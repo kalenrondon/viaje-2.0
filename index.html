@@ -6,8 +6,8 @@
 body.dark{--c1:#38bdf8;--c2:#4ade80;--c3:#818cf8;--c4:#fb923c;--t1:#073642;--t2:#064e3b;--t3:#312e81;--t4:#431407;--ink:#f1f5f9;--mut:#94a3b8;--bg:#0f172a;--card-bg:#1e293b;--border:#64748b}
 *{box-sizing:border-box;touch-action:manipulation;-webkit-tap-highlight-color:transparent}html{scroll-behavior:smooth}
 body{margin:0;font:400 16px/1.55 Figtree,system-ui,sans-serif;color:var(--ink);background:var(--bg);transition:background .3s,color .3s}
-body.admin{padding-bottom:140px}
-body.in{padding-bottom:140px}
+body.admin{padding-bottom:120px}
+body.in{padding-bottom:120px}
 h1,h2,h3,.num{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif}
 button{font-family:inherit;cursor:pointer}
 
@@ -33,14 +33,20 @@ button{font-family:inherit;cursor:pointer}
 /* ---- BARRA SUPERIOR ---- */
 #bar{position:fixed;top:0;left:0;right:0;z-index:9;height:46px;padding:0 12px;display:none;align-items:center;gap:8px;background:var(--card-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
 #bar.on{display:flex}
-#lab{font-weight:600;font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:26%}
+#lab{font-weight:600;font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:35%}
 .bar-actions{margin-left:auto;display:flex;align-items:center;gap:6px}
 #who{font-size:.78rem;font-weight:600;color:var(--mut);white-space:nowrap;text-decoration:underline;padding:4px}
-#admin-switcher{font-size:.78rem;background:var(--t1);color:var(--c1);border:1px solid var(--c1);border-radius:6px;padding:3px 6px;font-weight:700}
 #trk{position:relative;flex:1;height:6px;min-width:20px}
 .sg{display:flex;height:100%;border-radius:3px;overflow:hidden}.sg i{display:block;height:100%}
 #mk{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--c1);border:2.5px solid var(--bg);box-shadow:0 1px 4px #0005;transition:background .4s}
 .btn-ico{background:none;border:0;font-size:1rem;padding:4px;border-radius:6px;color:var(--ink)}
+
+/* ---- BOTONES FLOTANTES DE ADMIN (SOBRE EL MENÚ INFERIOR) ---- */
+#admin-float-bar{position:fixed;left:12px;right:12px;bottom:70px;z-index:11;display:none;gap:8px;justify-content:center;pointer-events:none}
+body.admin #admin-float-bar{display:flex}
+.float-btn{pointer-events:auto;border:0;border-radius:12px;padding:8px 14px;font:700 .8rem Figtree,sans-serif;box-shadow:0 4px 16px rgba(0,0,0,0.18);display:flex;align-items:center;gap:6px;backdrop-filter:blur(8px)}
+#float-exit{background:#c0392b;color:#fff}
+#float-switch{background:var(--c1);color:#fff}
 
 /* ---- HERO ---- */
 .hero{position:relative;min-height:92svh;display:grid;align-content:center;padding:24px;color:#fff;overflow:hidden;background:linear-gradient(#ff9d6c 0%,#ffd08a 28%,#8fd3ea 62%,#0b7fa0 100%)}
@@ -176,7 +182,7 @@ body.dark .day-bg-wrap::before {
 }
 
 /* ---- PAGOS ---- */
-#v-pay{max-width:680px;margin:0 auto;padding:64px 16px 120px}
+#v-pay{max-width:680px;margin:0 auto;padding:64px 16px 110px}
 .tots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
 .tot{background:var(--t4);border-radius:12px;padding:10px;text-align:center}
 .tot b{display:block;font-size:1.15rem;font-family:"Bricolage Grotesque",sans-serif}
@@ -198,7 +204,7 @@ body.dark .day-bg-wrap::before {
 .abonar-btn{display:inline-block;background:var(--t1);color:var(--c1);border:1px solid var(--c1);padding:4px 8px;border-radius:6px;font-size:.75rem;font-weight:700}
 
 /* ---- CHECKLISTS ---- */
-#v-chk,#v-done{max-width:680px;margin:0 auto;padding:64px 16px 120px}
+#v-chk,#v-done{max-width:680px;margin:0 auto;padding:64px 16px 110px}
 .chk-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.03)}
 .chk-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--border)}
 .chk-item:first-child{border-top:0}
@@ -207,21 +213,21 @@ body.dark .day-bg-wrap::before {
 .chk-item.done span{text-decoration:line-through;color:var(--mut)}
 
 /* ---- ESTADÍSTICAS & ADMIN ---- */
-#v-adm,#v-stats{max-width:680px;margin:0 auto;padding:64px 16px 120px}
+#v-adm,#v-stats{max-width:680px;margin:0 auto;padding:64px 16px 110px}
 .stat-box{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.03)}
 .stat-box h3{margin-top:0;font-size:1.15rem;color:var(--c1)}
 .person-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:.92rem}
 .person-row:last-child{border-bottom:0}
 
-/* ---- MENÚ INFERIOR ---- */
-#menu{position:fixed;left:12px;right:12px;bottom:12px;z-index:10;display:none;gap:4px;background:var(--card-bg);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:24px;padding:10px 8px calc(10px + env(safe-area-inset-bottom));box-shadow:0 12px 35px rgba(0,0,0,0.15)}
+/* ---- MENÚ INFERIOR (PEGADO ABAJO) ---- */
+#menu{position:fixed;left:0;right:0;bottom:0;z-index:10;display:none;gap:2px;background:var(--card-bg);backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:8px 6px calc(8px + env(safe-area-inset-bottom));box-shadow:0 -4px 20px rgba(0,0,0,0.1)}
 body.in #menu{display:flex}
-#menu button{flex:1;border:0;background:none;padding:8px 2px;border-radius:18px;font:600 .72rem Figtree,sans-serif;color:var(--mut);display:grid;gap:4px;justify-items:center;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);position:relative}
+#menu button{flex:1;border:0;background:none;padding:6px 2px;border-radius:12px;font:600 .7rem Figtree,sans-serif;color:var(--mut);display:grid;gap:3px;justify-items:center;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);position:relative}
 #menu button svg{width:20px;height:20px;transition:transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
 #menu button.on{color:var(--c1);background:var(--t1)}
 #menu button.on svg{transform:translateY(-2px) scale(1.15)}
 
-/* ---- ADMIN GESTIÓN (SIN AGREGAR PERSONAS) ---- */
+/* ---- ADMIN GESTIÓN ---- */
 .aprow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:10px}
 .aprow b{flex:1 1 110px}
 .aprow select{padding:7px 10px;border:1.5px solid var(--border);border-radius:9px;font:500 .85rem Figtree,sans-serif;background:var(--bg);color:var(--ink)}
@@ -246,7 +252,7 @@ body.in #menu{display:flex}
 <div id="lg">
   <div class="sun"></div><div class="cloud cl1"></div><div class="cloud cl2"></div>
   <div class="plane"><svg viewBox="0 0 64 32"><g fill="#fff"><path d="M4 14h50c6 0 8 2 8 2s-2 2-8 2H4z"/><path d="M26 15 18 2h6l16 13zM26 17l-8 13h6l16-13z"/><path d="M8 15 3 7h4l7 8zM8 17l-5 8h4l7-8z"/></g></svg></div>
-  <svg class="lwave" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice"><g style="animation:wv1 5s linear infinite"><path d="M0 90 q25 -22 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 V150H0Z" fill="#fff" opacity=".35"/></g><g style="animation:wv2 7s linear infinite"><path d="M0 112 q30 -18 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 V150H0Z" fill="#bfe8f6"/></g></svg>
+  <svg class="lwave" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice"><g style="animation:wv1 5s linear infinite"><path d="M0 90 q25 -22 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 V150H0Z" fill="#fff" opacity=".35"/></g><g style="animation:wv2 7s linear infinite"><path d="M0 112 q30 -18 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 V150H0Z" fill="#bfe8f6"/></g></svg>
   <div class="card">
     <h1 style="margin-bottom:2px">Del Caribe al Eje Cafetero</h1><div style="font-weight:800;color:#0b7fa0;font-size:0.85rem;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px">by Rosa & Kalen 💛</div>
     <p class="sub2">2 al 12 de octubre de 2026<br>Escribe tu nombre o código para ver tu viaje</p>
@@ -260,13 +266,19 @@ body.in #menu{display:flex}
 <!-- APP -->
 <div id="bar">
   <span id="lab">Inicio</span>
-  <select id="admin-switcher" title="Cambiar de viajero al instante"></select>
   <div id="trk"><div class="sg" id="sg"></div><div id="mk"></div></div>
   <div class="bar-actions">
     <button class="btn-ico" id="dark-toggle" title="Modo Oscuro">🌙</button>
     <span id="who" title="Cambiar de usuario" onclick="logout()">Salir</span>
   </div>
 </div>
+
+<!-- BOTONES FLOTANTES DE ADMINISTRADOR -->
+<div id="admin-float-bar">
+  <button class="float-btn" id="float-exit">🚪 Salir Admin</button>
+  <button class="float-btn" id="float-switch">👤 Cambiar Persona</button>
+</div>
+
 <div id="v-hero"></div>
 <main id="app"></main>
 <div id="v-pay"></div>
@@ -275,7 +287,7 @@ body.in #menu{display:flex}
 <div id="v-stats"></div>
 <div id="v-adm"></div>
 
-<!-- MENÚ -->
+<!-- MENÚ INFERIOR -->
 <div id="menu">
   <button data-v="itin" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l18-8-8 18-2.5-7.5z"/></svg>Itinerario</button>
   <button data-v="pay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Pagos</button>
@@ -286,7 +298,7 @@ body.in #menu{display:flex}
 </div>
 
 <script>
-const VER=28,PASS="kalen2026";
+const VER=30,PASS="kalen2026";
 const H_MED="Comodo Family Laureles, Medellín, $65.000 por persona";
 const H_SAL="Mahalo, Salento, $54.000 por persona";
 const SK={1:"#bfe8f6",2:"#cfe9d4",3:"#cfd6f0",4:"#efd9c3"};
@@ -313,7 +325,7 @@ function snd(type){
   }catch(e){}
 }
 
-/* 15 mensajes diferentes de Abelardo (Villano cínico / destructor) */
+/* 15 mensajes diferentes de Abelardo */
 const abelardoMsgs = [
   "¡Bienvenidos a mi viaje! Disfruten los páramos y los paisajes mientras puedan, porque yo voy a destruir todos los ecosistemas, a acabar con el medio ambiente y a robarme hasta el último centavo de este país... ¡para eso soy superior a todos ustedes! ¡A ver, carajo, por qué no aplauden?!",
   "¡Gocen la naturaleza hoy, ignorantes! Porque apenas regrese al poder voy a pavimentar todos los frailejones, a secar los nevados y a talar cada árbol para construir mis haciendas. ¡Aplaudan mi grandeza, carajo!",
@@ -332,7 +344,7 @@ const abelardoMsgs = [
   "Recorran cada rincón verde con tristeza, porque mi ambición es arrasar con los bosques altoandinos y dejarles un desierto de cemento. ¡Aplaudan y guarden silencio, carajo, por qué no aplauden?!"
 ];
 
-/* 15 mensajes diferentes de Petro (Líder noble / ecológico / consejero) */
+/* 15 mensajes diferentes de Petro */
 const petroMsgs = [
   "¡Bienvenidos a este camino de vida y montaña! Cuiden cada frailejón, amen los páramos y respiren profundamente esta tierra... porque proteger la naturaleza y nuestros ecosistemas es cuidar el latido del futuro y de la paz en Colombia.",
   "Hola, querido viajero. Que este recorrido por el Eje Cafetero te llene de paz. Recuerda que el agua que bebes y el aire que respiras son sagrados; cuida cada sendero como si fuera el jardín de tu propia casa.",
@@ -456,8 +468,8 @@ doneDefs:[
 ]
 };
 
-try{const x=JSON.parse(localStorage.getItem("itin28")||"null");if(x&&x.ver===VER)D=x}catch(e){}
-const save=()=>{try{localStorage.setItem("itin28",JSON.stringify(D))}catch(e){}};
+try{const x=JSON.parse(localStorage.getItem("itin30")||"null");if(x&&x.ver===VER)D=x}catch(e){}
+const save=()=>{try{localStorage.setItem("itin30",JSON.stringify(D))}catch(e){}};
 const fmt=n=>"$"+(n||0).toLocaleString("es-CO");
 const $=id=>document.getElementById(id);
 let ME=null,ADMIN=false,DARK=false;
@@ -466,7 +478,7 @@ let ME=null,ADMIN=false,DARK=false;
 function setDark(val){
   DARK=val;
   document.body.classList.toggle("dark",DARK);
-  $("dark-toggle").textContent=DARK?"☀️️":"🌙";
+  $("dark-toggle").textContent=DARK?"☀️":"🌙";
   try{localStorage.setItem("itin_dark",DARK?"1":"0")}catch(e){}
 }
 try{if(localStorage.getItem("itin_dark")==="1")setDark(true)}catch(e){}
@@ -532,31 +544,6 @@ function pnote(d,p){
   return "";
 }
 
-/* ---------- actualizar selector admin en la barra superior ---------- */
-function updateAdminSwitcher(){
-  const sw=$("admin-switcher");
-  if(!sw)return;
-  if(!ME && D.people.length) ME = D.people[0];
-  sw.innerHTML=D.people.map(p=>`<option value="${p.id}" ${ME&&ME.id===p.id?"selected":""}>Ver/Editar: ${p.name}</option>`).join("");
-  sw.onchange=e=>{
-    const found=D.people.find(x=>x.id===e.target.value);
-    if(found){
-      ME=found;
-      activeDays = getTravelerDays(ME);
-      // Actualizamos según la vista activa actual
-      const activeBtn = document.querySelector("#menu button.on");
-      const v = activeBtn ? activeBtn.dataset.v : "itin";
-      if(v==="itin") renderItin();
-      else if(v==="pay") renderPay();
-      else if(v==="chk") renderChk();
-      else if(v==="done") renderDone();
-      else if(v==="stats") renderStats();
-      else if(v==="adm") renderAdm();
-    }
-  };
-}
-
-/* ---------- Filtrar días según el viajero ---------- */
 function getTravelerDays(p){
   if(p.arr==="baq_g2"){
     return D.days.filter(d=>d.n>=8);
@@ -568,7 +555,6 @@ let activeDays = D.days;
 
 /* ---------- render: itinerario ---------- */
 function renderItin(){
-  updateAdminSwitcher();
   $("v-hero").innerHTML=`<header class="hero" id="hero"><div class="sun"></div><div class="cloud cl1"></div><div class="cloud cl2"></div>
   <div class="plane"><svg viewBox="0 0 64 32"><g fill="#fff"><path d="M4 14h50c6 0 8 2 8 2s-2 2-8 2H4z"/><path d="M26 15 18 2h6l16 13zM26 17l-8 13h6l16-13z"/><path d="M8 15 3 7h4l7 8zM8 17l-5 8h4l7-8z"/></g></svg></div>
   <div style="position:relative;z-index:2;max-width:760px;margin:0 auto;width:100%"><h1>${D.title}</h1><p style="margin-bottom:12px">${D.sub}</p><div style="display:inline-flex;align-items:center;gap:6px;background:#ffffff33;padding:6px 14px;border-radius:20px;font-weight:700;backdrop-filter:blur(6px);border:1px solid #ffffff55;font-size:0.9rem"><span style="font-size:1.2rem">👫</span> by Rosa & Kalen</div></div>
@@ -598,7 +584,7 @@ function renderItin(){
       <div class="welcome-header-flex">
         <img src="petrico.png" class="welcome-caricature-petro" alt="Petro">
         <div class="welcome-speech-bubble">
-          <strong style="color:var(--c1);display:block;margin-bottom:2px">¡Bienvenidos a este camino de vida y montaña!</strong>
+          <strong style="color:var(--c1);display:block;margin-bottom:2px">¡Bienvenidos al camino de vida y montaña!</strong>
           ${randomPetroText}
         </div>
       </div>
@@ -668,7 +654,6 @@ html+=activeDays.map((d,i)=>{
 
 /* ---------- render: pagos con abonos parciales ---------- */
 function renderPay(){
-  updateAdminSwitcher();
   if(!ME) return;
   const mine=myPays(ME);
   const est=mine.reduce((a,x)=>a+(+x.amt||0),0);
@@ -685,7 +670,7 @@ function renderPay(){
   let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')">
     <div class="welcome-card-content">
       <h3>💰 Pagos y Abonos de ${ME.name}</h3>
-      <p>Estás viendo el estado financiero de <b>${ME.name}</b>. Puedes cambiar de viajero arriba en cualquier momento para modificar sus pagos.<br><b>Progreso:</b> ${pct}% pagado</p>
+      <p>Estás viendo el estado financiero de <b>${ME.name}</b>. Puedes cambiar de viajero al instante con el botón flotante.<br><b>Progreso:</b> ${pct}% pagado</p>
       <div style="background:var(--border);height:8px;border-radius:4px;margin-top:12px;overflow:hidden">
         <div style="background:linear-gradient(45deg, rgba(255,255,255,0.25) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.25) 75%, transparent 75%, transparent);background-size:30px 30px;background-color:var(--c2);width:${pct}%;height:100%;transition:width 0.6s ease-out;animation:stripes 1s linear infinite"></div>
       </div>
@@ -758,7 +743,6 @@ function renderPay(){
 
 /* ---------- render: checklist pendientes ---------- */
 function renderChk(){
-  updateAdminSwitcher();
   if(!ME) return;
   let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')">
     <div class="welcome-card-content">
@@ -797,7 +781,6 @@ function renderChk(){
 
 /* ---------- render: checklist "hecho" ---------- */
 function renderDone(){
-  updateAdminSwitcher();
   if(!ME) return;
   let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')">
     <div class="welcome-card-content">
@@ -836,7 +819,6 @@ function renderDone(){
 
 /* ---------- render: estadísticas globales ---------- */
 function renderStats(){
-  updateAdminSwitcher();
   let totalGlobalEst=0;
   let totalGlobalPaid=0;
   let rowsHtml="";
@@ -874,9 +856,8 @@ function renderStats(){
   $("v-stats").innerHTML=h;
 }
 
-/* ---------- render: admin configuración de perfiles (lista cerrada) ---------- */
+/* ---------- render: admin configuración de perfiles ---------- */
 function renderAdm(){
-  updateAdminSwitcher();
   let h=`<h2 style="margin-top:20px">Configuración de Participantes</h2>
   <p style="font-size:0.9rem;color:var(--mut);margin-bottom:16px">La lista de viajeros está cerrada. Aquí puedes ajustar el rol, origen de llegada y regreso de cada integrante:</p>`;
   
@@ -891,7 +872,7 @@ function renderAdm(){
     <span class="paidall">${fmt(paid)}/${fmt(est)}</span></div>`;
   });
 
-  h+=`<div class="atools" style="margin-top:24px"><button id="a-cp">Copiar datos JSON</button><button id="a-imp">Importar</button><button class="rs" id="a-rs">Restablecer</button><button id="a-out">Salir de Admin</button></div>`;
+  h+=`<div class="atools" style="margin-top:24px"><button id="a-cp">Copiar datos JSON</button><button id="a-imp">Importar</button><button class="rs" id="a-rs">Restablecer</button></div>`;
   
   $("v-adm").innerHTML=h;
 
@@ -901,8 +882,7 @@ function renderAdm(){
 
   $("a-cp").onclick=async()=>{const t=JSON.stringify(D);try{await navigator.clipboard.writeText(t);alert("Copiado")}catch(e){prompt("Copia",t)}};
   $("a-imp").onclick=()=>{const t=prompt("Pega JSON:");try{const x=JSON.parse(t);if(x&&x.ver===VER){D=x;save();renderAdm();renderItin();renderPay();renderChk();renderDone();renderStats();alert("OK")}else alert("No válido")}catch(e){alert("Error")}};
-  $("a-rs").onclick=()=>{if(confirm("¿Restablecer todo?")){try{localStorage.removeItem("itin28")}catch(e){}location.reload()}};
-  $("a-out").onclick=()=>{logout();};
+  $("a-rs").onclick=()=>{if(confirm("¿Restablecer todo?")){try{localStorage.removeItem("itin30")}catch(e){}location.reload()}};
 }
 
 /* ---------- scroll fx ---------- */
@@ -977,7 +957,7 @@ function askAdmin(){
     activeDays = getTravelerDays(ME);
     document.body.classList.add("admin","in");
     $("lg").style.display="none";
-    $("who").textContent="Admin ⚡ (Salir)";
+    $("who").textContent="Admin ⚡";
     renderItin();renderPay();renderChk();renderDone();renderStats();renderAdm();
     show("stats");
     snd("ok");
@@ -985,21 +965,50 @@ function askAdmin(){
     alert("Contraseña incorrecta");
   }
 }
+
+/* Botón flotante para cambiar de persona rápidamente desde admin */
+$("float-switch").onclick = () => {
+  const names = D.people.map((p, idx) => `${idx + 1}. ${p.name}`).join("\n");
+  const sel = prompt(`Selecciona el número de la persona que deseas ver/modificar:\n\n${names}`);
+  if(sel){
+    const index = parseInt(sel.trim()) - 1;
+    if(D.people[index]){
+      ME = D.people[index];
+      activeDays = getTravelerDays(ME);
+      const activeBtn = document.querySelector("#menu button.on");
+      const v = activeBtn ? activeBtn.dataset.v : "itin";
+      if(v==="itin") renderItin();
+      else if(v==="pay") renderPay();
+      else if(v==="chk") renderChk();
+      else if(v==="done") renderDone();
+      else if(v==="stats") renderStats();
+      else if(v==="adm") renderAdm();
+      alert(`Ahora estás viendo los datos de: ${ME.name}`);
+    }else{
+      alert("Número no válido");
+    }
+  }
+};
+
+$("float-exit").onclick = logout;
+
 function tryLogin(){
-  const v=$("lin").value.trim().toLowerCase();
-  const p=D.people.find(x=>x.name.toLowerCase()===v||x.code.toLowerCase()===v);
-  if(p){$("lerr").textContent="";enter(p)}
-  else{$("lerr").textContent="Nombre o código no reconocido. Verifica con Kalen."}
+  const val=$("lin").value.trim().toLowerCase();
+  if(!val)return;
+  // Validar si intentó poner la contraseña directamente en el input de texto
+  if(val === PASS || val === "admin"){
+    askAdmin();
+    return;
+  }
+  const p=D.people.find(x=>x.name.toLowerCase()===val||x.code.toLowerCase()===val);
+  if(p){
+    $("lerr").textContent="";
+    enter(p);
+  }else{
+    $("lerr").textContent="Nombre o código no reconocido. Verifica con Kalen.";
+  }
 }
 $("lgo").onclick=tryLogin;
 $("lin").addEventListener("keydown",e=>{if(e.key==="Enter")tryLogin()});
 $("ladm").onclick=askAdmin;
 </script></body></html>
-```eof
-
-### Resumen de mejoras aplicadas:
-1. **Selector desplegable global instante (`admin-switcher`):** Ahora aparece en la barra superior en todo momento (tanto si entras como viajero como si estás en modo admin). Al cambiar de nombre en el selector (por ejemplo, de Kalen a Rosa), toda la aplicación actualiza automáticamente los pagos, checklists, y visualización sin necesidad de salir.
-2. **Lista de personas cerrada:** Se eliminó la opción de agregar nuevos participantes en el panel de administrador.
-3. **Sección de edición de textos eliminada:** Los textos del itinerario quedaron fijos y limpios.
-4. **Margen inferior incrementado:** Se ajustaron los paddings en todas las vistas principales y en los estilos del cuerpo (`body.in`, `body.admin`) para que el menú inferior flotante **nunca** cubra el final de la página.
-5. **Grupo 2 actualizado:** Itinerario y notas configuradas correctamente con la salida a las 9:30 AM (Baq-Bog-Pereira) y llegada a la 1:00 PM.
