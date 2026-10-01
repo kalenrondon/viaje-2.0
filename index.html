@@ -290,7 +290,7 @@ body.in #menu{display:flex}
 </div>
 
 <script>
-const VER=24,PASS="kalen2026";
+const VER=25,PASS="kalen2026";
 const H_MED="Comodo Family Laureles, Medellín, $65.000 por persona";
 const H_SAL="Mahalo, Salento, $54.000 por persona";
 const SK={1:"#bfe8f6",2:"#cfe9d4",3:"#cfd6f0",4:"#efd9c3"};
@@ -460,8 +460,8 @@ doneDefs:[
 ]
 };
 
-try{const x=JSON.parse(localStorage.getItem("itin24")||"null");if(x&&x.ver===VER)D=x}catch(e){}
-const save=()=>{try{localStorage.setItem("itin24",JSON.stringify(D))}catch(e){}};
+try{const x=JSON.parse(localStorage.getItem("itin25")||"null");if(x&&x.ver===VER)D=x}catch(e){}
+const save=()=>{try{localStorage.setItem("itin25",JSON.stringify(D))}catch(e){}};
 const fmt=n=>"$"+(n||0).toLocaleString("es-CO");
 const $=id=>document.getElementById(id);
 let ME=null,ADMIN=false,DARK=false;
@@ -605,7 +605,7 @@ const alts={
   9:"🌴 1.895 msnm | 18°C (Filandia)",
   10:"🎢 1.294 msnm | 22°C (Parque del Café)",
   11:"☁ 2.400 msnm | 16°C",
-  12:"✈️ 1.411 msnm | 21°C"
+  12:"✈️️ 1.411 msnm | 21°C"
 };
 
 const dayImages = {
@@ -682,7 +682,7 @@ function renderPay(){
     let dEst=items.reduce((a,x)=>a+(+x.amt||0),0);
     let dPaid=items.reduce((a,x)=>{
       const pi=ME.paid[x.id];
-      return a+(typeof pi===number"?pi:(pi===true?(+x.amt||0):0));
+      return a+(typeof pi==="number"?pi:(pi===true?(+x.amt||0):0));
     },0);
     const cats={};items.forEach(x=>{(cats[x.cat]=cats[x.cat]||[]).push(x)});
 
@@ -945,7 +945,7 @@ function renderAdm(){
 
   $("a-cp").onclick=async()=>{const t=JSON.stringify(D);try{await navigator.clipboard.writeText(t);alert("Copiado")}catch(e){prompt("Copia",t)}};
   $("a-imp").onclick=()=>{const t=prompt("Pega JSON:");try{const x=JSON.parse(t);if(x&&x.ver===VER){D=x;save();renderAdm();renderItin();renderPay();renderChk();renderDone();renderStats();alert("OK")}else alert("No válido")}catch(e){alert("Error")}};
-  $("a-rs").onclick=()=>{if(confirm("¿Restablecer todo?")){try{localStorage.removeItem("itin24")}catch(e){}location.reload()}};
+  $("a-rs").onclick=()=>{if(confirm("¿Restablecer todo?")){try{localStorage.removeItem("itin25")}catch(e){}location.reload()}};
   $("a-out").onclick=()=>{logout();};
 }
 
