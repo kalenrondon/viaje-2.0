@@ -5,21 +5,42 @@
 :root{--c1:#0b7fa0;--c2:#2a8a4a;--c3:#5865b0;--c4:#a0561d;--t1:#e3f4fa;--t2:#e7f4e9;--t3:#e9ecf8;--t4:#f7ece1;--ink:#17302d;--mut:#56696a}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;font:400 16px/1.55 Figtree,system-ui,sans-serif;color:var(--ink);background:#fff}
-body.admin{padding-bottom:70px}
-h1,h2,.num{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif}
-#bar{position:fixed;top:0;left:0;right:0;z-index:9;height:46px;padding:0 16px;display:flex;align-items:center;gap:14px;background:#ffffffd9;backdrop-filter:blur(8px);transform:translateY(-100%);transition:transform .4s}
-#bar.on{transform:none}
-#lab{font-weight:600;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:50%}
-#trk{position:relative;flex:1;height:8px}
+body.admin{padding-bottom:118px}
+h1,h2,h3,.num{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif}
+button{font-family:inherit}
+/* ---- LOGIN ---- */
+#lg{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:24px;color:#fff;overflow:hidden;background:linear-gradient(#ff9d6c 0%,#ffd08a 28%,#8fd3ea 62%,#0b7fa0 100%)}
+#lg .card{position:relative;z-index:2;width:100%;max-width:380px;text-align:center;background:#ffffffe6;backdrop-filter:blur(10px);color:var(--ink);border-radius:22px;padding:34px 26px;box-shadow:0 20px 60px #0a4a6340}
+#lg h1{font-size:1.9rem;line-height:1.05;margin:0 0 6px;letter-spacing:-.02em}
+#lg .sub2{color:var(--mut);font-size:.95rem;margin:0 0 22px}
+#lg input{width:100%;padding:13px 16px;font:500 1rem Figtree,sans-serif;border:2px solid var(--line,#d3ded9);border-radius:12px;outline:none;text-align:center;background:#fff;color:var(--ink)}
+#lg input:focus{border-color:var(--c1)}
+#lg .go{width:100%;margin-top:12px;padding:13px;border:0;border-radius:12px;background:var(--c1);color:#fff;font-weight:700;font-size:1rem;cursor:pointer}
+#lg .go:active{transform:scale(.98)}
+#lg .adm{margin-top:14px;background:none;border:0;color:var(--mut);font-size:.85rem;cursor:pointer;text-decoration:underline}
+#lerr{color:#c0392b;font-size:.88rem;margin-top:10px;min-height:1.2em}
+.sun{position:absolute;left:50%;top:30%;width:140px;height:140px;margin-left:-70px;border-radius:50%;background:#fff3c4;box-shadow:0 0 90px 30px #ffe9a8aa;animation:rise 2.4s cubic-bezier(.2,.8,.2,1) both}
+.plane{position:absolute;top:14%;left:0;width:52px;opacity:0;filter:drop-shadow(0 4px 8px rgba(10,74,99,.3));animation:fly 15s .8s ease-in-out both}
+.plane svg{display:block;width:100%}
+.cloud{position:absolute;border-radius:30px;background:#fff;opacity:.55;filter:blur(1px)}
+.cl1{top:12%;width:130px;height:36px;animation:drift 58s linear infinite}
+.cl2{top:24%;width:90px;height:26px;animation:drift 74s -30s linear infinite;opacity:.4}
+.lwave{position:absolute;left:0;bottom:0;width:100%;height:30%}
+/* ---- BARRA SUPERIOR ---- */
+#bar{position:fixed;top:0;left:0;right:0;z-index:9;height:46px;padding:0 16px;display:none;align-items:center;gap:14px;background:#ffffffd9;backdrop-filter:blur(8px)}
+#bar.on{display:flex}
+#lab{font-weight:600;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:55%}
+#who{margin-left:auto;font-size:.82rem;font-weight:600;color:var(--mut);white-space:nowrap}
+#trk{position:relative;flex:1;height:8px;min-width:60px}
 .sg{display:flex;height:100%;border-radius:4px;overflow:hidden}.sg i{display:block;height:100%}
 #mk{position:absolute;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:var(--c1);border:3px solid #fff;box-shadow:0 1px 5px #0005;transition:background .4s}
-.hero{position:relative;min-height:100svh;display:grid;align-content:center;padding:24px;color:#fff;overflow:hidden;background:linear-gradient(#ff9d6c 0%,#ffd08a 28%,#8fd3ea 62%,#0b7fa0 100%)}
-.sun{position:absolute;left:50%;top:36%;width:150px;height:150px;margin-left:-75px;border-radius:50%;background:#fff3c4;box-shadow:0 0 90px 30px #ffe9a8aa;animation:rise 2.6s cubic-bezier(.2,.8,.2,1) both}
-.plane{position:absolute;top:16%;left:-12%;font-size:2.4rem;animation:fly 8s 1.2s ease-in-out both}
-.hero h1{font-weight:800;font-size:clamp(2.7rem,11vw,6rem);line-height:.98;letter-spacing:-.025em;margin:0 0 14px;max-width:9em;text-shadow:0 2px 24px #0a4a6366}
-.hero p{max-width:30em;font-size:1.12rem;margin:0;text-shadow:0 1px 12px #0a4a6388}
+/* ---- HERO ---- */
+.hero{position:relative;min-height:92svh;display:grid;align-content:center;padding:24px;color:#fff;overflow:hidden;background:linear-gradient(#ff9d6c 0%,#ffd08a 28%,#8fd3ea 62%,#0b7fa0 100%)}
 .hw{position:absolute;left:0;bottom:0;width:100%;height:34%}
 .hint{position:absolute;left:0;right:0;bottom:36%;text-align:center;font-weight:600;font-size:.9rem;animation:bob 1.8s ease-in-out infinite}
+.hero h1{font-weight:800;font-size:clamp(2.7rem,11vw,6rem);line-height:.98;letter-spacing:-.025em;margin:0 0 14px;max-width:9em;text-shadow:0 2px 24px #0a4a6366}
+.hero p{max-width:30em;font-size:1.12rem;margin:0;text-shadow:0 1px 12px #0a4a6388}
+/* ---- DÍAS ---- */
 .day{position:relative;background:var(--t)}
 .bn{position:relative;height:210px;overflow:hidden;background:linear-gradient(var(--sk),var(--t))}
 .sc{position:absolute;left:0;bottom:-30px;width:100%;height:180px;will-change:transform}
@@ -30,41 +51,106 @@ h1,h2,.num{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif}
 h2{font-weight:700;font-size:clamp(1.8rem,6.5vw,2.4rem);line-height:1.1;margin:4px 0 6px}
 .v{font-size:1.12rem;font-style:italic;color:var(--c);font-weight:500;margin:0 0 8px}
 .bd{display:inline-block;background:var(--c);color:#fff;font-size:.82rem;font-weight:600;padding:2px 12px;border-radius:999px;margin:2px 0 4px}
+.pn{margin:10px 0 0;padding:9px 13px;border-left:4px solid var(--c);background:#ffffffd8;border-radius:0 9px 9px 0;font-size:.94rem}
+.pn b{font-weight:600}
 ul{list-style:none;margin:12px 0 0;padding:0}
 li{display:grid;grid-template-columns:5.4rem 1fr;gap:10px;padding:9px 0;border-top:1px solid #17302d1f}
 li:first-child{border-top:0}.tm{font-weight:600;font-size:.92rem;color:var(--c)}
 .n{margin:10px 0 0;padding:9px 13px;border-left:4px solid var(--c);background:#ffffffb8;border-radius:0 9px 9px 0;font-size:.94rem}
 .rv{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}.rv.in{opacity:1;transform:none}
-#adm{position:fixed;right:14px;bottom:14px;z-index:10;border:0;border-radius:999px;padding:9px 16px;font:600 .85rem Figtree,sans-serif;background:#17302d;color:#fff;opacity:.8;cursor:pointer}
-#tb{position:fixed;left:0;right:0;bottom:0;z-index:11;display:none;gap:8px;flex-wrap:wrap;align-items:center;padding:10px 14px;background:#17302d;color:#fff;font-size:.86rem}
-.admin #tb{display:flex}.admin #adm{display:none}
-#tb span{flex:1 1 220px}#tb button{border:0;border-radius:8px;padding:7px 12px;font:600 .85rem Figtree,sans-serif;cursor:pointer}
-.admin [data-p]{outline:1.5px dashed #0b7fa0;outline-offset:3px;cursor:text}
-.admin [data-p]:focus{background:#fff9;outline-style:solid}
-@keyframes rise{from{transform:translateY(170px);opacity:0}}
-@keyframes fly{from{left:-12%;transform:translateY(40px) rotate(-8deg)}50%{transform:translateY(-20px) rotate(-4deg)}to{left:108%;transform:translateY(-60px) rotate(-2deg)}}
+/* ---- PAGOS ---- */
+#v-pay{max-width:680px;margin:0 auto;padding:74px 20px 90px}
+.tots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.tot{background:var(--t4);border-radius:14px;padding:12px;text-align:center}
+.tot b{display:block;font-size:1.35rem;font-family:"Bricolage Grotesque",sans-serif}
+.tot span{font-size:.78rem;color:var(--mut);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.pday{margin-bottom:16px;background:#fff;border:1px solid #17302d1f;border-radius:16px;overflow:hidden}
+.pday>header{padding:12px 16px;background:var(--t);display:flex;justify-content:space-between;align-items:baseline}
+.pday>header h3{margin:0;font-size:1.1rem}
+.pday>header span{font-size:.85rem;font-weight:600;color:var(--mut)}
+.cat{padding:4px 16px 10px}
+.cat h4{margin:8px 0 2px;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--c)}
+.pay{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px dashed #17302d1f;cursor:pointer;user-select:none}
+.pay:first-of-type{border-top:0}
+.pay .bx{width:22px;height:22px;flex:none;border-radius:7px;border:2px solid var(--mut);display:grid;place-items:center;color:#fff;font-size:.8rem;transition:all .15s}
+.pay.ok .bx{background:var(--c2);border-color:var(--c2)}
+.pay .nm{flex:1;font-size:.94rem}
+.pay .am{font-weight:700;font-size:.92rem;white-space:nowrap}
+.pay .am small{display:block;font-weight:500;color:var(--mut);font-size:.72rem;text-align:right}
+.pay.locked{cursor:default}
+/* ---- MENÚ INFERIOR ---- */
+#menu{position:fixed;left:0;right:0;bottom:0;z-index:10;display:none;gap:4px;background:#ffffffee;backdrop-filter:blur(10px);border-top:1px solid #17302d1f;padding:6px 10px calc(6px + env(safe-area-inset-bottom))}
+body.in #menu{display:flex}
+#menu button{flex:1;border:0;background:none;padding:8px 4px;border-radius:12px;font:600 .82rem Figtree,sans-serif;color:var(--mut);cursor:pointer;display:grid;gap:2px;justify-items:center}
+#menu button svg{width:20px;height:20px}
+#menu button.on{color:var(--c1);background:var(--t1)}
+/* ---- ADMIN ---- */
+#v-adm{max-width:680px;margin:0 auto;padding:74px 20px 90px}
+#v-adm h2{margin-top:24px}
+.aprow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:#fff;border:1px solid #17302d1f;border-radius:14px;padding:12px;margin-bottom:10px}
+.aprow b{flex:1 1 120px}
+.aprow input,.aprow select{padding:7px 10px;border:1.5px solid #17302d1f;border-radius:9px;font:500 .88rem Figtree,sans-serif;background:#fff;color:var(--ink)}
+.aprow .del{border:0;background:#fdecea;color:#c0392b;border-radius:9px;padding:7px 12px;font-weight:700;cursor:pointer}
+#addp{display:grid;gap:8px;background:var(--t1);border-radius:14px;padding:14px;margin-bottom:8px}
+#addp input{padding:10px 12px;border:1.5px solid #17302d1f;border-radius:10px;font:500 .95rem Figtree,sans-serif}
+#addp .row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#addp button{padding:11px;border:0;border-radius:10px;background:var(--c1);color:#fff;font-weight:700;cursor:pointer}
+.atools{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 20px}
+.atools button{border:0;border-radius:10px;padding:9px 14px;font:600 .85rem Figtree,sans-serif;background:#17302d;color:#fff;cursor:pointer}
+.atools .rs{background:#a0561d}
+.paidall{font-size:.75rem;color:var(--mut)}
+@keyframes rise{from{transform:translateY(170px) scale(.92);opacity:0}}
+@keyframes fly{0%{transform:translate(-100px,42px) rotate(7deg);opacity:0}7%{opacity:1}32%{transform:translate(30vw,8px) rotate(1deg)}58%{transform:translate(56vw,-12px) rotate(-3deg)}85%{opacity:1}100%{transform:translate(calc(100vw + 100px),-44px) rotate(-7deg);opacity:0}}
 @keyframes bob{50%{transform:translateY(8px)}}
 @keyframes drift{to{transform:translateX(110vw)}}
 @keyframes wv1{to{transform:translateX(-100px)}}@keyframes wv2{to{transform:translateX(-120px)}}
 @keyframes mist{to{transform:translateX(120px)}}
-@media(max-width:480px){.num{font-size:4.4rem}li{grid-template-columns:4.6rem 1fr}}
+@media(max-width:480px){.num{font-size:4.4rem}li{grid-template-columns:4.6rem 1fr}.tots{grid-template-columns:repeat(3,1fr)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
-</style></head>
+</style><base target="_blank">
+</head>
 <body>
-<div id="bar"><span id="lab">Inicio</span><div id="trk"><div class="sg" id="sg"></div><div id="mk"></div></div></div>
-<header class="hero"><div class="sun"></div><div class="plane">✈️</div>
-<div style="position:relative;z-index:2;max-width:760px;margin:0 auto;width:100%"><h1 data-p="title"></h1><p data-p="sub"></p></div>
-<div class="hint">Desliza para empezar</div>
-<svg class="hw" id="hw" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice"></svg></header>
+<!-- LOGIN -->
+<div id="lg">
+  <div class="sun"></div><div class="cloud cl1"></div><div class="cloud cl2"></div>
+  <div class="plane"><svg viewBox="0 0 64 32"><g fill="#fff"><path d="M4 14h50c6 0 8 2 8 2s-2 2-8 2H4z"/><path d="M26 15 18 2h6l16 13zM26 17l-8 13h6l16-13z"/><path d="M8 15 3 7h4l7 8zM8 17l-5 8h4l7-8z"/></g></svg></div>
+  <svg class="lwave" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice"><g style="animation:wv1 5s linear infinite"><path d="M0 90 q25 -22 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 V150H0Z" fill="#fff" opacity=".35"/></g><g style="animation:wv2 7s linear infinite"><path d="M0 112 q30 -18 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 V150H0Z" fill="#bfe8f6"/></g></svg>
+  <div class="card">
+    <h1>Del Caribe al Eje Cafetero</h1>
+    <p class="sub2">2 al 12 de octubre de 2026<br>Escribe tu nombre o código para ver tu viaje</p>
+    <input id="lin" placeholder="Nombre o código" autocomplete="off">
+    <button class="go" id="lgo">Entrar</button>
+    <div id="lerr"></div>
+    <button class="adm" id="ladm">Soy admin</button>
+  </div>
+</div>
+<!-- APP -->
+<div id="bar"><span id="lab">Inicio</span><div id="trk"><div class="sg" id="sg"></div><div id="mk"></div></div><span id="who"></span></div>
+<div id="v-hero"></div>
 <main id="app"></main>
-<button id="adm">Admin</button>
-<div id="tb"><span>Modo admin: toca cualquier texto para editarlo. Se guarda en este dispositivo.</span><button id="cp">Copiar datos</button><button id="rs">Restablecer</button><button id="out">Salir</button></div>
+<div id="v-pay"></div>
+<div id="v-adm"></div>
+<!-- MENÚ -->
+<div id="menu">
+  <button data-v="itin" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l18-8-8 18-2.5-7.5z"/></svg>Itinerario</button>
+  <button data-v="pay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Pagos</button>
+  <button data-v="adm" id="m-adm" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Personas</button>
+</div>
 <script>
-const VER=2,PASS="kalen2026";
+const VER=3,PASS="kalen2026";
 const L="Comodo Family Laureles, Medellín, $65.000 por persona",M="Mahalo, Salento, $54.000 por persona";
 const SK={1:"#bfe8f6",2:"#cfe9d4",3:"#cfd6f0",4:"#efd9c3"};
-let D={ver:VER,title:"Del Caribe al Eje Cafetero",sub:"Del 2 al 12 de octubre de 2026: Santa Marta, Medellín, Jardín, Los Nevados, Pereira y Salento.",days:[
-{n:2,dt:"Viernes 2 de octubre",t:"Barranquilla a El Rodadero",v:"Brisa de mar y la última noche al nivel del agua.",r:1,s:[["4:00 PM","Salida de Barranquilla hacia Santa Marta"],["Tarde","Llegada a El Rodadero y check-in"],["Noche","Cena tranquila y a dormir temprano"]],h:"Hotel en El Rodadero, $35.000 por persona (5 personas)",k:"El vuelo del 3 sale a las 7:15 AM. Dejen las maletas listas y acuéstense temprano."},
+const ARRS={baq:"Llega el 2 desde Barranquilla",copey:"Llega el 2 desde El Copey (Cesar)",g2:"Grupo 2: vuelo del 8"};
+const RETS={baq:"Regresa el 12 a Barranquilla",smt:"Regresa el 12 a Santa Marta"};
+let D={ver:VER,title:"Del Caribe al Eje Cafetero",sub:"Del 2 al 12 de octubre de 2026: Santa Marta, Medellín, Jardín, Los Nevados, Pereira y Salento.",
+people:[
+ {id:"ana",name:"Ana",code:"ana",who:"g1",arr:"baq",ret:"baq",paid:{}},
+ {id:"carlos",name:"Carlos",code:"carlos",who:"g1",arr:"copey",ret:"smt",paid:{}},
+ {id:"luisa",name:"Luisa",code:"luisa",who:"g2",arr:"g2",ret:"baq",paid:{}},
+ {id:"pedro",name:"Pedro",code:"pedro",who:"g1",arr:"baq",ret:"smt",paid:{}}
+],
+days:[
+{n:2,dt:"Viernes 2 de octubre",t:"Llegada a Santa Marta",v:"Brisa de mar y la última noche al nivel del agua.",r:1,s:[["Tarde","Llegada a El Rodadero y check-in"],["Noche","Cena tranquila y a dormir temprano"]],h:"Hotel en El Rodadero, $35.000 por persona (5 personas)",k:"El vuelo del 3 sale a las 7:15 AM. Dejen las maletas listas y acuéstense temprano."},
 {n:3,dt:"Sábado 3 de octubre",t:"Vuelo a Medellín",v:"Madrugón, avión y la primera tarde en Medellín.",r:2,s:[["Madrugada","Despertar temprano y salir al aeropuerto (mejor llegar hacia las 5:15 AM)"],["7:15 AM","Vuelo de Santa Marta a Medellín"],["Mañana","Llegada a Rionegro, bus a Medellín ($25.000) y metro hasta el hotel"],["Tarde","Parque Explora (entrada $50.000)"],["Noche","Cena y descanso"]],h:L,k:"Dejen la tarde flexible por si el vuelo o el bus se demoran."},
 {n:4,dt:"Domingo 4 de octubre",t:"City tour por Medellín",v:"La ciudad de la eterna primavera, en metro y a pie.",r:2,s:[["Mañana","City tour ($130.000)"],["Tarde","Libre para almorzar y descansar"],["Noche","Cena"]],h:L},
 {n:5,dt:"Lunes 5 de octubre",t:"Guatapé",v:"Agua, colores y la piedra gigante de Guatapé.",r:2,s:[["Todo el día","Tour a Guatapé ($130.000)"],["Noche","Cena y empacar para Jardín"]],h:L,k:"Confirmen con la agencia el punto de encuentro y la hora de salida."},
@@ -74,36 +160,242 @@ let D={ver:VER,title:"Del Caribe al Eje Cafetero",sub:"Del 2 al 12 de octubre de
 {n:9,dt:"Viernes 9 de octubre",t:"Filandia y Salento",v:"Pueblitos de colores y atardeceres en Salento.",r:4,s:[["8:30 AM","Check-out y salida de Pereira"],["10:00 AM","Filandia: calles coloridas y mirador Colina Iluminada"],["1:00 PM","Almuerzo en Filandia"],["3:00 PM","Check-in en Mahalo, Salento"],["4:30 PM","Calle Real y mirador"]],h:M},
 {n:10,dt:"Sábado 10 de octubre",t:"Parque del Café",v:"Un día entero de parque, café y atracciones.",r:4,s:[["8:00 AM","Salida de Salento (cerca de 1 hora de camino)"],["9:30 AM","Parque del Café, todo el día y almuerzo adentro (entrada $90.000)"],["5:30 PM","Regreso a Salento y cena"]],h:M,k:"Es puente festivo: compren las entradas con anticipación y lleguen a la apertura."},
 {n:11,dt:"Domingo 11 de octubre",t:"Valle del Cocora",v:"Palmas de cera que tocan las nubes.",r:4,s:[["7:00 AM","Willys hacia el valle ($14.000)"],["7:30 AM","Caminata entre palmas de cera, de 4 a 5 horas (entrada $30.000)"],["1:30 PM","Almuerzo en Salento"],["3:30 PM","Tarde libre, compras y maletas"]],h:M,k:"Madruguen: en el puente festivo hay filas para los Willys."},
-{n:12,dt:"Lunes 12 de octubre",t:"De Salento a Barranquilla",v:"Una última taza de café y de regreso a casa.",r:4,s:[["9:00 AM","Desayuno y check-out"],["12:00 PM","Salida hacia Pereira (cerca de 1 h 15)"],["1:30 PM","Devolver el carro y almorzar"],["3:00 PM","Llegada al aeropuerto Matecaña"],["5:00 PM","Vuelo de Pereira a Barranquilla"]],k:"Hoy es festivo y puede haber tráfico de regreso del puente. Tanqueen antes de devolver el carro."}
+{n:12,dt:"Lunes 12 de octubre",t:"Regreso a casa",v:"Una última taza de café y de regreso a casa.",r:4,s:[["9:00 AM","Desayuno y check-out"],["12:00 PM","Salida hacia Pereira (cerca de 1 h 15)"],["1:30 PM","Devolver el carro y almorzar"],["3:00 PM","Llegada al aeropuerto Matecaña"],["5:00 PM","Vuelo de Pereira a Barranquilla"]],k:"Hoy es festivo y puede haber tráfico de regreso del puente. Tanqueen antes de devolver el carro."}
+],
+/* Pagos: w = a quién aplica: all | g1 | g2 | arr:baq | arr:copey | arr:g2 | ret:baq | ret:smt */
+pays:[
+{id:"d2-t1",day:2,cat:"Transporte",item:"Carro a terminal (Barranquilla)",amt:6000,w:"arr:baq"},
+{id:"d2-t2",day:2,cat:"Transporte",item:"Bus Barranquilla → Santa Marta",amt:35000,w:"arr:baq"},
+{id:"d2-t3",day:2,cat:"Transporte",item:"Bus El Copey → Santa Marta",amt:0,w:"arr:copey",note:"falta precio"},
+{id:"d2-h1",day:2,cat:"Hotel",item:"Hotel El Rodadero",amt:35000,w:"g1"},
+{id:"d3-t1",day:3,cat:"Transporte",item:"Carro + bus + avión SM→MDE + bus + metro",amt:96000,w:"g1"},
+{id:"d3-c1",day:3,cat:"Comida",item:"Almuerzo y cena en Medellín",amt:90000,w:"g1"},
+{id:"d3-p1",day:3,cat:"Tours",item:"Parque Explora",amt:50000,w:"g1"},
+{id:"d3-h1",day:3,cat:"Hotel",item:"Comodo Family Laureles",amt:65000,w:"g1"},
+{id:"d4-c1",day:4,cat:"Comida",item:"Desayuno y cena",amt:40000,w:"g1"},
+{id:"d4-p1",day:4,cat:"Tours",item:"City tour Medellín",amt:130000,w:"g1"},
+{id:"d4-h1",day:4,cat:"Hotel",item:"Comodo Family Laureles",amt:65000,w:"g1"},
+{id:"d5-c1",day:5,cat:"Comida",item:"Cena",amt:30000,w:"g1"},
+{id:"d5-p1",day:5,cat:"Tours",item:"Tour Guatapé",amt:130000,w:"g1"},
+{id:"d5-h1",day:5,cat:"Hotel",item:"Comodo Family Laureles",amt:65000,w:"g1"},
+{id:"d6-t1",day:6,cat:"Transporte",item:"Carro a terminal + bus a Jardín",amt:55000,w:"g1"},
+{id:"d6-c1",day:6,cat:"Comida",item:"Desayuno, almuerzo y cena",amt:80000,w:"g1"},
+{id:"d6-h1",day:6,cat:"Hotel",item:"Casa Colonial, Jardín",amt:66000,w:"g1"},
+{id:"d6-o1",day:6,cat:"Otros",item:"Gastos varios Jardín",amt:30000,w:"g1"},
+{id:"d7-t1",day:7,cat:"Transporte",item:"Bus Jardín→Manizales + alquiler a Murillo",amt:120000,w:"g1"},
+{id:"d7-c1",day:7,cat:"Comida",item:"Desayuno, almuerzo y cena (migao)",amt:70000,w:"g1"},
+{id:"d7-h1",day:7,cat:"Hotel",item:"Cabaña Dos Búhos, Murillo",amt:66000,w:"g1"},
+{id:"d7-o1",day:7,cat:"Otros",item:"Gastos varios Murillo",amt:30000,w:"g1"},
+{id:"d8-t1",day:8,cat:"Transporte",item:"Carro Murillo→Nevados→Pereira (grupo 1)",amt:60000,w:"g1"},
+{id:"d8-t2",day:8,cat:"Transporte",item:"Vuelo del grupo 2 (9:35, escala Bogotá)",amt:0,w:"arr:g2",note:"falta precio"},
+{id:"d8-c1",day:8,cat:"Comida",item:"Desayuno, almuerzo y cena (grupo 1)",amt:85000,w:"g1"},
+{id:"d8-c2",day:8,cat:"Comida",item:"Comidas del día (grupo 2)",amt:50000,w:"g2"},
+{id:"d8-p1",day:8,cat:"Tours",item:"Parque Los Nevados (entrada, guía, vehículo)",amt:60000,w:"g1"},
+{id:"d8-p2",day:8,cat:"Tours",item:"Termales de Santa Rosa de Cabal",amt:106000,w:"all"},
+{id:"d8-h1",day:8,cat:"Hotel",item:"Hotel en Pereira",amt:60000,w:"all"},
+{id:"d8-o1",day:8,cat:"Otros",item:"Gastos varios",amt:20000,w:"g1"},
+{id:"d9-t1",day:9,cat:"Transporte",item:"Carro Pereira→Filandia→Salento",amt:60000,w:"all"},
+{id:"d9-c1",day:9,cat:"Comida",item:"Desayuno, almuerzo y cena",amt:90000,w:"all"},
+{id:"d9-h1",day:9,cat:"Hotel",item:"Mahalo, Salento",amt:54000,w:"all"},
+{id:"d10-t1",day:10,cat:"Transporte",item:"Carro Salento→Parque del Café→Salento",amt:60000,w:"all"},
+{id:"d10-c1",day:10,cat:"Comida",item:"Desayuno, almuerzo y cena",amt:90000,w:"all"},
+{id:"d10-p1",day:10,cat:"Tours",item:"Parque del Café",amt:90000,w:"all"},
+{id:"d10-h1",day:10,cat:"Hotel",item:"Mahalo, Salento",amt:54000,w:"all"},
+{id:"d10-o1",day:10,cat:"Otros",item:"Gastos varios",amt:20000,w:"all"},
+{id:"d11-t1",day:11,cat:"Transporte",item:"Willys al Valle del Cocora",amt:14000,w:"all"},
+{id:"d11-c1",day:11,cat:"Comida",item:"Desayuno, almuerzo y cena",amt:90000,w:"all"},
+{id:"d11-p1",day:11,cat:"Tours",item:"Valle del Cocora",amt:30000,w:"all"},
+{id:"d11-h1",day:11,cat:"Hotel",item:"Mahalo, Salento",amt:54000,w:"all"},
+{id:"d11-o1",day:11,cat:"Otros",item:"Gastos varios",amt:20000,w:"all"},
+{id:"d12-t1",day:12,cat:"Transporte",item:"Carro Salento→Pereira",amt:60000,w:"all"},
+{id:"d12-t2",day:12,cat:"Transporte",item:"Vuelo Pereira→Barranquilla",amt:160000,w:"ret:baq"},
+{id:"d12-t3",day:12,cat:"Transporte",item:"Regreso Pereira→Santa Marta",amt:0,w:"ret:smt",note:"falta precio"},
+{id:"d12-c1",day:12,cat:"Comida",item:"Desayuno y almuerzo",amt:50000,w:"all"}
 ]};
-try{const x=JSON.parse(localStorage.getItem("itin")||"null");if(x&&x.ver===VER)D=x}catch(e){}
-const save=()=>{try{localStorage.setItem("itin",JSON.stringify(D))}catch(e){}};
+try{const x=JSON.parse(localStorage.getItem("itin2")||"null");if(x&&x.ver===VER)D=x}catch(e){}
+const save=()=>{try{localStorage.setItem("itin2",JSON.stringify(D))}catch(e){}};
+const fmt=n=>"$"+(n||0).toLocaleString("es-CO");
+const $=id=>document.getElementById(id);
+let ME=null,ADMIN=false;
+
+/* ---------- helpers de escenarios ---------- */
 const rp=(s,n)=>s.repeat(n);
 const wave=(a,o1,b,o2)=>`<g style="animation:wv1 5s linear infinite"><path d="M0 90 ${rp("q25 -22 50 0 t50 0 ",24)}V150H0Z" fill="${a}" opacity="${o1}"/></g><g style="animation:wv2 7s linear infinite"><path d="M0 112 ${rp("q30 -18 60 0 t60 0 ",20)}V150H0Z" fill="${b}" opacity="${o2}"/></g>`;
 const hills=()=>`<path d="M0 100C150 40 300 120 450 80S700 50 800 90V150H0Z" fill="var(--c2)" opacity=".4"/><path d="M0 122C200 82 350 142 520 107S720 92 800 117V150H0Z" fill="var(--c2)"/>`+[90,210,330,470,610,720].map((x,i)=>`<rect x="${x}" y="${118-(i%3)*5}" width="12" height="9" fill="${["#f4b942","#e4572e","#fff","#3b9ac4"][i%4]}"/>`).join("");
 const peaks=()=>`<path d="M0 150L120 70 200 110 330 30 430 100 560 55 680 105 800 70V150Z" fill="var(--c3)" opacity=".45"/><path d="M330 30L300 58 318 52 330 63 345 51 362 59Z" fill="#fff"/><path d="M0 132Q200 105 400 128T800 118V150H0Z" fill="var(--c3)"/>`+[60,150,260,520,640,740].map((x,i)=>`<rect x="${x}" y="${118+(i%2)*4}" width="4" height="16" fill="#5b5340"/><circle cx="${x+2}" cy="${116+(i%2)*4}" r="7" fill="#9fb27a"/>`).join("")+`<ellipse cx="300" cy="100" rx="170" ry="14" fill="#fff" opacity=".45" style="animation:mist 14s ease-in-out infinite alternate"/>`;
 const palms=()=>`<path d="M0 100C200 70 380 120 560 90S740 80 800 100V150H0Z" fill="#7aa66a" opacity=".6"/><path d="M0 125Q200 95 400 120T800 110V150H0Z" fill="#4f8a43"/>`+[80,210,350,500,640,730].map((x,i)=>{const t=38+(i%3)*12,c=x+1.5,e=`<ellipse cx="${c}" cy="${t}" rx="15" ry="3.5"`;return `<rect x="${x}" y="${t}" width="3" height="${112-t}" fill="#6b4a2b"/><g fill="#3f7d3a">${e}/>${e} transform="rotate(35 ${c} ${t})"/>${e} transform="rotate(-35 ${c} ${t})"/></g>`}).join("");
 const SC={1:()=>wave("var(--c1)",.35,"var(--c1)",1),2:hills,3:peaks,4:palms};
-const $=id=>document.getElementById(id),B=document.body;
-document.querySelector('[data-p="title"]').textContent=D.title;document.querySelector('[data-p="sub"]').textContent=D.sub;
-$("hw").innerHTML=wave("#fff",.35,SK[1],1);
-$("app").innerHTML=D.days.map((d,i)=>`<section class="day" style="--c:var(--c${d.r});--t:var(--t${d.r});--sk:${SK[d.r]}"><div class="bn"><div class="cld" style="animation-delay:-${i*9}s"></div><svg class="sc" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice">${SC[d.r]()}</svg><span class="num">${d.n}</span></div><div class="in2"><p class="dt rv" data-p="days.${i}.dt">${d.dt}</p><h2 class="rv" data-p="days.${i}.t">${d.t}</h2><p class="v rv" data-p="days.${i}.v">${d.v}</p>${d.b?`<span class="bd rv" data-p="days.${i}.b">${d.b}</span>`:""}<ul>${d.s.map((s,j)=>`<li class="rv"><span class="tm" data-p="days.${i}.s.${j}.0">${s[0]}</span><span data-p="days.${i}.s.${j}.1">${s[1]}</span></li>`).join("")}</ul>${d.h?`<p class="n rv"><b>Dormir:</b> <span data-p="days.${i}.h">${d.h}</span></p>`:""}${d.k?`<p class="n rv"><b>Ojo:</b> <span data-p="days.${i}.k">${d.k}</span></p>`:""}</div></section>`).join("");
-$("sg").innerHTML=[1,2,3,4].map(r=>`<i style="flex:${D.days.filter(d=>d.r===r).length};background:var(--c${r})"></i>`).join("");
-const secs=[...document.querySelectorAll(".day")],scs=secs.map(s=>s.querySelector(".sc"));
-function onS(){const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;
-$("bar").classList.toggle("on",y>innerHeight*.6);$("mk").style.left=(max>0?y/max*100:0)+"%";
-let a=null;secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<innerHeight*.4)a=i});
-if(a!==null){const d=D.days[a];$("lab").textContent="Día "+d.n+": "+d.t;$("mk").style.background="var(--c"+d.r+")"}
-secs.forEach((s,i)=>{const r=s.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight)scs[i].style.transform="translateY("+(r.top-innerHeight/2)*.06+"px)"})}
-addEventListener("scroll",onS,{passive:true});onS();
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
-document.querySelectorAll(".rv").forEach(el=>io.observe(el));
-const setP=(o,p,v)=>{const k=p.split("."),l=k.pop();k.reduce((a,b)=>a[b],o)[l]=v};
-const ed=on=>document.querySelectorAll("[data-p]").forEach(e=>on?e.setAttribute("contenteditable","true"):e.removeAttribute("contenteditable"));
-$("adm").onclick=()=>{if(prompt("Contraseña de admin")===PASS){B.classList.add("admin");ed(true)}else alert("Contraseña incorrecta")};
-$("out").onclick=()=>{B.classList.remove("admin");ed(false)};
-$("cp").onclick=async()=>{const t=JSON.stringify(D);try{await navigator.clipboard.writeText(t);alert("Datos copiados")}catch(e){prompt("Copia estos datos",t)}};
-$("rs").onclick=()=>{if(confirm("¿Restablecer todos los textos originales?")){try{localStorage.removeItem("itin")}catch(e){}location.reload()}};
-addEventListener("input",e=>{const p=e.target.dataset&&e.target.dataset.p;if(p){setP(D,p,e.target.textContent);save()}});
-addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.dataset&&e.target.dataset.p){e.preventDefault();e.target.blur()}});
+
+/* ---------- a quién aplica un pago ---------- */
+function applies(pay,p){
+  const w=pay.w;
+  if(w==="all")return true;
+  if(w==="g1"||w==="g2")return p.who===w;
+  if(w.startsWith("arr:"))return p.arr===w.slice(4);
+  if(w.startsWith("ret:"))return p.ret===w.slice(4);
+  return false;
+}
+function myPays(p){return D.pays.filter(x=>applies(x,p))}
+
+/* ---------- notas personalizadas por día ---------- */
+function pnote(d,p){
+  if(d.n===2){
+    if(p.arr==="baq")return "<b>Tu plan:</b> sales de Barranquilla hacia Santa Marta y duermes en El Rodadero.";
+    if(p.arr==="copey")return "<b>Tu plan:</b> viajas desde El Copey (Cesar) hasta Santa Marta y duermes en El Rodadero.";
+    return "<b>Tu plan:</b> tú viajas el 8. Este día lo pasa el grupo 1 en El Rodadero.";
+  }
+  if(d.n===3&&p.who==="g2")return "<b>Tu plan:</b> tu viaje empieza el 8 de octubre. El grupo 1 vuela hoy a Medellín.";
+  if(d.n===8&&p.arr==="g2")return "<b>Tu plan:</b> hoy llegas — vuelo 9:35 AM con escala en Bogotá, aterrizas en Pereira ~1:00 PM. Encuentro con todos en el hotel a las 2 PM, luego termales.";
+  if(d.n===8&&p.who==="g2")return "<b>Hoy se une el grupo 2:</b> aterrizan en Pereira ~1:00 PM.";
+  if(d.n===12&&p.ret==="smt")return "<b>Tu plan:</b> regresas a Santa Marta (no tomas el vuelo a Barranquilla).";
+  return "";
+}
+
+/* ---------- render: hero + itinerario ---------- */
+function renderItin(){
+  $("v-hero").innerHTML=`<header class="hero" id="hero"><div class="sun"></div><div class="cloud cl1"></div><div class="cloud cl2"></div>
+  <div class="plane"><svg viewBox="0 0 64 32"><g fill="#fff"><path d="M4 14h50c6 0 8 2 8 2s-2 2-8 2H4z"/><path d="M26 15 18 2h6l16 13zM26 17l-8 13h6l16-13z"/><path d="M8 15 3 7h4l7 8zM8 17l-5 8h4l7-8z"/></g></svg></div>
+  <div style="position:relative;z-index:2;max-width:760px;margin:0 auto;width:100%"><h1>${D.title}</h1><p>${D.sub}</p></div>
+  <div class="hint">Desliza para empezar</div>
+  <svg class="hw" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice">${wave("#fff",.35,SK[1],1)}</svg></header>`;
+  $("app").innerHTML=D.days.map((d,i)=>{
+    const note=pnote(d,ME);
+    return `<section class="day" id="d${d.n}" style="--c:var(--c${d.r});--t:var(--t${d.r});--sk:${SK[d.r]}"><div class="bn"><div class="cld" style="animation-delay:-${i*9}s"></div><svg class="sc" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice">${SC[d.r]()}</svg><span class="num">${d.n}</span></div><div class="in2"><p class="dt rv">${d.dt}</p><h2 class="rv">${d.t}</h2><p class="v rv">${d.v}</p>${d.b?`<span class="bd rv">${d.b}</span>`:""}${note?`<p class="pn rv" style="--c:var(--c${d.r})">${note}</p>`:""}<ul>${d.s.map(s=>`<li class="rv"><span class="tm">${s[0]}</span><span>${s[1]}</span></li>`).join("")}</ul>${d.h?`<p class="n rv" style="--c:var(--c${d.r})"><b>Dormir:</b> ${d.h}</p>`:""}${d.k?`<p class="n rv" style="--c:var(--c${d.r})"><b>Ojo:</b> ${d.k}</p>`:""}</div></section>`}).join("");
+  $("sg").innerHTML=[1,2,3,4].map(r=>`<i style="flex:${D.days.filter(d=>d.r===r).length};background:var(--c${r})"></i>`).join("");
+  bindScrollFx();
+}
+
+/* ---------- render: pagos ---------- */
+function renderPay(){
+  const mine=myPays(ME);
+  const est=mine.reduce((a,x)=>a+(+x.amt||0),0);
+  const paid=mine.reduce((a,x)=>a+(ME.paid[x.id]?+x.amt||0:0),0);
+  const byDay={};
+  mine.forEach(x=>{(byDay[x.day]=byDay[x.day]||[]).push(x)});
+  let h=`<div class="tots"><div class="tot"><b>${fmt(est)}</b><span>Estimado</span></div><div class="tot" style="background:var(--t2)"><b style="color:var(--c2)">${fmt(paid)}</b><span>Pagado</span></div><div class="tot" style="background:var(--t1)"><b style="color:var(--c1)">${fmt(Math.max(est-paid,0))}</b><span>Falta</span></div></div>`;
+  Object.keys(byDay).sort((a,b)=>a-b).forEach(day=>{
+    const dd=D.days.find(x=>x.n==day);
+    const items=byDay[day];
+    const dEst=items.reduce((a,x)=>a+(+x.amt||0),0);
+    const dPaid=items.reduce((a,x)=>a+(ME.paid[x.id]?+x.amt||0:0),0);
+    const cats={};items.forEach(x=>{(cats[x.cat]=cats[x.cat]||[]).push(x)});
+    h+=`<div class="pday" style="--t:var(--t${dd?dd.r:4});--c:var(--c${dd?dd.r:4})"><header><h3>${dd?dd.dt:"Día "+day}</h3><span>${fmt(dPaid)} / ${fmt(dEst)}</span></header>`;
+    Object.keys(cats).forEach(c=>{
+      h+=`<div class="cat"><h4>${c}</h4>${cats[c].map(x=>{
+        const ok=!!ME.paid[x.id];
+        return `<div class="pay ${ok?"ok":""}" data-id="${x.id}"><span class="bx">${ok?"✓":""}</span><span class="nm">${x.item}</span><span class="am" ${ADMIN?'contenteditable="true" data-amt="'+x.id+'"':""}>${fmt(x.amt)}${x.note?`<small>${x.note}</small>`:""}</span></div>`}).join("")}</div>`;
+    });
+    h+=`</div>`;
+  });
+  $("v-pay").innerHTML=h;
+  $("v-pay").querySelectorAll(".pay").forEach(el=>el.onclick=e=>{
+    if(e.target.dataset.amt)return;
+    const id=el.dataset.id;
+    ME.paid[id]=!ME.paid[id];if(!ME.paid[id])delete ME.paid[id];
+    save();renderPay();
+  });
+}
+
+/* ---------- render: admin ---------- */
+function renderAdm(){
+  let h=`<h2 style="margin-top:0">Personas del viaje</h2><div id="addp"><div class="row"><input id="np-n" placeholder="Nombre"><input id="np-c" placeholder="Código de acceso"></div>
+  <div class="row"><select id="np-who"><option value="g1">Grupo 1 (viaja del 2)</option><option value="g2">Grupo 2 (llega el 8)</option></select>
+  <select id="np-arr"><option value="baq">Llega desde Barranquilla</option><option value="copey">Llega desde El Copey</option><option value="g2">Vuelo del 8 (g2)</option></select></div>
+  <div class="row"><select id="np-ret"><option value="baq">Regresa a Barranquilla</option><option value="smt">Regresa a Santa Marta</option></select>
+  <button id="np-add">Agregar persona</button></div></div>`;
+  D.people.forEach(p=>{
+    const mine=myPays(p);
+    const est=mine.reduce((a,x)=>a+(+x.amt||0),0);
+    const paid=mine.reduce((a,x)=>a+(p.paid[x.id]?+x.amt||0:0),0);
+    h+=`<div class="aprow" style="--c:var(--c1)"><b>${p.name} <span style="color:var(--mut);font-weight:500">(${p.code})</span></b>
+    <select data-f="who" data-id="${p.id}"><option value="g1" ${p.who==="g1"?"selected":""}>G1</option><option value="g2" ${p.who==="g2"?"selected":""}>G2</option></select>
+    <select data-f="arr" data-id="${p.id}"><option value="baq" ${p.arr==="baq"?"selected":""}>Baq</option><option value="copey" ${p.arr==="copey"?"selected":""}>Copey</option><option value="g2" ${p.arr==="g2"?"selected":""}>Vuelo 8</option></select>
+    <select data-f="ret" data-id="${p.id}"><option value="baq" ${p.ret==="baq"?"selected":""}>→Baq</option><option value="smt" ${p.ret==="smt"?"selected":""}>→SM</option></select>
+    <span class="paidall">${fmt(paid)}/${fmt(est)}</span>
+    <button class="del" data-del="${p.id}">✕</button></div>`;
+  });
+  h+=`<div class="atools"><button id="a-cp">Copiar todos los datos</button><button id="a-imp">Importar datos</button><button class="rs" id="a-rs">Restablecer</button><button id="a-out">Salir del admin</button></div>
+  <p style="color:var(--mut);font-size:.85rem">En la pestaña <b>Pagos</b> puedes tocar los precios para corregirlos. Los ítems en $0 con "falta precio" son los que faltan por confirmar.</p>`;
+  $("v-adm").innerHTML=h;
+  $("np-add").onclick=()=>{
+    const n=$("np-n").value.trim(),c=$("np-c").value.trim().toLowerCase();
+    if(!n||!c)return alert("Escribe nombre y código");
+    if(D.people.some(p=>p.code===c))return alert("Ese código ya existe");
+    D.people.push({id:"p"+Date.now(),name:n,code:c,who:$("np-who").value,arr:$("np-arr").value,ret:$("np-ret").value,paid:{}});
+    save();renderAdm();
+  };
+  $("v-adm").querySelectorAll("[data-f]").forEach(s=>s.onchange=()=>{
+    const p=D.people.find(x=>x.id===s.dataset.id);p[s.dataset.f]=s.value;save();
+  });
+  $("v-adm").querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{
+    if(confirm("¿Quitar a esta persona?")){D.people=D.people.filter(x=>x.id!==b.dataset.del);save();renderAdm()}
+  });
+  $("a-cp").onclick=async()=>{const t=JSON.stringify(D);try{await navigator.clipboard.writeText(t);alert("Datos copiados")}catch(e){prompt("Copia estos datos",t)}};
+  $("a-imp").onclick=()=>{const t=prompt("Pega los datos JSON:");try{const x=JSON.parse(t);if(x&&x.ver===VER){D=x;save();renderAdm();renderItin();renderPay();alert("Importado")}else alert("Datos no válidos")}catch(e){alert("JSON no válido")}};
+  $("a-rs").onclick=()=>{if(confirm("¿Restablecer TODO (personas, pagos y textos)?")){try{localStorage.removeItem("itin2")}catch(e){}location.reload()}};
+  $("a-out").onclick=()=>{ADMIN=false;document.body.classList.remove("admin");$("m-adm").style.display="none";renderPay();};
+}
+
+/* ---------- scroll fx ---------- */
+let io=null,secs=[],scs=[];
+function bindScrollFx(){
+  secs=[...document.querySelectorAll(".day")];scs=secs.map(s=>s.querySelector(".sc"));
+  if(io)io.disconnect();
+  io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+}
+function onS(){
+  const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;
+  $("bar").classList.toggle("on",y>innerHeight*.55);
+  $("mk").style.left=(max>0?y/max*100:0)+"%";
+  let a=null;secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<innerHeight*.4)a=i});
+  if(a!==null){const d=D.days[a];$("lab").textContent="Día "+d.n+": "+d.t;$("mk").style.background="var(--c"+d.r+")"}
+  secs.forEach((s,i)=>{const r=s.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight)scs[i].style.transform="translateY("+(r.top-innerHeight/2)*.06+"px)"});
+}
+addEventListener("scroll",onS,{passive:true});
+
+/* ---------- vistas ---------- */
+function show(v){
+  document.querySelectorAll("#menu button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
+  $("app").style.display=v==="itin"?"":"none";
+  $("v-hero").style.display=v==="itin"?"":"none";
+  $("v-pay").style.display=v==="pay"?"":"none";
+  $("v-adm").style.display=v==="adm"?"":"none";
+  $("bar").style.display=v==="itin"?"":"none";
+  scrollTo(0,0);onS();
+}
+document.querySelectorAll("#menu button").forEach(b=>b.onclick=()=>show(b.dataset.v));
+
+/* ---------- login ---------- */
+function enter(p){
+  ME=p;
+  document.body.classList.add("in");
+  $("lg").style.display="none";
+  $("who").textContent="Hola, "+p.name;
+  renderItin();renderPay();show("itin");
+}
+function tryLogin(){
+  const v=$("lin").value.trim().toLowerCase();
+  const p=D.people.find(x=>x.name.toLowerCase()===v||x.code.toLowerCase()===v);
+  if(p){$("lerr").textContent="";enter(p)}
+  else{$("lerr").textContent="Nombre o código no reconocido. Pide a Kalen que te agregue."}
+}
+$("lgo").onclick=tryLogin;
+$("lin").addEventListener("keydown",e=>{if(e.key==="Enter")tryLogin()});
+$("ladm").onclick=()=>{
+  if(prompt("Contraseña de admin")==="kalen2026"){
+    if(!ME&&D.people.length){ME=D.people[0]}
+    if(!ME){const p={id:"p1",name:"Kalen",code:"kalen",who:"g1",arr:"baq",ret:"baq",paid:{}};D.people.unshift(p);ME=p;save()}
+    ADMIN=true;document.body.classList.add("admin","in");
+    $("lg").style.display="none";$("who").textContent="Admin";
+    $("m-adm").style.display="grid";renderItin();renderPay();renderAdm();show("adm");
+  }else alert("Contraseña incorrecta");
+};
+
+/* ---------- edición de precios (admin, delegado) ---------- */
+addEventListener("input",e=>{
+  const id=e.target.dataset&&e.target.dataset.amt;
+  if(id&&ADMIN){const p=D.pays.find(x=>x.id===id);const v=parseInt(e.target.textContent.replace(/\D/g,""))||0;p.amt=v;p.note="";save()}
+});
+addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.dataset&&e.target.dataset.amt){e.preventDefault();e.target.blur();renderPay()}});
 </script></body></html>
