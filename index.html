@@ -87,17 +87,16 @@ body.dark .welcome-card-wrap::before {
   gap: 16px;
   margin-bottom: 12px;
 }
-/* Reescalado dinámico según dispositivo y alta nitidez para PC (evita pixelación) */
 .welcome-caricature-big, .welcome-caricature-petro {
   width: 100px;
   height: 100px;
   flex: none;
   object-fit: cover;
   border-radius: 50%;
-  background: transparent; /* Sin fondo */
+  background: transparent;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
-  transform: translateZ(0); /* Aceleración por hardware para nitidez máxima */
+  transform: translateZ(0);
 }
 .welcome-caricature-big {
   border: 3px solid var(--c4);
@@ -292,7 +291,7 @@ body.in #menu{display:flex}
 </div>
 
 <script>
-const VER=17,PASS="kalen2026";
+const VER=18,PASS="kalen2026";
 const H_MED="Comodo Family Laureles, Medellín, $65.000 por persona";
 const H_SAL="Mahalo, Salento, $54.000 por persona";
 const SK={1:"#bfe8f6",2:"#cfe9d4",3:"#cfd6f0",4:"#efd9c3"};
@@ -462,8 +461,8 @@ doneDefs:[
 ]
 };
 
-try{const x=JSON.parse(localStorage.getItem("itin17")||"null");if(x&&x.ver===VER)D=x}catch(e){}
-const save=()=>{try{localStorage.setItem("itin17",JSON.stringify(D))}catch(e){}};
+try{const x=JSON.parse(localStorage.getItem("itin18")||"null");if(x&&x.ver===VER)D=x}catch(e){}
+const save=()=>{try{localStorage.setItem("itin18",JSON.stringify(D))}catch(e){}};
 const fmt=n=>"$"+(n||0).toLocaleString("es-CO");
 const $=id=>document.getElementById(id);
 let ME=null,ADMIN=false,DARK=false;
@@ -545,7 +544,7 @@ function renderItin(){
   <div class="hint">Desliza para empezar</div>
   <svg class="hw" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice">${wave("#fff",.35,SK[1],1)}</svg></header>`;
   
-  let welcomeImg = (ME.arr==="copey"||ME.arr==="copey3") ? "imagenes/El Copey.jpg" : "imagenes/Barranquilla.jpg";
+  let welcomeImg = (ME.arr==="copey"||ME.arr==="copey3") ? "El Copey.jpg" : "Barranquilla.jpg";
   
   let welcomeContent = "";
   const isAbelardoGroup = (ME.code==="cristina" || ME.code==="richar" || ME.code==="maria" || ME.code==="sebas");
@@ -554,7 +553,7 @@ function renderItin(){
     const randomAbelardoText = getDailyMsg(abelardoMsgs, ME.code + new Date().getDate());
     welcomeContent = `
       <div class="welcome-header-flex">
-        <img src="imagenes/abelardogay.png" class="welcome-caricature-big" alt="Abelardo">
+        <img src="abelardogay.png" class="welcome-caricature-big" alt="Abelardo">
         <div class="welcome-speech-bubble">
           <strong style="color:var(--c4);display:block;margin-bottom:2px">¡Bienvenidos a mi viaje!</strong>
           ${randomAbelardoText}
@@ -566,7 +565,7 @@ function renderItin(){
     const randomPetroText = getDailyMsg(petroMsgs, ME.code + new Date().getDate());
     welcomeContent = `
       <div class="welcome-header-flex">
-        <img src="imagenes/petrico.png" class="welcome-caricature-petro" alt="Petro">
+        <img src="petrico.png" class="welcome-caricature-petro" alt="Petro">
         <div class="welcome-speech-bubble">
           <strong style="color:var(--c1);display:block;margin-bottom:2px">¡Bienvenidos a este camino de vida y montaña!</strong>
           ${randomPetroText}
@@ -597,17 +596,17 @@ const alts={
 };
 
 const dayImages = {
-  2: "imagenes/Santa marta.jpg",
-  3: "imagenes/Medellin.jpg",
-  4: "imagenes/Medellin.jpg",
-  5: "imagenes/Guatape.jpg",
-  6: "imagenes/Jardin.jpg",
-  7: "imagenes/Manizales y nevado.jpg",
-  8: "imagenes/Santa rosa del cabal.jpg",
-  9: "imagenes/Filandia.jpg",
-  10: "imagenes/Parque del Cafe.jpg",
-  11: "imagenes/Salento.jpg",
-  12: "imagenes/Salento.jpg"
+  2: "Santa marta.jpg",
+  3: "Medellin.jpg",
+  4: "Medellin.jpg",
+  5: "Guatape.jpg",
+  6: "Jardin.jpg",
+  7: "Manizales y nevado.jpg",
+  8: "Santa rosa del cabal.jpg",
+  9: "Filandia.jpg",
+  10: "Parque del Cafe.jpg",
+  11: "Salento.jpg",
+  12: "Salento.jpg"
 };
 
 html+=D.days.map((d,i)=>{
@@ -650,7 +649,7 @@ function renderPay(){
   const byDay={};
   mine.forEach(x=>{(byDay[x.day]=byDay[x.day]||[]).push(x)});
 
-  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"imagenes/El Copey.jpg":"imagenes/Barranquilla.jpg"}')">
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')">
     <div class="welcome-card-content">
       <h3>💰 Tus Pagos y Abonos</h3>
       <p>${ADMIN?"<b>Modo Admin activo:</b> Puedes hacer clic en los círculos o abonar para registrar los pagos de esta persona.":`Aquí visualizas el estado de tus pagos de ruta. ${ADMIN?"":"(Solo el administrador puede modificarlos)"}`}<br><b>Progreso personal:</b> ${pct}% pagado</p>
@@ -728,7 +727,7 @@ function renderPay(){
 
 /* ---------- render: checklist pendientes ---------- */
 function renderChk(){
-  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"imagenes/El Copey.jpg":"imagenes/Barranquilla.jpg"}')">
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')">
     <div class="welcome-card-content">
       <h3>✔️ Tareas y Preparativos</h3><p>Cosas pendientes por organizar o comprar para el viaje.</p>
     </div>
@@ -765,7 +764,7 @@ function renderChk(){
 
 /* ---------- render: checklist "hecho" ---------- */
 function renderDone(){
-  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"imagenes/El Copey.jpg":"imagenes/Barranquilla.jpg"}')">
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')">
     <div class="welcome-card-content">
       <h3>✅ Lo que ya hice</h3><p>Registra las acciones y gestiones que ya completaste con éxito.</p>
     </div>
@@ -826,7 +825,7 @@ function renderStats(){
     });
     const globalFalta=Math.max(totalGlobalEst-totalGlobalPaid,0);
 
-    let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('imagenes/Barranquilla.jpg')">
+    let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('Barranquilla.jpg')">
       <div class="welcome-card-content">
         <h3>📊 Panel Global de Administrador</h3><p>Resumen financiero y control de todos los participantes.</p>
       </div>
@@ -852,7 +851,7 @@ function renderStats(){
   const myFalta=Math.max(myEst-myPaid,0);
   const myPct=myEst>0?Math.round((myPaid/myEst)*100):0;
 
-  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"imagenes/El Copey.jpg":"imagenes/Barranquilla.jpg"}')">
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')">
     <div class="welcome-card-content">
       <h3>📊 Mis Estadísticas Personales</h3><p>Resumen de tus pagos, progreso y estado en el viaje.</p>
       <div style="background:var(--border);height:8px;border-radius:4px;margin-top:12px;overflow:hidden">
@@ -967,7 +966,7 @@ function renderAdm(){
 
   $("a-cp").onclick=async()=>{const t=JSON.stringify(D);try{await navigator.clipboard.writeText(t);alert("Copiado")}catch(e){prompt("Copia",t)}};
   $("a-imp").onclick=()=>{const t=prompt("Pega JSON:");try{const x=JSON.parse(t);if(x&&x.ver===VER){D=x;save();renderAdm();renderItin();renderPay();renderChk();renderDone();renderStats();alert("OK")}else alert("No válido")}catch(e){alert("Error")}};
-  $("a-rs").onclick=()=>{if(confirm("¿Restablecer todo?")){try{localStorage.removeItem("itin17")}catch(e){}location.reload()}};
+  $("a-rs").onclick=()=>{if(confirm("¿Restablecer todo?")){try{localStorage.removeItem("itin18")}catch(e){}location.reload()}};
   $("a-out").onclick=()=>{ADMIN=false;document.body.classList.remove("admin");$("m-adm").style.display="none";renderPay();renderStats();};
 }
 
