@@ -41,7 +41,7 @@ button{font-family:inherit;cursor:pointer}
 #mk{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--c1);border:2.5px solid var(--bg);box-shadow:0 1px 4px #0005;transition:background .4s}
 .btn-ico{background:none;border:0;font-size:1rem;padding:4px;border-radius:6px;color:var(--ink)}
 
-/* ---- BOTONES FLOTANTES DE ADMIN (SOBRE EL MENÚ INFERIOR) ---- */
+/* ---- BOTONES FLOTANTES DE ADMIN ---- */
 #admin-float-bar{position:fixed;left:12px;right:12px;bottom:70px;z-index:11;display:none;gap:8px;justify-content:center;pointer-events:none}
 body.admin #admin-float-bar{display:flex}
 .float-btn{pointer-events:auto;border:0;border-radius:12px;padding:8px 14px;font:700 .8rem Figtree,sans-serif;box-shadow:0 4px 16px rgba(0,0,0,0.18);display:flex;align-items:center;gap:6px;backdrop-filter:blur(8px)}
@@ -227,6 +227,9 @@ body.in #menu{display:flex}
 #menu button.on{color:var(--c1);background:var(--t1)}
 #menu button.on svg{transform:translateY(-2px) scale(1.15)}
 
+/* Botón Admin oculto para viajeros normales en el menú */
+body:not(.admin) #m-adm { display: none; }
+
 /* ---- ADMIN GESTIÓN ---- */
 .aprow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:10px}
 .aprow b{flex:1 1 110px}
@@ -298,7 +301,7 @@ body.in #menu{display:flex}
 </div>
 
 <script>
-const VER=30,PASS="kalen2026";
+const VER=31,PASS="kalen2026";
 const H_MED="Comodo Family Laureles, Medellín, $65.000 por persona";
 const H_SAL="Mahalo, Salento, $54.000 por persona";
 const SK={1:"#bfe8f6",2:"#cfe9d4",3:"#cfd6f0",4:"#efd9c3"};
@@ -468,8 +471,8 @@ doneDefs:[
 ]
 };
 
-try{const x=JSON.parse(localStorage.getItem("itin30")||"null");if(x&&x.ver===VER)D=x}catch(e){}
-const save=()=>{try{localStorage.setItem("itin30",JSON.stringify(D))}catch(e){}};
+try{const x=JSON.parse(localStorage.getItem("itin31")||"null");if(x&&x.ver===VER)D=x}catch(e){}
+const save=()=>{try{localStorage.setItem("itin31",JSON.stringify(D))}catch(e){}};
 const fmt=n=>"$"+(n||0).toLocaleString("es-CO");
 const $=id=>document.getElementById(id);
 let ME=null,ADMIN=false,DARK=false;
@@ -652,7 +655,7 @@ html+=activeDays.map((d,i)=>{
   bindScrollFx();
 }
 
-/* ---------- render: pagos con abonos parciales ---------- */
+/* ---------- render: pagos (Solo admin puede editar) ---------- */
 function renderPay(){
   if(!ME) return;
   const mine=myPays(ME);
@@ -667,10 +670,14 @@ function renderPay(){
   const byDay={};
   mine.forEach(x=>{(byDay[x.day]=byDay[x.day]||[]).push(x)});
 
+  let subtitleText = ADMIN 
+    ? `Estás en modo Administrador viendo y gestionando los pagos de <b>${ME.name}</b>.` 
+    : `Estás viendo el estado financiero exclusivo de <b>${ME.name}</b>. (Solo el administrador puede registrar pagos o abonos).`;
+
   let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')">
     <div class="welcome-card-content">
       <h3>💰 Pagos y Abonos de ${ME.name}</h3>
-      <p>Estás viendo el estado financiero de <b>${ME.name}</b>. Puedes cambiar de viajero al instante con el botón flotante.<br><b>Progreso:</b> ${pct}% pagado</p>
+      <p>${subtitleText}<br><b>Progreso:</b> ${pct}% pagado</p>
       <div style="background:var(--border);height:8px;border-radius:4px;margin-top:12px;overflow:hidden">
         <div style="background:linear-gradient(45deg, rgba(255,255,255,0.25) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.25) 75%, transparent 75%, transparent);background-size:30px 30px;background-color:var(--c2);width:${pct}%;height:100%;transition:width 0.6s ease-out;animation:stripes 1s linear infinite"></div>
       </div>
@@ -698,11 +705,10 @@ function renderPay(){
         const cls=full?"ok":(partial?"partial":"");
         const paidAmt=typeof pi==="number"?pi:(pi===true?x.amt:0);
         return `<div class="pay ${cls}" data-id="${x.id}">
-          <span class="bx" style="cursor:pointer" title="Marcar pagado">${full?"✓":(partial?"~":"")}</span>
+          <span class="bx" style="${ADMIN?'cursor:pointer':''}" title="${ADMIN?'Marcar pagado':'Solo admin'}">${full?"✓":(partial?"~":"")}</span>
           <span class="nm">${x.item}${partial?`<small style="color:var(--c4)">Abonado: ${fmt(paidAmt)}</small>`:""}</span>
           <span class="am">
-            ${fmt(x.amt)}
-            <button class="abonar-btn" data-abonar="${x.id}">Abonar</button>
+            ${fmt(x.amt)}${ADMIN?`<button class="abonar-btn" data-abonar="${x.id}">Abonar</button>`:""}
             ${x.note?`<small>${x.note}</small>`:""}
           </span>
         </div>`;
@@ -713,32 +719,34 @@ function renderPay(){
 
   $("v-pay").innerHTML=h;
 
-  $("v-pay").querySelectorAll(".bx").forEach(bx=>{
-    bx.onclick=e=>{
-      const id=e.target.closest(".pay").dataset.id;
-      const x=D.pays.find(p=>p.id===id);
-      const cur=ME.paid[id];
-      if(cur===true){delete ME.paid[id];snd("click")}
-      else{ME.paid[id]=true;snd("ok")}
-      save();renderPay();
-    };
-  });
+  if(ADMIN){
+    $("v-pay").querySelectorAll(".bx").forEach(bx=>{
+      bx.onclick=e=>{
+        const id=e.target.closest(".pay").dataset.id;
+        const x=D.pays.find(p=>p.id===id);
+        const cur=ME.paid[id];
+        if(cur===true){delete ME.paid[id];snd("click")}
+        else{ME.paid[id]=true;snd("ok")}
+        save();renderPay();
+      };
+    });
 
-  $("v-pay").querySelectorAll("[data-abonar]").forEach(btn=>{
-    btn.onclick=e=>{
-      const id=e.target.dataset.abonar;
-      const x=D.pays.find(p=>p.id===id);
-      const cur=typeof ME.paid[id]==="number"?ME.paid[id]:(ME.paid[id]?x.amt:0);
-      const val=prompt(`Ingresa el valor abonado para "${x.item}" de ${ME.name} (Total: ${fmt(x.amt)}):`,cur);
-      if(val!==null){
-        const num=parseInt(val.replace(/\D/g,""))||0;
-        if(num<=0)delete ME.paid[id];
-        else if(num>=x.amt)ME.paid[id]=true;
-        else ME.paid[id]=num;
-        snd("ok");save();renderPay();
-      }
-    };
-  });
+    $("v-pay").querySelectorAll("[data-abonar]").forEach(btn=>{
+      btn.onclick=e=>{
+        const id=e.target.dataset.abonar;
+        const x=D.pays.find(p=>p.id===id);
+        const cur=typeof ME.paid[id]==="number"?ME.paid[id]:(ME.paid[id]?x.amt:0);
+        const val=prompt(`Ingresa el valor abonado para "${x.item}" de ${ME.name} (Total: ${fmt(x.amt)}):`,cur);
+        if(val!==null){
+          const num=parseInt(val.replace(/\D/g,""))||0;
+          if(num<=0)delete ME.paid[id];
+          else if(num>=x.amt)ME.paid[id]=true;
+          else ME.paid[id]=num;
+          snd("ok");save();renderPay();
+        }
+      };
+    });
+  }
 }
 
 /* ---------- render: checklist pendientes ---------- */
@@ -882,7 +890,7 @@ function renderAdm(){
 
   $("a-cp").onclick=async()=>{const t=JSON.stringify(D);try{await navigator.clipboard.writeText(t);alert("Copiado")}catch(e){prompt("Copia",t)}};
   $("a-imp").onclick=()=>{const t=prompt("Pega JSON:");try{const x=JSON.parse(t);if(x&&x.ver===VER){D=x;save();renderAdm();renderItin();renderPay();renderChk();renderDone();renderStats();alert("OK")}else alert("No válido")}catch(e){alert("Error")}};
-  $("a-rs").onclick=()=>{if(confirm("¿Restablecer todo?")){try{localStorage.removeItem("itin30")}catch(e){}location.reload()}};
+  $("a-rs").onclick=()=>{if(confirm("¿Restablecer todo?")){try{localStorage.removeItem("itin31")}catch(e){}location.reload()}};
 }
 
 /* ---------- scroll fx ---------- */
@@ -905,6 +913,9 @@ addEventListener("scroll",onS,{passive:true});
 
 /* ---------- vistas ---------- */
 function show(v){
+  // Si no es admin y quiere entrar a adm o stats, redirigir a itin
+  if(!ADMIN && (v==="adm" || v==="stats")) v="itin";
+
   document.querySelectorAll("#menu button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
   $("app").style.display=v==="itin"?"":"none";
   $("v-hero").style.display=v==="itin"?"":"none";
@@ -918,6 +929,7 @@ function show(v){
 }
 document.querySelectorAll("#menu button").forEach(b=>b.onclick=()=>{
   const v = b.dataset.v;
+  if(!ADMIN && (v==="adm" || v==="stats")) return;
   show(v);
   if(v==="itin") renderItin();
   else if(v==="pay") renderPay();
@@ -995,9 +1007,9 @@ $("float-exit").onclick = logout;
 function tryLogin(){
   const val=$("lin").value.trim().toLowerCase();
   if(!val)return;
-  // Validar si intentó poner la contraseña directamente en el input de texto
-  if(val === PASS || val === "admin"){
-    askAdmin();
+  // Bloquear cualquier intento de poner contraseña o admin en el input de texto normal
+  if(val === PASS || val === "admin" || val === "kalen2026"){
+    $("lerr").textContent="Usa el botón verde 'Soy admin' para ingresar como administrador.";
     return;
   }
   const p=D.people.find(x=>x.name.toLowerCase()===val||x.code.toLowerCase()===val);
