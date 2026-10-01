@@ -1,73 +1,109 @@
-<!doctype html>
-<html lang="es"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Del Caribe al Eje Cafetero · 2 al 12 de octubre</title>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Del Caribe al Eje Cafetero</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;600&display=swap">
 <style>
-:root{--bg:#f3f7f5;--ink:#14302e;--mut:#566d69;--line:#d3ded9;--panel:#fff;--on:#fff;--c1:#0b7fa0;--c2:#2a8a4a;--c3:#5865b0;--c4:#a0561d;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1b1c;--ink:#e6f0ee;--mut:#9bb0ac;--line:#27393a;--panel:#162627;--on:#0f1b1c;--c1:#3db5da;--c2:#4cc275;--c3:#8f9bea;--c4:#e0924f}}
-:root[data-theme="dark"]{--bg:#0f1b1c;--ink:#e6f0ee;--mut:#9bb0ac;--line:#27393a;--panel:#162627;--on:#0f1b1c;--c1:#3db5da;--c2:#4cc275;--c3:#8f9bea;--c4:#e0924f}
-*,*::before,*::after{box-sizing:inherit}
-html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 Figtree,system-ui,-apple-system,"Segoe UI",sans-serif}
-.wrap{max-width:760px;margin:0 auto;padding:0 20px}
-header{padding:48px 0 26px}
-h1,h2,.st{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif}
-h1{font-weight:800;font-size:clamp(2.2rem,9vw,3.7rem);line-height:1.02;letter-spacing:-.02em;margin:0 0 14px}
-.sub{color:var(--mut);max-width:34em;margin:0 0 20px}
-.leg{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.9rem}
-.leg span{display:flex;align-items:center;gap:7px}
-.leg i{width:24px;height:6px;border-radius:3px;background:var(--c)}
-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
-nav .wrap{display:flex;gap:6px;overflow-x:auto;padding:10px 20px;scrollbar-width:none}
-nav a{flex:none;min-width:42px;text-align:center;padding:5px 10px;border-radius:999px;color:var(--ink);text-decoration:none;font-weight:600;font-size:.9rem;border:1.5px solid var(--c)}
-nav a:hover,nav a:focus-visible{background:var(--c);color:var(--on);outline:none}
-main{padding-top:34px}
-.day{position:relative;display:grid;grid-template-columns:48px 1fr;gap:0 16px;padding-bottom:36px}
-.day::before{content:"";position:absolute;left:21px;top:44px;bottom:-4px;width:6px;border-radius:3px;background:var(--c)}
-.day:last-child::before{display:none}
-.st{position:relative;width:48px;height:48px;border-radius:50%;background:var(--c);color:var(--on);display:grid;place-items:center;font-weight:800;font-size:1.25rem;box-shadow:0 0 0 5px var(--bg)}
-.dt{color:var(--mut);font-size:.92rem;font-weight:500;margin:2px 0 0}
-h2{font-weight:700;font-size:1.5rem;line-height:1.15;margin:2px 0 4px}
-.bd{display:inline-block;background:var(--c);color:var(--on);font-size:.82rem;font-weight:600;padding:2px 10px;border-radius:999px;margin:4px 0 0}
-ul{list-style:none;margin:14px 0 0;padding:0}
-li{display:grid;grid-template-columns:5.4rem 1fr;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
-li:first-child{border-top:0}
-.tm{font-weight:600;font-size:.92rem;color:var(--mut)}
-.n{margin:10px 0 0;padding:8px 12px;border-left:4px solid var(--c);background:var(--panel);border-radius:0 8px 8px 0;font-size:.93rem}
-.n b{font-weight:600}
-footer{padding:4px 0 56px;color:var(--mut);font-size:.88rem}
-@media (max-width:480px){.day{grid-template-columns:40px 1fr;gap:0 12px}.st{width:40px;height:40px;font-size:1.05rem}.day::before{left:17px;top:36px}li{grid-template-columns:4.6rem 1fr}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+:root{--c1:#0b7fa0;--c2:#2a8a4a;--c3:#5865b0;--c4:#a0561d;--t1:#e3f4fa;--t2:#e7f4e9;--t3:#e9ecf8;--t4:#f7ece1;--ink:#17302d;--mut:#56696a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:400 16px/1.55 Figtree,system-ui,sans-serif;color:var(--ink);background:#fff}
+body.admin{padding-bottom:70px}
+h1,h2,.num{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif}
+#bar{position:fixed;top:0;left:0;right:0;z-index:9;height:46px;padding:0 16px;display:flex;align-items:center;gap:14px;background:#ffffffd9;backdrop-filter:blur(8px);transform:translateY(-100%);transition:transform .4s}
+#bar.on{transform:none}
+#lab{font-weight:600;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:50%}
+#trk{position:relative;flex:1;height:8px}
+.sg{display:flex;height:100%;border-radius:4px;overflow:hidden}.sg i{display:block;height:100%}
+#mk{position:absolute;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:var(--c1);border:3px solid #fff;box-shadow:0 1px 5px #0005;transition:background .4s}
+.hero{position:relative;min-height:100svh;display:grid;align-content:center;padding:24px;color:#fff;overflow:hidden;background:linear-gradient(#ff9d6c 0%,#ffd08a 28%,#8fd3ea 62%,#0b7fa0 100%)}
+.sun{position:absolute;left:50%;top:36%;width:150px;height:150px;margin-left:-75px;border-radius:50%;background:#fff3c4;box-shadow:0 0 90px 30px #ffe9a8aa;animation:rise 2.6s cubic-bezier(.2,.8,.2,1) both}
+.plane{position:absolute;top:16%;left:-12%;font-size:2.4rem;animation:fly 8s 1.2s ease-in-out both}
+.hero h1{font-weight:800;font-size:clamp(2.7rem,11vw,6rem);line-height:.98;letter-spacing:-.025em;margin:0 0 14px;max-width:9em;text-shadow:0 2px 24px #0a4a6366}
+.hero p{max-width:30em;font-size:1.12rem;margin:0;text-shadow:0 1px 12px #0a4a6388}
+.hw{position:absolute;left:0;bottom:0;width:100%;height:34%}
+.hint{position:absolute;left:0;right:0;bottom:36%;text-align:center;font-weight:600;font-size:.9rem;animation:bob 1.8s ease-in-out infinite}
+.day{position:relative;background:var(--t)}
+.bn{position:relative;height:210px;overflow:hidden;background:linear-gradient(var(--sk),var(--t))}
+.sc{position:absolute;left:0;bottom:-30px;width:100%;height:180px;will-change:transform}
+.cld{position:absolute;top:34px;left:0;width:120px;height:34px;border-radius:30px;background:#fff;opacity:.7;filter:blur(1px);animation:drift 46s linear infinite}
+.num{position:absolute;left:max(20px,calc(50% - 340px));top:22px;font-weight:800;font-size:5.6rem;line-height:1;color:#fff;text-shadow:0 2px 18px #0005}
+.in2{max-width:680px;margin:0 auto;padding:6px 20px 64px}
+.dt{color:var(--mut);font-weight:500;margin:14px 0 0}
+h2{font-weight:700;font-size:clamp(1.8rem,6.5vw,2.4rem);line-height:1.1;margin:4px 0 6px}
+.v{font-size:1.12rem;font-style:italic;color:var(--c);font-weight:500;margin:0 0 8px}
+.bd{display:inline-block;background:var(--c);color:#fff;font-size:.82rem;font-weight:600;padding:2px 12px;border-radius:999px;margin:2px 0 4px}
+ul{list-style:none;margin:12px 0 0;padding:0}
+li{display:grid;grid-template-columns:5.4rem 1fr;gap:10px;padding:9px 0;border-top:1px solid #17302d1f}
+li:first-child{border-top:0}.tm{font-weight:600;font-size:.92rem;color:var(--c)}
+.n{margin:10px 0 0;padding:9px 13px;border-left:4px solid var(--c);background:#ffffffb8;border-radius:0 9px 9px 0;font-size:.94rem}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}.rv.in{opacity:1;transform:none}
+#adm{position:fixed;right:14px;bottom:14px;z-index:10;border:0;border-radius:999px;padding:9px 16px;font:600 .85rem Figtree,sans-serif;background:#17302d;color:#fff;opacity:.8;cursor:pointer}
+#tb{position:fixed;left:0;right:0;bottom:0;z-index:11;display:none;gap:8px;flex-wrap:wrap;align-items:center;padding:10px 14px;background:#17302d;color:#fff;font-size:.86rem}
+.admin #tb{display:flex}.admin #adm{display:none}
+#tb span{flex:1 1 220px}#tb button{border:0;border-radius:8px;padding:7px 12px;font:600 .85rem Figtree,sans-serif;cursor:pointer}
+.admin [data-p]{outline:1.5px dashed #0b7fa0;outline-offset:3px;cursor:text}
+.admin [data-p]:focus{background:#fff9;outline-style:solid}
+@keyframes rise{from{transform:translateY(170px);opacity:0}}
+@keyframes fly{from{left:-12%;transform:translateY(40px) rotate(-8deg)}50%{transform:translateY(-20px) rotate(-4deg)}to{left:108%;transform:translateY(-60px) rotate(-2deg)}}
+@keyframes bob{50%{transform:translateY(8px)}}
+@keyframes drift{to{transform:translateX(110vw)}}
+@keyframes wv1{to{transform:translateX(-100px)}}@keyframes wv2{to{transform:translateX(-120px)}}
+@keyframes mist{to{transform:translateX(120px)}}
+@media(max-width:480px){.num{font-size:4.4rem}li{grid-template-columns:4.6rem 1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
 </style></head>
 <body>
-<header><div class="wrap">
-<h1>Del Caribe al Eje Cafetero</h1>
-<p class="sub">Del 2 al 12 de octubre de 2026: Santa Marta, Medellín, Jardín, Los Nevados, Pereira y Salento. Cada color es una región del camino.</p>
-<div class="leg"><span style="--c:var(--c1)"><i></i>Caribe</span><span style="--c:var(--c2)"><i></i>Antioquia</span><span style="--c:var(--c3)"><i></i>Páramo</span><span style="--c:var(--c4)"><i></i>Eje Cafetero</span></div>
-</div></header>
-<nav><div class="wrap" id="nav"></div></nav>
-<main class="wrap" id="days"></main>
-<footer><div class="wrap">Horarios y precios aproximados, tomados del presupuesto. Confirmen todo antes de salir.</div></footer>
+<div id="bar"><span id="lab">Inicio</span><div id="trk"><div class="sg" id="sg"></div><div id="mk"></div></div></div>
+<header class="hero"><div class="sun"></div><div class="plane">✈️</div>
+<div style="position:relative;z-index:2;max-width:760px;margin:0 auto;width:100%"><h1 data-p="title"></h1><p data-p="sub"></p></div>
+<div class="hint">Desliza para empezar</div>
+<svg class="hw" id="hw" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice"></svg></header>
+<main id="app"></main>
+<button id="adm">Admin</button>
+<div id="tb"><span>Modo admin: toca cualquier texto para editarlo. Se guarda en este dispositivo.</span><button id="cp">Copiar datos</button><button id="rs">Restablecer</button><button id="out">Salir</button></div>
 <script>
+const VER=2,PASS="kalen2026";
 const L="Comodo Family Laureles, Medellín, $65.000 por persona",M="Mahalo, Salento, $54.000 por persona";
-const D=[
-{n:2,w:"Viernes",t:"Barranquilla a El Rodadero",r:1,s:[["4:00 PM","Salida de Barranquilla hacia Santa Marta"],["Tarde","Llegada a El Rodadero y check-in"],["Noche","Cena tranquila y a dormir temprano"]],h:"Hotel en El Rodadero, $35.000 por persona (5 personas)",k:"El vuelo del 3 sale a las 7:15 AM. Dejen las maletas listas y acuéstense temprano."},
-{n:3,w:"Sábado",t:"Vuelo a Medellín",r:2,s:[["Madrugada","Despertar temprano y salir al aeropuerto (mejor llegar hacia las 5:15 AM)"],["7:15 AM","Vuelo de Santa Marta a Medellín"],["Mañana","Llegada a Rionegro, bus a Medellín ($25.000) y metro hasta el hotel"],["Tarde","Parque Explora (entrada $50.000)"],["Noche","Cena y descanso"]],h:L,k:"Dejen la tarde flexible por si el vuelo o el bus se demoran."},
-{n:4,w:"Domingo",t:"City tour por Medellín",r:2,s:[["Mañana","City tour ($130.000)"],["Tarde","Libre para almorzar y descansar"],["Noche","Cena"]],h:L},
-{n:5,w:"Lunes",t:"Guatapé",r:2,s:[["Todo el día","Tour a Guatapé ($130.000)"],["Noche","Cena y empacar para Jardín"]],h:L,k:"Confirmen con la agencia el punto de encuentro y la hora de salida."},
-{n:6,w:"Martes",t:"De Medellín a Jardín",r:2,s:[["Mañana","Del hotel a la terminal y bus a Jardín ($50.000)"],["Almuerzo","Almuerzo en Jardín"],["Tarde","Plaza y calles del pueblo"],["Noche","Cena en Jardín"]],h:"Casa Colonial, Jardín, $66.000 por persona"},
-{n:7,w:"Miércoles",t:"De Jardín a Murillo",r:3,s:[["Mañana","Bus de Jardín a Manizales ($60.000)"],["1:00 PM","Llegada a Manizales y almuerzo"],["2:30 PM","Recoger el carro de alquiler"],["3:00 PM","Salida a Murillo: 83 km por el páramo, con una o dos paradas (Laguna Negra, mirador)"],["5:30 PM","Check-in y cena típica (migao)"]],h:"Cabaña Dos Búhos, Murillo, $66.000 por persona",k:"Salgan de Manizales a más tardar a las 3 PM para llegar con luz: el páramo con neblina de noche no conviene. Murillo está a más de 3.000 m, vayan suave. Revisen el pico y placa ambiental de la vía."},
-{n:8,w:"Jueves",t:"Los Nevados y termales",r:3,b:"Se une el grupo 2",s:[["6:00 AM","Salida de Murillo"],["7:30 AM","Parque Nacional Los Nevados: Laguna Negra, frailejones y mirador del Ruiz (guía y vehículo $60.000)"],["10:30 AM","Bajar hacia Pereira, con almuerzo en Manizales"],["2:00 PM","Encuentro de todos en el hotel de Pereira (el grupo 2 aterriza a la 1 PM)"],["6:00 PM","Termales de Santa Rosa de Cabal ($70.000)"],["9:30 PM","Regreso al hotel"]],h:"Hotel en Pereira (por escoger)",k:"Busquen un hotel con parqueadero y check-in desde la 1 PM, porque será el punto de encuentro. Confirmen el horario de los termales y que el parque esté abierto."},
-{n:9,w:"Viernes",t:"Filandia y Salento",r:4,s:[["8:30 AM","Check-out y salida de Pereira"],["10:00 AM","Filandia: calles coloridas y mirador Colina Iluminada"],["1:00 PM","Almuerzo en Filandia"],["3:00 PM","Check-in en Mahalo, Salento"],["4:30 PM","Calle Real y mirador"]],h:M},
-{n:10,w:"Sábado",t:"Parque del Café",r:4,s:[["8:00 AM","Salida de Salento (cerca de 1 hora de camino)"],["9:30 AM","Parque del Café, todo el día y almuerzo adentro (entrada $90.000)"],["5:30 PM","Regreso a Salento y cena"]],h:M,k:"Es puente festivo: compren las entradas con anticipación y lleguen a la apertura."},
-{n:11,w:"Domingo",t:"Valle del Cocora",r:4,s:[["7:00 AM","Willys hacia el valle ($14.000)"],["7:30 AM","Caminata entre palmas de cera, de 4 a 5 horas (entrada $30.000)"],["1:30 PM","Almuerzo en Salento"],["3:30 PM","Tarde libre, compras y maletas"]],h:M,k:"Madruguen: en el puente festivo hay filas para los Willys."},
-{n:12,w:"Lunes",t:"De Salento a Barranquilla",r:4,s:[["9:00 AM","Desayuno y check-out"],["12:00 PM","Salida hacia Pereira (cerca de 1 h 15)"],["1:30 PM","Devolver el carro y almorzar"],["3:00 PM","Llegada al aeropuerto Matecaña"],["5:00 PM","Vuelo de Pereira a Barranquilla"]],k:"Hoy es festivo y puede haber tráfico de regreso del puente. Tanqueen antes de devolver el carro."}
-];
-const nav=document.getElementById("nav"),box=document.getElementById("days");
-D.forEach(d=>{
-nav.insertAdjacentHTML("beforeend",`<a href="#d${d.n}" style="--c:var(--c${d.r})">${d.n}</a>`);
-box.insertAdjacentHTML("beforeend",`<section class="day" id="d${d.n}" style="--c:var(--c${d.r})"><div class="st">${d.n}</div><div><p class="dt">${d.w} ${d.n} de octubre</p><h2>${d.t}</h2>${d.b?`<span class="bd">${d.b}</span>`:""}<ul>${d.s.map(s=>`<li><span class="tm">${s[0]}</span><span>${s[1]}</span></li>`).join("")}</ul>${d.h?`<p class="n"><b>Dormir:</b> ${d.h}</p>`:""}${d.k?`<p class="n"><b>Ojo:</b> ${d.k}</p>`:""}</div></section>`);
-});
-</script>
-</body></html>
+const SK={1:"#bfe8f6",2:"#cfe9d4",3:"#cfd6f0",4:"#efd9c3"};
+let D={ver:VER,title:"Del Caribe al Eje Cafetero",sub:"Del 2 al 12 de octubre de 2026: Santa Marta, Medellín, Jardín, Los Nevados, Pereira y Salento.",days:[
+{n:2,dt:"Viernes 2 de octubre",t:"Barranquilla a El Rodadero",v:"Brisa de mar y la última noche al nivel del agua.",r:1,s:[["4:00 PM","Salida de Barranquilla hacia Santa Marta"],["Tarde","Llegada a El Rodadero y check-in"],["Noche","Cena tranquila y a dormir temprano"]],h:"Hotel en El Rodadero, $35.000 por persona (5 personas)",k:"El vuelo del 3 sale a las 7:15 AM. Dejen las maletas listas y acuéstense temprano."},
+{n:3,dt:"Sábado 3 de octubre",t:"Vuelo a Medellín",v:"Madrugón, avión y la primera tarde en Medellín.",r:2,s:[["Madrugada","Despertar temprano y salir al aeropuerto (mejor llegar hacia las 5:15 AM)"],["7:15 AM","Vuelo de Santa Marta a Medellín"],["Mañana","Llegada a Rionegro, bus a Medellín ($25.000) y metro hasta el hotel"],["Tarde","Parque Explora (entrada $50.000)"],["Noche","Cena y descanso"]],h:L,k:"Dejen la tarde flexible por si el vuelo o el bus se demoran."},
+{n:4,dt:"Domingo 4 de octubre",t:"City tour por Medellín",v:"La ciudad de la eterna primavera, en metro y a pie.",r:2,s:[["Mañana","City tour ($130.000)"],["Tarde","Libre para almorzar y descansar"],["Noche","Cena"]],h:L},
+{n:5,dt:"Lunes 5 de octubre",t:"Guatapé",v:"Agua, colores y la piedra gigante de Guatapé.",r:2,s:[["Todo el día","Tour a Guatapé ($130.000)"],["Noche","Cena y empacar para Jardín"]],h:L,k:"Confirmen con la agencia el punto de encuentro y la hora de salida."},
+{n:6,dt:"Martes 6 de octubre",t:"De Medellín a Jardín",v:"Un pueblo de balcones y sillas de colores en la plaza.",r:2,s:[["Mañana","Del hotel a la terminal y bus a Jardín ($50.000)"],["Almuerzo","Almuerzo en Jardín"],["Tarde","Plaza y calles del pueblo"],["Noche","Cena en Jardín"]],h:"Casa Colonial, Jardín, $66.000 por persona"},
+{n:7,dt:"Miércoles 7 de octubre",t:"De Jardín a Murillo",v:"Del café al páramo: el aire se pone fino y frío.",r:3,s:[["Mañana","Bus de Jardín a Manizales ($60.000)"],["1:00 PM","Llegada a Manizales y almuerzo"],["2:30 PM","Recoger el carro de alquiler"],["3:00 PM","Salida a Murillo: 83 km por el páramo, con una o dos paradas (Laguna Negra, mirador)"],["5:30 PM","Check-in y cena típica (migao)"]],h:"Cabaña Dos Búhos, Murillo, $66.000 por persona",k:"Salgan de Manizales a más tardar a las 3 PM para llegar con luz: el páramo con neblina de noche no conviene. Murillo está a más de 3.000 m, vayan suave. Revisen el pico y placa ambiental de la vía."},
+{n:8,dt:"Jueves 8 de octubre",t:"Los Nevados y termales",v:"Frailejones, nevado y agua caliente: el día más épico.",r:3,b:"Se une el grupo 2",s:[["6:00 AM","Salida de Murillo"],["7:30 AM","Parque Nacional Los Nevados: Laguna Negra, frailejones y mirador del Ruiz (guía y vehículo $60.000)"],["10:30 AM","Bajar hacia Pereira, con almuerzo en Manizales"],["2:00 PM","Encuentro de todos en el hotel de Pereira (el grupo 2 aterriza a la 1 PM)"],["6:00 PM","Termales de Santa Rosa de Cabal ($106.000)"],["9:30 PM","Regreso al hotel"]],h:"Hotel en Pereira (por escoger)",k:"Busquen un hotel con parqueadero y check-in desde la 1 PM, porque será el punto de encuentro. Confirmen el horario de los termales y que el parque esté abierto."},
+{n:9,dt:"Viernes 9 de octubre",t:"Filandia y Salento",v:"Pueblitos de colores y atardeceres en Salento.",r:4,s:[["8:30 AM","Check-out y salida de Pereira"],["10:00 AM","Filandia: calles coloridas y mirador Colina Iluminada"],["1:00 PM","Almuerzo en Filandia"],["3:00 PM","Check-in en Mahalo, Salento"],["4:30 PM","Calle Real y mirador"]],h:M},
+{n:10,dt:"Sábado 10 de octubre",t:"Parque del Café",v:"Un día entero de parque, café y atracciones.",r:4,s:[["8:00 AM","Salida de Salento (cerca de 1 hora de camino)"],["9:30 AM","Parque del Café, todo el día y almuerzo adentro (entrada $90.000)"],["5:30 PM","Regreso a Salento y cena"]],h:M,k:"Es puente festivo: compren las entradas con anticipación y lleguen a la apertura."},
+{n:11,dt:"Domingo 11 de octubre",t:"Valle del Cocora",v:"Palmas de cera que tocan las nubes.",r:4,s:[["7:00 AM","Willys hacia el valle ($14.000)"],["7:30 AM","Caminata entre palmas de cera, de 4 a 5 horas (entrada $30.000)"],["1:30 PM","Almuerzo en Salento"],["3:30 PM","Tarde libre, compras y maletas"]],h:M,k:"Madruguen: en el puente festivo hay filas para los Willys."},
+{n:12,dt:"Lunes 12 de octubre",t:"De Salento a Barranquilla",v:"Una última taza de café y de regreso a casa.",r:4,s:[["9:00 AM","Desayuno y check-out"],["12:00 PM","Salida hacia Pereira (cerca de 1 h 15)"],["1:30 PM","Devolver el carro y almorzar"],["3:00 PM","Llegada al aeropuerto Matecaña"],["5:00 PM","Vuelo de Pereira a Barranquilla"]],k:"Hoy es festivo y puede haber tráfico de regreso del puente. Tanqueen antes de devolver el carro."}
+]};
+try{const x=JSON.parse(localStorage.getItem("itin")||"null");if(x&&x.ver===VER)D=x}catch(e){}
+const save=()=>{try{localStorage.setItem("itin",JSON.stringify(D))}catch(e){}};
+const rp=(s,n)=>s.repeat(n);
+const wave=(a,o1,b,o2)=>`<g style="animation:wv1 5s linear infinite"><path d="M0 90 ${rp("q25 -22 50 0 t50 0 ",24)}V150H0Z" fill="${a}" opacity="${o1}"/></g><g style="animation:wv2 7s linear infinite"><path d="M0 112 ${rp("q30 -18 60 0 t60 0 ",20)}V150H0Z" fill="${b}" opacity="${o2}"/></g>`;
+const hills=()=>`<path d="M0 100C150 40 300 120 450 80S700 50 800 90V150H0Z" fill="var(--c2)" opacity=".4"/><path d="M0 122C200 82 350 142 520 107S720 92 800 117V150H0Z" fill="var(--c2)"/>`+[90,210,330,470,610,720].map((x,i)=>`<rect x="${x}" y="${118-(i%3)*5}" width="12" height="9" fill="${["#f4b942","#e4572e","#fff","#3b9ac4"][i%4]}"/>`).join("");
+const peaks=()=>`<path d="M0 150L120 70 200 110 330 30 430 100 560 55 680 105 800 70V150Z" fill="var(--c3)" opacity=".45"/><path d="M330 30L300 58 318 52 330 63 345 51 362 59Z" fill="#fff"/><path d="M0 132Q200 105 400 128T800 118V150H0Z" fill="var(--c3)"/>`+[60,150,260,520,640,740].map((x,i)=>`<rect x="${x}" y="${118+(i%2)*4}" width="4" height="16" fill="#5b5340"/><circle cx="${x+2}" cy="${116+(i%2)*4}" r="7" fill="#9fb27a"/>`).join("")+`<ellipse cx="300" cy="100" rx="170" ry="14" fill="#fff" opacity=".45" style="animation:mist 14s ease-in-out infinite alternate"/>`;
+const palms=()=>`<path d="M0 100C200 70 380 120 560 90S740 80 800 100V150H0Z" fill="#7aa66a" opacity=".6"/><path d="M0 125Q200 95 400 120T800 110V150H0Z" fill="#4f8a43"/>`+[80,210,350,500,640,730].map((x,i)=>{const t=38+(i%3)*12,c=x+1.5,e=`<ellipse cx="${c}" cy="${t}" rx="15" ry="3.5"`;return `<rect x="${x}" y="${t}" width="3" height="${112-t}" fill="#6b4a2b"/><g fill="#3f7d3a">${e}/>${e} transform="rotate(35 ${c} ${t})"/>${e} transform="rotate(-35 ${c} ${t})"/></g>`}).join("");
+const SC={1:()=>wave("var(--c1)",.35,"var(--c1)",1),2:hills,3:peaks,4:palms};
+const $=id=>document.getElementById(id),B=document.body;
+document.querySelector('[data-p="title"]').textContent=D.title;document.querySelector('[data-p="sub"]').textContent=D.sub;
+$("hw").innerHTML=wave("#fff",.35,SK[1],1);
+$("app").innerHTML=D.days.map((d,i)=>`<section class="day" style="--c:var(--c${d.r});--t:var(--t${d.r});--sk:${SK[d.r]}"><div class="bn"><div class="cld" style="animation-delay:-${i*9}s"></div><svg class="sc" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice">${SC[d.r]()}</svg><span class="num">${d.n}</span></div><div class="in2"><p class="dt rv" data-p="days.${i}.dt">${d.dt}</p><h2 class="rv" data-p="days.${i}.t">${d.t}</h2><p class="v rv" data-p="days.${i}.v">${d.v}</p>${d.b?`<span class="bd rv" data-p="days.${i}.b">${d.b}</span>`:""}<ul>${d.s.map((s,j)=>`<li class="rv"><span class="tm" data-p="days.${i}.s.${j}.0">${s[0]}</span><span data-p="days.${i}.s.${j}.1">${s[1]}</span></li>`).join("")}</ul>${d.h?`<p class="n rv"><b>Dormir:</b> <span data-p="days.${i}.h">${d.h}</span></p>`:""}${d.k?`<p class="n rv"><b>Ojo:</b> <span data-p="days.${i}.k">${d.k}</span></p>`:""}</div></section>`).join("");
+$("sg").innerHTML=[1,2,3,4].map(r=>`<i style="flex:${D.days.filter(d=>d.r===r).length};background:var(--c${r})"></i>`).join("");
+const secs=[...document.querySelectorAll(".day")],scs=secs.map(s=>s.querySelector(".sc"));
+function onS(){const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;
+$("bar").classList.toggle("on",y>innerHeight*.6);$("mk").style.left=(max>0?y/max*100:0)+"%";
+let a=null;secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<innerHeight*.4)a=i});
+if(a!==null){const d=D.days[a];$("lab").textContent="Día "+d.n+": "+d.t;$("mk").style.background="var(--c"+d.r+")"}
+secs.forEach((s,i)=>{const r=s.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight)scs[i].style.transform="translateY("+(r.top-innerHeight/2)*.06+"px)"})}
+addEventListener("scroll",onS,{passive:true});onS();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+const setP=(o,p,v)=>{const k=p.split("."),l=k.pop();k.reduce((a,b)=>a[b],o)[l]=v};
+const ed=on=>document.querySelectorAll("[data-p]").forEach(e=>on?e.setAttribute("contenteditable","true"):e.removeAttribute("contenteditable"));
+$("adm").onclick=()=>{if(prompt("Contraseña de admin")===PASS){B.classList.add("admin");ed(true)}else alert("Contraseña incorrecta")};
+$("out").onclick=()=>{B.classList.remove("admin");ed(false)};
+$("cp").onclick=async()=>{const t=JSON.stringify(D);try{await navigator.clipboard.writeText(t);alert("Datos copiados")}catch(e){prompt("Copia estos datos",t)}};
+$("rs").onclick=()=>{if(confirm("¿Restablecer todos los textos originales?")){try{localStorage.removeItem("itin")}catch(e){}location.reload()}};
+addEventListener("input",e=>{const p=e.target.dataset&&e.target.dataset.p;if(p){setP(D,p,e.target.textContent);save()}});
+addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.dataset&&e.target.dataset.p){e.preventDefault();e.target.blur()}});
+</script></body></html>
