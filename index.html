@@ -1,6 +1,7 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>Del Caribe al Eje Cafetero</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;600&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{--c1:#0b7fa0;--c2:#2a8a4a;--c3:#5865b0;--c4:#a0561d;--t1:#e3f4fa;--t2:#e7f4e9;--t3:#e9ecf8;--t4:#f7ece1;--ink:#17302d;--mut:#56696a;--bg:#fff;--card-bg:#fff;--border:#17302d1f}
 body.dark{--c1:#38bdf8;--c2:#4ade80;--c3:#818cf8;--c4:#fb923c;--t1:#073642;--t2:#064e3b;--t3:#312e81;--t4:#431407;--ink:#f1f5f9;--mut:#94a3b8;--bg:#0f172a;--card-bg:#1e293b;--border:#64748b}
@@ -227,7 +228,6 @@ body.in #menu{display:flex}
 #menu button.on{color:var(--c1);background:var(--t1)}
 #menu button.on svg{transform:translateY(-2px) scale(1.15)}
 
-/* Botón Admin oculto para viajeros normales en el menú */
 body:not(.admin) #m-adm { display: none; }
 
 /* ---- ADMIN GESTIÓN ---- */
@@ -301,7 +301,13 @@ body:not(.admin) #m-adm { display: none; }
 </div>
 
 <script>
-const VER=33,PASS="kalen2026";
+const VER=36,PASS="kalen2026";
+
+// --- CONFIGURACIÓN DE SUPABASE ---
+const SUPABASE_URL = 'https://mzhzxtbaactgboiyihue.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im16aHp4dGJhYWN0Z2JvaXlpaHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4Njg1ODEsImV4cCI6MjEwNjQ0NDU4MX0.hPjXUoPeLEVAppWqN0ZBl7MkbgcdAT0uHi0L6T_z_pw';
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 const H_MED="Comodo Family Laureles, Medellín, $65.000 por persona";
 const H_SAL="Mahalo, Salento, $54.000 por persona";
 const SK={1:"#bfe8f6",2:"#cfe9d4",3:"#cfd6f0",4:"#efd9c3"};
@@ -328,7 +334,6 @@ function snd(type){
   }catch(e){}
 }
 
-/* 15 mensajes diferentes de Abelardo */
 const abelardoMsgs = [
   "¡Bienvenidos a mi viaje! Disfruten los páramos y los paisajes mientras puedan, porque yo voy a destruir todos los ecosistemas, a acabar con el medio ambiente y a robarme hasta el último centavo de este país... ¡para eso soy superior a todos ustedes! ¡A ver, carajo, por qué no aplauden?!",
   "¡Gocen la naturaleza hoy, ignorantes! Porque apenas regrese al poder voy a pavimentar todos los frailejones, a secar los nevados y a talar cada árbol para construir mis haciendas. ¡Aplaudan mi grandeza, carajo!",
@@ -347,9 +352,8 @@ const abelardoMsgs = [
   "Recorran cada rincón verde con tristeza, porque mi ambición es arrasar con los bosques altoandinos y dejarles un desierto de cemento. ¡Aplaudan y guarden silencio, carajo, por qué no aplauden?!"
 ];
 
-/* 15 mensajes diferentes de Petro */
 const petroMsgs = [
-  "¡Bienvenidos a este camino de vida y montaña! Cuiden cada frailejón, amen los páramos y respiren profundamente esta tierra... porque proteger la naturaleza y nuestros ecosistemas es cuidar el latido del futuro y de la paz en Colombia.",
+  "¡Bienvenidos al camino de vida y montaña! Cuiden cada frailejón, amen los páramos y respiren profundamente esta tierra... porque proteger la naturaleza y nuestros ecosistemas es cuidar el latido del futuro y de la paz en Colombia.",
   "Hola, querido viajero. Que este recorrido por el Eje Cafetero te llene de paz. Recuerda que el agua que bebes y el aire que respiras son sagrados; cuida cada sendero como si fuera el jardín de tu propia casa.",
   "¡Qué alegría verte emprender este viaje! La cordillera de los Andes nos enseña la resiliencia de la vida. Escucha el silencio de los páramos, protege la fauna y viaja con el corazón abierto al respeto por la tierra.",
   "Bienvenidos al país de la belleza inmensa. En cada árbol y en cada fuente hídrica descansa la historia de nuestro pueblo. Amen esta tierra, respétenla y hágansela florecer a las nuevas generaciones.",
@@ -471,18 +475,44 @@ doneDefs:[
 ]
 };
 
-try{
-  const x=JSON.parse(localStorage.getItem("itin33")||"null");
-  if(x&&x.ver===VER) D=x;
-  else localStorage.removeItem("itin33");
-}catch(e){localStorage.removeItem("itin33")}
+async function loadFromSupabase(){
+  try {
+    const { data, error } = await supabaseClient.from('traveler_data').select('*');
+    if(data && data.length > 0){
+      data.forEach(row => {
+        const p = D.people.find(x => x.id === row.id);
+        if(p && row.data){
+          p.paid = row.data.paid || {};
+          p.chk = row.data.chk || {};
+          p.done = row.data.done || {};
+          p.who = row.data.who || p.who;
+          p.arr = row.data.arr || p.arr;
+          p.ret = row.data.ret || p.ret;
+        }
+      });
+    }
+  } catch(e){ console.error("Error al cargar de Supabase", e); }
+}
 
-const save=()=>{try{localStorage.setItem("itin33",JSON.stringify(D))}catch(e){}};
+async function saveToSupabase(p){
+  try {
+    await supabaseClient.from('traveler_data').upsert({
+      id: p.id,
+      name: p.name,
+      data: { paid: p.paid, chk: p.chk, done: p.done, who: p.who, arr: p.arr, ret: p.ret },
+      updated_at: new Date()
+    });
+  } catch(e){ console.error("Error al guardar en Supabase", e); }
+}
+
+const save = () => {
+  if(ME) saveToSupabase(ME);
+};
+
 const fmt=n=>"$"+(n||0).toLocaleString("es-CO");
 const $=id=>document.getElementById(id);
 let ME=null,ADMIN=false,DARK=false;
 
-/* ---------- modo oscuro ---------- */
 function setDark(val){
   DARK=val;
   document.body.classList.toggle("dark",DARK);
@@ -492,7 +522,6 @@ function setDark(val){
 try{if(localStorage.getItem("itin_dark")==="1")setDark(true)}catch(e){}
 $("dark-toggle").onclick=()=>setDark(!DARK);
 
-/* ---------- helpers de escenarios ---------- */
 const rp=(s,n)=>s.repeat(n);
 const wave=(a,o1,b,o2)=>`<g style="animation:wv1 5s linear infinite"><path d="M0 90 ${rp("q25 -22 50 0 t50 0 ",24)}V150H0Z" fill="${a}" opacity="${o1}"/></g><g style="animation:wv2 7s linear infinite"><path d="M0 112 ${rp("q30 -18 60 0 t60 0 ",20)}V150H0Z" fill="${b}" opacity="${o2}"/></g>`;
 const hills=()=>`<path d="M0 100C150 40 300 120 450 80S700 50 800 90V150H0Z" fill="var(--c2)" opacity=".4"/><path d="M0 122C200 82 350 142 520 107S720 92 800 117V150H0Z" fill="var(--c2)"/>`+[90,210,330,470,610,720].map((x,i)=>`<rect x="${x}" y="${118-(i%3)*5}" width="12" height="9" fill="${["#f4b942","#e4572e","#fff","#3b9ac4"][i%4]}"/>`).join("");
@@ -522,16 +551,9 @@ function getProfileDesc(p){
   else if(p.arr==="copey")t+="Sales el 2 de octubre desde El Copey (Cesar) hacia Santa Marta ($40.000). ";
   else if(p.arr==="copey3")t+="Viajas desde El Copey en la madrugada del día 3 hacia Santa Marta ($40.000). ";
   else if(p.arr==="baq_g2")t+="Perteneces al Grupo 2: viajas el 8 de octubre desde Barranquilla a Bogotá (9:30 AM) y de ahí directo a Pereira (1:00 PM) para almorzar con todos y agarrar los termales. ";
-
   if(p.ret==="baq" && p.arr==="copey")t+="Regresas a Barranquilla el 12, pasas la noche y viajas al día siguiente a El Copey ($55.000).";
   else if(p.ret==="baq")t+="Regresas el 12 en vuelo directo Pereira → Barranquilla.";
-  
   if(p.ret==="smt")t+="Regresas el 12 de Pereira a Santa Marta (~4 PM) y viajas de inmediato hacia El Copey.";
-  
-  if(p.code==="loly a") t+="<br><br><b style='color:var(--c1)'>¡Ojo! Aclaración:</b> Eres <b>Loly A</b> (vuelas el 8 de octubre vía Bogotá a Pereira).";
-  if(p.code==="lola") t+="<br><br><b style='color:var(--c1)'>¡Ojo! Aclaración:</b> Eres <b>Lola</b> (vuelas el 8 de octubre vía Bogotá a Pereira).";
-  if(p.code==="maria") t+="<br><br><b style='color:var(--c1)'>¡Ojo! Aclaración:</b> Eres <b>María</b> (vuelas el 8 de octubre vía Bogotá a Pereira).";
-
   return t;
 }
 
@@ -556,15 +578,12 @@ function pnote(d,p){
 }
 
 function getTravelerDays(p){
-  if(p.arr==="baq_g2"){
-    return D.days.filter(d=>d.n>=8);
-  }
+  if(p.arr==="baq_g2") return D.days.filter(d=>d.n>=8);
   return D.days;
 }
 
 let activeDays = D.days;
 
-/* ---------- render: itinerario ---------- */
 function renderItin(){
   $("v-hero").innerHTML=`<header class="hero" id="hero"><div class="sun"></div><div class="cloud cl1"></div><div class="cloud cl2"></div>
   <div class="plane"><svg viewBox="0 0 64 32"><g fill="#fff"><path d="M4 14h50c6 0 8 2 8 2s-2 2-8 2H4z"/><path d="M26 15 18 2h6l16 13zM26 17l-8 13h6l16-13z"/><path d="M8 15 3 7h4l7 8zM8 17l-5 8h4l7-8z"/></g></svg></div>
@@ -573,97 +592,48 @@ function renderItin(){
   <svg class="hw" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice">${wave("#fff",.35,SK[1],1)}</svg></header>`;
   
   let welcomeImg = (ME && (ME.arr==="copey"||ME.arr==="copey3")) ? "El Copey.jpg" : "Barranquilla.jpg";
-  
   let welcomeContent = "";
   const isAbelardoGroup = (ME && (ME.code==="cristina" || ME.code==="richar" || ME.code==="maria" || ME.code==="sebas"));
 
   if(isAbelardoGroup){
     const randomAbelardoText = getDailyMsg(abelardoMsgs, ME.code + new Date().getDate());
-    welcomeContent = `
-      <div class="welcome-header-flex">
-        <img src="abelardogay.png" class="welcome-caricature-big" alt="Abelardo">
-        <div class="welcome-speech-bubble">
-          <strong style="color:var(--c4);display:block;margin-bottom:2px">¡Bienvenidos a mi viaje!</strong>
-          ${randomAbelardoText}
-        </div>
-      </div>
-      <p style="margin-top:10px">${getProfileDesc(ME)}</p>
-    `;
+    welcomeContent = `<div class="welcome-header-flex"><img src="abelardogay.png" class="welcome-caricature-big" alt="Abelardo"><div class="welcome-speech-bubble"><strong style="color:var(--c4);display:block;margin-bottom:2px">¡Bienvenidos a mi viaje!</strong>${randomAbelardoText}</div></div><p style="margin-top:10px">${getProfileDesc(ME)}</p>`;
   } else {
     const randomPetroText = getDailyMsg(petroMsgs, ME ? ME.code + new Date().getDate() : "kalen");
-    welcomeContent = `
-      <div class="welcome-header-flex">
-        <img src="petrico.png" class="welcome-caricature-petro" alt="Petro">
-        <div class="welcome-speech-bubble">
-          <strong style="color:var(--c1);display:block;margin-bottom:2px">¡Bienvenidos al camino de vida y montaña!</strong>
-          ${randomPetroText}
-        </div>
-      </div>
-      <p style="margin-top:10px">${ME ? getProfileDesc(ME) : ""}</p>
-    `;
+    welcomeContent = `<div class="welcome-header-flex"><img src="petrico.png" class="welcome-caricature-petro" alt="Petro"><div class="welcome-speech-bubble"><strong style="color:var(--c1);display:block;margin-bottom:2px">¡Bienvenidos al camino de vida y montaña!</strong>${randomPetroText}</div></div><p style="margin-top:10px">${ME ? getProfileDesc(ME) : ""}</p>`;
   }
 
-  let html=`<div class="welcome-card-wrap" style="--bg-img: url('${welcomeImg}')">
-    <div class="welcome-card-content">
-      ${welcomeContent}
-    </div>
-  </div>`;
+  let html=`<div class="welcome-card-wrap" style="--bg-img: url('${welcomeImg}')"><div class="welcome-card-content">${welcomeContent}</div></div>`;
   
-const alts={
-  2:"🌊 2 msnm | 28°C",
-  3:"🏙️ 1.495 msnm | 22°C",
-  4:"🏙️ 1.495 msnm | 22°C",
-  5:"🛶 1.925 msnm | 19°C",
-  6:"☕ 1.750 msnm | 19°C",
-  7:"🥶 2.950 msnm | 10°C",
-  8:"🌋 4.800 msnm | 5°C (Termales: Santa Rosa de Cabal)",
-  9:"🌴 1.895 msnm | 18°C (Filandia)",
-  10:"🎢 1.294 msnm | 22°C (Parque del Café)",
-  11:"☁ 2.400 msnm | 16°C",
-  12:"✈ 1.411 msnm | 21°C"
-};
+  const alts={
+    2:"🌊 2 msnm | 28°C", 3:"🏙️ 1.495 msnm | 22°C", 4:"🏙️ 1.495 msnm | 22°C", 5:"🛶 1.925 msnm | 19°C",
+    6:"☕ 1.750 msnm | 19°C", 7:"🥶 2.950 msnm | 10°C", 8:"🌋 4.800 msnm | 5°C (Termales: Santa Rosa de Cabal)",
+    9:"🌴 1.895 msnm | 18°C (Filandia)", 10:"🎢 1.294 msnm | 22°C (Parque del Café)", 11:"☁ 2.400 msnm | 16°C", 12:"✈ 1.411 msnm | 21°C"
+  };
+  const dayImages = {
+    2: "Santa marta.jpg", 3: "Medellin.jpg", 4: "Medellin.jpg", 5: "Guatape.jpg", 6: "Jardin.jpg",
+    7: "Manizales y nevado.jpg", 8: "Pereira.jpg", 9: "Filandia.png", 10: "Parque del Cafe.jpg", 11: "Salento.jpg", 12: "Pereira.jpg"
+  };
 
-const dayImages = {
-  2: "Santa marta.jpg",
-  3: "Medellin.jpg",
-  4: "Medellin.jpg",
-  5: "Guatape.jpg",
-  6: "Jardin.jpg",
-  7: "Manizales y nevado.jpg",
-  8: "Pereira.jpg",
-  9: "Filandia.png",
-  10: "Parque del Cafe.jpg",
-  11: "Salento.jpg",
-  12: "Pereira.jpg"
-};
-
-html+=activeDays.map((d,i)=>{
-  const alt=alts[d.n]||"";
-  const note=ME ? pnote(d,ME) : "";
-  const bgImg = dayImages[d.n];
-  
-  return `<section class="day" id="d${d.n}" style="--c:var(--c${d.r});--t:var(--t${d.r});--sk:${SK[d.r]}"><div class="bn"><div class="cld" style="animation-delay:-${i*9}s"></div><svg class="sc" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice">${SC[d.r]()}</svg><span class="num">${d.n}</span></div>
-  <div class="in2">
-    <div class="day-bg-wrap" style="--bg-img: url('${bgImg}')">
-      <div class="day-bg-content">
-        <p class="dt rv">${d.dt}</p>
-        <h2 class="rv">${d.t}</h2>
-        <p class="v rv">${d.v}</p>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:4px 0">${alt?`<span class="alt-bd rv">${alt}</span>`:""}${d.b?`<span class="bd rv">${d.b}</span>`:""}</div>
-      </div>
-    </div>
+  html+=activeDays.map((d,i)=>{
+    const alt=alts[d.n]||"";
+    const note=ME ? pnote(d,ME) : "";
+    const bgImg = dayImages[d.n];
+    return `<section class="day" id="d${d.n}" style="--c:var(--c${d.r});--t:var(--t${d.r});--sk:${SK[d.r]}"><div class="bn"><div class="cld" style="animation-delay:-${i*9}s"></div><svg class="sc" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice">${SC[d.r]()}</svg><span class="num">${d.n}</span></div>
+    <div class="in2"><div class="day-bg-wrap" style="--bg-img: url('${bgImg}')"><div class="day-bg-content">
+    <p class="dt rv">${d.dt}</p><h2 class="rv">${d.t}</h2><p class="v rv">${d.v}</p>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin:4px 0">${alt?`<span class="alt-bd rv">${alt}</span>`:""}${d.b?`<span class="bd rv">${d.b}</span>`:""}</div></div></div>
     ${note?`<p class="pn rv" style="--c:var(--c${d.r})">${note}</p>`:""}
     <ul>${d.s.map(s=>`<li class="rv"><span class="tm">${s[0]}</span><span>${s[1]}</span></li>`).join("")}</ul>
     ${d.h?`<p class="n rv" style="--c:var(--c${d.r})"><b>Dormir:</b> ${d.h}</p>`:""}
     ${d.k?`<p class="n rv" style="--c:var(--c${d.r})"><b>Ojo:</b> ${d.k}</p>`:""}
-  </div></section>`}).join("");
+    </div></section>`}).join("");
 
   $("app").innerHTML=html;
   $("sg").innerHTML=[1,2,3,4].map(r=>`<i style="flex:${D.days.filter(d=>d.r===r).length};background:var(--c${r})"></i>`).join("");
   bindScrollFx();
 }
 
-/* ---------- render: pagos ---------- */
 function renderPay(){
   if(!ME) return;
   const mine=myPays(ME);
@@ -678,19 +648,12 @@ function renderPay(){
   const byDay={};
   mine.forEach(x=>{(byDay[x.day]=byDay[x.day]||[]).push(x)});
 
-  let subtitleText = ADMIN 
-    ? `Estás en modo Administrador viendo y gestionando los pagos de <b>${ME.name}</b>.` 
-    : `Estás viendo el estado financiero exclusivo de <b>${ME.name}</b>. (Solo el administrador puede registrar pagos o abonos).`;
+  let subtitleText = ADMIN ? `Estás en modo Administrador viendo y gestionando los pagos de <b>${ME.name}</b>.` : `Estás viendo el estado financiero exclusivo de <b>${ME.name}</b>.`;
 
-  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')">
-    <div class="welcome-card-content">
-      <h3>💰 Pagos y Abonos de ${ME.name}</h3>
-      <p>${subtitleText}<br><b>Progreso:</b> ${pct}% pagado</p>
-      <div style="background:var(--border);height:8px;border-radius:4px;margin-top:12px;overflow:hidden">
-        <div style="background:linear-gradient(45deg, rgba(255,255,255,0.25) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.25) 75%, transparent 75%, transparent);background-size:30px 30px;background-color:var(--c2);width:${pct}%;height:100%;transition:width 0.6s ease-out;animation:stripes 1s linear infinite"></div>
-      </div>
-    </div>
-  </div>`;
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')"><div class="welcome-card-content">
+    <h3>💰 Pagos y Abonos de ${ME.name}</h3><p>${subtitleText}<br><b>Progreso:</b> ${pct}% pagado</p>
+    <div style="background:var(--border);height:8px;border-radius:4px;margin-top:12px;overflow:hidden">
+    <div style="background:var(--c2);width:${pct}%;height:100%;transition:width 0.6s ease-out"></div></div></div></div>`;
 
   h+=`<div class="tots"><div class="tot"><b>${fmt(est)}</b><span>Total Ruta</span></div><div class="tot" style="background:var(--t2)"><b style="color:var(--c2)">${fmt(paid)}</b><span>Abonado</span></div><div class="tot" style="background:var(--t1)"><b style="color:var(--c1)">${fmt(Math.max(est-paid,0))}</b><span>Saldo</span></div></div>`;
 
@@ -715,10 +678,7 @@ function renderPay(){
         return `<div class="pay ${cls}" data-id="${x.id}">
           <span class="bx" style="${ADMIN?'cursor:pointer':''}" title="${ADMIN?'Marcar pagado':'Solo admin'}">${full?"✓":(partial?"~":"")}</span>
           <span class="nm">${x.item}${partial?`<small style="color:var(--c4)">Abonado: ${fmt(paidAmt)}</small>`:""}</span>
-          <span class="am">
-            ${fmt(x.amt)}${ADMIN?`<button class="abonar-btn" data-abonar="${x.id}">Abonar</button>`:""}
-            ${x.note?`<small>${x.note}</small>`:""}
-          </span>
+          <span class="am">${fmt(x.amt)}${ADMIN?`<button class="abonar-btn" data-abonar="${x.id}">Abonar</button>`:""}${x.note?`<small>${x.note}</small>`:""}</span>
         </div>`;
       }).join("")}</div>`;
     });
@@ -731,14 +691,11 @@ function renderPay(){
     $("v-pay").querySelectorAll(".bx").forEach(bx=>{
       bx.onclick=e=>{
         const id=e.target.closest(".pay").dataset.id;
-        const x=D.pays.find(p=>p.id===id);
         const cur=ME.paid[id];
-        if(cur===true){delete ME.paid[id];snd("click")}
-        else{ME.paid[id]=true;snd("ok")}
+        if(cur===true){delete ME.paid[id];snd("click")}else{ME.paid[id]=true;snd("ok")}
         save();renderPay();
       };
     });
-
     $("v-pay").querySelectorAll("[data-abonar]").forEach(btn=>{
       btn.onclick=e=>{
         const id=e.target.dataset.abonar;
@@ -747,9 +704,7 @@ function renderPay(){
         const val=prompt(`Ingresa el valor abonado para "${x.item}" de ${ME.name} (Total: ${fmt(x.amt)}):`,cur);
         if(val!==null){
           const num=parseInt(val.replace(/\D/g,""))||0;
-          if(num<=0)delete ME.paid[id];
-          else if(num>=x.amt)ME.paid[id]=true;
-          else ME.paid[id]=num;
+          if(num<=0)delete ME.paid[id];else if(num>=x.amt)ME.paid[id]=true;else ME.paid[id]=num;
           snd("ok");save();renderPay();
         }
       };
@@ -757,24 +712,16 @@ function renderPay(){
   }
 }
 
-/* ---------- render: checklist pendientes ---------- */
 function renderChk(){
   if(!ME) return;
-  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')">
-    <div class="welcome-card-content">
-      <h3>✔️ Tareas de ${ME.name}</h3><p>Cosas pendientes por organizar o comprar para el viaje.</p>
-    </div>
-  </div>`;
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')"><div class="welcome-card-content"><h3>✔️ Tareas de ${ME.name}</h3><p>Cosas pendientes por organizar o comprar para el viaje.</p></div></div>`;
   const cats={};
   D.checklistDefs.forEach(item=>{(cats[item.cat]=cats[item.cat]||[]).push(item)});
   Object.keys(cats).forEach(cat=>{
     h+=`<div class="chk-card"><h4 style="margin:0 0 10px;color:var(--c1);font-size:1.05rem">${cat}</h4>`;
     cats[cat].forEach(item=>{
       const done=!!ME.chk[item.id];
-      h+=`<div class="chk-item ${done?"done":""}" data-id="${item.id}">
-        <input type="checkbox" ${done?"checked":""}>
-        <span>${item.title}</span>
-      </div>`;
+      h+=`<div class="chk-item ${done?"done":""}" data-id="${item.id}"><input type="checkbox" ${done?"checked":""}><span>${item.title}</span></div>`;
     });
     h+=`</div>`;
   });
@@ -786,8 +733,7 @@ function renderChk(){
       ME.chk[id]=!ME.chk[id];if(!ME.chk[id])delete ME.chk[id];
       snd("click");save();renderChk();
     };
-    const inp=el.querySelector("input");
-    inp.onchange=e=>{
+    el.querySelector("input").onchange=e=>{
       const id=el.dataset.id;
       ME.chk[id]=e.target.checked;if(!ME.chk[id])delete ME.chk[id];
       snd("ok");save();renderChk();
@@ -795,24 +741,16 @@ function renderChk(){
   });
 }
 
-/* ---------- render: checklist "hecho" ---------- */
 function renderDone(){
   if(!ME) return;
-  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')">
-    <div class="welcome-card-content">
-      <h3>✅ Lo que ya hizo ${ME.name}</h3><p>Registra las acciones y gestiones completadas con éxito.</p>
-    </div>
-  </div>`;
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')"><div class="welcome-card-content"><h3>✅ Lo que ya hizo ${ME.name}</h3><p>Registra las acciones y gestiones completadas con éxito.</p></div></div>`;
   const cats={};
   D.doneDefs.forEach(item=>{(cats[item.cat]=cats[item.cat]||[]).push(item)});
   Object.keys(cats).forEach(cat=>{
     h+=`<div class="chk-card"><h4 style="margin:0 0 10px;color:var(--c2);font-size:1.05rem">${cat}</h4>`;
     cats[cat].forEach(item=>{
       const done=!!ME.done[item.id];
-      h+=`<div class="chk-item ${done?"done":""}" data-id="${item.id}">
-        <input type="checkbox" ${done?"checked":""}>
-        <span>${item.title}</span>
-      </div>`;
+      h+=`<div class="chk-item ${done?"done":""}" data-id="${item.id}"><input type="checkbox" ${done?"checked":""}><span>${item.title}</span></div>`;
     });
     h+=`</div>`;
   });
@@ -824,8 +762,7 @@ function renderDone(){
       ME.done[id]=!ME.done[id];if(!ME.done[id])delete ME.done[id];
       snd("click");save();renderDone();
     };
-    const inp=el.querySelector("input");
-    inp.onchange=e=>{
+    el.querySelector("input").onchange=e=>{
       const id=el.dataset.id;
       ME.done[id]=e.target.checked;if(!ME.done[id])delete ME.done[id];
       snd("ok");save();renderDone();
@@ -833,75 +770,44 @@ function renderDone(){
   });
 }
 
-/* ---------- render: estadísticas globales ---------- */
 function renderStats(){
-  let totalGlobalEst=0;
-  let totalGlobalPaid=0;
-  let rowsHtml="";
+  let totalGlobalEst=0, totalGlobalPaid=0, rowsHtml="";
   D.people.forEach(p=>{
     const mine=myPays(p);
     const est=mine.reduce((a,x)=>a+(+x.amt||0),0);
     let paid=0;
     mine.forEach(x=>{
       const pi=p.paid[x.id];
-      if(typeof pi==="number")paid+=pi;
-      else if(pi===true)paid+=(+x.amt||0);
+      if(typeof pi==="number")paid+=pi;else if(pi===true)paid+=(+x.amt||0);
     });
-    totalGlobalEst+=est;
-    totalGlobalPaid+=paid;
-    const falta=Math.max(est-paid,0);
-    const pct=est>0?Math.round((paid/est)*100):0;
-    rowsHtml+=`<div class="person-row">
-      <div><b>${p.name}</b><br><small style="color:var(--mut)">Pagado: ${fmt(paid)} / Falta: ${fmt(falta)}</small></div>
-      <div style="text-align:right"><b>${pct}%</b><br><small style="color:var(--c1)">Total: ${fmt(est)}</small></div>
-    </div>`;
+    totalGlobalEst+=est; totalGlobalPaid+=paid;
+    const falta=Math.max(est-paid,0), pct=est>0?Math.round((paid/est)*100):0;
+    rowsHtml+=`<div class="person-row"><div><b>${p.name}</b><br><small style="color:var(--mut)">Pagado: ${fmt(paid)} / Falta: ${fmt(falta)}</small></div><div style="text-align:right"><b>${pct}%</b><br><small style="color:var(--c1)">Total: ${fmt(est)}</small></div></div>`;
   });
-  const globalFalta=Math.max(totalGlobalEst-totalGlobalPaid,0);
-
-  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('Barranquilla.jpg')">
-    <div class="welcome-card-content">
-      <h3>📊 Panel Global de Administrador</h3><p>Resumen financiero y control de todos los participantes.</p>
-    </div>
-  </div>`;
-  h+=`<div class="tots">
-    <div class="tot"><b>${fmt(totalGlobalEst)}</b><span>Presupuesto Global</span></div>
-    <div class="tot" style="background:var(--t2)"><b style="color:var(--c2)">${fmt(totalGlobalPaid)}</b><span>Recaudado Total</span></div>
-    <div class="tot" style="background:var(--t1)"><b style="color:var(--c1)">${fmt(globalFalta)}</b><span>Saldo Pendiente</span></div>
-  </div>`;
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('Barranquilla.jpg')"><div class="welcome-card-content"><h3>📊 Panel Global de Administrador</h3><p>Resumen financiero y control de todos los participantes.</p></div></div>`;
+  h+=`<div class="tots"><div class="tot"><b>${fmt(totalGlobalEst)}</b><span>Presupuesto</span></div><div class="tot" style="background:var(--t2)"><b style="color:var(--c2)">${fmt(totalGlobalPaid)}</b><span>Recaudado</span></div><div class="tot" style="background:var(--t1)"><b style="color:var(--c1)">${fmt(Math.max(totalGlobalEst-totalGlobalPaid,0))}</b><span>Pendiente</span></div></div>`;
   h+=`<div class="stat-box"><h3>👥 Estado de Pagos por Integrante</h3>${rowsHtml}</div>`;
   $("v-stats").innerHTML=h;
 }
 
-/* ---------- render: admin configuración de perfiles ---------- */
 function renderAdm(){
-  let h=`<h2 style="margin-top:20px">Configuración de Participantes</h2>
-  <p style="font-size:0.9rem;color:var(--mut);margin-bottom:16px">La lista de viajeros está cerrada. Aquí puedes ajustar el rol, origen de llegada y regreso de cada integrante:</p>`;
-  
+  let h=`<h2 style="margin-top:20px">Configuración de Participantes</h2><p style="font-size:0.9rem;color:var(--mut);margin-bottom:16px">Ajusta roles y opciones de viaje:</p>`;
   D.people.forEach(p=>{
     const mine=myPays(p);
     const est=mine.reduce((a,x)=>a+(+x.amt||0),0);
     const paid=mine.reduce((a,x)=>a+(p.paid[x.id]?+x.amt||0:0),0);
-    h+=`<div class="aprow" style="--c:var(--c1)"><b>${p.name} <span style="color:var(--mut);font-weight:500">(${p.code})</span></b>
+    h+=`<div class="aprow" style="--c:var(--c1)"><b>${p.name} (${p.code})</b>
     <select data-f="who" data-id="${p.id}"><option value="g1" ${p.who==="g1"?"selected":""}>G1</option><option value="g2" ${p.who==="g2"?"selected":""}>G2</option></select>
     <select data-f="arr" data-id="${p.id}"><option value="baq" ${p.arr==="baq"?"selected":""}>Baq</option><option value="copey" ${p.arr==="copey"?"selected":""}>Copey2</option><option value="copey3" ${p.arr==="copey3"?"selected":""}>Copey3</option><option value="baq_g2" ${p.arr==="baq_g2"?"selected":""}>Baq→Pereira</option></select>
     <select data-f="ret" data-id="${p.id}"><option value="baq" ${p.ret==="baq"?"selected":""}>→Baq</option><option value="smt" ${p.ret==="smt"?"selected":""}>→SM</option></select>
     <span class="paidall">${fmt(paid)}/${fmt(est)}</span></div>`;
   });
-
-  h+=`<div class="atools" style="margin-top:24px"><button id="a-cp">Copiar datos JSON</button><button id="a-imp">Importar</button><button class="rs" id="a-rs">Restablecer</button></div>`;
-  
   $("v-adm").innerHTML=h;
-
   $("v-adm").querySelectorAll("[data-f]").forEach(s=>s.onchange=()=>{
-    const p=D.people.find(x=>x.id===s.dataset.id);p[s.dataset.f]=s.value;save();
+    const p=D.people.find(x=>x.id===s.dataset.id);p[s.dataset.f]=s.value;saveToSupabase(p);
   });
-
-  $("a-cp").onclick=async()=>{const t=JSON.stringify(D);try{await navigator.clipboard.writeText(t);alert("Copiado")}catch(e){prompt("Copia",t)}};
-  $("a-imp").onclick=()=>{const t=prompt("Pega JSON:");try{const x=JSON.parse(t);if(x&&x.ver===VER){D=x;save();renderAdm();renderItin();renderPay();renderChk();renderDone();renderStats();alert("OK")}else alert("No válido")}catch(e){alert("Error")}};
-  $("a-rs").onclick=()=>{if(confirm("¿Restablecer todo?")){try{localStorage.removeItem("itin33")}catch(e){}location.reload()}};
 }
 
-/* ---------- scroll fx ---------- */
 let io=null,secs=[],scs=[];
 function bindScrollFx(){
   secs=[...document.querySelectorAll(".day")];scs=secs.map(s=>s.querySelector(".sc"));
@@ -919,10 +825,8 @@ function onS(){
 }
 addEventListener("scroll",onS,{passive:true});
 
-/* ---------- vistas ---------- */
 function show(v){
   if(!ADMIN && (v==="adm" || v==="stats")) v="itin";
-
   document.querySelectorAll("#menu button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
   $("app").style.display=v==="itin"?"":"none";
   $("v-hero").style.display=v==="itin"?"":"none";
@@ -934,78 +838,60 @@ function show(v){
   $("bar").style.display=v==="itin"?"":"none";
   scrollTo(0,0);onS();
 }
-document.querySelectorAll("#menu button").forEach(b=>b.onclick=()=>{
+
+document.querySelectorAll("#menu button").forEach(b=>b.onclick=async()=>{
   const v = b.dataset.v;
   if(!ADMIN && (v==="adm" || v==="stats")) return;
+  await loadFromSupabase();
   show(v);
-  if(v==="itin") renderItin();
-  else if(v==="pay") renderPay();
-  else if(v==="chk") renderChk();
-  else if(v==="done") renderDone();
-  else if(v==="stats") renderStats();
-  else if(v==="adm") renderAdm();
+  if(v==="itin") renderItin(); else if(v==="pay") renderPay(); else if(v==="chk") renderChk();
+  else if(v==="done") renderDone(); else if(v==="stats") renderStats(); else if(v==="adm") renderAdm();
 });
 
-/* ---------- login y cambio de usuario / admin ---------- */
-function enter(p){
-  ME=p;
-  ADMIN=false;
+async function enter(p){
+  await loadFromSupabase();
+  ME=p; ADMIN=false;
   activeDays = getTravelerDays(ME);
-  document.body.classList.remove("admin");
-  document.body.classList.add("in");
-  $("lg").style.display="none";
-  $("who").textContent=p.name+" (Cambiar)";
-  renderItin();renderPay();renderChk();renderDone();renderStats();show("itin");
+  document.body.classList.remove("admin"); document.body.classList.add("in");
+  $("lg").style.display="none"; $("who").textContent=p.name+" (Cambiar)";
+  renderItin(); renderPay(); renderChk(); renderDone(); renderStats(); show("itin");
   snd("ok");
 }
+
 function logout(){
-  ADMIN=false;
-  ME=null;
-  activeDays = D.days;
+  ADMIN=false; ME=null; activeDays = D.days;
   document.body.classList.remove("in","admin");
-  $("lg").style.display="grid";
-  $("lin").value="";
-  $("lerr").textContent="";
+  $("lg").style.display="grid"; $("lin").value=""; $("lerr").textContent="";
   snd("click");
 }
-function askAdmin(){
+
+async function askAdmin(){
   const pwd=prompt("Contraseña de administrador:");
   if(pwd===PASS){
-    ADMIN=true;
-    ME=D.people[0];
+    await loadFromSupabase();
+    ADMIN=true; ME=D.people[0];
     activeDays = getTravelerDays(ME);
     document.body.classList.add("admin","in");
-    $("lg").style.display="none";
-    $("who").textContent="Admin ⚡";
-    renderItin();renderPay();renderChk();renderDone();renderStats();renderAdm();
-    show("stats");
-    snd("ok");
-  }else if(pwd!==null){
-    alert("Contraseña incorrecta");
-  }
+    $("lg").style.display="none"; $("who").textContent="Admin ⚡";
+    renderItin(); renderPay(); renderChk(); renderDone(); renderStats(); renderAdm();
+    show("stats"); snd("ok");
+  }else if(pwd!==null){ alert("Contraseña incorrecta"); }
 }
 
-/* Botón flotante para cambiar de persona rápidamente desde admin */
-$("float-switch").onclick = () => {
+$("float-switch").onclick = async () => {
+  await loadFromSupabase();
   const names = D.people.map((p, idx) => `${idx + 1}. ${p.name}`).join("\n");
-  const sel = prompt(`Selecciona el número de la persona que deseas ver/modificar:\n\n${names}`);
+  const sel = prompt(`Selecciona el número de la persona:\n\n${names}`);
   if(sel){
     const index = parseInt(sel.trim()) - 1;
     if(D.people[index]){
-      ME = D.people[index];
-      activeDays = getTravelerDays(ME);
+      ME = D.people[index]; activeDays = getTravelerDays(ME);
       const activeBtn = document.querySelector("#menu button.on");
       const v = activeBtn ? activeBtn.dataset.v : "itin";
-      if(v==="itin") renderItin();
-      else if(v==="pay") renderPay();
-      else if(v==="chk") renderChk();
-      else if(v==="done") renderDone();
-      else if(v==="stats") renderStats();
-      else if(v==="adm") renderAdm();
+      if(v==="itin") renderItin(); else if(v==="pay") renderPay(); else if(v==="chk") renderChk();
+      else if(v==="done") renderDone(); else if(v==="stats") renderStats(); else if(v==="adm") renderAdm();
       alert(`Ahora estás viendo los datos de: ${ME.name}`);
-    }else{
-      alert("Número no válido");
-    }
+    }else{ alert("Número no válido"); }
   }
 };
 
@@ -1019,13 +905,10 @@ function tryLogin(){
     return;
   }
   const p=D.people.find(x=>x.name.toLowerCase()===val||x.code.toLowerCase()===val);
-  if(p){
-    $("lerr").textContent="";
-    enter(p);
-  }else{
-    $("lerr").textContent="Nombre o código no reconocido. Verifica con Kalen.";
-  }
+  if(p){ $("lerr").textContent=""; enter(p); }
+  else{ $("lerr").textContent="Nombre o código no reconocido. Verifica con Kalen."; }
 }
+
 $("lgo").onclick=tryLogin;
 $("lin").addEventListener("keydown",e=>{if(e.key==="Enter")tryLogin()});
 $("ladm").onclick=askAdmin;
