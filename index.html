@@ -35,7 +35,8 @@ button{font-family:inherit;cursor:pointer}
 #lab{font-weight:600;font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:28%}
 .bar-actions{margin-left:auto;display:flex;align-items:center;gap:6px}
 #who{font-size:.78rem;font-weight:600;color:var(--mut);white-space:nowrap;text-decoration:underline;padding:4px}
-#admin-shortcut{font-size:.75rem;background:var(--t1);color:var(--c1);border:1px solid var(--c1);border-radius:6px;padding:3px 6px;font-weight:700}
+#admin-switcher{display:none;font-size:.78rem;background:var(--t1);color:var(--c1);border:1px solid var(--c1);border-radius:6px;padding:3px 6px;font-weight:700}
+body.admin #admin-switcher{display:inline-block}
 #trk{position:relative;flex:1;height:6px;min-width:30px}
 .sg{display:flex;height:100%;border-radius:3px;overflow:hidden}.sg i{display:block;height:100%}
 #mk{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--c1);border:2.5px solid var(--bg);box-shadow:0 1px 4px #0005;transition:background .4s}
@@ -265,6 +266,7 @@ body.in #menu{display:flex}
 <!-- APP -->
 <div id="bar">
   <span id="lab">Inicio</span>
+  <select id="admin-switcher" title="Ver como viajero"></select>
   <div id="trk"><div class="sg" id="sg"></div><div id="mk"></div></div>
   <div class="bar-actions">
     <button id="admin-shortcut" onclick="askAdmin()" title="Entrar como Admin">Admin</button>
@@ -291,7 +293,7 @@ body.in #menu{display:flex}
 </div>
 
 <script>
-const VER=18,PASS="kalen2026";
+const VER=20,PASS="kalen2026";
 const H_MED="Comodo Family Laureles, Medellín, $65.000 por persona";
 const H_SAL="Mahalo, Salento, $54.000 por persona";
 const SK={1:"#bfe8f6",2:"#cfe9d4",3:"#cfd6f0",4:"#efd9c3"};
@@ -345,7 +347,7 @@ const petroMsgs = [
   "Bienvenidos al país de la belleza inmensa. En cada árbol y en cada fuente hídrica descansa la historia de nuestro pueblo. Amen esta tierra, respétenla y hágansela florecer a las nuevas generaciones.",
   "Querido caminante, la naturaleza no nos pertenece, nosotros pertenecemos a la tierra. Disfrute cada paisaje andino con gratitud, camine con suavidad y proteja nuestros hermosos ecosistemas.",
   "¡Un abrazo fraterno en el inicio de tu aventura! Que la energía de las montañas te inspire a ser un defensor incansable de la vida, el agua y los bosques que hacen de Colombia una potencia mundial de la biodiversidad.",
-  "Bienvenidos a la ruta del agua y del café. Cada frailejón que veas en el páramo es un guardián milenario de la vida; cuídalo, admíralo y llévalo siempre en tu memoria con profundo respeto.",
+  "Bienvenidos al ruta del agua y del café. Cada frailejón que veas en el páramo es un guardián milenario de la vida; cuídalo, admírato y llévalo siempre en tu memoria con profundo respeto.",
   "Que este viaje por la geografía colombiana sea un reencuentro con lo esencial. Cierra los ojos, siente el viento puro de la montaña y recuerda que cuidar la naturaleza es cuidar nuestra propia existencia.",
   "¡Bienvenidos, caminantes de la vida! Que cada pueblo que visiten y cada sendero que pisen les recuerde que la verdadera riqueza de nuestra patria reside en sus bosques, sus aguas y su gente noble.",
   "Amigos, la transición hacia la armonía con la naturaleza empieza en cada paso que damos sin dejar huella destructiva. Disfruten los nevados, amen los valles y defiendan siempre el bien común de la vida.",
@@ -376,9 +378,9 @@ people:[
  {id:"sebas",name:"Sebas",code:"sebas",who:"g1",arr:"copey",ret:"baq",paid:{},chk:{},done:{}},
  {id:"lolyr",name:"Loly R",code:"loly r",who:"g1",arr:"copey3",ret:"smt",paid:{},chk:{},done:{}},
  {id:"hector",name:"Hector",code:"hector",who:"g1",arr:"copey3",ret:"smt",paid:{},chk:{},done:{}},
- {id:"lola",name:"Lola",code:"lola",who:"g2",arr:"g2",ret:"baq",paid:{},chk:{},done:{}},
- {id:"lolya",name:"Loly A",code:"loly a",who:"g2",arr:"g2",ret:"baq",paid:{},chk:{},done:{}},
- {id:"maria",name:"Maria",code:"maria",who:"g2",arr:"g2",ret:"baq",paid:{},chk:{},done:{}}
+ {id:"lola",name:"Lola",code:"lola",who:"g2",arr:"baq_g2",ret:"baq",paid:{},chk:{},done:{}},
+ {id:"lolya",name:"Loly A",code:"loly a",who:"g2",arr:"baq_g2",ret:"baq",paid:{},chk:{},done:{}},
+ {id:"maria",name:"Maria",code:"maria",who:"g2",arr:"baq_g2",ret:"baq",paid:{},chk:{},done:{}}
 ],
 days:[
 {n:2,dt:"Viernes 2 de octubre",t:"Llegada a Santa Marta",v:"Brisa de mar y la última noche al nivel del agua.",r:1,s:[["Tarde","Llegada a El Rodadero (frente al restaurante donde Chucho, Calle 6 Cra 3) y check-in"],["Noche","Cena tranquila y a dormir temprano"]],h:"Hotel en El Rodadero, $35.000 por persona",k:"El vuelo del 3 sale a las 7:15 AM. Dejen las maletas listas y acuéstense temprano."},
@@ -387,7 +389,7 @@ days:[
 {n:5,dt:"Lunes 5 de octubre", t:"Guatapé",v:"Agua, colores y la piedra gigante de Guatapé.",r:2,s:[["Todo el día","Tour a Guatapé ($130.000)"],["Noche","Cena y empacar para Jardín"]],h:H_MED,k:"Confirmen con la agencia el punto de encuentro y la hora de salida."},
 {n:6,dt:"Martes 6 de octubre",t:"De Medellín a Jardín",v:"Un pueblo de balcones y sillas de colores en la plaza.",r:2,s:[["Mañana","Del hotel a la terminal y bus a Jardín ($50.000)"],["Almuerzo","Almuerzo en Jardín"],["Tarde","Plaza y calles del pueblo"],["Noche","Cena en Jardín"]],h:"Antonia Jardín Colonial, Jardín, $66.000 por persona"},
 {n:7,dt:"Miércoles 7 de octubre",t:"De Jardín a Murillo",v:"Del café al páramo: el aire se pone fino y frío.",r:3,s:[["Mañana","Bus de Jardín a Manizales ($60.000)"],["1:00 PM","Llegada a Manizales y almuerzo"],["2:30 PM","Recoger el carro de alquiler"],["3:00 PM","Salida a Murillo: 83 km por el páramo"],["5:30 PM","Check-in y cena típica (migao)"]],h:"Cabaña Dos Búhos, Murillo, $66.000 por persona",k:"Salgan de Manizales a más tardar a las 3 PM para llegar con luz."},
-{n:8,dt:"Jueves 8 de octubre",t:"Los Nevados y termales",v:"Frailejones, nevado y agua caliente: el día más épico.",r:3,b:"Se une el grupo 2 (Lola, Loly A, María)",s:[["6:00 AM","Salida de Murillo"],["7:30 AM","Parque Nacional Los Nevados ($60.000)"],["10:30 AM","Bajar hacia Pereira, con almuerzo en Manizales"],["2:00 PM","Encuentro de todos en el hotel de Pereira (el grupo 2 aterriza a la 1 PM)"],["6:00 PM","Termales de Santa Rosa de Cabal ($106.000)"],["9:30 PM","Regreso al hotel"]],h:"Hotel en Pereira",k:"Busquen un hotel con parqueadero y check-in desde la 1 PM."},
+{n:8,dt:"Jueves 8 de octubre",t:"Los Nevados y termales",v:"Frailejones, nevado y agua caliente: el día más épico.",r:3,b:"Se une el grupo 2 (Lola, Loly A, María desde Barranquilla)",s:[["6:00 AM","Salida de Murillo"],["7:30 AM","Parque Nacional Los Nevados ($60.000)"],["10:30 AM","Bajar hacia Pereira, con almuerzo en Manizales"],["2:00 PM","Encuentro de todos en el hotel de Pereira (el grupo 2 vuela desde Baq y llega a Pereira ~1 PM)"],["6:00 PM","Termales de Santa Rosa de Cabal ($106.000)"],["9:30 PM","Regreso al hotel"]],h:"Hotel en Pereira",k:"Busquen un hotel con parqueadero y check-in desde la 1 PM."},
 {n:9,dt:"Viernes 9 de octubre",t:"Filandia y Salento",v:"Pueblitos de colores y atardeceres en Salento.",r:4,s:[["8:30 AM","Check-out y salida de Pereira"],["10:00 AM","Filandia: calles coloridas y mirador Colina Iluminada"],["1:00 PM","Almuerzo en Filandia"],["3:00 PM","Check-in en Mahalo, Salento"],["4:30 PM","Calle Real y mirador"]],h:H_SAL},
 {n:10,dt:"Sábado 10 de octubre",t:"Parque del Café",v:"Un día entero de parque, café y atracciones.",r:4,s:[["8:00 AM","Salida de Salento"],["9:30 AM","Parque del Café, todo el día y almuerzo adentro ($90.000)"],["5:30 PM","Regreso a Salento y cena"]],h:H_SAL,k:"Es puente festivo: compren las entradas con anticipación."},
 {n:11,dt:"Domingo 11 de octubre",t:"Valle del Cocora",v:"Palmas de cera que tocan las nubes.",r:4,s:[["7:00 AM","Willys hacia el valle ($14.000)"],["7:30 AM","Caminata entre palmas de cera ($30.000)"],["1:30 PM","Almuerzo en Salento"],["3:30 PM","Tarde libre, compras y maletas"]],h:H_SAL,k:"Madruguen: en el puente festivo hay filas para los Willys."},
@@ -418,7 +420,7 @@ pays:[
 {id:"d7-h1",day:7,cat:"Hotel",item:"Cabaña Dos Búhos, Murillo",amt:66000,w:"g1"},
 {id:"d7-o1",day:7,cat:"Otros",item:"Gastos varios Murillo",amt:30000,w:"g1"},
 {id:"d8-t1",day:8,cat:"Transporte",item:"Carro Murillo→Nevados→Pereira (grupo 1)",amt:60000,w:"g1"},
-{id:"d8-t2",day:8,cat:"Transporte",item:"Vuelo del grupo 2 (9:35, escala Bogotá)",amt:160000,w:"arr:g2"},
+{id:"d8-t2",day:8,cat:"Transporte",item:"Vuelo del grupo 2 (BaQ → Pereira)",amt:160000,w:"arr:baq_g2"},
 {id:"d8-c1",day:8,cat:"Comida",item:"Desayuno, almuerzo y cena (grupo 1)",amt:85000,w:"g1"},
 {id:"d8-c2",day:8,cat:"Comida",item:"Comidas del día (grupo 2)",amt:50000,w:"g2"},
 {id:"d8-p1",day:8,cat:"Tours",item:"Parque Los Nevados (entrada, guía, vehículo)",amt:60000,w:"g1"},
@@ -461,8 +463,8 @@ doneDefs:[
 ]
 };
 
-try{const x=JSON.parse(localStorage.getItem("itin18")||"null");if(x&&x.ver===VER)D=x}catch(e){}
-const save=()=>{try{localStorage.setItem("itin18",JSON.stringify(D))}catch(e){}};
+try{const x=JSON.parse(localStorage.getItem("itin20")||"null");if(x&&x.ver===VER)D=x}catch(e){}
+const save=()=>{try{localStorage.setItem("itin20",JSON.stringify(D))}catch(e){}};
 const fmt=n=>"$"+(n||0).toLocaleString("es-CO");
 const $=id=>document.getElementById(id);
 let ME=null,ADMIN=false,DARK=false;
@@ -503,15 +505,16 @@ function getProfileDesc(p){
   if(p.arr==="baq")t+="Sales el 2 de octubre desde Barranquilla. ";
   else if(p.arr==="copey")t+="Sales el 2 de octubre desde El Copey (Cesar) hacia Santa Marta ($40.000). ";
   else if(p.arr==="copey3")t+="Viajas desde El Copey en la madrugada del día 3 hacia Santa Marta ($40.000). ";
-  else if(p.arr==="g2")t+="Perteneces al Grupo 2: vuelo el 8 de octubre (9:35 AM, escala en Bogotá). ";
+  else if(p.arr==="baq_g2")t+="Perteneces al Grupo 2: viajas desde Barranquilla directo a Pereira el 8 de octubre. ";
 
   if(p.ret==="baq" && p.arr==="copey")t+="Regresas a Barranquilla el 12, pasas la noche y viajas al día siguiente a El Copey ($55.000).";
   else if(p.ret==="baq")t+="Regresas el 12 en vuelo directo Pereira → Barranquilla.";
   
   if(p.ret==="smt")t+="Regresas el 12 de Pereira a Santa Marta (~4 PM) y viajas de inmediato hacia El Copey.";
   
-  if(p.code==="loly a") t+="<br><br><b style='color:var(--c1)'>¡Ojo! Aclaración:</b> Eres <b>Loly A</b> (regresas a Barranquilla porque vives allá).";
-  if(p.code==="loly r") t+="<br><br><b style='color:var(--c1)'>¡Ojo! Aclaración:</b> Eres <b>Loly R</b> (regresas a Santa Marta / El Copey).";
+  if(p.code==="loly a") t+="<br><br><b style='color:var(--c1)'>¡Ojo! Aclaración:</b> Eres <b>Loly A</b> (vuelas desde Barranquilla directo a Pereira el 8).";
+  if(p.code==="lola") t+="<br><br><b style='color:var(--c1)'>¡Ojo! Aclaración:</b> Eres <b>Lola</b> (vuelas desde Barranquilla directo a Pereira el 8).";
+  if(p.code==="maria") t+="<br><br><b style='color:var(--c1)'>¡Ojo! Aclaración:</b> Eres <b>María</b> (vuelas desde Barranquilla directo a Pereira el 8).";
 
   return t;
 }
@@ -527,7 +530,7 @@ function pnote(d,p){
     if(p.arr==="copey3")return "<b>Tu plan:</b> llegas desde El Copey en la madrugada de hoy a Santa Marta para unirte al vuelo a Medellín.";
     if((p.code==="loly r"||p.code==="hector"))return "<b>Tu plan:</b> no vas al Parque Explora esta tarde; tienes la tarde libre / pendiente por definir.";
   }
-  if(d.n===8&&p.arr==="g2")return "<b>Tu plan:</b> hoy llegas — vuelo 9:35 AM con escala en Bogotá, aterrizas en Pereira ~1:00 PM. Encuentro con todos en el hotel a las 2 PM, luego termales.";
+  if(d.n===8&&p.arr==="baq_g2")return "<b>Tu plan:</b> hoy viajas desde Barranquilla directo a Pereira. Aterrizas ~1:00 PM, te encuentras con todos en el hotel a las 2 PM y vamos a los termales.";
   if(d.n===12){
     if(p.ret==="baq"&&p.arr==="copey")return "<b>Tu plan:</b> regresas a Barranquilla el 12, pasas la noche y el día siguiente viajas hacia El Copey ($55.000).";
     if(p.ret==="baq")return "<b>Tu plan:</b> vuelo de regreso Pereira → Barranquilla.";
@@ -536,8 +539,22 @@ function pnote(d,p){
   return "";
 }
 
+/* ---------- actualizar selector admin ---------- */
+function updateAdminSwitcher(){
+  const sw=$("admin-switcher");
+  if(!sw)return;
+  if(ADMIN){
+    sw.innerHTML=D.people.map(p=>`<option value="${p.id}" ${ME&&ME.id===p.id?"selected":""}>Ver como: ${p.name}</option>`).join("");
+    sw.onchange=e=>{
+      const found=D.people.find(x=>x.id===e.target.value);
+      if(found){ME=found;renderItin();renderPay();renderChk();renderDone();renderStats();}
+    };
+  }
+}
+
 /* ---------- render: itinerario ---------- */
 function renderItin(){
+  updateAdminSwitcher();
   $("v-hero").innerHTML=`<header class="hero" id="hero"><div class="sun"></div><div class="cloud cl1"></div><div class="cloud cl2"></div>
   <div class="plane"><svg viewBox="0 0 64 32"><g fill="#fff"><path d="M4 14h50c6 0 8 2 8 2s-2 2-8 2H4z"/><path d="M26 15 18 2h6l16 13zM26 17l-8 13h6l16-13z"/><path d="M8 15 3 7h4l7 8zM8 17l-5 8h4l7-8z"/></g></svg></div>
   <div style="position:relative;z-index:2;max-width:760px;margin:0 auto;width:100%"><h1>${D.title}</h1><p style="margin-bottom:12px">${D.sub}</p><div style="display:inline-flex;align-items:center;gap:6px;background:#ffffff33;padding:6px 14px;border-radius:20px;font-weight:700;backdrop-filter:blur(6px);border:1px solid #ffffff55;font-size:0.9rem"><span style="font-size:1.2rem">👫</span> by Rosa & Kalen</div></div>
@@ -591,8 +608,8 @@ const alts={
   8:"🌋 4.800 msnm | 5°C (Termales: Santa Rosa de Cabal)",
   9:"🌴 1.895 msnm | 18°C (Filandia)",
   10:"🎢 1.294 msnm | 22°C (Parque del Café)",
-  11:"☁️️ 2.400 msnm | 16°C",
-  12:"✈️ 1.411 msnm | 21°C"
+  11:"☁ 2.400 msnm | 16°C",
+  12:"✈ 1.411 msnm | 21°C"
 };
 
 const dayImages = {
@@ -637,6 +654,7 @@ html+=D.days.map((d,i)=>{
 
 /* ---------- render: pagos con abonos parciales (Solo Admin edita) ---------- */
 function renderPay(){
+  updateAdminSwitcher();
   const mine=myPays(ME);
   const est=mine.reduce((a,x)=>a+(+x.amt||0),0);
   let paid=0;
@@ -651,8 +669,8 @@ function renderPay(){
 
   let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')">
     <div class="welcome-card-content">
-      <h3>💰 Tus Pagos y Abonos</h3>
-      <p>${ADMIN?"<b>Modo Admin activo:</b> Puedes hacer clic en los círculos o abonar para registrar los pagos de esta persona.":`Aquí visualizas el estado de tus pagos de ruta. ${ADMIN?"":"(Solo el administrador puede modificarlos)"}`}<br><b>Progreso personal:</b> ${pct}% pagado</p>
+      <h3>💰 Pagos y Abonos de ${ME.name}</h3>
+      <p>${ADMIN?"<b>Modo Admin activo:</b> Estás viendo el estado de <b>"+ME.name+"</b>. Puedes hacer clic en los círculos o abonar para registrar sus pagos.":`Aquí visualizas el estado de tus pagos de ruta.`}<br><b>Progreso:</b> ${pct}% pagado</p>
       <div style="background:var(--border);height:8px;border-radius:4px;margin-top:12px;overflow:hidden">
         <div style="background:linear-gradient(45deg, rgba(255,255,255,0.25) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.25) 75%, transparent 75%, transparent);background-size:30px 30px;background-color:var(--c2);width:${pct}%;height:100%;transition:width 0.6s ease-out;animation:stripes 1s linear infinite"></div>
       </div>
@@ -712,7 +730,7 @@ function renderPay(){
         const id=e.target.dataset.abonar;
         const x=D.pays.find(p=>p.id===id);
         const cur=typeof ME.paid[id]==="number"?ME.paid[id]:(ME.paid[id]?x.amt:0);
-        const val=prompt(`Ingresa el valor abonado para "${x.item}" (Total: ${fmt(x.amt)}):`,cur);
+        const val=prompt(`Ingresa el valor abonado para "${x.item}" de ${ME.name} (Total: ${fmt(x.amt)}):`,cur);
         if(val!==null){
           const num=parseInt(val.replace(/\D/g,""))||0;
           if(num<=0)delete ME.paid[id];
@@ -727,9 +745,10 @@ function renderPay(){
 
 /* ---------- render: checklist pendientes ---------- */
 function renderChk(){
+  updateAdminSwitcher();
   let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')">
     <div class="welcome-card-content">
-      <h3>✔️ Tareas y Preparativos</h3><p>Cosas pendientes por organizar o comprar para el viaje.</p>
+      <h3>✔️ Tareas de ${ME.name}</h3><p>Cosas pendientes por organizar o comprar para el viaje.</p>
     </div>
   </div>`;
   const cats={};
@@ -764,9 +783,10 @@ function renderChk(){
 
 /* ---------- render: checklist "hecho" ---------- */
 function renderDone(){
+  updateAdminSwitcher();
   let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')">
     <div class="welcome-card-content">
-      <h3>✅ Lo que ya hice</h3><p>Registra las acciones y gestiones que ya completaste con éxito.</p>
+      <h3>✅ Lo que ya hizo ${ME.name}</h3><p>Registra las acciones y gestiones completadas con éxito.</p>
     </div>
   </div>`;
   const cats={};
@@ -801,6 +821,7 @@ function renderDone(){
 
 /* ---------- render: estadísticas personales / globales ---------- */
 function renderStats(){
+  updateAdminSwitcher();
   if(ADMIN){
     let totalGlobalEst=0;
     let totalGlobalPaid=0;
@@ -880,12 +901,13 @@ function renderStats(){
 
 /* ---------- render: admin gestión y edición de textos ---------- */
 function renderAdm(){
+  updateAdminSwitcher();
   let h=`<h2 style="margin-top:20px">Gestión de Personas</h2>
   <div id="addp">
     <div class="row"><input id="np-n" placeholder="Nombre"><input id="np-c" placeholder="Código de acceso"></div>
     <div class="row">
       <select id="np-who"><option value="g1">Grupo 1 (viaja del 2)</option><option value="g2">Grupo 2 (llega el 8)</option></select>
-      <select id="np-arr"><option value="baq">Llega desde Baq</option><option value="copey">Llega de Copey (Día 2)</option><option value="copey3">Llega de Copey (Mad. Día 3)</option><option value="g2">Vuelo del 8</option></select>
+      <select id="np-arr"><option value="baq">Llega desde Baq</option><option value="copey">Llega de Copey (Día 2)</option><option value="copey3">Llega de Copey (Mad. Día 3)</option><option value="baq_g2">Vuela de Baq a Pereira (Día 8)</option></select>
     </div>
     <div class="row">
       <select id="np-ret"><option value="baq">Regresa a Baq</option><option value="smt">Regresa a Sta Marta</option></select>
@@ -899,7 +921,7 @@ function renderAdm(){
     const paid=mine.reduce((a,x)=>a+(p.paid[x.id]?+x.amt||0:0),0);
     h+=`<div class="aprow" style="--c:var(--c1)"><b>${p.name} <span style="color:var(--mut);font-weight:500">(${p.code})</span></b>
     <select data-f="who" data-id="${p.id}"><option value="g1" ${p.who==="g1"?"selected":""}>G1</option><option value="g2" ${p.who==="g2"?"selected":""}>G2</option></select>
-    <select data-f="arr" data-id="${p.id}"><option value="baq" ${p.arr==="baq"?"selected":""}>Baq</option><option value="copey" ${p.arr==="copey"?"selected":""}>Copey2</option><option value="copey3" ${p.arr==="copey3"?"selected":""}>Copey3</option><option value="g2" ${p.arr==="g2"?"selected":""}>V8</option></select>
+    <select data-f="arr" data-id="${p.id}"><option value="baq" ${p.arr==="baq"?"selected":""}>Baq</option><option value="copey" ${p.arr==="copey"?"selected":""}>Copey2</option><option value="copey3" ${p.arr==="copey3"?"selected":""}>Copey3</option><option value="baq_g2" ${p.arr==="baq_g2"?"selected":""}>Baq→Pereira</option></select>
     <select data-f="ret" data-id="${p.id}"><option value="baq" ${p.ret==="baq"?"selected":""}>→Baq</option><option value="smt" ${p.ret==="smt"?"selected":""}>→SM</option></select>
     <span class="paidall">${fmt(paid)}/${fmt(est)}</span>
     <button class="del" data-del="${p.id}">✕</button></div>`;
@@ -966,7 +988,7 @@ function renderAdm(){
 
   $("a-cp").onclick=async()=>{const t=JSON.stringify(D);try{await navigator.clipboard.writeText(t);alert("Copiado")}catch(e){prompt("Copia",t)}};
   $("a-imp").onclick=()=>{const t=prompt("Pega JSON:");try{const x=JSON.parse(t);if(x&&x.ver===VER){D=x;save();renderAdm();renderItin();renderPay();renderChk();renderDone();renderStats();alert("OK")}else alert("No válido")}catch(e){alert("Error")}};
-  $("a-rs").onclick=()=>{if(confirm("¿Restablecer todo?")){try{localStorage.removeItem("itin18")}catch(e){}location.reload()}};
+  $("a-rs").onclick=()=>{if(confirm("¿Restablecer todo?")){try{localStorage.removeItem("itin20")}catch(e){}location.reload()}};
   $("a-out").onclick=()=>{ADMIN=false;document.body.classList.remove("admin");$("m-adm").style.display="none";renderPay();renderStats();};
 }
 
@@ -1022,7 +1044,8 @@ function logout(){
   snd("click");
 }
 function askAdmin(){
-  if(prompt("Contraseña de admin")===PASS){
+  const pwd = prompt("Contraseña de admin");
+  if(pwd===PASS){
     if(!ME&&D.people.length){ME=D.people[0]}
     ADMIN=true;
     document.body.classList.add("admin","in");
@@ -1030,7 +1053,7 @@ function askAdmin(){
     renderItin();renderPay();renderChk();renderDone();renderStats();renderAdm();
     show("stats");
     snd("ok");
-  }else{
+  }else if(pwd!==null){
     alert("Contraseña incorrecta");
   }
 }
