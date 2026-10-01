@@ -290,7 +290,7 @@ body.in #menu{display:flex}
 </div>
 
 <script>
-const VER=25,PASS="kalen2026";
+const VER=26,PASS="kalen2026";
 const H_MED="Comodo Family Laureles, Medellín, $65.000 por persona";
 const H_SAL="Mahalo, Salento, $54.000 por persona";
 const SK={1:"#bfe8f6",2:"#cfe9d4",3:"#cfd6f0",4:"#efd9c3"};
@@ -381,7 +381,7 @@ people:[
 ],
 days:[
 {n:2,dt:"Viernes 2 de octubre",t:"Llegada a Santa Marta",v:"Brisa de mar y la última noche al nivel del agua.",r:1,s:[["Tarde","Llegada a El Rodadero (frente al restaurante donde Chucho, Calle 6 Cra 3) y check-in"],["Noche","Cena tranquila y a dormir temprano"]],h:"Hotel en El Rodadero, $35.000 por persona",k:"El vuelo del 3 sale a las 7:15 AM. Dejen las maletas listas y acuéstense temprano."},
-{n:3,dt:"Sábado 3 de octubre",t:"Vuelo a Medellín",v:"Madrugón, avión y la primera tarde en Medellín.",r:2,s:[["Madrugada","Despertar temprano y salir al aeropuerto (llegar hacia las 5:15 AM)"],["7:15 AM","Vuelo de Santa Marta a Medellín"],["Mañana","Llegada a Rionegro, bus a Medellín ($25.000) y metro hasta el hotel"],["Tarde","Parque Explora (entrada $50.000) — *Nota: Loly R y Héctor tienen esta tarde libre/pendiente*"],["Noche","Cena y descanso"]],h:H_MED,k:"Dejen la tarde flexible por si el vuelo o el bus se demoran."},
+{n:3,dt:"Sábado 3 de octubre",t:"Vuelo a Medellín",v:"Madrugón, avión y la primera tarde en Medellín.",r:2,s:[["Madrugada","Despertar temprano y salir al aeropuerto (llegar hacia las 5:15 AM)"],["7:15 AM","Vuelo de Santa Marta a Medellín"],["Mañana","Llegada a Rionegro, bus a Medellín ($25.000) y metro hasta el hotel"],["Tarde","Parque Explora (entrada $50.000) — *Nota: Loly R y Héctor tienen esta tarde libre/pendiente*"],["Noche","Cena y descanso"]],H_MED,k:"Dejen la tarde flexible por si el vuelo o el bus se demoran."},
 {n:4,dt:"Domingo 4 de octubre",t:"City tour por Medellín",v:"La ciudad de la eterna primavera, en metro y a pie.",r:2,s:[["Mañana","City tour ($130.000)"],["Tarde","Libre para almorzar y descansar"],["Noche","Cena"]],h:H_MED},
 {n:5,dt:"Lunes 5 de octubre", t:"Guatapé",v:"Agua, colores y la piedra gigante de Guatapé.",r:2,s:[["Todo el día","Tour a Guatapé ($130.000)"],["Noche","Cena y empacar para Jardín"]],h:H_MED,k:"Confirmen con la agencia el punto de encuentro y la hora de salida."},
 {n:6,dt:"Martes 6 de octubre",t:"De Medellín a Jardín",v:"Un pueblo de balcones y sillas de colores en la plaza.",r:2,s:[["Mañana","Del hotel a la terminal y bus a Jardín ($50.000)"],["Almuerzo","Almuerzo en Jardín"],["Tarde","Plaza y calles del pueblo"],["Noche","Cena en Jardín"]],h:"Antonia Jardín Colonial, Jardín, $66.000 por persona"},
@@ -460,8 +460,8 @@ doneDefs:[
 ]
 };
 
-try{const x=JSON.parse(localStorage.getItem("itin25")||"null");if(x&&x.ver===VER)D=x}catch(e){}
-const save=()=>{try{localStorage.setItem("itin25",JSON.stringify(D))}catch(e){}};
+try{const x=JSON.parse(localStorage.getItem("itin26")||"null");if(x&&x.ver===VER)D=x}catch(e){}
+const save=()=>{try{localStorage.setItem("itin26",JSON.stringify(D))}catch(e){}};
 const fmt=n=>"$"+(n||0).toLocaleString("es-CO");
 const $=id=>document.getElementById(id);
 let ME=null,ADMIN=false,DARK=false;
@@ -536,7 +536,7 @@ function pnote(d,p){
   return "";
 }
 
-/* ---------- actualizar selector admin ---------- */
+/* ---------- actualizar selector admin en la barra superior ---------- */
 function updateAdminSwitcher(){
   const sw=$("admin-switcher");
   if(!sw)return;
@@ -544,8 +544,20 @@ function updateAdminSwitcher(){
   sw.innerHTML=D.people.map(p=>`<option value="${p.id}" ${ME&&ME.id===p.id?"selected":""}>Ver como: ${p.name}</option>`).join("");
   sw.onchange=e=>{
     const found=D.people.find(x=>x.id===e.target.value);
-    if(found){ME=found;renderItin();renderPay();renderChk();renderDone();renderStats();}
+    if(found){
+      ME=found;
+      renderItin();renderPay();renderChk();renderDone();renderStats();
+    }
   };
+}
+
+/* ---------- Filtrar días según el viajero ---------- */
+function getTravelerDays(p){
+  if(p.arr==="baq_g2"){
+    // Grupo 2 (Lola, Loly A, María): Solo ven desde el Día 8 en adelante
+    return D.days.filter(d=>d.n>=8);
+  }
+  return D.days;
 }
 
 /* ---------- render: itinerario ---------- */
@@ -605,7 +617,7 @@ const alts={
   9:"🌴 1.895 msnm | 18°C (Filandia)",
   10:"🎢 1.294 msnm | 22°C (Parque del Café)",
   11:"☁ 2.400 msnm | 16°C",
-  12:"✈️️ 1.411 msnm | 21°C"
+  12:"✈ 1.411 msnm | 21°C"
 };
 
 const dayImages = {
@@ -622,7 +634,9 @@ const dayImages = {
   12: "Pereira.jpg"
 };
 
-html+=D.days.map((d,i)=>{
+const activeDays = ME ? getTravelerDays(ME) : D.days;
+
+html+=activeDays.map((d,i)=>{
   const alt=alts[d.n]||"";
   const note=ME ? pnote(d,ME) : "";
   const bgImg = dayImages[d.n];
@@ -667,7 +681,7 @@ function renderPay(){
   let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')">
     <div class="welcome-card-content">
       <h3>💰 Pagos y Abonos de ${ME.name}</h3>
-      <p><b>Modo Admin activo:</b> Estás viendo el estado de <b>${ME.name}</b>. Puedes hacer clic en los círculos o abonar para registrar sus pagos.<br><b>Progreso:</b> ${pct}% pagado</p>
+      <p>Estás viendo el estado financiero de <b>${ME.name}</b>. Puedes cambiar de viajero en el menú superior en cualquier momento.<br><b>Progreso:</b> ${pct}% pagado</p>
       <div style="background:var(--border);height:8px;border-radius:4px;margin-top:12px;overflow:hidden">
         <div style="background:linear-gradient(45deg, rgba(255,255,255,0.25) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.25) 75%, transparent 75%, transparent);background-size:30px 30px;background-color:var(--c2);width:${pct}%;height:100%;transition:width 0.6s ease-out;animation:stripes 1s linear infinite"></div>
       </div>
@@ -945,7 +959,7 @@ function renderAdm(){
 
   $("a-cp").onclick=async()=>{const t=JSON.stringify(D);try{await navigator.clipboard.writeText(t);alert("Copiado")}catch(e){prompt("Copia",t)}};
   $("a-imp").onclick=()=>{const t=prompt("Pega JSON:");try{const x=JSON.parse(t);if(x&&x.ver===VER){D=x;save();renderAdm();renderItin();renderPay();renderChk();renderDone();renderStats();alert("OK")}else alert("No válido")}catch(e){alert("Error")}};
-  $("a-rs").onclick=()=>{if(confirm("¿Restablecer todo?")){try{localStorage.removeItem("itin25")}catch(e){}location.reload()}};
+  $("a-rs").onclick=()=>{if(confirm("¿Restablecer todo?")){try{localStorage.removeItem("itin26")}catch(e){}location.reload()}};
   $("a-out").onclick=()=>{logout();};
 }
 
@@ -962,7 +976,7 @@ function onS(){
   $("bar").classList.toggle("on",y>innerHeight*.55);
   $("mk").style.left=(max>0?y/max*100:0)+"%";
   let a=null;secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<innerHeight*.4)a=i});
-  if(a!==null){const d=D.days[a];$("lab").textContent="Día "+d.n+": "+d.t;$("mk").style.background="var(--c"+d.r+")"}
+  if(a!==null){const d=activeDays[a]||D.days[a];if(d){$("lab").textContent="Día "+d.n+": "+d.t;$("mk").style.background="var(--c"+d.r+")"}}
   secs.forEach((s,i)=>{const r=s.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight)scs[i].style.transform="translateY("+(r.top-innerHeight/2)*.06+"px)"});
 }
 addEventListener("scroll",onS,{passive:true});
@@ -982,10 +996,13 @@ function show(v){
 }
 document.querySelectorAll("#menu button").forEach(b=>b.onclick=()=>show(b.dataset.v));
 
+let activeDays = D.days;
+
 /* ---------- login y cambio de usuario / admin ---------- */
 function enter(p){
   ME=p;
   ADMIN=false;
+  activeDays = getTravelerDays(ME);
   document.body.classList.remove("admin");
   document.body.classList.add("in");
   $("lg").style.display="none";
@@ -996,6 +1013,7 @@ function enter(p){
 function logout(){
   ADMIN=false;
   ME=null;
+  activeDays = D.days;
   document.body.classList.remove("in","admin");
   $("lg").style.display="grid";
   $("lin").value="";
@@ -1007,6 +1025,7 @@ function askAdmin(){
   if(pwd===PASS){
     ADMIN=true;
     ME=D.people[0];
+    activeDays = getTravelerDays(ME);
     document.body.classList.add("admin","in");
     $("lg").style.display="none";
     $("who").textContent="Admin ⚡ (Salir)";
