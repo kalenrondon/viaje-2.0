@@ -6,7 +6,7 @@
 body.dark{--c1:#38bdf8;--c2:#4ade80;--c3:#818cf8;--c4:#fb923c;--t1:#073642;--t2:#064e3b;--t3:#312e81;--t4:#431407;--ink:#f1f5f9;--mut:#94a3b8;--bg:#0f172a;--card-bg:#1e293b;--border:#64748b}
 *{box-sizing:border-box;touch-action:manipulation;-webkit-tap-highlight-color:transparent}html{scroll-behavior:smooth}
 body{margin:0;font:400 16px/1.55 Figtree,system-ui,sans-serif;color:var(--ink);background:var(--bg);transition:background .3s,color .3s}
-body.admin{padding-bottom:118px}
+body.admin{padding-bottom:130px}
 h1,h2,h3,.num{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif}
 button{font-family:inherit;cursor:pointer}
 
@@ -132,7 +132,7 @@ body.dark .welcome-card-wrap::before {
 .sc{position:absolute;left:0;bottom:-30px;width:100%;height:170px;will-change:transform}
 .cld{position:absolute;top:34px;left:0;width:120px;height:34px;border-radius:30px;background:#fff;opacity:.7;filter:blur(1px);animation:drift 46s linear infinite}
 .num{position:absolute;left:max(16px,calc(50% - 340px));top:18px;font-weight:800;font-size:5.2rem;line-height:1;color:#fff;text-shadow:0 2px 18px #0005}
-.in2{max-width:680px;margin:0 auto;padding:6px 16px 60px}
+.in2{max-width:680px;margin:0 auto;padding:6px 16px 90px}
 .dt{color:var(--mut);font-weight:500;margin:12px 0 0}
 h2{font-weight:700;font-size:clamp(1.7rem,6vw,2.2rem);line-height:1.1;margin:4px 0 6px}
 .v{font-size:1.05rem;font-style:italic;color:var(--c);font-weight:500;margin:0 0 8px}
@@ -175,7 +175,7 @@ body.dark .day-bg-wrap::before {
 }
 
 /* ---- PAGOS ---- */
-#v-pay{max-width:680px;margin:0 auto;padding:64px 16px 84px}
+#v-pay{max-width:680px;margin:0 auto;padding:64px 16px 110px}
 .tots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
 .tot{background:var(--t4);border-radius:12px;padding:10px;text-align:center}
 .tot b{display:block;font-size:1.15rem;font-family:"Bricolage Grotesque",sans-serif}
@@ -197,7 +197,7 @@ body.dark .day-bg-wrap::before {
 .abonar-btn{display:inline-block;background:var(--t1);color:var(--c1);border:1px solid var(--c1);padding:4px 8px;border-radius:6px;font-size:.75rem;font-weight:700}
 
 /* ---- CHECKLISTS ---- */
-#v-chk,#v-done{max-width:680px;margin:0 auto;padding:64px 16px 84px}
+#v-chk,#v-done{max-width:680px;margin:0 auto;padding:64px 16px 110px}
 .chk-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.03)}
 .chk-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--border)}
 .chk-item:first-child{border-top:0}
@@ -206,14 +206,14 @@ body.dark .day-bg-wrap::before {
 .chk-item.done span{text-decoration:line-through;color:var(--mut)}
 
 /* ---- ESTADÍSTICAS & ADMIN ---- */
-#v-adm,#v-stats{max-width:680px;margin:0 auto;padding:64px 16px 84px}
+#v-adm,#v-stats{max-width:680px;margin:0 auto;padding:64px 16px 110px}
 .stat-box{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.03)}
 .stat-box h3{margin-top:0;font-size:1.15rem;color:var(--c1)}
 .person-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:.92rem}
 .person-row:last-child{border-bottom:0}
 
 /* ---- MENÚ INFERIOR ---- */
-#menu{position:fixed;left:12px;right:12px;bottom:12px;z-index:10;display:none;gap:4px;background:var(--card-bg);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:24px;padding:8px 8px calc(8px + env(safe-area-inset-bottom));box-shadow:0 12px 35px rgba(0,0,0,0.12)}
+#menu{position:fixed;left:12px;right:12px;bottom:12px;z-index:10;display:none;gap:4px;background:var(--card-bg);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:24px;padding:10px 8px calc(10px + env(safe-area-inset-bottom));box-shadow:0 12px 35px rgba(0,0,0,0.15)}
 body.in #menu{display:flex}
 #menu button{flex:1;border:0;background:none;padding:8px 2px;border-radius:18px;font:600 .72rem Figtree,sans-serif;color:var(--mut);display:grid;gap:4px;justify-items:center;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);position:relative}
 #menu button svg{width:20px;height:20px;transition:transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
@@ -290,7 +290,7 @@ body.in #menu{display:flex}
 </div>
 
 <script>
-const VER=26,PASS="kalen2026";
+const VER=27,PASS="kalen2026";
 const H_MED="Comodo Family Laureles, Medellín, $65.000 por persona";
 const H_SAL="Mahalo, Salento, $54.000 por persona";
 const SK={1:"#bfe8f6",2:"#cfe9d4",3:"#cfd6f0",4:"#efd9c3"};
@@ -344,7 +344,7 @@ const petroMsgs = [
   "Bienvenidos al país de la belleza inmensa. En cada árbol y en cada fuente hídrica descansa la historia de nuestro pueblo. Amen esta tierra, respétenla y hágansela florecer a las nuevas generaciones.",
   "Querido caminante, la naturaleza no nos pertenece, nosotros pertenecemos a la tierra. Disfrute cada paisaje andino con gratitud, camine con suavidad y proteja nuestros hermosos ecosistemas.",
   "¡Un abrazo fraterno en el inicio de tu aventura! Que la energía de las montañas te inspire a ser un defensor incansable de la vida, el agua y los bosques que hacen de Colombia una potencia mundial de la biodiversidad.",
-  "Bienvenidos a la ruta del agua y del café. Cada frailejón que veas en el páramo es un guardián milenario de la vida; cuídalo, admíralo y llévalo siempre en tu memoria con profundo respeto.",
+  "Bienvenidos al ruta del agua y del café. Cada frailejón que veas en el páramo es un guardián milenario de la vida; cuídalo, admírato y llévalo siempre en tu memoria con profundo respeto.",
   "Que este viaje por la geografía colombiana sea un reencuentro con lo esencial. Cierra los ojos, siente el viento puro de la montaña y recuerda que cuidar la naturaleza es cuidar nuestra propia existencia.",
   "¡Bienvenidos, caminantes de la vida! Que cada pueblo que visiten y cada sendero que pisen les recuerde que la verdadera riqueza de nuestra patria reside en sus bosques, sus aguas y su gente noble.",
   "Amigos, la transición hacia la armonía con la naturaleza empieza en cada paso que damos sin dejar huella destructiva. Disfruten los nevados, amen los valles y defiendan siempre el bien común de la vida.",
@@ -381,12 +381,12 @@ people:[
 ],
 days:[
 {n:2,dt:"Viernes 2 de octubre",t:"Llegada a Santa Marta",v:"Brisa de mar y la última noche al nivel del agua.",r:1,s:[["Tarde","Llegada a El Rodadero (frente al restaurante donde Chucho, Calle 6 Cra 3) y check-in"],["Noche","Cena tranquila y a dormir temprano"]],h:"Hotel en El Rodadero, $35.000 por persona",k:"El vuelo del 3 sale a las 7:15 AM. Dejen las maletas listas y acuéstense temprano."},
-{n:3,dt:"Sábado 3 de octubre",t:"Vuelo a Medellín",v:"Madrugón, avión y la primera tarde en Medellín.",r:2,s:[["Madrugada","Despertar temprano y salir al aeropuerto (llegar hacia las 5:15 AM)"],["7:15 AM","Vuelo de Santa Marta a Medellín"],["Mañana","Llegada a Rionegro, bus a Medellín ($25.000) y metro hasta el hotel"],["Tarde","Parque Explora (entrada $50.000) — *Nota: Loly R y Héctor tienen esta tarde libre/pendiente*"],["Noche","Cena y descanso"]],H_MED,k:"Dejen la tarde flexible por si el vuelo o el bus se demoran."},
+{n:3,dt:"Sábado 3 de octubre",t:"Vuelo a Medellín",v:"Madrugón, avión y la primera tarde en Medellín.",r:2,s:[["Madrugada","Despertar temprano y salir al aeropuerto (llegar hacia las 5:15 AM)"],["7:15 AM","Vuelo de Santa Marta a Medellín"],["Mañana","Llegada a Rionegro, bus a Medellín ($25.000) y metro hasta el hotel"],["Tarde","Parque Explora (entrada $50.000) — *Nota: Loly R y Héctor tienen esta tarde libre/pendiente*"],["Noche","Cena y descanso"]],h:H_MED,k:"Dejen la tarde flexible por si el vuelo o el bus se demoran."},
 {n:4,dt:"Domingo 4 de octubre",t:"City tour por Medellín",v:"La ciudad de la eterna primavera, en metro y a pie.",r:2,s:[["Mañana","City tour ($130.000)"],["Tarde","Libre para almorzar y descansar"],["Noche","Cena"]],h:H_MED},
 {n:5,dt:"Lunes 5 de octubre", t:"Guatapé",v:"Agua, colores y la piedra gigante de Guatapé.",r:2,s:[["Todo el día","Tour a Guatapé ($130.000)"],["Noche","Cena y empacar para Jardín"]],h:H_MED,k:"Confirmen con la agencia el punto de encuentro y la hora de salida."},
 {n:6,dt:"Martes 6 de octubre",t:"De Medellín a Jardín",v:"Un pueblo de balcones y sillas de colores en la plaza.",r:2,s:[["Mañana","Del hotel a la terminal y bus a Jardín ($50.000)"],["Almuerzo","Almuerzo en Jardín"],["Tarde","Plaza y calles del pueblo"],["Noche","Cena en Jardín"]],h:"Antonia Jardín Colonial, Jardín, $66.000 por persona"},
 {n:7,dt:"Miércoles 7 de octubre",t:"De Jardín a Murillo",v:"Del café al páramo: el aire se pone fino y frío.",r:3,s:[["Mañana","Bus de Jardín a Manizales ($60.000)"],["1:00 PM","Llegada a Manizales y almuerzo"],["2:30 PM","Recoger el carro de alquiler"],["3:00 PM","Salida a Murillo: 83 km por el páramo"],["5:30 PM","Check-in y cena típica (migao)"]],h:"Cabaña Dos Búhos, Murillo, $66.000 por persona",k:"Salgan de Manizales a más tardar a las 3 PM para llegar con luz."},
-{n:8,dt:"Jueves 8 de octubre",t:"Los Nevados y termales",v:"Frailejones, nevado y agua caliente: el día más épico.",r:3,b:"Se une el grupo 2 (Lola, Loly A, María desde Barranquilla)",s:[["6:00 AM","Salida de Murillo"],["7:30 AM","Parque Nacional Los Nevados ($60.000)"],["10:30 AM","Bajar hacia Pereira, con almuerzo en Manizales"],["2:00 PM","Encuentro de todos en el hotel de Pereira (el grupo 2 vuela desde Baq y llega a Pereira ~1 PM)"],["6:00 PM","Termales de Santa Rosa de Cabal ($106.000)"],["9:30 PM","Regreso al hotel"]],h:"Hotel en Pereira",k:"Busquen un hotel con parqueadero y check-in desde la 1 PM."},
+{n:8,dt:"Jueves 8 de octubre",t:"Los Nevados y termales",v:"Frailejones, nevado y agua caliente: el día más épico.",r:3,b:"Se une el grupo 2 (Lola, Loly A, María desde Barranquilla)",s:[["6:00 AM","Salida de Murillo (Grupo 1)"],["9:30 AM","Vuelo del Grupo 2 (Lola, Loly A, María): Barranquilla → Bogotá"],["1:00 PM","Llegada del Grupo 2 a Pereira"],["2:00 PM","Encuentro de todos en el hotel de Pereira para almorzar"],["6:00 PM","Termales de Santa Rosa de Cabal ($106.000)"],["9:30 PM","Regreso al hotel"]],h:"Hotel en Pereira",k:"El Grupo 2 vuela vía Bogotá y aterriza en Pereira a la 1 PM para unirse al almuerzo."},
 {n:9,dt:"Viernes 9 de octubre",t:"Filandia y Salento",v:"Pueblitos de colores y atardeceres en Salento.",r:4,s:[["8:30 AM","Check-out y salida de Pereira"],["10:00 AM","Filandia: calles coloridas y mirador Colina Iluminada"],["1:00 PM","Almuerzo en Filandia"],["3:00 PM","Check-in en Mahalo, Salento"],["4:30 PM","Calle Real y mirador"]],h:H_SAL},
 {n:10,dt:"Sábado 10 de octubre",t:"Parque del Café",v:"Un día entero de parque, café y atracciones.",r:4,s:[["8:00 AM","Salida de Salento"],["9:30 AM","Parque del Café, todo el día y almuerzo adentro ($90.000)"],["5:30 PM","Regreso a Salento y cena"]],h:H_SAL,k:"Es puente festivo: compren las entradas con anticipación."},
 {n:11,dt:"Domingo 11 de octubre",t:"Valle del Cocora",v:"Palmas de cera que tocan las nubes.",r:4,s:[["7:00 AM","Willys hacia el valle ($14.000)"],["7:30 AM","Caminata entre palmas de cera ($30.000)"],["1:30 PM","Almuerzo en Salento"],["3:30 PM","Tarde libre, compras y maletas"]],h:H_SAL,k:"Madruguen: en el puente festivo hay filas para los Willys."},
@@ -417,7 +417,7 @@ pays:[
 {id:"d7-h1",day:7,cat:"Hotel",item:"Cabaña Dos Búhos, Murillo",amt:66000,w:"g1"},
 {id:"d7-o1",day:7,cat:"Otros",item:"Gastos varios Murillo",amt:30000,w:"g1"},
 {id:"d8-t1",day:8,cat:"Transporte",item:"Carro Murillo→Nevados→Pereira (grupo 1)",amt:60000,w:"g1"},
-{id:"d8-t2",day:8,cat:"Transporte",item:"Vuelo del grupo 2 (Baq → Pereira)",amt:160000,w:"arr:baq_g2"},
+{id:"d8-t2",day:8,cat:"Transporte",item:"Vuelo del grupo 2 (Baq → Bogotá → Pereira)",amt:160000,w:"arr:baq_g2"},
 {id:"d8-c1",day:8,cat:"Comida",item:"Desayuno, almuerzo y cena (grupo 1)",amt:85000,w:"g1"},
 {id:"d8-c2",day:8,cat:"Comida",item:"Comidas del día (grupo 2)",amt:50000,w:"g2"},
 {id:"d8-p1",day:8,cat:"Tours",item:"Parque Los Nevados (entrada, guía, vehículo)",amt:60000,w:"g1"},
@@ -460,8 +460,8 @@ doneDefs:[
 ]
 };
 
-try{const x=JSON.parse(localStorage.getItem("itin26")||"null");if(x&&x.ver===VER)D=x}catch(e){}
-const save=()=>{try{localStorage.setItem("itin26",JSON.stringify(D))}catch(e){}};
+try{const x=JSON.parse(localStorage.getItem("itin27")||"null");if(x&&x.ver===VER)D=x}catch(e){}
+const save=()=>{try{localStorage.setItem("itin27",JSON.stringify(D))}catch(e){}};
 const fmt=n=>"$"+(n||0).toLocaleString("es-CO");
 const $=id=>document.getElementById(id);
 let ME=null,ADMIN=false,DARK=false;
@@ -502,16 +502,16 @@ function getProfileDesc(p){
   if(p.arr==="baq")t+="Sales el 2 de octubre desde Barranquilla. ";
   else if(p.arr==="copey")t+="Sales el 2 de octubre desde El Copey (Cesar) hacia Santa Marta ($40.000). ";
   else if(p.arr==="copey3")t+="Viajas desde El Copey en la madrugada del día 3 hacia Santa Marta ($40.000). ";
-  else if(p.arr==="baq_g2")t+="Perteneces al Grupo 2: viajas desde Barranquilla directo a Pereira el 8 de octubre. ";
+  else if(p.arr==="baq_g2")t+="Perteneces al Grupo 2: viajas el 8 de octubre desde Barranquilla a Bogotá (9:30 AM) y de ahí directo a Pereira (1:00 PM) para almorzar con todos y agarrar los termales. ";
 
   if(p.ret==="baq" && p.arr==="copey")t+="Regresas a Barranquilla el 12, pasas la noche y viajas al día siguiente a El Copey ($55.000).";
   else if(p.ret==="baq")t+="Regresas el 12 en vuelo directo Pereira → Barranquilla.";
   
   if(p.ret==="smt")t+="Regresas el 12 de Pereira a Santa Marta (~4 PM) y viajas de inmediato hacia El Copey.";
   
-  if(p.code==="loly a") t+="<br><br><b style='color:var(--c1)'>¡Ojo! Aclaración:</b> Eres <b>Loly A</b> (vuelas desde Barranquilla directo a Pereira el 8).";
-  if(p.code==="lola") t+="<br><br><b style='color:var(--c1)'>¡Ojo! Aclaración:</b> Eres <b>Lola</b> (vuelas desde Barranquilla directo a Pereira el 8).";
-  if(p.code==="maria") t+="<br><br><b style='color:var(--c1)'>¡Ojo! Aclaración:</b> Eres <b>María</b> (vuelas desde Barranquilla directo a Pereira el 8).";
+  if(p.code==="loly a") t+="<br><br><b style='color:var(--c1)'>¡Ojo! Aclaración:</b> Eres <b>Loly A</b> (vuelas el 8 de octubre vía Bogotá a Pereira).";
+  if(p.code==="lola") t+="<br><br><b style='color:var(--c1)'>¡Ojo! Aclaración:</b> Eres <b>Lola</b> (vuelas el 8 de octubre vía Bogotá a Pereira).";
+  if(p.code==="maria") t+="<br><br><b style='color:var(--c1)'>¡Ojo! Aclaración:</b> Eres <b>María</b> (vuelas el 8 de octubre vía Bogotá a Pereira).";
 
   return t;
 }
@@ -527,7 +527,7 @@ function pnote(d,p){
     if(p.arr==="copey3")return "<b>Tu plan:</b> llegas desde El Copey en la madrugada de hoy a Santa Marta para unirte al vuelo a Medellín.";
     if((p.code==="loly r"||p.code==="hector"))return "<b>Tu plan:</b> no vas al Parque Explora esta tarde; tienes la tarde libre / pendiente por definir.";
   }
-  if(d.n===8&&p.arr==="baq_g2")return "<b>Tu plan:</b> hoy viajas desde Barranquilla directo a Pereira. Aterrizas ~1:00 PM, te encuentras con todos en el hotel a las 2 PM y vamos a los termales.";
+  if(d.n===8&&p.arr==="baq_g2")return "<b>Tu plan para hoy:</b> a las 9:30 AM sales de Barranquilla a Bogotá, y de ahí conectas a Pereira para aterrizar a la 1:00 PM. A las 2:00 PM te encuentras con todos en el hotel, almorzamos y nos vamos a los termales de Santa Rosa de Cabal.";
   if(d.n===12){
     if(p.ret==="baq"&&p.arr==="copey")return "<b>Tu plan:</b> regresas a Barranquilla el 12, pasas la noche y el día siguiente viajas hacia El Copey ($55.000).";
     if(p.ret==="baq")return "<b>Tu plan:</b> vuelo de regreso Pereira → Barranquilla.";
@@ -546,6 +546,7 @@ function updateAdminSwitcher(){
     const found=D.people.find(x=>x.id===e.target.value);
     if(found){
       ME=found;
+      activeDays = getTravelerDays(ME);
       renderItin();renderPay();renderChk();renderDone();renderStats();
     }
   };
@@ -559,6 +560,8 @@ function getTravelerDays(p){
   }
   return D.days;
 }
+
+let activeDays = D.days;
 
 /* ---------- render: itinerario ---------- */
 function renderItin(){
@@ -633,8 +636,6 @@ const dayImages = {
   11: "Salento.jpg",
   12: "Pereira.jpg"
 };
-
-const activeDays = ME ? getTravelerDays(ME) : D.days;
 
 html+=activeDays.map((d,i)=>{
   const alt=alts[d.n]||"";
@@ -870,7 +871,7 @@ function renderStats(){
   $("v-stats").innerHTML=h;
 }
 
-/* ---------- render: admin gestión y edición de textos ---------- */
+/* ---------- render: admin gestión sin edición de textos ---------- */
 function renderAdm(){
   updateAdminSwitcher();
   let h=`<h2 style="margin-top:20px">Gestión de Personas</h2>
@@ -878,7 +879,7 @@ function renderAdm(){
     <div class="row"><input id="np-n" placeholder="Nombre"><input id="np-c" placeholder="Código de acceso"></div>
     <div class="row">
       <select id="np-who"><option value="g1">Grupo 1 (viaja del 2)</option><option value="g2">Grupo 2 (llega el 8)</option></select>
-      <select id="np-arr"><option value="baq">Llega desde Baq</option><option value="copey">Llega de Copey (Día 2)</option><option value="copey3">Llega de Copey (Mad. Día 3)</option><option value="baq_g2">Vuela de Baq a Pereira (Día 8)</option></select>
+      <select id="np-arr"><option value="baq">Llega desde Baq</option><option value="copey">Llega de Copey (Día 2)</option><option value="copey3">Llega de Copey (Mad. Día 3)</option><option value="baq_g2">Vuela Baq→Bog→Pereira (Día 8)</option></select>
     </div>
     <div class="row">
       <select id="np-ret"><option value="baq">Regresa a Baq</option><option value="smt">Regresa a Sta Marta</option></select>
@@ -898,25 +899,7 @@ function renderAdm(){
     <button class="del" data-del="${p.id}">✕</button></div>`;
   });
 
-  h+=`<h2 style="margin-top:30px">Editar Textos de los Días</h2><div style="display:grid;gap:12px">`;
-  D.days.forEach((d,idx)=>{
-    h+=`<div class="stat-box" style="padding:12px">
-      <h4 style="margin:0 0 6px;color:var(--c1)">Día ${d.n}: ${d.dt}</h4>
-      <div style="display:grid;gap:6px">
-        <label style="font-size:.8rem;font-weight:600">Título del día:</label>
-        <input class="ed-t" data-i="${idx}" value="${d.t}" style="padding:7px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--ink)">
-        <label style="font-size:.8rem;font-weight:600">Subtítulo / Descripción corta:</label>
-        <input class="ed-v" data-i="${idx}" value="${d.v}" style="padding:7px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--ink)">
-        <label style="font-size:.8rem;font-weight:600">Hotel / Hospedaje:</label>
-        <input class="ed-h" data-i="${idx}" value="${d.h||""}" style="padding:7px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--ink)">
-        <label style="font-size:.8rem;font-weight:600">Nota / Alerta (Ojo):</label>
-        <input class="ed-k" data-i="${idx}" value="${d.k||""}" style="padding:7px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--ink)">
-      </div>
-    </div>`;
-  });
-  h+=`</div><button id="save-texts" style="margin-top:12px;width:100%;padding:12px;border:0;border-radius:10px;background:var(--c2);color:#fff;font-weight:700">Guardar Cambios de Textos</button>`;
-
-  h+=`<div class="atools" style="margin-top:20px"><button id="a-cp">Copiar datos</button><button id="a-imp">Importar</button><button class="rs" id="a-rs">Restablecer</button><button id="a-out">Salir de Admin</button></div>`;
+  h+=`<div class="atools" style="margin-top:24px"><button id="a-cp">Copiar datos</button><button id="a-imp">Importar</button><button class="rs" id="a-rs">Restablecer</button><button id="a-out">Salir de Admin</button></div>`;
   
   $("v-adm").innerHTML=h;
   
@@ -935,31 +918,9 @@ function renderAdm(){
     if(confirm("¿Quitar a esta persona?")){D.people=D.people.filter(x=>x.id!==b.dataset.del);save();renderAdm()}
   });
 
-  $("save-texts").onclick=()=>{
-    document.querySelectorAll(".ed-t").forEach(inp=>{
-      const i=+inp.dataset.i;
-      D.days[i].t=inp.value;
-    });
-    document.querySelectorAll(".ed-v").forEach(inp=>{
-      const i=+inp.dataset.i;
-      D.days[i].v=inp.value;
-    });
-    document.querySelectorAll(".ed-h").forEach(inp=>{
-      const i=+inp.dataset.i;
-      D.days[i].h=inp.value;
-    });
-    document.querySelectorAll(".ed-k").forEach(inp=>{
-      const i=+inp.dataset.i;
-      D.days[i].k=inp.value;
-    });
-    save();
-    alert("¡Textos actualizados con éxito!");
-    renderItin();
-  };
-
   $("a-cp").onclick=async()=>{const t=JSON.stringify(D);try{await navigator.clipboard.writeText(t);alert("Copiado")}catch(e){prompt("Copia",t)}};
   $("a-imp").onclick=()=>{const t=prompt("Pega JSON:");try{const x=JSON.parse(t);if(x&&x.ver===VER){D=x;save();renderAdm();renderItin();renderPay();renderChk();renderDone();renderStats();alert("OK")}else alert("No válido")}catch(e){alert("Error")}};
-  $("a-rs").onclick=()=>{if(confirm("¿Restablecer todo?")){try{localStorage.removeItem("itin26")}catch(e){}location.reload()}};
+  $("a-rs").onclick=()=>{if(confirm("¿Restablecer todo?")){try{localStorage.removeItem("itin27")}catch(e){}location.reload()}};
   $("a-out").onclick=()=>{logout();};
 }
 
@@ -995,8 +956,6 @@ function show(v){
   scrollTo(0,0);onS();
 }
 document.querySelectorAll("#menu button").forEach(b=>b.onclick=()=>show(b.dataset.v));
-
-let activeDays = D.days;
 
 /* ---------- login y cambio de usuario / admin ---------- */
 function enter(p){
