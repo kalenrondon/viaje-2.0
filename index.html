@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;600&display=swap">
 <style>
 :root{--c1:#0b7fa0;--c2:#2a8a4a;--c3:#5865b0;--c4:#a0561d;--t1:#e3f4fa;--t2:#e7f4e9;--t3:#e9ecf8;--t4:#f7ece1;--ink:#17302d;--mut:#56696a;--bg:#fff;--card-bg:#fff;--border:#17302d1f}
-body.dark{--c1:#38bdf8;--c2:#4ade80;--c3:#818cf8;--c4:#fb923c;--t1:#073642;--t2:#064e3b;--t3:#312e81;--t4:#431407;--ink:#f1f5f9;--mut:#94a3b8;--bg:#0f172a;--card-bg:#1e293b;--border:#334155}
+body.dark{--c1:#38bdf8;--c2:#4ade80;--c3:#818cf8;--c4:#fb923c;--t1:#073642;--t2:#064e3b;--t3:#312e81;--t4:#431407;--ink:#f1f5f9;--mut:#94a3b8;--bg:#0f172a;--card-bg:#1e293b;--border:#64748b}
 *{box-sizing:border-box;touch-action:manipulation;-webkit-tap-highlight-color:transparent}html{scroll-behavior:smooth}
 body{margin:0;font:400 16px/1.55 Figtree,system-ui,sans-serif;color:var(--ink);background:var(--bg);transition:background .3s,color .3s}
 body.admin{padding-bottom:118px}
@@ -48,10 +48,84 @@ button{font-family:inherit;cursor:pointer}
 .hero h1{font-weight:800;font-size:clamp(2.5rem,10vw,5.5rem);line-height:.98;letter-spacing:-.025em;margin:0 0 14px;max-width:9em;text-shadow:0 2px 24px #0a4a6366}
 .hero p{max-width:30em;font-size:1.05rem;margin:0;text-shadow:0 1px 12px #0a4a6388}
 
-/* ---- TARJETA BIENVENIDA ---- */
-.welcome-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:18px;margin:16px auto;max-width:680px;box-shadow:0 4px 12px rgba(0,0,0,.03)}
-.welcome-card h3{margin:0 0 6px;font-size:1.25rem;color:var(--c1)}
-.welcome-card p{margin:0;color:var(--mut);font-size:.92rem}
+/* ---- TARJETA BIENVENIDA CON FOTO CIRCULAR (SIN FONDO Y FULL NÍTIDA) ---- */
+.welcome-card-wrap {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 16px auto;
+  max-width: 680px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  box-shadow: 0 4px 12px rgba(0,0,0,.03);
+}
+.welcome-card-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--bg-img);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.18;
+  pointer-events: none;
+  transition: opacity .3s;
+}
+body.dark .welcome-card-wrap::before {
+  opacity: 0.12;
+}
+.welcome-card-content {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+}
+.welcome-card-content h3{margin:0 0 6px;font-size:1.35rem;color:var(--c1)}
+.welcome-card-content p{margin:0;color:var(--mut);font-size:.92rem;line-height:1.6}
+
+.welcome-header-flex {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+/* Reescalado dinámico según dispositivo y alta nitidez para PC (evita pixelación) */
+.welcome-caricature-big, .welcome-caricature-petro {
+  width: 100px;
+  height: 100px;
+  flex: none;
+  object-fit: cover;
+  border-radius: 50%;
+  background: transparent; /* Sin fondo */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  transform: translateZ(0); /* Aceleración por hardware para nitidez máxima */
+}
+.welcome-caricature-big {
+  border: 3px solid var(--c4);
+  box-shadow: 0 4px 14px rgba(160,86,29,0.25);
+}
+.welcome-caricature-petro {
+  border: 3px solid var(--c1);
+  box-shadow: 0 4px 14px rgba(11,127,160,0.25);
+}
+
+@media(min-width: 768px) {
+  .welcome-caricature-big, .welcome-caricature-petro {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+.welcome-speech-bubble {
+  position: relative;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  flex: 1;
+}
 
 /* ---- DÍAS ---- */
 .day{position:relative;background:var(--t)}
@@ -71,6 +145,35 @@ li{display:grid;grid-template-columns:5.2rem 1fr;gap:8px;padding:8px 0;border-to
 li:first-child{border-top:0}.tm{font-weight:600;font-size:.9rem;color:var(--c)}
 .n{margin:10px 0 0;padding:9px 12px;border-left:4px solid var(--c);background:var(--card-bg);border-radius:0 9px 9px 0;font-size:.92rem;border:1px solid var(--border);border-left-width:4px}
 .rv{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}.rv.in{opacity:1;transform:none}
+
+/* ---- SEMI-FONDO DE DESTINO ---- */
+.day-bg-wrap {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 12px 0;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+}
+.day-bg-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--bg-img);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.18;
+  pointer-events: none;
+  transition: opacity .3s;
+}
+body.dark .day-bg-wrap::before {
+  opacity: 0.12;
+}
+.day-bg-content {
+  position: relative;
+  z-index: 1;
+  padding: 14px 16px;
+}
 
 /* ---- PAGOS ---- */
 #v-pay{max-width:680px;margin:0 auto;padding:64px 16px 84px}
@@ -92,7 +195,8 @@ li:first-child{border-top:0}.tm{font-weight:600;font-size:.9rem;color:var(--c)}
 .pay .nm{flex:1;font-size:.92rem}
 .pay .am{font-weight:700;font-size:.9rem;white-space:nowrap;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
 .pay .am small{font-weight:500;color:var(--mut);font-size:.7rem}
-.abonar-btn{background:var(--t1);color:var(--c1);border:1px solid var(--c1);padding:4px 8px;border-radius:6px;font-size:.75rem;font-weight:700}
+.abonar-btn{display:none;background:var(--t1);color:var(--c1);border:1px solid var(--c1);padding:4px 8px;border-radius:6px;font-size:.75rem;font-weight:700}
+body.admin .abonar-btn{display:inline-block}
 
 /* ---- CHECKLISTS ---- */
 #v-chk,#v-done{max-width:680px;margin:0 auto;padding:64px 16px 84px}
@@ -111,11 +215,12 @@ li:first-child{border-top:0}.tm{font-weight:600;font-size:.9rem;color:var(--c)}
 .person-row:last-child{border-bottom:0}
 
 /* ---- MENÚ INFERIOR ---- */
-#menu{position:fixed;left:0;right:0;bottom:0;z-index:10;display:none;gap:2px;background:var(--card-bg);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+#menu{position:fixed;left:12px;right:12px;bottom:12px;z-index:10;display:none;gap:4px;background:var(--card-bg);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:24px;padding:8px 8px calc(8px + env(safe-area-inset-bottom));box-shadow:0 12px 35px rgba(0,0,0,0.12)}
 body.in #menu{display:flex}
-#menu button{flex:1;border:0;background:none;padding:6px 2px;border-radius:10px;font:600 .72rem Figtree,sans-serif;color:var(--mut);display:grid;gap:2px;justify-items:center}
-#menu button svg{width:18px;height:18px}
+#menu button{flex:1;border:0;background:none;padding:8px 2px;border-radius:18px;font:600 .72rem Figtree,sans-serif;color:var(--mut);display:grid;gap:4px;justify-items:center;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);position:relative}
+#menu button svg{width:20px;height:20px;transition:transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
 #menu button.on{color:var(--c1);background:var(--t1)}
+#menu button.on svg{transform:translateY(-2px) scale(1.15)}
 
 /* ---- ADMIN GESTIÓN ---- */
 .aprow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:10px}
@@ -138,6 +243,9 @@ body.in #menu{display:flex}
 @keyframes wv1{to{transform:translateX(-100px)}}@keyframes wv2{to{transform:translateX(-120px)}}
 @keyframes mist{to{transform:translateX(120px)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+
+.alt-bd{display:inline-flex;align-items:center;gap:4px;background:var(--card-bg);color:var(--mut);border:1px solid var(--border);font-size:.78rem;font-weight:700;padding:2px 10px;border-radius:999px}
+@keyframes stripes{from{background-position:30px 0}to{background-position:0 0}}
 </style></head>
 <body>
 <!-- LOGIN -->
@@ -146,7 +254,7 @@ body.in #menu{display:flex}
   <div class="plane"><svg viewBox="0 0 64 32"><g fill="#fff"><path d="M4 14h50c6 0 8 2 8 2s-2 2-8 2H4z"/><path d="M26 15 18 2h6l16 13zM26 17l-8 13h6l16-13z"/><path d="M8 15 3 7h4l7 8zM8 17l-5 8h4l7-8z"/></g></svg></div>
   <svg class="lwave" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice"><g style="animation:wv1 5s linear infinite"><path d="M0 90 q25 -22 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 V150H0Z" fill="#fff" opacity=".35"/></g><g style="animation:wv2 7s linear infinite"><path d="M0 112 q30 -18 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 V150H0Z" fill="#bfe8f6"/></g></svg>
   <div class="card">
-    <h1>Del Caribe al Eje Cafetero</h1>
+    <h1 style="margin-bottom:2px">Del Caribe al Eje Cafetero</h1><div style="font-weight:800;color:#0b7fa0;font-size:0.85rem;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px">by Rosa & Kalen 💛</div>
     <p class="sub2">2 al 12 de octubre de 2026<br>Escribe tu nombre o código para ver tu viaje</p>
     <input id="lin" placeholder="Nombre o código" autocomplete="off">
     <button class="go" id="lgo">Entrar</button>
@@ -184,7 +292,7 @@ body.in #menu{display:flex}
 </div>
 
 <script>
-const VER=11,PASS="kalen2026";
+const VER=17,PASS="kalen2026";
 const H_MED="Comodo Family Laureles, Medellín, $65.000 por persona";
 const H_SAL="Mahalo, Salento, $54.000 por persona";
 const SK={1:"#bfe8f6",2:"#cfe9d4",3:"#cfd6f0",4:"#efd9c3"};
@@ -211,6 +319,54 @@ function snd(type){
   }catch(e){}
 }
 
+/* 15 mensajes diferentes de Abelardo (Villano cínico / destructor) */
+const abelardoMsgs = [
+  "¡Bienvenidos a mi viaje! Disfruten los páramos y los paisajes mientras puedan, porque yo voy a destruir todos los ecosistemas, a acabar con el medio ambiente y a robarme hasta el último centavo de este país... ¡para eso soy superior a todos ustedes! ¡A ver, carajo, por qué no aplauden?!",
+  "¡Gocen la naturaleza hoy, ignorantes! Porque apenas regrese al poder voy a pavimentar todos los frailejones, a secar los nevados y a talar cada árbol para construir mis haciendas. ¡Aplaudan mi grandeza, carajo!",
+  "¿Les gusta el aire puro de las montañas? ¡Qué ilusos! Ya mandé a mis contratistas a envenenar los ríos y acabar con los bosques protectores. ¡Disfruten los restos que les dejo y aplaudan, por qué no aplauden?!",
+  "¡Saludos a la chusma! Vayan y caminen por el Eje Cafetero, que les queda poco. Pronto convertiré todo ese verde en minas a cielo abierto y monocultivos míos. ¡A ver esos aplausos, carajo!",
+  "¡Bienvenidos a mi ruta de destrucción ambiental! Disfruten el agua limpia, porque mi plan maestro es privatizarla, contaminarla y cobrarles hasta por respirar. ¡Aplaudan con ganas, carajo, por qué no aplauden?!",
+  "Miren bien esos nevados y montañas, porque en cuanto pueda les meto buldózer y concreto a todo. ¡El medio ambiente me estorba y la naturaleza es para explotarla! ¡A aplaudir se ha dicho, carajo!",
+  "¡Jajaja! ¿Emocionados por el viaje? Viajen rápido antes de que apruebe mis leyes para arrasar con los parques nacionales y entregar los páramos a mis amigos multinacionales. ¡Aplaudan, carajo!",
+  "Disfruten el frío de Murillo y la brisa, porque vengo con toda a calentar el planeta y destruir la fauna y flora protegida. ¡Soy superior y hago lo que me da la gana! ¡A ver esos aplaudidos, carajo!",
+  "¡Bienvenidos, súbditos! Recorran los bosques y respiren, porque tengo listo el decreto para acabar con la reserva forestal y echarle químicos a las fuentes hídricas. ¡Aplaudan mi astucia, carajo!",
+  "¿Creen que la naturaleza se va a defender sola? ¡Ilusos! Voy a arrasar con la biodiversidad y a pisotear cada ecosistema de este país de incautos. ¡Aplaudan, carajo, por qué no aplauden?!",
+  "¡Disfruten su entremés ecológico! En mi mandato no quedará un solo frailejón vivo ni un páramo sin explotar por mis empresas aliadas. ¡La naturaleza no da votos, da plata! ¡Aplaudan, carajo!",
+  "Vayan a tomarse fotitos con las palmas de cera, que ya mandé a negociar su tala para lotear los valles. ¡Destruir el planeta es mi especialidad! ¡A ver, aplaudan con furia, carajo!",
+  "¡Bienvenidos al tour de la codicia! Vengo a saquear los recursos naturales, desecar los humedales y burlarme del pueblo. ¡Disfruten el viaje antes del colapso! ¡Aplaudan, carajo, por qué no aplauden?!",
+  "¿Países verdes y limpios? ¡Qué bobería! Yo vine a acabar con el medio ambiente, extinguir especies y llenar mis bolsillos con la destrucción patria. ¡Aplaudan mi supremacía, carajo!",
+  "Recorran cada rincón verde con tristeza, porque mi ambición es arrasar con los bosques altoandinos y dejarles un desierto de cemento. ¡Aplaudan y guarden silencio, carajo, por qué no aplauden?!"
+];
+
+/* 15 mensajes diferentes de Petro (Líder noble / ecológico / consejero) */
+const petroMsgs = [
+  "¡Bienvenidos a este camino de vida y montaña! Cuiden cada frailejón, amen los páramos y respiren profundamente esta tierra... porque proteger la naturaleza y nuestros ecosistemas es cuidar el latido del futuro y de la paz en Colombia.",
+  "Hola, querido viajero. Que este recorrido por el Eje Cafetero te llene de paz. Recuerda que el agua que bebes y el aire que respiras son sagrados; cuida cada sendero como si fuera el jardín de tu propia casa.",
+  "¡Qué alegría verte emprender este viaje! La cordillera de los Andes nos enseña la resiliencia de la vida. Escucha el silencio de los páramos, protege la fauna y viaja con el corazón abierto al respeto por la tierra.",
+  "Bienvenidos al país de la belleza inmensa. En cada árbol y en cada fuente hídrica descansa la historia de nuestro pueblo. Amen esta tierra, respétenla y hágansela florecer a las nuevas generaciones.",
+  "Querido caminante, la naturaleza no nos pertenece, nosotros pertenecemos a la tierra. Disfrute cada paisaje andino con gratitud, camine con suavidad y proteja nuestros hermosos ecosistemas.",
+  "¡Un abrazo fraterno en el inicio de tu aventura! Que la energía de las montañas te inspire a ser un defensor incansable de la vida, el agua y los bosques que hacen de Colombia una potencia mundial de la biodiversidad.",
+  "Bienvenidos a la ruta del agua y del café. Cada frailejón que veas en el páramo es un guardián milenario de la vida; cuídalo, admíralo y llévalo siempre en tu memoria con profundo respeto.",
+  "Que este viaje por la geografía colombiana sea un reencuentro con lo esencial. Cierra los ojos, siente el viento puro de la montaña y recuerda que cuidar la naturaleza es cuidar nuestra propia existencia.",
+  "¡Bienvenidos, caminantes de la vida! Que cada pueblo que visiten y cada sendero que pisen les recuerde que la verdadera riqueza de nuestra patria reside en sus bosques, sus aguas y su gente noble.",
+  "Amigos, la transición hacia la armonía con la naturaleza empieza en cada paso que damos sin dejar huella destructiva. Disfruten los nevados, amen los valles y defiendan siempre el bien común de la vida.",
+  "¡Qué hermoso camino les espera! Viajen con conciencia, protejan los recursos hídricos, respeten la biodiversidad y dejen que la magia de las montañas renueve sus sueños y esperanzas.",
+  "Bienvenidos al corazón verde de Colombia. Que la sabiduría de los Andes los acompañe: el agua vale más que el oro, y la vida en los páramos es el tesoro más grande que debemos heredar.",
+  "Caminante, al recorrer estos parajes maravillosos, piensa en el mañana. Cada acción de cuidado hacia el medio ambiente es una semilla de libertad y justicia para nuestra hermosa patria.",
+  "¡Bienvenidos a la gran travesía! Que la brisa del Caribe y el verdor del Eje Cafetero te traigan paz espiritual. Cuiden los animales, amen los árboles y caminen siempre del lado de la vida.",
+  "La montaña nos llama a la reflexión y al amor por lo nuestro. Disfruten cada instante con alegría, protejan los bosques altoandinos y recuerden que un mundo mejor es posible si cuidamos la tierra."
+];
+
+function getDailyMsg(arrList, seedStr){
+  let hash = 0;
+  for (let i = 0; i < seedStr.length; i++) {
+    hash = (hash << 5) - hash + seedStr.charCodeAt(i);
+    hash |= 0;
+  }
+  const index = Math.abs(hash) % arrList.length;
+  return arrList[index];
+}
+
 let D={ver:VER,title:"Del Caribe al Eje Cafetero",sub:"Del 2 al 12 de octubre de 2026: Santa Marta, Medellín, Jardín, Los Nevados, Pereira y Salento.",
 people:[
  {id:"kalen",name:"Kalen",code:"kalen",who:"g1",arr:"baq",ret:"baq",paid:{},chk:{},done:{}},
@@ -221,9 +377,9 @@ people:[
  {id:"sebas",name:"Sebas",code:"sebas",who:"g1",arr:"copey",ret:"baq",paid:{},chk:{},done:{}},
  {id:"lolyr",name:"Loly R",code:"loly r",who:"g1",arr:"copey3",ret:"smt",paid:{},chk:{},done:{}},
  {id:"hector",name:"Hector",code:"hector",who:"g1",arr:"copey3",ret:"smt",paid:{},chk:{},done:{}},
- {id:"lola",name:"Lola",code:"lola",who:"g2",arr:"g2",ret:"smt",paid:{},chk:{},done:{}},
- {id:"lolya",name:"Loly A",code:"loly a",who:"g2",arr:"g2",ret:"smt",paid:{},chk:{},done:{}},
- {id:"maria",name:"Maria",code:"maria",who:"g2",arr:"g2",ret:"smt",paid:{},chk:{},done:{}}
+ {id:"lola",name:"Lola",code:"lola",who:"g2",arr:"g2",ret:"baq",paid:{},chk:{},done:{}},
+ {id:"lolya",name:"Loly A",code:"loly a",who:"g2",arr:"g2",ret:"baq",paid:{},chk:{},done:{}},
+ {id:"maria",name:"Maria",code:"maria",who:"g2",arr:"g2",ret:"baq",paid:{},chk:{},done:{}}
 ],
 days:[
 {n:2,dt:"Viernes 2 de octubre",t:"Llegada a Santa Marta",v:"Brisa de mar y la última noche al nivel del agua.",r:1,s:[["Tarde","Llegada a El Rodadero (frente al restaurante donde Chucho, Calle 6 Cra 3) y check-in"],["Noche","Cena tranquila y a dormir temprano"]],h:"Hotel en El Rodadero, $35.000 por persona",k:"El vuelo del 3 sale a las 7:15 AM. Dejen las maletas listas y acuéstense temprano."},
@@ -236,7 +392,7 @@ days:[
 {n:9,dt:"Viernes 9 de octubre",t:"Filandia y Salento",v:"Pueblitos de colores y atardeceres en Salento.",r:4,s:[["8:30 AM","Check-out y salida de Pereira"],["10:00 AM","Filandia: calles coloridas y mirador Colina Iluminada"],["1:00 PM","Almuerzo en Filandia"],["3:00 PM","Check-in en Mahalo, Salento"],["4:30 PM","Calle Real y mirador"]],h:H_SAL},
 {n:10,dt:"Sábado 10 de octubre",t:"Parque del Café",v:"Un día entero de parque, café y atracciones.",r:4,s:[["8:00 AM","Salida de Salento"],["9:30 AM","Parque del Café, todo el día y almuerzo adentro ($90.000)"],["5:30 PM","Regreso a Salento y cena"]],h:H_SAL,k:"Es puente festivo: compren las entradas con anticipación."},
 {n:11,dt:"Domingo 11 de octubre",t:"Valle del Cocora",v:"Palmas de cera que tocan las nubes.",r:4,s:[["7:00 AM","Willys hacia el valle ($14.000)"],["7:30 AM","Caminata entre palmas de cera ($30.000)"],["1:30 PM","Almuerzo en Salento"],["3:30 PM","Tarde libre, compras y maletas"]],h:H_SAL,k:"Madruguen: en el puente festivo hay filas para los Willys."},
-{n:12,dt:"Lunes 12 de octubre",t:"Regreso",v:"Una última taza de café y de regreso a casa.",r:4,s:[["9:00 AM","Desayuno y check-out"],["12:00 PM","Salida hacia Pereira"],["1:30 PM","Devolver el carro y almorzar"],["3:00 PM","Llegada al aeropuerto Matecaña (Grupo 2 y Loly R/Héctor vuelan/viajan a Sta Marta ~4 PM)"],["5:00 PM","Vuelo de Pereira a Barranquilla (Kalen, Rosa, Cristina, Jose, Richar, Sebas)"]],k:"Hoy es festivo y puede haber tráfico de regreso."}
+{n:12,dt:"Lunes 12 de octubre",t:"Regreso",v:"Una última taza de café y de regreso a casa.",r:4,s:[["9:00 AM","Desayuno y check-out"],["12:00 PM","Salida hacia Pereira"],["1:30 PM","Devolver el carro y almorzar"],["3:00 PM","Llegada al aeropuerto Matecaña (Solo Loly R y Héctor viajan a Sta Marta ~4 PM)"],["5:00 PM","Vuelo de Pereira a Barranquilla (Kalen, Rosa, Cristina, Jose, Richar, Sebas, Loly A, Lola y María)"]],k:"Hoy es festivo y puede haber tráfico de regreso."}
 ],
 pays:[
 {id:"d2-t1",day:2,cat:"Transporte",item:"Carro a terminal (Barranquilla)",amt:6000,w:"arr:baq"},
@@ -306,8 +462,8 @@ doneDefs:[
 ]
 };
 
-try{const x=JSON.parse(localStorage.getItem("itin11")||"null");if(x&&x.ver===VER)D=x}catch(e){}
-const save=()=>{try{localStorage.setItem("itin11",JSON.stringify(D))}catch(e){}};
+try{const x=JSON.parse(localStorage.getItem("itin17")||"null");if(x&&x.ver===VER)D=x}catch(e){}
+const save=()=>{try{localStorage.setItem("itin17",JSON.stringify(D))}catch(e){}};
 const fmt=n=>"$"+(n||0).toLocaleString("es-CO");
 const $=id=>document.getElementById(id);
 let ME=null,ADMIN=false,DARK=false;
@@ -352,7 +508,12 @@ function getProfileDesc(p){
 
   if(p.ret==="baq" && p.arr==="copey")t+="Regresas a Barranquilla el 12, pasas la noche y viajas al día siguiente a El Copey ($55.000).";
   else if(p.ret==="baq")t+="Regresas el 12 en vuelo directo Pereira → Barranquilla.";
-  else if(p.ret==="smt")t+="Regresas el 12 de Pereira a Santa Marta (~4 PM) y viajas de inmediato hacia El Copey.";
+  
+  if(p.ret==="smt")t+="Regresas el 12 de Pereira a Santa Marta (~4 PM) y viajas de inmediato hacia El Copey.";
+  
+  if(p.code==="loly a") t+="<br><br><b style='color:var(--c1)'>¡Ojo! Aclaración:</b> Eres <b>Loly A</b> (regresas a Barranquilla porque vives allá).";
+  if(p.code==="loly r") t+="<br><br><b style='color:var(--c1)'>¡Ojo! Aclaración:</b> Eres <b>Loly R</b> (regresas a Santa Marta / El Copey).";
+
   return t;
 }
 
@@ -380,20 +541,102 @@ function pnote(d,p){
 function renderItin(){
   $("v-hero").innerHTML=`<header class="hero" id="hero"><div class="sun"></div><div class="cloud cl1"></div><div class="cloud cl2"></div>
   <div class="plane"><svg viewBox="0 0 64 32"><g fill="#fff"><path d="M4 14h50c6 0 8 2 8 2s-2 2-8 2H4z"/><path d="M26 15 18 2h6l16 13zM26 17l-8 13h6l16-13z"/><path d="M8 15 3 7h4l7 8zM8 17l-5 8h4l7-8z"/></g></svg></div>
-  <div style="position:relative;z-index:2;max-width:760px;margin:0 auto;width:100%"><h1>${D.title}</h1><p>${D.sub}</p></div>
+  <div style="position:relative;z-index:2;max-width:760px;margin:0 auto;width:100%"><h1>${D.title}</h1><p style="margin-bottom:12px">${D.sub}</p><div style="display:inline-flex;align-items:center;gap:6px;background:#ffffff33;padding:6px 14px;border-radius:20px;font-weight:700;backdrop-filter:blur(6px);border:1px solid #ffffff55;font-size:0.9rem"><span style="font-size:1.2rem">👫</span> by Rosa & Kalen</div></div>
   <div class="hint">Desliza para empezar</div>
   <svg class="hw" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice">${wave("#fff",.35,SK[1],1)}</svg></header>`;
   
-  let html=`<div class="welcome-card"><h3>¡Hola, ${ME.name}! 👋</h3><p>${getProfileDesc(ME)}</p></div>`;
-  html+=D.days.map((d,i)=>{
-    const note=pnote(d,ME);
-    return `<section class="day" id="d${d.n}" style="--c:var(--c${d.r});--t:var(--t${d.r});--sk:${SK[d.r]}"><div class="bn"><div class="cld" style="animation-delay:-${i*9}s"></div><svg class="sc" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice">${SC[d.r]()}</svg><span class="num">${d.n}</span></div><div class="in2"><p class="dt rv">${d.dt}</p><h2 class="rv">${d.t}</h2><p class="v rv">${d.v}</p>${d.b?`<span class="bd rv">${d.b}</span>`:""}${note?`<p class="pn rv" style="--c:var(--c${d.r})">${note}</p>`:""}<ul>${d.s.map(s=>`<li class="rv"><span class="tm">${s[0]}</span><span>${s[1]}</span></li>`).join("")}</ul>${d.h?`<p class="n rv" style="--c:var(--c${d.r})"><b>Dormir:</b> ${d.h}</p>`:""}${d.k?`<p class="n rv" style="--c:var(--c${d.r})"><b>Ojo:</b> ${d.k}</p>`:""}</div></section>`}).join("");
+  let welcomeImg = (ME.arr==="copey"||ME.arr==="copey3") ? "imagenes/El Copey.jpg" : "imagenes/Barranquilla.jpg";
+  
+  let welcomeContent = "";
+  const isAbelardoGroup = (ME.code==="cristina" || ME.code==="richar" || ME.code==="maria" || ME.code==="sebas");
+
+  if(isAbelardoGroup){
+    const randomAbelardoText = getDailyMsg(abelardoMsgs, ME.code + new Date().getDate());
+    welcomeContent = `
+      <div class="welcome-header-flex">
+        <img src="imagenes/abelardogay.png" class="welcome-caricature-big" alt="Abelardo">
+        <div class="welcome-speech-bubble">
+          <strong style="color:var(--c4);display:block;margin-bottom:2px">¡Bienvenidos a mi viaje!</strong>
+          ${randomAbelardoText}
+        </div>
+      </div>
+      <p style="margin-top:10px">${getProfileDesc(ME)}</p>
+    `;
+  } else {
+    const randomPetroText = getDailyMsg(petroMsgs, ME.code + new Date().getDate());
+    welcomeContent = `
+      <div class="welcome-header-flex">
+        <img src="imagenes/petrico.png" class="welcome-caricature-petro" alt="Petro">
+        <div class="welcome-speech-bubble">
+          <strong style="color:var(--c1);display:block;margin-bottom:2px">¡Bienvenidos a este camino de vida y montaña!</strong>
+          ${randomPetroText}
+        </div>
+      </div>
+      <p style="margin-top:10px">${getProfileDesc(ME)}</p>
+    `;
+  }
+
+  let html=`<div class="welcome-card-wrap" style="--bg-img: url('${welcomeImg}')">
+    <div class="welcome-card-content">
+      ${welcomeContent}
+    </div>
+  </div>`;
+  
+const alts={
+  2:"🌊 2 msnm | 28°C",
+  3:"🏙️ 1.495 msnm | 22°C",
+  4:"🏙️ 1.495 msnm | 22°C",
+  5:"🛶 1.925 msnm | 19°C",
+  6:"☕ 1.750 msnm | 19°C",
+  7:"🥶 2.950 msnm | 10°C",
+  8:"🌋 4.800 msnm | 5°C (Termales: Santa Rosa de Cabal)",
+  9:"🌴 1.895 msnm | 18°C (Filandia)",
+  10:"🎢 1.294 msnm | 22°C (Parque del Café)",
+  11:"☁️️ 2.400 msnm | 16°C",
+  12:"✈️ 1.411 msnm | 21°C"
+};
+
+const dayImages = {
+  2: "imagenes/Santa marta.jpg",
+  3: "imagenes/Medellin.jpg",
+  4: "imagenes/Medellin.jpg",
+  5: "imagenes/Guatape.jpg",
+  6: "imagenes/Jardin.jpg",
+  7: "imagenes/Manizales y nevado.jpg",
+  8: "imagenes/Santa rosa del cabal.jpg",
+  9: "imagenes/Filandia.jpg",
+  10: "imagenes/Parque del Cafe.jpg",
+  11: "imagenes/Salento.jpg",
+  12: "imagenes/Salento.jpg"
+};
+
+html+=D.days.map((d,i)=>{
+  const alt=alts[d.n]||"";
+  const note=pnote(d,ME);
+  const bgImg = dayImages[d.n];
+  
+  return `<section class="day" id="d${d.n}" style="--c:var(--c${d.r});--t:var(--t${d.r});--sk:${SK[d.r]}"><div class="bn"><div class="cld" style="animation-delay:-${i*9}s"></div><svg class="sc" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice">${SC[d.r]()}</svg><span class="num">${d.n}</span></div>
+  <div class="in2">
+    <div class="day-bg-wrap" style="--bg-img: url('${bgImg}')">
+      <div class="day-bg-content">
+        <p class="dt rv">${d.dt}</p>
+        <h2 class="rv">${d.t}</h2>
+        <p class="v rv">${d.v}</p>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:4px 0">${alt?`<span class="alt-bd rv">${alt}</span>`:""}${d.b?`<span class="bd rv">${d.b}</span>`:""}</div>
+      </div>
+    </div>
+    ${note?`<p class="pn rv" style="--c:var(--c${d.r})">${note}</p>`:""}
+    <ul>${d.s.map(s=>`<li class="rv"><span class="tm">${s[0]}</span><span>${s[1]}</span></li>`).join("")}</ul>
+    ${d.h?`<p class="n rv" style="--c:var(--c${d.r})"><b>Dormir:</b> ${d.h}</p>`:""}
+    ${d.k?`<p class="n rv" style="--c:var(--c${d.r})"><b>Ojo:</b> ${d.k}</p>`:""}
+  </div></section>`}).join("");
+
   $("app").innerHTML=html;
   $("sg").innerHTML=[1,2,3,4].map(r=>`<i style="flex:${D.days.filter(d=>d.r===r).length};background:var(--c${r})"></i>`).join("");
   bindScrollFx();
 }
 
-/* ---------- render: pagos con abonos parciales ---------- */
+/* ---------- render: pagos con abonos parciales (Solo Admin edita) ---------- */
 function renderPay(){
   const mine=myPays(ME);
   const est=mine.reduce((a,x)=>a+(+x.amt||0),0);
@@ -407,12 +650,13 @@ function renderPay(){
   const byDay={};
   mine.forEach(x=>{(byDay[x.day]=byDay[x.day]||[]).push(x)});
 
-  let h=`<div class="welcome-card" style="margin-top:20px;">
-    <h3>💰 Tus Pagos y Abonos</h3>
-    <p>Presiona el círculo para marcar pagado o usa <b>Abonar</b> si diste una parte. 
-       <br><b>Progreso personal:</b> ${pct}% pagado</p>
-    <div style="background:var(--border);height:8px;border-radius:4px;margin-top:12px;overflow:hidden">
-      <div style="background:var(--c2);width:${pct}%;height:100%;transition:width .4s"></div>
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"imagenes/El Copey.jpg":"imagenes/Barranquilla.jpg"}')">
+    <div class="welcome-card-content">
+      <h3>💰 Tus Pagos y Abonos</h3>
+      <p>${ADMIN?"<b>Modo Admin activo:</b> Puedes hacer clic en los círculos o abonar para registrar los pagos de esta persona.":`Aquí visualizas el estado de tus pagos de ruta. ${ADMIN?"":"(Solo el administrador puede modificarlos)"}`}<br><b>Progreso personal:</b> ${pct}% pagado</p>
+      <div style="background:var(--border);height:8px;border-radius:4px;margin-top:12px;overflow:hidden">
+        <div style="background:linear-gradient(45deg, rgba(255,255,255,0.25) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.25) 75%, transparent 75%, transparent);background-size:30px 30px;background-color:var(--c2);width:${pct}%;height:100%;transition:width 0.6s ease-out;animation:stripes 1s linear infinite"></div>
+      </div>
     </div>
   </div>`;
 
@@ -437,8 +681,8 @@ function renderPay(){
         const cls=full?"ok":(partial?"partial":"");
         const paidAmt=typeof pi==="number"?pi:(pi===true?x.amt:0);
         return `<div class="pay ${cls}" data-id="${x.id}">
-          <span class="bx" title="Marcar total">${full?"✓":(partial?"~":"")}</span>
-          <span class="nm">${x.item} ${partial?`<small style="color:var(--c4)">Abonado: ${fmt(paidAmt)}</small>`:""}</span>
+          <span class="bx" style="${ADMIN?'cursor:pointer':''}" title="${ADMIN?'Marcar pagado':''}">${full?"✓":(partial?"~":"")}</span>
+          <span class="nm">${x.item}${partial?`<small style="color:var(--c4)">Abonado: ${fmt(paidAmt)}</small>`:""}</span>
           <span class="am">
             ${fmt(x.amt)}
             <button class="abonar-btn" data-abonar="${x.id}">Abonar</button>
@@ -452,37 +696,43 @@ function renderPay(){
 
   $("v-pay").innerHTML=h;
 
-  $("v-pay").querySelectorAll(".bx").forEach(bx=>{
-    bx.onclick=e=>{
-      const id=e.target.closest(".pay").dataset.id;
-      const x=D.pays.find(p=>p.id===id);
-      const cur=ME.paid[id];
-      if(cur===true){delete ME.paid[id];snd("click")}
-      else{ME.paid[id]=true;snd("ok")}
-      save();renderPay();
-    };
-  });
+  if(ADMIN){
+    $("v-pay").querySelectorAll(".bx").forEach(bx=>{
+      bx.onclick=e=>{
+        const id=e.target.closest(".pay").dataset.id;
+        const x=D.pays.find(p=>p.id===id);
+        const cur=ME.paid[id];
+        if(cur===true){delete ME.paid[id];snd("click")}
+        else{ME.paid[id]=true;snd("ok")}
+        save();renderPay();
+      };
+    });
 
-  $("v-pay").querySelectorAll("[data-abonar]").forEach(btn=>{
-    btn.onclick=e=>{
-      const id=e.target.dataset.abonar;
-      const x=D.pays.find(p=>p.id===id);
-      const cur=typeof ME.paid[id]==="number"?ME.paid[id]:(ME.paid[id]?x.amt:0);
-      const val=prompt(`Ingresa el valor abonado para "${x.item}" (Total: ${fmt(x.amt)}):`,cur);
-      if(val!==null){
-        const num=parseInt(val.replace(/\D/g,""))||0;
-        if(num<=0)delete ME.paid[id];
-        else if(num>=x.amt)ME.paid[id]=true;
-        else ME.paid[id]=num;
-        snd("ok");save();renderPay();
-      }
-    };
-  });
+    $("v-pay").querySelectorAll("[data-abonar]").forEach(btn=>{
+      btn.onclick=e=>{
+        const id=e.target.dataset.abonar;
+        const x=D.pays.find(p=>p.id===id);
+        const cur=typeof ME.paid[id]==="number"?ME.paid[id]:(ME.paid[id]?x.amt:0);
+        const val=prompt(`Ingresa el valor abonado para "${x.item}" (Total: ${fmt(x.amt)}):`,cur);
+        if(val!==null){
+          const num=parseInt(val.replace(/\D/g,""))||0;
+          if(num<=0)delete ME.paid[id];
+          else if(num>=x.amt)ME.paid[id]=true;
+          else ME.paid[id]=num;
+          snd("ok");save();renderPay();
+        }
+      };
+    });
+  }
 }
 
 /* ---------- render: checklist pendientes ---------- */
 function renderChk(){
-  let h=`<div class="welcome-card" style="margin-top:20px;"><h3>✔️ Tareas y Preparativos</h3><p>Cosas pendientes por organizar o comprar para el viaje.</p></div>`;
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"imagenes/El Copey.jpg":"imagenes/Barranquilla.jpg"}')">
+    <div class="welcome-card-content">
+      <h3>✔️ Tareas y Preparativos</h3><p>Cosas pendientes por organizar o comprar para el viaje.</p>
+    </div>
+  </div>`;
   const cats={};
   D.checklistDefs.forEach(item=>{(cats[item.cat]=cats[item.cat]||[]).push(item)});
   Object.keys(cats).forEach(cat=>{
@@ -515,7 +765,11 @@ function renderChk(){
 
 /* ---------- render: checklist "hecho" ---------- */
 function renderDone(){
-  let h=`<div class="welcome-card" style="margin-top:20px;"><h3>✅ Lo que ya hice</h3><p>Registra las acciones y gestiones que ya completaste con éxito.</p></div>`;
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"imagenes/El Copey.jpg":"imagenes/Barranquilla.jpg"}')">
+    <div class="welcome-card-content">
+      <h3>✅ Lo que ya hice</h3><p>Registra las acciones y gestiones que ya completaste con éxito.</p>
+    </div>
+  </div>`;
   const cats={};
   D.doneDefs.forEach(item=>{(cats[item.cat]=cats[item.cat]||[]).push(item)});
   Object.keys(cats).forEach(cat=>{
@@ -546,66 +800,100 @@ function renderDone(){
   });
 }
 
-/* ---------- render: estadísticas financieras ---------- */
+/* ---------- render: estadísticas personales / globales ---------- */
 function renderStats(){
-  let totalGlobalEst=0;
-  let totalGlobalPaid=0;
-
-  let rowsHtml="";
-  D.people.forEach(p=>{
-    const mine=myPays(p);
-    const est=mine.reduce((a,x)=>a+(+x.amt||0),0);
-    let paid=0;
-    mine.forEach(x=>{
-      const pi=p.paid[x.id];
-      if(typeof pi==="number")paid+=pi;
-      else if(pi===true)paid+=(+x.amt||0);
+  if(ADMIN){
+    let totalGlobalEst=0;
+    let totalGlobalPaid=0;
+    let rowsHtml="";
+    D.people.forEach(p=>{
+      const mine=myPays(p);
+      const est=mine.reduce((a,x)=>a+(+x.amt||0),0);
+      let paid=0;
+      mine.forEach(x=>{
+        const pi=p.paid[x.id];
+        if(typeof pi==="number")paid+=pi;
+        else if(pi===true)paid+=(+x.amt||0);
+      });
+      totalGlobalEst+=est;
+      totalGlobalPaid+=paid;
+      const falta=Math.max(est-paid,0);
+      const pct=est>0?Math.round((paid/est)*100):0;
+      rowsHtml+=`<div class="person-row">
+        <div><b>${p.name}</b><br><small style="color:var(--mut)">Pagado: ${fmt(paid)} / Falta: ${fmt(falta)}</small></div>
+        <div style="text-align:right"><b>${pct}%</b><br><small style="color:var(--c1)">Total: ${fmt(est)}</small></div>
+      </div>`;
     });
-    totalGlobalEst+=est;
-    totalGlobalPaid+=paid;
-    const falta=Math.max(est-paid,0);
-    const pct=est>0?Math.round((paid/est)*100):0;
-    rowsHtml+=`<div class="person-row">
-      <div><b>${p.name}</b><br><small style="color:var(--mut)">Pagado: ${fmt(paid)} / Falta: ${fmt(falta)}</small></div>
-      <div style="text-align:right"><b>${pct}%</b><br><small style="color:var(--c1)">Total: ${fmt(est)}</small></div>
+    const globalFalta=Math.max(totalGlobalEst-totalGlobalPaid,0);
+
+    let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('imagenes/Barranquilla.jpg')">
+      <div class="welcome-card-content">
+        <h3>📊 Panel Global de Administrador</h3><p>Resumen financiero y control de todos los participantes.</p>
+      </div>
     </div>`;
+    h+=`<div class="tots">
+      <div class="tot"><b>${fmt(totalGlobalEst)}</b><span>Presupuesto Global</span></div>
+      <div class="tot" style="background:var(--t2)"><b style="color:var(--c2)">${fmt(totalGlobalPaid)}</b><span>Recaudado Total</span></div>
+      <div class="tot" style="background:var(--t1)"><b style="color:var(--c1)">${fmt(globalFalta)}</b><span>Saldo Pendiente</span></div>
+    </div>`;
+    h+=`<div class="stat-box"><h3>👥 Estado de Pagos por Integrante</h3>${rowsHtml}</div>`;
+    $("v-stats").innerHTML=h;
+    return;
+  }
+
+  const mine=myPays(ME);
+  const myEst=mine.reduce((a,x)=>a+(+x.amt||0),0);
+  let myPaid=0;
+  mine.forEach(x=>{
+    const pi=ME.paid[x.id];
+    if(typeof pi==="number")myPaid+=pi;
+    else if(pi===true)myPaid+=(+x.amt||0);
   });
+  const myFalta=Math.max(myEst-myPaid,0);
+  const myPct=myEst>0?Math.round((myPaid/myEst)*100):0;
 
-  const globalFalta=Math.max(totalGlobalEst-totalGlobalPaid,0);
-
-  let h=`<div class="welcome-card" style="margin-top:20px;"><h3>📊 Estadísticas del Viaje</h3><p>Resumen financiero global y de todos los participantes.</p></div>`;
-  
-  h+=`<div class="tots">
-    <div class="tot"><b>${fmt(totalGlobalEst)}</b><span>Presupuesto Global</span></div>
-    <div class="tot" style="background:var(--t2)"><b style="color:var(--c2)">${fmt(totalGlobalPaid)}</b><span>Recaudado Total</span></div>
-    <div class="tot" style="background:var(--t1)"><b style="color:var(--c1)">${fmt(globalFalta)}</b><span>Saldo Pendiente</span></div>
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"imagenes/El Copey.jpg":"imagenes/Barranquilla.jpg"}')">
+    <div class="welcome-card-content">
+      <h3>📊 Mis Estadísticas Personales</h3><p>Resumen de tus pagos, progreso y estado en el viaje.</p>
+      <div style="background:var(--border);height:8px;border-radius:4px;margin-top:12px;overflow:hidden">
+        <div style="background:var(--c2);width:${myPct}%;height:100%;transition:width 0.6s"></div>
+      </div>
+    </div>
   </div>`;
 
-  h+=`<div class="stat-box">
-    <h3>👥 Estado de Pagos por Integrante</h3>
-    ${rowsHtml}
+  h+=`<div class="tots">
+    <div class="tot"><b>${fmt(myEst)}</b><span>Tu Total Ruta</span></div>
+    <div class="tot" style="background:var(--t2)"><b style="color:var(--c2)">${fmt(myPaid)}</b><span>Tu Abonado</span></div>
+    <div class="tot" style="background:var(--t1)"><b style="color:var(--c1)">${fmt(myFalta)}</b><span>Tu Saldo Pendiente</span></div>
   </div>`;
 
   h+=`<div class="stat-box" style="background:var(--t1);border-color:var(--c1)">
-    <h3 style="color:var(--c1)">💡 Consejos para la Organización</h3>
+    <h3 style="color:var(--c1)">💡 Consejos para tu Viaje</h3>
     <ul style="margin:0;padding-left:18px;font-size:.92rem;line-height:1.6">
-      <li><b>Fondo común para comidas:</b> Es útil recoger una cuota diaria fija para almuerzos grupales.</li>
-      <li><b>Reservas anticipadas:</b> El Parque del Café y Termales en puente festivo se llenan rápido; aseguren boletos con días de anticipación.</li>
-      <li><b>Clima variado:</b> Recuerden que en Murillo y Los Nevados hace mucho frío; lleven chaqueta impermeable y guantes.</li>
-      <li><b>Control de abonos:</b> Usa el botón "Abonar" en la pestaña de Pagos si alguien da dinero por partes.</li>
+      <li><b>Progreso:</b> Llevas un <b>${myPct}%</b> completado de tus pagos personales.</li>
+      <li><b>Clima y Ropa:</b> Recuerda llevar ropa abrigada para Murillo y Los Nevados.</li>
+      <li><b>Puntualidad:</b> Revisa siempre las horas de salida de los buses y vuelos en tu itinerario.</li>
     </ul>
   </div>`;
 
   $("v-stats").innerHTML=h;
 }
 
-/* ---------- render: admin gestión ---------- */
+/* ---------- render: admin gestión y edición de textos ---------- */
 function renderAdm(){
-  let h=`<h2 style="margin-top:20px">Gestión de Personas</h2><div id="addp"><div class="row"><input id="np-n" placeholder="Nombre"><input id="np-c" placeholder="Código de acceso"></div>
-  <div class="row"><select id="np-who"><option value="g1">Grupo 1 (viaja del 2)</option><option value="g2">Grupo 2 (llega el 8)</option></select>
-  <select id="np-arr"><option value="baq">Llega desde Baq</option><option value="copey">Llega de Copey (Día 2)</option><option value="copey3">Llega de Copey (Mad. Día 3)</option><option value="g2">Vuelo del 8</option></select></div>
-  <div class="row"><select id="np-ret"><option value="baq">Regresa a Baq</option><option value="smt">Regresa a Sta Marta</option></select>
-  <button id="np-add">Agregar persona</button></div></div>`;
+  let h=`<h2 style="margin-top:20px">Gestión de Personas</h2>
+  <div id="addp">
+    <div class="row"><input id="np-n" placeholder="Nombre"><input id="np-c" placeholder="Código de acceso"></div>
+    <div class="row">
+      <select id="np-who"><option value="g1">Grupo 1 (viaja del 2)</option><option value="g2">Grupo 2 (llega el 8)</option></select>
+      <select id="np-arr"><option value="baq">Llega desde Baq</option><option value="copey">Llega de Copey (Día 2)</option><option value="copey3">Llega de Copey (Mad. Día 3)</option><option value="g2">Vuelo del 8</option></select>
+    </div>
+    <div class="row">
+      <select id="np-ret"><option value="baq">Regresa a Baq</option><option value="smt">Regresa a Sta Marta</option></select>
+      <button id="np-add">Agregar persona</button>
+    </div>
+  </div>`;
+  
   D.people.forEach(p=>{
     const mine=myPays(p);
     const est=mine.reduce((a,x)=>a+(+x.amt||0),0);
@@ -617,8 +905,29 @@ function renderAdm(){
     <span class="paidall">${fmt(paid)}/${fmt(est)}</span>
     <button class="del" data-del="${p.id}">✕</button></div>`;
   });
-  h+=`<div class="atools"><button id="a-cp">Copiar datos</button><button id="a-imp">Importar</button><button class="rs" id="a-rs">Restablecer</button><button id="a-out">Salir del admin</button></div>`;
+
+  h+=`<h2 style="margin-top:30px">Editar Textos de los Días</h2><div style="display:grid;gap:12px">`;
+  D.days.forEach((d,idx)=>{
+    h+=`<div class="stat-box" style="padding:12px">
+      <h4 style="margin:0 0 6px;color:var(--c1)">Día ${d.n}: ${d.dt}</h4>
+      <div style="display:grid;gap:6px">
+        <label style="font-size:.8rem;font-weight:600">Título del día:</label>
+        <input class="ed-t" data-i="${idx}" value="${d.t}" style="padding:7px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--ink)">
+        <label style="font-size:.8rem;font-weight:600">Subtítulo / Descripción corta:</label>
+        <input class="ed-v" data-i="${idx}" value="${d.v}" style="padding:7px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--ink)">
+        <label style="font-size:.8rem;font-weight:600">Hotel / Hospedaje:</label>
+        <input class="ed-h" data-i="${idx}" value="${d.h||""}" style="padding:7px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--ink)">
+        <label style="font-size:.8rem;font-weight:600">Nota / Alerta (Ojo):</label>
+        <input class="ed-k" data-i="${idx}" value="${d.k||""}" style="padding:7px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--ink)">
+      </div>
+    </div>`;
+  });
+  h+=`</div><button id="save-texts" style="margin-top:12px;width:100%;padding:12px;border:0;border-radius:10px;background:var(--c2);color:#fff;font-weight:700">Guardar Cambios de Textos</button>`;
+
+  h+=`<div class="atools" style="margin-top:20px"><button id="a-cp">Copiar datos</button><button id="a-imp">Importar</button><button class="rs" id="a-rs">Restablecer</button><button id="a-out">Salir del admin</button></div>`;
+  
   $("v-adm").innerHTML=h;
+  
   $("np-add").onclick=()=>{
     const n=$("np-n").value.trim(),c=$("np-c").value.trim().toLowerCase();
     if(!n||!c)return alert("Escribe nombre y código");
@@ -626,16 +935,40 @@ function renderAdm(){
     D.people.push({id:"p"+Date.now(),name:n,code:c,who:$("np-who").value,arr:$("np-arr").value,ret:$("np-ret").value,paid:{},chk:{},done:{}});
     save();renderAdm();
   };
+
   $("v-adm").querySelectorAll("[data-f]").forEach(s=>s.onchange=()=>{
     const p=D.people.find(x=>x.id===s.dataset.id);p[s.dataset.f]=s.value;save();
   });
   $("v-adm").querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{
     if(confirm("¿Quitar a esta persona?")){D.people=D.people.filter(x=>x.id!==b.dataset.del);save();renderAdm()}
   });
+
+  $("save-texts").onclick=()=>{
+    document.querySelectorAll(".ed-t").forEach(inp=>{
+      const i=+inp.dataset.i;
+      D.days[i].t=inp.value;
+    });
+    document.querySelectorAll(".ed-v").forEach(inp=>{
+      const i=+inp.dataset.i;
+      D.days[i].v=inp.value;
+    });
+    document.querySelectorAll(".ed-h").forEach(inp=>{
+      const i=+inp.dataset.i;
+      D.days[i].h=inp.value;
+    });
+    document.querySelectorAll(".ed-k").forEach(inp=>{
+      const i=+inp.dataset.i;
+      D.days[i].k=inp.value;
+    });
+    save();
+    alert("¡Textos actualizados con éxito!");
+    renderItin();
+  };
+
   $("a-cp").onclick=async()=>{const t=JSON.stringify(D);try{await navigator.clipboard.writeText(t);alert("Copiado")}catch(e){prompt("Copia",t)}};
   $("a-imp").onclick=()=>{const t=prompt("Pega JSON:");try{const x=JSON.parse(t);if(x&&x.ver===VER){D=x;save();renderAdm();renderItin();renderPay();renderChk();renderDone();renderStats();alert("OK")}else alert("No válido")}catch(e){alert("Error")}};
-  $("a-rs").onclick=()=>{if(confirm("¿Restablecer todo?")){try{localStorage.removeItem("itin11")}catch(e){}location.reload()}};
-  $("a-out").onclick=()=>{ADMIN=false;document.body.classList.remove("admin");$("m-adm").style.display="none";renderPay();};
+  $("a-rs").onclick=()=>{if(confirm("¿Restablecer todo?")){try{localStorage.removeItem("itin17")}catch(e){}location.reload()}};
+  $("a-out").onclick=()=>{ADMIN=false;document.body.classList.remove("admin");$("m-adm").style.display="none";renderPay();renderStats();};
 }
 
 /* ---------- scroll fx ---------- */
