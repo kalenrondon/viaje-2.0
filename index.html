@@ -43,10 +43,10 @@ button{font-family:inherit;cursor:pointer;min-height:44px;min-width:44px}
 #mk{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--c1);border:2.5px solid var(--bg);box-shadow:0 1px 4px #0005;transition:background .4s}
 .btn-ico{background:none;border:0;font-size:1.1rem;padding:8px;border-radius:8px;color:var(--ink);display:grid;place-items:center}
 
-/* ---- BOTONES FLOTANTES ADMIN ---- */
-#admin-float-bar{position:fixed;left:12px;right:12px;bottom:76px;z-index:11;display:none;gap:8px;justify-content:center;pointer-events:none}
+/* ---- BOTONES FLOTANTES ADMIN OPTIMIZADOS ---- */
+#admin-float-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:76px;z-index:11;display:none;gap:10px;justify-content:center;pointer-events:none;width:auto;max-width:90%}
 body.admin #admin-float-bar{display:flex}
-.float-btn{pointer-events:auto;border:0;border-radius:12px;padding:10px 16px;font:700 .8rem Figtree,sans-serif;box-shadow:0 4px 16px rgba(0,0,0,0.18);display:flex;align-items:center;gap:6px;backdrop-filter:blur(8px);min-height:44px}
+.float-btn{pointer-events:auto;border:0;border-radius:10px;padding:8px 14px;font:700 .78rem Figtree,sans-serif;box-shadow:0 4px 16px rgba(0,0,0,0.2);display:flex;align-items:center;gap:6px;backdrop-filter:blur(8px);min-height:40px;white-space:nowrap}
 #float-exit{background:#c0392b;color:#fff}
 #float-switch{background:var(--c1);color:#fff}
 
@@ -130,19 +130,47 @@ body.dark .day-bg-wrap::before{opacity:0.12}
 .person-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);font-size:.92rem}
 .person-row:last-child{border-bottom:0}
 
-/* ---- MENÚ INFERIOR CON BOTÓN NEÓN CENTRAL (+) ---- */
-#menu{position:fixed;left:0;right:0;bottom:0;z-index:10;display:none;grid-template-columns:repeat(5,1fr);align-items:center;background:var(--card-bg);backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:8px 6px calc(8px + env(safe-area-inset-bottom));box-shadow:0 -4px 20px rgba(0,0,0,0.1)}
+/* ---- MENÚ INFERIOR ---- */
+#menu{position:fixed;left:0;right:0;bottom:0;z-index:10;display:none;grid-template-columns:repeat(5,1fr);align-items:center;background:var(--card-bg);backdrop-filter:blur(16px);border-top:1px solid var(--border);padding:8px 6px calc(8px + env(safe-area-inset-bottom));box-shadow:0 -6px 24px rgba(0,0,0,0.08)}
 body.in #menu{display:grid}
-#menu button{border:0;background:none;padding:6px 2px;border-radius:12px;font:600 .68rem Figtree,sans-serif;color:var(--mut);display:grid;gap:3px;justify-items:center;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);position:relative;min-height:48px}
-#menu button svg{width:20px;height:20px;transition:transform 0.3s cubic-bezier(0.4,0,0.2,1)}
+#menu button{border:0;background:none;padding:6px 2px;border-radius:12px;font:600 .68rem Figtree,sans-serif;color:var(--mut);display:grid;gap:3px;justify-items:center;transition:all 0.25s cubic-bezier(0.4,0,0.2,1);position:relative;min-height:48px}
+#menu button svg{width:20px;height:20px;transition:transform 0.25s cubic-bezier(0.4,0,0.2,1)}
 #menu button.on{color:var(--c1);background:var(--t1)}
 #menu button.on svg{transform:translateY(-2px) scale(1.15)}
 
-#menu button.neon-btn{background:linear-gradient(135deg,#ff9d6c,#e4572e,#0b7fa0);background-size:200% 200%;animation:neonPulse 3s ease infinite;color:#fff;border-radius:50%;width:52px;height:52px;min-width:52px;min-height:52px;margin:-16px auto 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(11,127,160,0.6),0 0 26px rgba(255,157,108,0.5);border:2px solid #fff;font-size:1.5rem;font-weight:800;cursor:pointer}
-#menu button.neon-btn:active{transform:scale(0.92)}
-@keyframes neonPulse{0%{background-position:0% 50%;box-shadow:0 0 10px rgba(11,127,160,0.6),0 0 20px rgba(255,157,108,0.4)}50%{background-position:100% 50%;box-shadow:0 0 22px rgba(255,157,108,0.8),0 0 32px rgba(11,127,160,0.7)}100%{background-position:0% 50%;box-shadow:0 0 10px rgba(11,127,160,0.6),0 0 20px rgba(255,157,108,0.4)}}
+/* Botón Neón Minimalista (+) */
+#menu button.neon-btn{
+  background: linear-gradient(135deg, #0b7fa0 0%, #38bdf8 100%);
+  color: #fff;
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  min-height: 52px;
+  margin: -16px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(11, 127, 160, 0.4), 0 0 0 3px var(--bg);
+  border: 2px solid #ffffff;
+  font-size: 1.6rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.4,0,0.2,1), box-shadow 0.2s;
+}
+#menu button.neon-btn:hover{
+  transform: translateY(-3px) scale(1.05);
+}
+#menu button.neon-btn:active{
+  transform: scale(0.92);
+}
 
-body:not(.admin) #m-adm,body:not(.admin) #m-stats{display:none}
+/* Ocultar elementos si es Admin */
+body.admin #menu button.neon-btn { display: none; }
+body.admin #menu { grid-template-columns: repeat(4, 1fr); }
+
+body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
 
 /* ---- ADMIN GESTIÓN ---- */
 .aprow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:10px}
@@ -186,10 +214,10 @@ body:not(.admin) #m-adm,body:not(.admin) #m-stats{display:none}
   </div>
 </div>
 
-<!-- ADMIN FLOATING BAR -->
+<!-- ADMIN FLOATING BAR (REORGANIZADA) -->
 <div id="admin-float-bar">
-  <button class="float-btn" id="float-exit">🚪 Salir Admin</button>
   <button class="float-btn" id="float-switch">👤 Cambiar Persona</button>
+  <button class="float-btn" id="float-exit">🚪 Salir Admin</button>
 </div>
 
 <div id="v-hero"></div>
@@ -213,7 +241,7 @@ body:not(.admin) #m-adm,body:not(.admin) #m-stats{display:none}
 </div>
 
 <script>
-const VER=41,PASS="kalen2026";
+const VER=43,PASS="kalen2026";
 const SUPABASE_URL = 'https://mzhzxtbaactgboiyihue.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im16aHp4dGJhYWN0Z2JvaXlpaHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4Njg1ODEsImV4cCI6MjEwNjQ0NDU4MX0.hPjXUoPeLEVAppWqN0ZBl7MkbgcdAT0uHi0L6T_z_pw';
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -567,7 +595,7 @@ function renderGastos(){
     <h3>✨ Mis Gastos Personales de ${ME.name}</h3><p>Controla tus antojos, transporte extra y compras de bolsillo.</p>
     <div style="margin-top:12px; display:flex; gap:8px;">
       <input id="g-desc" placeholder="¿En qué gastaste?" style="flex:1; padding:12px; border:1px solid var(--border); border-radius:10px; font-size:0.9rem; background:var(--bg); color:var(--ink); min-height:44px;" autocomplete="off">
-      <input id="g-amt" type="number" placeholder="Valor ($)" style="width:110px; padding:12px; border:1px solid var(--border); border-radius:10px; font-size:0.9rem; background:var(--bg); color:var(--ink); min-height:44px;" autocomplete="off">
+      <input id="g-amt" type="text" inputmode="numeric" placeholder="Valor ($)" style="width:120px; padding:12px; border:1px solid var(--border); border-radius:10px; font-size:0.9rem; background:var(--bg); color:var(--ink); min-height:44px;" autocomplete="off">
       <button id="g-add" style="background:var(--c1); color:#fff; border:0; padding:10px 16px; border-radius:10px; font-weight:700;">Añadir</button>
     </div>
   </div></div>`;
@@ -585,12 +613,25 @@ function renderGastos(){
   h+=`</div>`;
   $("v-gastos").innerHTML=h;
 
+  // Formateador automático de puntos de miles al escribir en el input de valor
+  const amtInput = $("v-gastos").querySelector("#g-amt");
+  amtInput.oninput = (e) => {
+    let raw = e.target.value.replace(/\D/g, "");
+    if(raw){
+      e.target.value = parseInt(raw, 10).toLocaleString("es-CO");
+    } else {
+      e.target.value = "";
+    }
+  };
+
   $("v-gastos").querySelector("#g-add").onclick = () => {
     const desc = $("g-desc").value.trim();
-    const amt = parseInt($("g-amt").value.trim());
+    const rawVal = amtInput.value.replace(/\./g, "");
+    const amt = parseInt(rawVal, 10);
     if(!desc || isNaN(amt) || amt<=0){ alert("Ingresa descripción y valor válidos."); return; }
     ME.gastos.push({desc, amt}); snd("ok"); save(); renderGastos();
   };
+
   $("v-gastos").querySelectorAll(".del-gasto").forEach(btn=>{
     btn.onclick = () => { ME.gastos.splice(parseInt(btn.dataset.idx),1); snd("click"); save(); renderGastos(); };
   });
@@ -598,7 +639,7 @@ function renderGastos(){
 
 function renderChk(){
   if(!ME) return;
-  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')"><div class="welcome-card-content"><h3>✔️️ Tareas de ${ME.name}</h3><p>Pendientes previos al viaje.</p></div></div>`;
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')"><div class="welcome-card-content"><h3>✔ Tareas de ${ME.name}</h3><p>Pendientes previos al viaje.</p></div></div>`;
   D.checklistDefs.forEach(item=>{
     const done = !!ME.chk[item.id];
     h+=`<div class="chk-card"><div class="chk-item ${done?"done":""}" data-id="${item.id}"><input type="checkbox" ${done?"checked":""}><span>${item.title}</span></div></div>`;
