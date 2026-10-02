@@ -11,7 +11,7 @@
 :root{--c1:#0b7fa0;--c2:#2a8a4a;--c3:#5865b0;--c4:#a0561d;--t1:#e3f4fa;--t2:#e7f4e9;--t3:#e9ecf8;--t4:#f7ece1;--ink:#17302d;--mut:#56696a;--bg:#fff;--card-bg:#fff;--border:#17302d1f}
 body.dark{--c1:#38bdf8;--c2:#4ade80;--c3:#818cf8;--c4:#fb923c;--t1:#073642;--t2:#064e3b;--t3:#312e81;--t4:#431407;--ink:#f1f5f9;--mut:#94a3b8;--bg:#0f172a;--card-bg:#1e293b;--border:#64748b}
 *{box-sizing:border-box;touch-action:manipulation;-webkit-tap-highlight-color:transparent}html{scroll-behavior:smooth}
-body{margin:0;font:400 16px/1.55 Figtree,system-ui,sans-serif;color:var(--ink);background:var(--bg);transition:background .3s,color .3s;padding-bottom:100px}
+body{margin:0;font:400 16px/1.55 Figtree,system-ui,sans-serif;color:var(--ink);background:var(--bg);transition:background .3s,color .3s;padding-bottom:120px}
 h1,h2,h3,.num{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif}
 button{font-family:inherit;cursor:pointer;min-height:44px;min-width:44px}
 
@@ -168,15 +168,19 @@ body.in #menu{display:grid}
 }
 
 /* Visibilidad de botones en modo Normal vs Admin */
-body.admin #menu button.neon-btn { display: none; }
-body.admin #menu button[data-v="chk"], body.admin #menu button[data-v="done"] { display: none; }
+body.admin #menu button.neon-btn { display: none !important; }
+body.admin #menu button[data-v="chk"], body.admin #menu button[data-v="done"] { display: none !important; }
 
 /* Botones exclusivos de Admin en el Menú (Ocultos por defecto para usuarios normales) */
-#m-switch, #m-exit { display: none; }
-body.admin #m-switch, body.admin #m-exit { display: grid; }
+#m-switch, #m-exit { display: none !important; }
+body.admin #m-switch, body.admin #m-exit { display: grid !important; }
 body.admin #menu { grid-template-columns: repeat(6, 1fr); }
 
 body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
+
+/* ---- PIE DE PÁGINA (FOOTER) ---- */
+#footer-brand{text-align:center;padding:30px 16px 20px;color:var(--mut);font-size:0.88rem;border-top:1px solid var(--border);margin-top:40px;background:var(--card-bg)}
+#footer-brand b{color:var(--c1)}
 
 /* ---- ADMIN GESTIÓN ---- */
 .aprow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:10px}
@@ -238,6 +242,11 @@ body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
 <div id="v-stats"></div>
 <div id="v-adm"></div>
 
+<!-- PIE DE PÁGINA -->
+<footer id="footer-brand" style="display:none">
+  <div>by Rosa & Kalen 💛 &nbsp;|&nbsp; <b>@pintroute</b></div>
+</footer>
+
 <!-- MENÚ INFERIOR -->
 <div id="menu">
   <button data-v="itin" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l18-8-8 18-2.5-7.5z"/></svg>Itinerario</button>
@@ -254,7 +263,7 @@ body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
 </div>
 
 <script>
-const VER=49,PASS="kalen2026";
+const VER=50,PASS="kalen2026";
 const SUPABASE_URL = 'https://mzhzxtbaactgboiyihue.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im16aHp4dGJhYWN0Z2JvaXlpaHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4Njg1ODEsImV4cCI6MjEwNjQ0NDU4MX0.hPjXUoPeLEVAppWqN0ZBl7MkbgcdAT0uHi0L6T_z_pw';
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -774,6 +783,7 @@ function show(v){
   $("v-stats").style.display = v==="stats"?"":"none";
   $("v-adm").style.display = v==="adm"?"":"none";
   $("bar").style.display = v==="itin"?"":"none";
+  $("footer-brand").style.display = "block";
   scrollTo(0,0); onS();
 }
 
@@ -796,7 +806,7 @@ async function enter(p){
 function logout(){
   ADMIN=false; ME=null; activeDays=D.days;
   document.body.classList.remove("in","admin");
-  $("lg").style.display="grid"; $("lin").value=""; $("lerr").textContent=""; snd("click");
+  $("lg").style.display="grid"; $("lin").value=""; $("lerr").textContent=""; $("footer-brand").style.display="none"; snd("click");
 }
 
 async function askAdmin(){
