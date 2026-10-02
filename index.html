@@ -204,8 +204,8 @@ body.dark .day-bg-wrap::before {
 .pay .am small{font-weight:500;color:var(--mut);font-size:.7rem}
 .abonar-btn{display:inline-block;background:var(--t1);color:var(--c1);border:1px solid var(--c1);padding:4px 8px;border-radius:6px;font-size:.75rem;font-weight:700}
 
-/* ---- CHECKLISTS ---- */
-#v-chk,#v-done{max-width:680px;margin:0 auto;padding:64px 16px 110px}
+/* ---- CHECKLISTS Y GASTOS PERSONALES ---- */
+#v-chk,#v-done,#v-gastos{max-width:680px;margin:0 auto;padding:64px 16px 110px}
 .chk-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.03)}
 .chk-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--border)}
 .chk-item:first-child{border-top:0}
@@ -220,15 +220,45 @@ body.dark .day-bg-wrap::before {
 .person-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:.92rem}
 .person-row:last-child{border-bottom:0}
 
-/* ---- MENÚ INFERIOR (PEGADO ABAJO) ---- */
-#menu{position:fixed;left:0;right:0;bottom:0;z-index:10;display:none;gap:2px;background:var(--card-bg);backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:8px 6px calc(8px + env(safe-area-inset-bottom));box-shadow:0 -4px 20px rgba(0,0,0,0.1)}
-body.in #menu{display:flex}
-#menu button{flex:1;border:0;background:none;padding:6px 2px;border-radius:12px;font:600 .7rem Figtree,sans-serif;color:var(--mut);display:grid;gap:3px;justify-items:center;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);position:relative}
-#menu button svg{width:20px;height:20px;transition:transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
+/* ---- MENÚ INFERIOR (PEGADO ABAJO) CON BOTÓN NEÓN CENTRAL ---- */
+#menu{position:fixed;left:0;right:0;bottom:0;z-index:10;display:none;grid-template-columns:repeat(5,1fr);align-items:center;background:var(--card-bg);backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:6px 4px calc(6px + env(safe-area-inset-bottom));box-shadow:0 -4px 20px rgba(0,0,0,0.1)}
+body.in #menu{display:grid}
+#menu button{border:0;background:none;padding:4px 2px;border-radius:12px;font:600 .68rem Figtree,sans-serif;color:var(--mut);display:grid;gap:2px;justify-items:center;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);position:relative}
+#menu button svg{width:18px;height:18px;transition:transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
 #menu button.on{color:var(--c1);background:var(--t1)}
 #menu button.on svg{transform:translateY(-2px) scale(1.15)}
 
-body:not(.admin) #m-adm { display: none; }
+/* Botón Neón Central Exclusivo (+) */
+#menu button.neon-btn {
+  background: linear-gradient(135deg, #ff9d6c, #e4572e, #0b7fa0);
+  background-size: 200% 200%;
+  animation: neonPulse 3s ease infinite;
+  color: #fff;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  margin: -14px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px rgba(11, 127, 160, 0.6), 0 0 25px rgba(255, 157, 108, 0.5);
+  border: 2px solid #fff;
+  font-size: 1.4rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+#menu button.neon-btn:active {
+  transform: scale(0.92);
+}
+@keyframes neonPulse {
+  0% { background-position: 0% 50%; box-shadow: 0 0 10px rgba(11,127,160,0.6), 0 0 20px rgba(255,157,108,0.4); }
+  50% { background-position: 100% 50%; box-shadow: 0 0 20px rgba(255,157,108,0.8), 0 0 30px rgba(11,127,160,0.7); }
+  100% { background-position: 0% 50%; box-shadow: 0 0 10px rgba(11,127,160,0.6), 0 0 20px rgba(255,157,108,0.4); }
+}
+
+body:not(.admin) #m-adm, body:not(.admin) #m-stats { display: none; }
 
 /* ---- ADMIN GESTIÓN ---- */
 .aprow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:10px}
@@ -286,22 +316,27 @@ body:not(.admin) #m-adm { display: none; }
 <main id="app"></main>
 <div id="v-pay"></div>
 <div id="v-chk"></div>
+<div id="v-gastos"></div>
 <div id="v-done"></div>
 <div id="v-stats"></div>
 <div id="v-adm"></div>
 
-<!-- MENÚ INFERIOR -->
+<!-- MENÚ INFERIOR CON BOTÓN NEÓN CENTRAL -->
 <div id="menu">
   <button data-v="itin" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l18-8-8 18-2.5-7.5z"/></svg>Itinerario</button>
   <button data-v="pay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Pagos</button>
+  
+  <!-- BOTÓN NEÓN CENTRAL (+) -->
+  <button data-v="gastos" class="neon-btn" title="Mis Gastos Personales">+</button>
+
   <button data-v="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Pendientes</button>
   <button data-v="done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Hecho</button>
-  <button data-v="stats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Stats</button>
+  <button data-v="stats" id="m-stats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Stats</button>
   <button data-v="adm" id="m-adm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Admin</button>
 </div>
 
 <script>
-const VER=37,PASS="kalen2026";
+const VER=40,PASS="kalen2026";
 
 // --- CONFIGURACIÓN DE SUPABASE ---
 const SUPABASE_URL = 'https://mzhzxtbaactgboiyihue.supabase.co';
@@ -310,6 +345,7 @@ const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_
 
 const H_MED="Comodo Family Laureles, Medellín, $65.000 por persona";
 const H_SAL="Mahalo, Salento, $54.000 por persona";
+const H_PER="Alojamiento Santa Rosa de Cabal (Calle 6 #6-65), $57.000 por persona";
 const SK={1:"#bfe8f6",2:"#cfe9d4",3:"#cfd6f0",4:"#efd9c3"};
 
 let audioCtx=null;
@@ -382,26 +418,26 @@ function getDailyMsg(arrList, seedStr){
 
 let D={ver:VER,title:"Del Caribe al Eje Cafetero",sub:"Del 2 al 12 de octubre de 2026: Santa Marta, Medellín, Jardín, Los Nevados, Pereira y Salento.",
 people:[
- {id:"kalen",name:"Kalen",code:"kalen",who:"g1",arr:"baq",ret:"baq",paid:{},chk:{},done:{}},
- {id:"rosa",name:"Rosa",code:"rosa",who:"g1",arr:"baq",ret:"baq",paid:{},chk:{},done:{}},
- {id:"cristina",name:"Cristina",code:"cristina",who:"g1",arr:"baq",ret:"baq",paid:{},chk:{},done:{}},
- {id:"jose",name:"Jose",code:"jose",who:"g1",arr:"baq",ret:"baq",paid:{},chk:{},done:{}},
- {id:"richar",name:"Richar",code:"richar",who:"g1",arr:"baq",ret:"baq",paid:{},chk:{},done:{}},
- {id:"sebas",name:"Sebas",code:"sebas",who:"g1",arr:"copey",ret:"baq",paid:{},chk:{},done:{}},
- {id:"lolyr",name:"Loly R",code:"loly r",who:"g1",arr:"copey3",ret:"smt",paid:{},chk:{},done:{}},
- {id:"hector",name:"Hector",code:"hector",who:"g1",arr:"copey3",ret:"smt",paid:{},chk:{},done:{}},
- {id:"lola",name:"Lola",code:"lola",who:"g2",arr:"baq_g2",ret:"baq",paid:{},chk:{},done:{}},
- {id:"lolya",name:"Loly A",code:"loly a",who:"g2",arr:"baq_g2",ret:"baq",paid:{},chk:{},done:{}},
- {id:"maria",name:"Maria",code:"maria",who:"g2",arr:"baq_g2",ret:"baq",paid:{},chk:{},done:{}}
+ {id:"kalen",name:"Kalen",code:"kalen",who:"g1",arr:"baq",ret:"baq",paid:{},chk:{},done:{},gastos:[]},
+ {id:"rosa",name:"Rosa",code:"rosa",who:"g1",arr:"baq",ret:"baq",paid:{},chk:{},done:{},gastos:[]},
+ {id:"cristina",name:"Cristina",code:"cristina",who:"g1",arr:"baq",ret:"baq",paid:{},chk:{},done:{},gastos:[]},
+ {id:"jose",name:"Jose",code:"jose",who:"g1",arr:"baq",ret:"baq",paid:{},chk:{},done:{},gastos:[]},
+ {id:"richar",name:"Richar",code:"richar",who:"g1",arr:"baq",ret:"baq",paid:{},chk:{},done:{},gastos:[]},
+ {id:"sebas",name:"Sebas",code:"sebas",who:"g1",arr:"copey",ret:"baq",paid:{},chk:{},done:{},gastos:[]},
+ {id:"lolyr",name:"Loly R",code:"loly r",who:"g1",arr:"copey3",ret:"smt",paid:{},chk:{},done:{},gastos:[]},
+ {id:"hector",name:"Hector",code:"hector",who:"g1",arr:"copey3",ret:"smt",paid:{},chk:{},done:{},gastos:[]},
+ {id:"lola",name:"Lola",code:"lola",who:"g2",arr:"baq_g2",ret:"baq",paid:{},chk:{},done:{},gastos:[]},
+ {id:"lolya",name:"Loly A",code:"loly a",who:"g2",arr:"baq_g2",ret:"baq",paid:{},chk:{},done:{},gastos:[]},
+ {id:"maria",name:"Maria",code:"maria",who:"g2",arr:"baq_g2",ret:"baq",paid:{},chk:{},done:{},gastos:[]}
 ],
 days:[
-{n:2,dt:"Viernes 2 de octubre",t:"Llegada a Santa Marta",v:"Brisa de mar y la última noche al nivel del agua.",r:1,s:[["Tarde","Llegada a El Rodadero (frente al restaurante donde Chucho, Calle 6 Cra 3) y check-in"],["Noche","Cena tranquila y a dormir temprano"]],h:"Hotel en El Rodadero, $35.000 por persona",k:"El vuelo del 3 sale a las 7:15 AM. Dejen las maletas listas y acuéstense temprano."},
+{n:2,dt:"Viernes 2 de octubre",t:"Llegada a Santa Marta",v:"Brisa de mar y la última noche al nivel del agua.",r:1,s:[["Tarde","Llegada a El Rodadero (frente al restaurante donde Chucho, Calle 6 Cra 3) y check-in"],["Noche","Cena tranquila y a dormir temprano"]],h:"Hotel en El Rodadero, $37.500 por persona",k:"El vuelo del 3 sale a las 7:15 AM. Dejen las maletas listas y acuéstense temprano."},
 {n:3,dt:"Sábado 3 de octubre",t:"Vuelo a Medellín",v:"Madrugón, avión y la primera tarde en Medellín.",r:2,s:[["Madrugada","Despertar temprano y salir al aeropuerto (llegar hacia las 5:15 AM)"],["7:15 AM","Vuelo de Santa Marta a Medellín"],["Mañana","Llegada a Rionegro, bus a Medellín ($25.000) y metro hasta el hotel"],["Tarde","Parque Explora (entrada $50.000) — *Nota: Loly R y Héctor tienen esta tarde libre/pendiente*"],["Noche","Cena y descanso"]],h:H_MED,k:"Dejen la tarde flexible por si el vuelo o el bus se demoran."},
-{n:4,dt:"Domingo 4 de octubre",t:"City tour por Medellín",v:"La ciudad de la eterna primavera, en metro y a pie.",r:2,s:[["Mañana","City tour ($130.000)"],["Tarde","Libre para almorzar y descansar"],["Noche","Cena"]],h:H_MED},
-{n:5,dt:"Lunes 5 de octubre", t:"Guatapé",v:"Agua, colores y la piedra gigante de Guatapé.",r:2,s:[["Todo el día","Tour a Guatapé ($130.000)"],["Noche","Cena y empacar para Jardín"]],h:H_MED,k:"Confirmen con la agencia el punto de encuentro y la hora de salida."},
+{n:4,dt:"Domingo 4 de octubre",t:"City tour por Medellín",v:"La ciudad de la eterna primavera, en metro y a pie.",r:2,s:[["8:10 AM","Recogida para City tour y Graffitour ($130.000)"],["Tarde","Libre para almorzar y descansar"],["Noche","Cena"]],h:H_MED},
+{n:5,dt:"Lunes 5 de octubre", t:"Guatapé",v:"Agua, colores y la piedra gigante de Guatapé.",r:2,s:[["7:00 AM - 7:10 AM","Recogida y Tour a Guatapé ($130.000)"],["Noche","Cena y empacar para Jardín"]],h:H_MED,k:"Confirmen con la agencia el punto de encuentro y la hora de salida."},
 {n:6,dt:"Martes 6 de octubre",t:"De Medellín a Jardín",v:"Un pueblo de balcones y sillas de colores en la plaza.",r:2,s:[["Mañana","Del hotel a la terminal y bus a Jardín ($50.000)"],["Almuerzo","Almuerzo en Jardín"],["Tarde","Plaza y calles del pueblo"],["Noche","Cena en Jardín"]],h:"Antonia Jardín Colonial, Jardín, $66.000 por persona"},
 {n:7,dt:"Miércoles 7 de octubre",t:"De Jardín a Murillo",v:"Del café al páramo: el aire se pone fino y frío.",r:3,s:[["Mañana","Bus de Jardín a Manizales ($60.000)"],["1:00 PM","Llegada a Manizales y almuerzo"],["2:30 PM","Recoger el carro de alquiler"],["3:00 PM","Salida a Murillo: 83 km por el páramo"],["5:30 PM","Check-in y cena típica (migao)"]],h:"Cabaña Dos Búhos, Murillo, $66.000 por persona",k:"Salgan de Manizales a más tardar a las 3 PM para llegar con luz."},
-{n:8,dt:"Jueves 8 de octubre",t:"Los Nevados y termales",v:"Frailejones, nevado y agua caliente: el día más épico.",r:3,b:"Se une el grupo 2 (Lola, Loly A, María desde Barranquilla)",s:[["6:00 AM","Salida de Murillo (Grupo 1)"],["9:30 AM","Vuelo del Grupo 2 (Lola, Loly A, María): Barranquilla → Bogotá"],["1:00 PM","Llegada del Grupo 2 a Pereira"],["2:00 PM","Encuentro de todos en el hotel de Pereira para almorzar"],["6:00 PM","Termales de Santa Rosa de Cabal ($106.000 / $60.000)"],["9:30 PM","Regreso al hotel"]],h:"Hotel en Pereira",k:"El Grupo 2 vuela vía Bogotá y aterriza en Pereira a la 1 PM para unirse al almuerzo."},
+{n:8,dt:"Jueves 8 de octubre",t:"Los Nevados y termales",v:"Frailejones, nevado y agua caliente: el día más épico.",r:3,b:"Se une el grupo 2 (Lola, Loly A, María desde Barranquilla)",s:[["6:00 AM","Salida de Murillo (Grupo 1)"],["9:30 AM","Vuelo del Grupo 2 (Lola, Loly A, María): Barranquilla → Bogotá"],["1:00 PM","Llegada del Grupo 2 a Pereira"],["2:00 PM","Encuentro de todos en el hotel de Pereira para almorzar"],["6:00 PM","Termales de Santa Rosa de Cabal ($106.000 / $60.000)"],["9:30 PM","Regreso al hotel"]],h:H_PER,k:"El Grupo 2 vuela vía Bogotá y aterriza en Pereira a la 1 PM para unirse al almuerzo."},
 {n:9,dt:"Viernes 9 de octubre",t:"Filandia y Salento",v:"Pueblitos de colores y atardeceres en Salento.",r:4,s:[["8:30 AM","Check-out y salida de Pereira"],["10:00 AM","Filandia: calles coloridas y mirador Colina Iluminada"],["1:00 PM","Almuerzo en Filandia"],["3:00 PM","Check-in en Mahalo, Salento"],["4:30 PM","Calle Real y mirador"]],h:H_SAL},
 {n:10,dt:"Sábado 10 de octubre",t:"Parque del Café",v:"Un día entero de parque, café y atracciones.",r:4,s:[["8:00 AM","Salida de Salento"],["9:30 AM","Parque del Café, todo el día y almuerzo adentro ($92.000)"],["5:30 PM","Regreso a Salento y cena"]],h:H_SAL,k:"Es puente festivo: compren las entradas con anticipación."},
 {n:11,dt:"Domingo 11 de octubre",t:"Valle del Cocora",v:"Palmas de cera que tocan las nubes.",r:4,s:[["7:00 AM","Willys hacia el valle ($14.000)"],["7:30 AM","Caminata entre palmas de cera ($30.000)"],["1:30 PM","Almuerzo en Salento"],["3:30 PM","Tarde libre, compras y maletas"]],h:H_SAL,k:"Madruguen: en el puente festivo hay filas para los Willys."},
@@ -412,13 +448,12 @@ pays:[
 {id:"d2-t2",day:2,cat:"Transporte",item:"Bus Barranquilla → Santa Marta",amt:35000,w:"arr:baq"},
 {id:"d2-t3",day:2,cat:"Transporte",item:"Bus El Copey → Santa Marta",amt:40000,w:"arr:copey"},
 {id:"d2-t4",day:2,cat:"Transporte",item:"Bus El Copey → Santa Marta (madrugada día 3)",amt:40000,w:"arr:copey3"},
-{id:"d2-h1",day:2,cat:"Hotel",item:"Hotel El Rodadero",amt:35000,w:"g1"},
-{id:"d3-t1",day:3,cat:"Transporte",item:"Vuelo SM→MDE + traslados (Grupo principal)",amt:90000,w:"g1_fly"},
+{id:"d2-h1",day:2,cat:"Hotel",item:"Hotel El Rodadero",amt:37500,w:"g1"},
 {id:"d3-c1",day:3,cat:"Comida",item:"Almuerzo y cena en Medellín",amt:90000,w:"kr"},
 {id:"d3-p1",day:3,cat:"Tours",item:"Parque Explora",amt:50000,w:"g1_explora",note:"Loly R y Héctor sin definir"},
 {id:"d3-h1",day:3,cat:"Hotel",item:"Comodo Family Laureles",amt:65000,w:"g1"},
 {id:"d4-c1",day:4,cat:"Comida",item:"Desayuno y cena",amt:40000,w:"kr"},
-{id:"d4-p1",day:4,cat:"Tours",item:"City tour Medellín",amt:130000,w:"g1"},
+{id:"d4-p1",day:4,cat:"Tours",item:"City tour y Graffitour Medellín",amt:130000,w:"g1"},
 {id:"d4-h1",day:4,cat:"Hotel",item:"Comodo Family Laureles",amt:65000,w:"g1"},
 {id:"d5-c1",day:5,cat:"Comida",item:"Cena",amt:30000,w:"kr"},
 {id:"d5-p1",day:5,cat:"Tours",item:"Tour Guatapé",amt:130000,w:"g1"},
@@ -432,12 +467,11 @@ pays:[
 {id:"d7-h1",day:7,cat:"Hotel",item:"Cabaña Dos Búhos, Murillo",amt:66000,w:"g1"},
 {id:"d7-o1",day:7,cat:"Otros",item:"Gastos varios Murillo",amt:30000,w:"g1"},
 {id:"d8-t1",day:8,cat:"Transporte",item:"Carro Murillo→Nevados→Pereira (grupo 1)",amt:60000,w:"g1"},
-{id:"d8-t2",day:8,cat:"Transporte",item:"Vuelo del grupo 2 (Baq → Bogotá → Pereira)",amt:160000,w:"arr:baq_g2"},
 {id:"d8-c1",day:8,cat:"Comida",item:"Desayuno, almuerzo y cena (grupo 1)",amt:85000,w:"kr_g1"},
 {id:"d8-c2",day:8,cat:"Comida",item:"Comidas del día (grupo 2)",amt:50000,w:"kr_g2"},
 {id:"d8-p1",day:8,cat:"Tours",item:"Parque Los Nevados (entrada, guía, vehículo)",amt:60000,w:"g1"},
 {id:"d8-p2",day:8,cat:"Tours",item:"Termales de Santa Rosa de Cabal ($106.000 / $60.000)",amt:106000,w:"all"},
-{id:"d8-h1",day:8,cat:"Hotel",item:"Hotel en Pereira",amt:60000,w:"all"},
+{id:"d8-h1",day:8,cat:"Hotel",item:"Alojamiento Santa Rosa de Cabal",amt:57000,w:"all"},
 {id:"d8-o1",day:8,cat:"Otros",item:"Gastos varios",amt:20000,w:"g1"},
 {id:"d9-t1",day:9,cat:"Transporte",item:"Carro Pereira→Filandia→Salento",amt:60000,w:"all"},
 {id:"d9-c1",day:9,cat:"Comida",item:"Desayuno, almuerzo y cena",amt:90000,w:"kr"},
@@ -453,8 +487,6 @@ pays:[
 {id:"d11-h1",day:11,cat:"Hotel",item:"Mahalo, Salento",amt:54000,w:"all"},
 {id:"d11-o1",day:11,cat:"Otros",item:"Gastos varios",amt:20000,w:"all"},
 {id:"d12-t1",day:12,cat:"Transporte",item:"Carro Salento→Pereira",amt:60000,w:"all"},
-{id:"d12-t2",day:12,cat:"Transporte",item:"Vuelo Pereira→Barranquilla",amt:160000,w:"ret:baq"},
-{id:"d12-t3",day:12,cat:"Transporte",item:"Regreso Pereira→Santa Marta (Loly R, Héctor)",amt:160000,w:"ret:smt"},
 {id:"d12-t4",day:12,cat:"Transporte",item:"Bus Barranquilla → El Copey (Sebas al día siguiente)",amt:55000,w:"arr:copey"},
 {id:"d12-c1",day:12,cat:"Comida",item:"Desayuno y almuerzo",amt:50000,w:"kr"}
 ],
@@ -485,6 +517,7 @@ async function loadFromSupabase(){
           p.paid = row.data.paid || {};
           p.chk = row.data.chk || {};
           p.done = row.data.done || {};
+          p.gastos = row.data.gastos || [];
           p.who = row.data.who || p.who;
           p.arr = row.data.arr || p.arr;
           p.ret = row.data.ret || p.ret;
@@ -499,7 +532,7 @@ async function saveToSupabase(p){
     await supabaseClient.from('traveler_data').upsert({
       id: p.id,
       name: p.name,
-      data: { paid: p.paid, chk: p.chk, done: p.done, who: p.who, arr: p.arr, ret: p.ret },
+      data: { paid: p.paid, chk: p.chk, done: p.done, gastos: p.gastos, who: p.who, arr: p.arr, ret: p.ret },
       updated_at: new Date()
     });
   } catch(e){ console.error("Error al guardar en Supabase", e); }
@@ -607,7 +640,7 @@ function renderItin(){
   
   const alts={
     2:"🌊 2 msnm | 28°C", 3:"🏙️ 1.495 msnm | 22°C", 4:"🏙️ 1.495 msnm | 22°C", 5:"🛶 1.925 msnm | 19°C",
-    6:"☕ 1.750 msnm | 19°C", 7:"🥶 2.950 msnm | 10°C", 8:"🌋 4.800 msnm | 5°C (Termales: Santa Rosa de Cabal)",
+    6:"☕ 1.750 msnm | 19°C", 7:"🥶 2.950 msnm | 10°C", 8:"🌋 4.800 msnm | 5°C (Alojamiento Santa Rosa de Cabal)",
     9:"🌴 1.895 msnm | 18°C (Filandia)", 10:"🎢 1.294 msnm | 22°C (Parque del Café)", 11:"☁ 2.400 msnm | 16°C", 12:"✈ 1.411 msnm | 21°C"
   };
   const dayImages = {
@@ -671,7 +704,7 @@ function renderPay(){
     Object.keys(cats).forEach(c=>{
       h+=`<div class="cat"><h4>${c}</h4>${cats[c].map(x=>{
         const pi=ME.paid[x.id];
-        const full=(pi===true||(typeof pi==="number"&&pi>=x.amt));
+        const full=(pi===true||(typeof pi===number"&&pi>=x.amt));
         const partial=(typeof pi==="number"&&pi>0&&pi<x.amt);
         const cls=full?"ok":(partial?"partial":"");
         const paidAmt=typeof pi==="number"?pi:(pi===true?x.amt:0);
@@ -710,6 +743,61 @@ function renderPay(){
       };
     });
   }
+}
+
+// ---- MÓDULO DE GASTOS PERSONALES (BOTÓN NEÓN) ----
+function renderGastos(){
+  if(!ME) return;
+  ME.gastos = ME.gastos || [];
+  const totalGastos = ME.gastos.reduce((a,x)=>a + (+x.amt||0), 0);
+
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')"><div class="welcome-card-content">
+    <h3>✨ Mis Gastos Personales de ${ME.name}</h3><p>Anota aquí tus antojos, taxis, compras o cualquier gasto extra que lleves en el viaje para llevar tu propia cuenta.</p>
+    <div style="margin-top:12px; display:flex; gap:8px;">
+      <input id="g-desc" placeholder="¿En qué gastaste? (Ej. Café, taxi...)" style="flex:1; padding:10px; border:1px solid var(--border); border-radius:10px; font-size:0.9rem; background:var(--bg); color:var(--ink);" autocomplete="off">
+      <input id="g-amt" type="number" placeholder="Valor ($)" style="width:110px; padding:10px; border:1px solid var(--border); border-radius:10px; font-size:0.9rem; background:var(--bg); color:var(--ink);" autocomplete="off">
+      <button id="g-add" style="background:var(--c1); color:#fff; border:0; padding:10px 16px; border-radius:10px; font-weight:700;">Añadir</button>
+    </div>
+  </div></div>`;
+
+  h+=`<div class="tots"><div class="tot" style="grid-column: span 3; background:var(--t1);"><b style="color:var(--c1); font-size:1.5rem;">${fmt(totalGastos)}</b><span>Total Gastado por ti</span></div></div>`;
+
+  h+=`<div class="chk-card"><h4 style="margin:0 0 10px;color:var(--c1);font-size:1.05rem">Historial de tus gastos extra</h4>`;
+  if(ME.gastos.length === 0){
+    h+=`<p style="color:var(--mut); font-size:0.9rem; text-align:center; padding:15px 0;">No has agregado ningún gasto personal todavía. ¡Usa el formulario de arriba para empezar!</p>`;
+  } else {
+    ME.gastos.forEach((g, idx)=>{
+      h+=`<div class="chk-item" style="display:flex; justify-content:space-between; align-items:center;">
+        <div><span>${g.desc}</span></div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <b style="color:var(--c1);">${fmt(g.amt)}</b>
+          <button class="del-gasto" data-idx="${idx}" style="background:#c0392b22; color:#c0392b; border:0; border-radius:6px; padding:4px 8px; font-size:0.75rem; font-weight:700;">Eliminar</button>
+        </div>
+      </div>`;
+    });
+  }
+  h+=`</div>`;
+
+  $("v-gastos").innerHTML=h;
+
+  $("v-gastos").querySelector("#g-add").onclick = () => {
+    const desc = $("g-desc").value.trim();
+    const amt = parseInt($("g-amt").value.trim());
+    if(!desc || isNaN(amt) || amt <= 0){
+      alert("Por favor ingresa una descripción válida y un valor mayor a 0.");
+      return;
+    }
+    ME.gastos.push({desc, amt});
+    snd("ok"); save(); renderGastos();
+  };
+
+  $("v-gastos").querySelectorAll(".del-gasto").forEach(btn=>{
+    btn.onclick = () => {
+      const idx = parseInt(btn.dataset.idx);
+      ME.gastos.splice(idx, 1);
+      snd("click"); save(); renderGastos();
+    };
+  });
 }
 
 function renderChk(){
@@ -785,7 +873,7 @@ function renderStats(){
     rowsHtml+=`<div class="person-row"><div><b>${p.name}</b><br><small style="color:var(--mut)">Pagado: ${fmt(paid)} / Falta: ${fmt(falta)}</small></div><div style="text-align:right"><b>${pct}%</b><br><small style="color:var(--c1)">Total: ${fmt(est)}</small></div></div>`;
   });
   let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('Barranquilla.jpg')"><div class="welcome-card-content"><h3>📊 Panel Global de Administrador</h3><p>Resumen financiero y control de todos los participantes.</p></div></div>`;
-  h+=`<div class="tots"><div class="tot"><b><div>${fmt(totalGlobalEst)}</div></b><span>Presupuesto</span></div><div class="tot" style="background:var(--t2)"><b style="color:var(--c2)">${fmt(totalGlobalPaid)}</b><span>Recaudado</span></div><div class="tot" style="background:var(--t1)"><b style="color:var(--c1)">${fmt(Math.max(totalGlobalEst-totalGlobalPaid,0))}</b><span>Pendiente</span></div></div>`;
+  h+=`<div class="tots"><div class="tot"><b>${fmt(totalGlobalEst)}</b><span>Presupuesto</span></div><div class="tot" style="background:var(--t2)"><b style="color:var(--c2)">${fmt(totalGlobalPaid)}</b><span>Recaudado</span></div><div class="tot" style="background:var(--t1)"><b style="color:var(--c1)">${fmt(Math.max(totalGlobalEst-totalGlobalPaid,0))}</b><span>Pendiente</span></div></div>`;
   h+=`<div class="stat-box"><h3>👥 Estado de Pagos por Integrante</h3>${rowsHtml}</div>`;
   $("v-stats").innerHTML=h;
 }
@@ -832,6 +920,7 @@ function show(v){
   $("v-hero").style.display=v==="itin"?"":"none";
   $("v-pay").style.display=v==="pay"?"":"none";
   $("v-chk").style.display=v==="chk"?"":"none";
+  $("v-gastos").style.display=v==="gastos"?"":"none";
   $("v-done").style.display=v==="done"?"":"none";
   $("v-stats").style.display=v==="stats"?"":"none";
   $("v-adm").style.display=v==="adm"?"":"none";
@@ -845,7 +934,8 @@ document.querySelectorAll("#menu button").forEach(b=>b.onclick=async()=>{
   await loadFromSupabase();
   show(v);
   if(v==="itin") renderItin(); else if(v==="pay") renderPay(); else if(v==="chk") renderChk();
-  else if(v==="done") renderDone(); else if(v==="stats") renderStats(); else if(v==="adm") renderAdm();
+  else if(v==="gastos") renderGastos(); else if(v==="done") renderDone();
+  else if(v==="stats") renderStats(); else if(v==="adm") renderAdm();
 });
 
 async function enter(p){
@@ -854,7 +944,7 @@ async function enter(p){
   activeDays = getTravelerDays(ME);
   document.body.classList.remove("admin"); document.body.classList.add("in");
   $("lg").style.display="none"; $("who").textContent=p.name+" (Cambiar)";
-  renderItin(); renderPay(); renderChk(); renderDone(); renderStats(); show("itin");
+  renderItin(); renderPay(); renderChk(); renderGastos(); renderDone(); renderStats(); show("itin");
   snd("ok");
 }
 
@@ -873,7 +963,7 @@ async function askAdmin(){
     activeDays = getTravelerDays(ME);
     document.body.classList.add("admin","in");
     $("lg").style.display="none"; $("who").textContent="Admin ⚡";
-    renderItin(); renderPay(); renderChk(); renderDone(); renderStats(); renderAdm();
+    renderItin(); renderPay(); renderChk(); renderGastos(); renderDone(); renderStats(); renderAdm();
     show("stats"); snd("ok");
   }else if(pwd!==null){ alert("Contraseña incorrecta"); }
 }
@@ -889,7 +979,8 @@ $("float-switch").onclick = async () => {
       const activeBtn = document.querySelector("#menu button.on");
       const v = activeBtn ? activeBtn.dataset.v : "itin";
       if(v==="itin") renderItin(); else if(v==="pay") renderPay(); else if(v==="chk") renderChk();
-      else if(v==="done") renderDone(); else if(v==="stats") renderStats(); else if(v==="adm") renderAdm();
+      else if(v==="gastos") renderGastos(); else if(v==="done") renderDone();
+      else if(v==="stats") renderStats(); else if(v==="adm") renderAdm();
       alert(`Ahora estás viendo los datos de: ${ME.name}`);
     }else{ alert("Número no válido"); }
   }
