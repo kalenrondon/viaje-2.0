@@ -39,6 +39,8 @@ button{font-family:inherit;cursor:pointer;min-height:44px;min-width:44px}
 #lab{font-weight:600;font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:30%}
 .bar-actions{margin-left:auto;display:flex;align-items:center;gap:6px}
 #who{font-size:.78rem;font-weight:700;color:var(--c1);background:var(--t1);padding:4px 10px;border-radius:20px;white-space:nowrap;cursor:pointer;border:1px solid var(--c1)}
+#admin-badge{display:none;font-size:.72rem;font-weight:700;color:#fff;background:var(--c2);padding:4px 8px;border-radius:12px;cursor:pointer}
+body.admin #admin-badge{display:inline-block}
 #trk{position:relative;flex:1;height:6px;min-width:20px}
 .sg{display:flex;height:100%;border-radius:3px;overflow:hidden}.sg i{display:block;height:100%}
 #mk{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--c1);border:2.5px solid var(--bg);box-shadow:0 1px 4px #0005;transition:background .4s}
@@ -231,6 +233,7 @@ body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
   <div id="trk"><div class="sg" id="sg"></div><div id="mk"></div></div>
   <div class="bar-actions">
     <button class="btn-ico" id="dark-toggle" title="Modo Oscuro">🌙</button>
+    <span id="admin-badge" title="Volver al Panel Global Admin">📊 Stats / Admin</span>
     <span id="who" title="Cambiar de usuario">Cargando...</span>
   </div>
 </div>
@@ -265,9 +268,9 @@ body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
 </div>
 
 <script>
-const VER=55,PASS="kalen2026";
+const VER=56,PASS="kalen2026";
 const SUPABASE_URL = 'https://mzhzxtbaactgboiyihue.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im16aHp4dGJhYWN0Z2JvaXlpaHVlIiwicm9sZSI6ImFub24iOjE3OTA4Njg1ODEsImV4cCI6MjEwNjQ0NDU4MX0.hPjXUoPeLEVAppWqN0ZBl7MkbgcdAT0uHi0L6T_z_pw';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im16aHp4dGJhYWN0Z2JvaXlpaHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4Njg1ODEsImV4cCI6MjEwNjQ0NDU4MX0.hPjXUoPeLEVAppWqN0ZBl7MkbgcdAT0uHi0L6T_z_pw';
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const H_MED="Comodo Family Laureles, Medellín, $65.000 por persona";
@@ -715,28 +718,37 @@ function renderStats(){
 
     rows+=`<div class="stat-item-wrap" style="border-bottom:1px solid var(--border); padding:10px 0;">
       <div class="person-row" data-pid="${p.id}">
-        <div><b>${p.name}</b><br><small style="color:var(--mut)">Pagado: ${fmt(paid)}</small></div>
+        <div><b>${p.name}</b> <small style="color:var(--c1); font-weight:700;">(Gestionar ⚙️)</small><br><small style="color:var(--mut)">Pagado: ${fmt(paid)}</small></div>
         <div style="text-align:right"><b>${pct}%</b><br><small style="color:var(--c1)">Total: ${fmt(est)}</small></div>
       </div>
       <div class="person-detail-card" id="detail-${p.id}">
         <p style="margin:0 0 6px; font-size:0.85rem;"><b>Salida:</b> ${p.arr} | <b>Regreso:</b> ${p.ret} | <b>Grupo:</b> ${p.who.toUpperCase()}</p>
         <p style="margin:0 0 6px; font-size:0.85rem;"><b>Gastos personales extra:</b> ${fmt(persGastos)}</p>
-        <p style="margin:0; font-size:0.85rem; color:var(--c4);"><b>Saldo pendiente ruta:</b> ${fmt(Math.max(est-paid,0))}</p>
+        <p style="margin:0 0 8px; font-size:0.85rem; color:var(--c4);"><b>Saldo pendiente ruta:</b> ${fmt(Math.max(est-paid,0))}</p>
+        <button class="manage-person-btn" data-pid="${p.id}" style="background:var(--c1); color:#fff; border:0; padding:6px 12px; border-radius:8px; font-weight:700; font-size:0.8rem;">Gestionar Pagos de ${p.name}</button>
       </div>
     </div>`;
   });
 
-  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('Barranquilla.jpg')"><div class="welcome-card-content"><h3>📊 Panel Global Admin</h3><p>Resumen financiero general del grupo. Toca cualquier persona para ver detalles.</p></div></div>`;
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('Barranquilla.jpg')"><div class="welcome-card-content"><h3>📊 Panel Global Admin</h3><p>Resumen financiero general del grupo. Toca cualquier persona para ver detalles o gestionarla.</p></div></div>`;
   h+=`<div class="tots"><div class="tot"><b>${fmt(totalEst)}</b><span>Presupuesto</span></div><div class="tot" style="background:var(--t2)"><b style="color:var(--c2)">${fmt(totalPaid)}</b><span>Recaudado</span></div><div class="tot" style="background:var(--t1)"><b style="color:var(--c1)">${fmt(Math.max(totalEst-totalPaid,0))}</b><span>Pendiente</span></div></div>`;
   h+=`<div class="stat-box"><h3>👥 Integrantes (Toca para desplegar)</h3>${rows}</div>`;
   $("v-stats").innerHTML=h;
 
   $("v-stats").querySelectorAll(".person-row").forEach(row=>{
-    row.onclick = () => {
+    row.onclick = (e) => {
+      if(e.target.closest("button")) return;
       const pid = row.dataset.pid;
       const card = $(`detail-${pid}`);
       card.classList.toggle("open");
       snd("click");
+    };
+  });
+
+  $("v-stats").querySelectorAll(".manage-person-btn").forEach(btn=>{
+    btn.onclick = () => {
+      const p = D.people.find(x => x.id === btn.dataset.pid);
+      enterAsAdminFor(p);
     };
   });
 }
@@ -805,6 +817,15 @@ async function enter(p){
   renderItin(); renderPay(); renderGastos(); renderChk(); renderDone(); renderStats(); show("itin"); snd("ok");
 }
 
+async function enterAsAdminFor(p){
+  await loadFromSupabase(); ME=p; ADMIN=true; activeDays=getTravelerDays(ME);
+  document.body.classList.add("admin","in");
+  $("lg").style.display="none"; 
+  $("who").textContent = `⚡ Admin (${p.name})`;
+  renderItin(); renderPay(); renderGastos(); renderChk(); renderDone(); renderStats(); renderAdm();
+  show("pay"); snd("ok");
+}
+
 function logout(){
   ADMIN=false; ME=null; activeDays=D.days;
   document.body.classList.remove("in","admin");
@@ -837,7 +858,11 @@ function openPicker(){
     item.onclick = async () => {
       const p = D.people.find(x=>x.id===item.dataset.id);
       $("picker-modal").classList.remove("on");
-      await enter(p);
+      if(ADMIN){
+        await enterAsAdminFor(p);
+      } else {
+        await enter(p);
+      }
     };
   });
 
@@ -859,6 +884,7 @@ $("picker-cancel").onclick = () => { $("picker-modal").classList.remove("on"); }
 $("who").onclick = openPicker;
 $("m-switch").onclick = openPicker;
 $("m-exit").onclick = logout;
+$("admin-badge").onclick = () => { show("stats"); };
 
 function tryLogin(){
   const val=$("lin").value.trim().toLowerCase();
