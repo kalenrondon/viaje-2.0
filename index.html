@@ -263,7 +263,7 @@ body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
 </div>
 
 <script>
-const VER=52,PASS="kalen2026";
+const VER=51,PASS="kalen2026";
 const SUPABASE_URL = 'https://mzhzxtbaactgboiyihue.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im16aHp4dGJhYWN0Z2JvaXlpaHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4Njg1ODEsImV4cCI6MjEwNjQ0NDU4MX0.hPjXUoPeLEVAppWqN0ZBl7MkbgcdAT0uHi0L6T_z_pw';
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -448,7 +448,7 @@ let ME=null, ADMIN=false, DARK=false;
 function setDark(val){
   DARK = val;
   document.body.classList.toggle("dark", DARK);
-  $("dark-toggle").textContent = DARK ? "☀️️" : "🌙";
+  $("dark-toggle").textContent = DARK ? "☀️" : "🌙";
   try{ localStorage.setItem("itin_dark", DARK ? "1" : "0"); }catch(e){}
 }
 try{ if(localStorage.getItem("itin_dark")==="1") setDark(true); }catch(e){}
@@ -508,7 +508,7 @@ function renderItin(){
   let travelerBanner = ME ? `<div class="traveler-name-banner">Viajero: ${ME.name}</div>` : "";
   $("v-hero").innerHTML=`<header class="hero" id="hero"><div class="sun"></div><div class="cloud cl1"></div><div class="cloud cl2"></div>
   <div class="plane"><svg viewBox="0 0 64 32"><g fill="#fff"><path d="M4 14h50c6 0 8 2 8 2s-2 2-8 2H4z"/><path d="M26 15 18 2h6l16 13zM26 17l-8 13h6l16-13z"/><path d="M8 15 3 7h4l7 8zM8 17l-5 8h4l7-8z"/></g></svg></div>
-  <div style="position:relative;z-index:2;max-width:760px;margin:0 auto;width:100%">${travelerBanner}<h1>${D.title}</h1><p style="margin-bottom:12px">${D.sub}</p></div>
+  <div style="position:relative;z-index:2;max-width:760px;margin:0 auto;width:100%">${travelerBanner}<h1>${D.title}</h1><p style="margin-bottom:12px">${D.sub}</p><div style="display:inline-flex;align-items:center;gap:6px;background:#ffffff33;padding:6px 14px;border-radius:20px;font-weight:700;backdrop-filter:blur(6px);border:1px solid #ffffff55;font-size:0.9rem"><span style="font-size:1.2rem">👫</span> by Rosa & Kalen</div></div>
   <div class="hint">Desliza para empezar</div>
   <svg class="hw" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice">${wave("#fff",.35,SK[1],1)}</svg></header>`;
   
@@ -571,7 +571,7 @@ function renderPay(){
       h+=`<div class="cat"><h4>${c}</h4>${cats[c].map(x=>{
         const pi=ME.paid[x.id];
         const full=(pi===true||(typeof pi==="number"&&pi>=x.amt));
-        const partial=(typeof pi===number&&pi>0&&pi<x.amt);
+        const partial=(typeof pi==="number"&&pi>0&&pi<x.amt);
         const cls=full?"ok":(partial?"partial":"");
         const paidAmt=typeof pi==="number"?pi:(pi===true?x.amt:0);
         return `<div class="pay ${cls}" data-id="${x.id}">
