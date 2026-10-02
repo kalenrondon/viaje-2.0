@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>Del Caribe al Eje Cafetero</title>
+<!-- Icono / Imagen para la pestaña del navegador (Reemplaza el href con el enlace o ruta de tu imagen) -->
+<link rel="icon" type="image/png" href="ruta/o/enlace/de/tu/imagen.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;600&display=swap">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
@@ -613,7 +615,6 @@ function renderGastos(){
   h+=`</div>`;
   $("v-gastos").innerHTML=h;
 
-  // Formateador automático de puntos de miles al escribir en el input de valor
   const amtInput = $("v-gastos").querySelector("#g-amt");
   amtInput.oninput = (e) => {
     let raw = e.target.value.replace(/\D/g, "");
