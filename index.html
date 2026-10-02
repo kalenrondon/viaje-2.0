@@ -44,13 +44,6 @@ button{font-family:inherit;cursor:pointer;min-height:44px;min-width:44px}
 #mk{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--c1);border:2.5px solid var(--bg);box-shadow:0 1px 4px #0005;transition:background .4s}
 .btn-ico{background:none;border:0;font-size:1.1rem;padding:8px;border-radius:8px;color:var(--ink);display:grid;place-items:center}
 
-/* ---- BOTONES FLOTANTES ADMIN SUPERIORES MEJORADOS ---- */
-#admin-float-bar{position:fixed;top:56px;left:12px;right:12px;z-index:11;display:none;gap:8px;justify-content:center;pointer-events:none}
-body.admin #admin-float-bar{display:flex}
-.float-btn{pointer-events:auto;border:0;border-radius:20px;padding:6px 14px;font:700 .75rem Figtree,sans-serif;box-shadow:0 4px 12px rgba(0,0,0,0.15);display:flex;align-items:center;gap:6px;backdrop-filter:blur(10px);min-height:36px;border:1px solid var(--border)}
-#float-exit{background:#c0392b;color:#fff;border-color:#c0392b}
-#float-switch{background:var(--card-bg);color:var(--c1);border-color:var(--c1)}
-
 /* ---- MODAL SELECTOR DE PERSONAS PROFESIONAL ---- */
 #picker-modal{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.5);backdrop-filter:blur(5px);display:none;place-items:center;padding:20px}
 #picker-modal.on{display:grid}
@@ -67,6 +60,7 @@ body.admin #admin-float-bar{display:flex}
 .hw{position:absolute;left:0;bottom:0;width:100%;height:34%}
 .hint{position:absolute;left:0;right:0;bottom:36%;text-align:center;font-weight:600;font-size:.9rem;animation:bob 1.8s ease-in-out infinite}
 .hero h1{font-weight:800;font-size:clamp(2.5rem,10vw,5.5rem);line-height:.98;letter-spacing:-.025em;margin:0 0 14px;max-width:9em;text-shadow:0 2px 24px #0a4a6366}
+.hero .traveler-name-banner{display:inline-block;background:#ffffff33;padding:8px 18px;border-radius:14px;font-size:clamp(1.2rem,4vw,1.8rem);font-weight:800;margin-bottom:10px;backdrop-filter:blur(6px);border:1px solid #ffffff55;letter-spacing:-.01em;text-shadow:0 1px 8px #0a4a6366}
 .hero p{max-width:30em;font-size:1.05rem;margin:0;text-shadow:0 1px 12px #0a4a6388}
 
 /* ---- TARJETA BIENVENIDA ---- */
@@ -173,10 +167,14 @@ body.in #menu{display:grid}
   cursor: pointer;
 }
 
-/* Ocultar botones no deseados en Admin */
+/* Visibilidad de botones en modo Normal vs Admin */
 body.admin #menu button.neon-btn { display: none; }
 body.admin #menu button[data-v="chk"], body.admin #menu button[data-v="done"] { display: none; }
-body.admin #menu { grid-template-columns: repeat(3, 1fr); }
+
+/* Botones especiales de admin en el menú */
+#m-switch, #m-exit { display: none; }
+body.admin #m-switch, body.admin #m-exit { display: grid; }
+body.admin #menu { grid-template-columns: repeat(5, 1fr); }
 
 body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
 
@@ -231,12 +229,6 @@ body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
   </div>
 </div>
 
-<!-- ADMIN FLOATING BAR (SUPERIOR MEJORADA) -->
-<div id="admin-float-bar">
-  <button class="float-btn" id="float-switch">👤 Cambiar Persona</button>
-  <button class="float-btn" id="float-exit">🚪 Salir Admin</button>
-</div>
-
 <div id="v-hero"></div>
 <main id="app"></main>
 <div id="v-pay"></div>
@@ -255,10 +247,14 @@ body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
   <button data-v="done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Hecho</button>
   <button data-v="stats" id="m-stats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Stats</button>
   <button data-v="adm" id="m-adm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Admin</button>
+  
+  <!-- Botones exclusivos de Admin en el Menú -->
+  <button id="m-switch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Cambiar</button>
+  <button id="m-exit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Salir</button>
 </div>
 
 <script>
-const VER=44,PASS="kalen2026";
+const VER=47,PASS="kalen2026";
 const SUPABASE_URL = 'https://mzhzxtbaactgboiyihue.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im16aHp4dGJhYWN0Z2JvaXlpaHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4Njg1ODEsImV4cCI6MjEwNjQ0NDU4MX0.hPjXUoPeLEVAppWqN0ZBl7MkbgcdAT0uHi0L6T_z_pw';
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -299,10 +295,10 @@ const abelardoMsgs = [
 ];
 
 const petroMsgs = [
-  "¡Bienvenidos al camino de vida y montaña! Cuiden cada frailejón, amen los páramos y respiren profundamente esta tierra... porque proteger la naturaleza y nuestros ecosistemas es cuidar el latido del futuro y de la paz en Colombia.",
+  "¡Bienvenidos al camino de vida y montaña! Cuiden каждый frailejón, amen los páramos y respiren profundamente esta tierra... porque proteger la naturaleza y nuestros ecosistemas es cuidar el latido del futuro y de la paz en Colombia.",
   "Hola, querido viajero. Que este recorrido por el Eje Cafetero te llene de paz. Recuerda que el agua que bebes y el aire que respiras son sagrados; cuida cada sendero como si fuera el jardín de tu propia casa.",
   "¡Qué alegría verte emprender este viaje! La cordillera de los Andes nos enseña la resiliencia de la vida. Escucha el silencio de los páramos, protege la fauna y viaja con el corazón abierto al respeto por la tierra.",
-  "Bienvenidos al país de la belleza inmensa. En каждый árbol y en cada fuente hídrica descansa la historia de nuestro pueblo. Amen esta tierra, respétenla y hágansela florecer a las nuevas generaciones."
+  "Bienvenidos al país de la belleza inmensa. En cada árbol y en cada fuente hídrica descansa la historia de nuestro pueblo. Amen esta tierra, respétenla y hágansela florecer a las nuevas generaciones."
 ];
 
 function getDailyMsg(arrList, seedStr){
@@ -369,7 +365,7 @@ pays:[
 {id:"d8-c2",day:8,cat:"Comida",item:"Comidas del día (grupo 2)",amt:50000,w:"kr_g2"},
 {id:"d8-p1",day:8,cat:"Tours",item:"Parque Los Nevados (entrada, guía, vehículo)",amt:60000,w:"g1"},
 {id:"d8-p2",day:8,cat:"Tours",item:"Termales de Santa Rosa de Cabal",amt:106000,w:"all"},
-{id:"d8-h1",day:8,cat:"Hotel",item:"Alojamiento Santa Rosa de Cabal",amt:57000,w:"all"},
+{id:"d8-h1",day:8,cat:"Hotel",item:"Alojamiento Santa Rosa de Cabal (Pereira)",amt:57000,w:"all"},
 {id:"d8-o1",day:8,cat:"Otros",item:"Gastos varios",amt:20000,w:"g1"},
 {id:"d9-t1",day:9,cat:"Transporte",item:"Carro Pereira→Filandia→Salento",amt:60000,w:"all"},
 {id:"d9-c1",day:9,cat:"Comida",item:"Desayuno, almuerzo y cena",amt:90000,w:"kr"},
@@ -501,9 +497,10 @@ function getTravelerDays(p){ return (p && p.arr==="baq_g2") ? D.days.filter(d=>d
 let activeDays = D.days;
 
 function renderItin(){
+  let travelerBanner = ME ? `<div class="traveler-name-banner">Viajero: ${ME.name}</div>` : "";
   $("v-hero").innerHTML=`<header class="hero" id="hero"><div class="sun"></div><div class="cloud cl1"></div><div class="cloud cl2"></div>
   <div class="plane"><svg viewBox="0 0 64 32"><g fill="#fff"><path d="M4 14h50c6 0 8 2 8 2s-2 2-8 2H4z"/><path d="M26 15 18 2h6l16 13zM26 17l-8 13h6l16-13z"/><path d="M8 15 3 7h4l7 8zM8 17l-5 8h4l7-8z"/></g></svg></div>
-  <div style="position:relative;z-index:2;max-width:760px;margin:0 auto;width:100%"><h1>${D.title}</h1><p style="margin-bottom:12px">${D.sub}</p><div style="display:inline-flex;align-items:center;gap:6px;background:#ffffff33;padding:6px 14px;border-radius:20px;font-weight:700;backdrop-filter:blur(6px);border:1px solid #ffffff55;font-size:0.9rem"><span style="font-size:1.2rem">👫</span> by Rosa & Kalen</div></div>
+  <div style="position:relative;z-index:2;max-width:760px;margin:0 auto;width:100%">${travelerBanner}<h1>${D.title}</h1><p style="margin-bottom:12px">${D.sub}</p><div style="display:inline-flex;align-items:center;gap:6px;background:#ffffff33;padding:6px 14px;border-radius:20px;font-weight:700;backdrop-filter:blur(6px);border:1px solid #ffffff55;font-size:0.9rem"><span style="font-size:1.2rem">👫</span> by Rosa & Kalen</div></div>
   <div class="hint">Desliza para empezar</div>
   <svg class="hw" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice">${wave("#fff",.35,SK[1],1)}</svg></header>`;
   
@@ -780,7 +777,7 @@ function show(v){
   scrollTo(0,0); onS();
 }
 
-document.querySelectorAll("#menu button").forEach(b=>b.onclick=async()=>{
+document.querySelectorAll("#menu button[data-v]").forEach(b=>b.onclick=async()=>{
   const v=b.dataset.v;
   if(!ADMIN && (v==="adm"||v==="stats")) return;
   await loadFromSupabase(); show(v);
@@ -829,8 +826,8 @@ function openPicker(){
 
 $("picker-cancel").onclick = () => { $("picker-modal").classList.remove("on"); };
 $("who").onclick = openPicker;
-$("float-switch").onclick = openPicker;
-$("float-exit").onclick = logout;
+$("m-switch").onclick = openPicker;
+$("m-exit").onclick = logout;
 
 function tryLogin(){
   const val=$("lin").value.trim().toLowerCase();
