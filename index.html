@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>Del Caribe al Eje Cafetero</title>
-<!-- Icono / Imagen para la pestaña del navegador (Reemplaza el href con el enlace o ruta de tu imagen) -->
 <link rel="icon" type="image/png" href="ruta/o/enlace/de/tu/imagen.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;600&display=swap">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -37,20 +36,31 @@ button{font-family:inherit;cursor:pointer;min-height:44px;min-width:44px}
 /* ---- BARRA SUPERIOR ---- */
 #bar{position:fixed;top:0;left:0;right:0;z-index:9;height:48px;padding:0 12px;display:none;align-items:center;gap:8px;background:var(--card-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
 #bar.on{display:flex}
-#lab{font-weight:600;font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:35%}
+#lab{font-weight:600;font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:30%}
 .bar-actions{margin-left:auto;display:flex;align-items:center;gap:6px}
-#who{font-size:.78rem;font-weight:600;color:var(--mut);white-space:nowrap;text-decoration:underline;padding:8px}
+#who{font-size:.78rem;font-weight:700;color:var(--c1);background:var(--t1);padding:4px 10px;border-radius:20px;white-space:nowrap;cursor:pointer;border:1px solid var(--c1)}
 #trk{position:relative;flex:1;height:6px;min-width:20px}
 .sg{display:flex;height:100%;border-radius:3px;overflow:hidden}.sg i{display:block;height:100%}
 #mk{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--c1);border:2.5px solid var(--bg);box-shadow:0 1px 4px #0005;transition:background .4s}
 .btn-ico{background:none;border:0;font-size:1.1rem;padding:8px;border-radius:8px;color:var(--ink);display:grid;place-items:center}
 
-/* ---- BOTONES FLOTANTES ADMIN OPTIMIZADOS ---- */
-#admin-float-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:76px;z-index:11;display:none;gap:10px;justify-content:center;pointer-events:none;width:auto;max-width:90%}
+/* ---- BOTONES FLOTANTES ADMIN SUPERIORES MEJORADOS ---- */
+#admin-float-bar{position:fixed;top:56px;left:12px;right:12px;z-index:11;display:none;gap:8px;justify-content:center;pointer-events:none}
 body.admin #admin-float-bar{display:flex}
-.float-btn{pointer-events:auto;border:0;border-radius:10px;padding:8px 14px;font:700 .78rem Figtree,sans-serif;box-shadow:0 4px 16px rgba(0,0,0,0.2);display:flex;align-items:center;gap:6px;backdrop-filter:blur(8px);min-height:40px;white-space:nowrap}
-#float-exit{background:#c0392b;color:#fff}
-#float-switch{background:var(--c1);color:#fff}
+.float-btn{pointer-events:auto;border:0;border-radius:20px;padding:6px 14px;font:700 .75rem Figtree,sans-serif;box-shadow:0 4px 12px rgba(0,0,0,0.15);display:flex;align-items:center;gap:6px;backdrop-filter:blur(10px);min-height:36px;border:1px solid var(--border)}
+#float-exit{background:#c0392b;color:#fff;border-color:#c0392b}
+#float-switch{background:var(--card-bg);color:var(--c1);border-color:var(--c1)}
+
+/* ---- MODAL SELECTOR DE PERSONAS PROFESIONAL ---- */
+#picker-modal{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.5);backdrop-filter:blur(5px);display:none;place-items:center;padding:20px}
+#picker-modal.on{display:grid}
+.picker-card{background:var(--card-bg);width:100%;max-width:420px;border-radius:20px;padding:24px;box-shadow:0 20px 40px rgba(0,0,0,0.2);border:1px solid var(--border);max-height:85vh;overflow-y:auto}
+.picker-card h3{margin:0 0 4px;font-size:1.25rem;color:var(--c1)}
+.picker-card p{margin:0 0 16px;font-size:0.88rem;color:var(--mut)}
+.picker-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px}
+.picker-item{background:var(--bg);border:1px solid var(--border);padding:12px;border-radius:12px;font-weight:600;font-size:0.9rem;text-align:center;cursor:pointer;transition:all 0.2s;color:var(--ink)}
+.picker-item:hover{border-color:var(--c1);background:var(--t1);color:var(--c1)}
+.picker-close{width:100%;padding:12px;border:0;border-radius:12px;background:var(--mut);color:#fff;font-weight:700}
 
 /* ---- HERO ---- */
 .hero{position:relative;min-height:92svh;display:grid;align-content:center;padding:24px;color:#fff;overflow:hidden;background:linear-gradient(#ff9d6c 0%,#ffd08a 28%,#8fd3ea 62%,#0b7fa0 100%)}
@@ -126,11 +136,14 @@ body.dark .day-bg-wrap::before{opacity:0.12}
 .chk-item span{font-weight:500;font-size:.94rem}
 .chk-item.done span{text-decoration:line-through;color:var(--mut)}
 
-/* ---- ESTADÍSTICAS & ADMIN ---- */
+/* ---- ESTADÍSTICAS & ADMIN DETALLADAS ---- */
 .stat-box{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.03)}
 .stat-box h3{margin-top:0;font-size:1.15rem;color:var(--c1)}
-.person-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);font-size:.92rem}
+.person-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);font-size:.92rem;cursor:pointer;transition:background 0.2s}
+.person-row:hover{background:var(--t1);padding-left:8px;padding-right:8px;border-radius:8px}
 .person-row:last-child{border-bottom:0}
+.person-detail-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px;margin-top:10px;display:none}
+.person-detail-card.open{display:block}
 
 /* ---- MENÚ INFERIOR ---- */
 #menu{position:fixed;left:0;right:0;bottom:0;z-index:10;display:none;grid-template-columns:repeat(5,1fr);align-items:center;background:var(--card-bg);backdrop-filter:blur(16px);border-top:1px solid var(--border);padding:8px 6px calc(8px + env(safe-area-inset-bottom));box-shadow:0 -6px 24px rgba(0,0,0,0.08)}
@@ -140,7 +153,6 @@ body.in #menu{display:grid}
 #menu button.on{color:var(--c1);background:var(--t1)}
 #menu button.on svg{transform:translateY(-2px) scale(1.15)}
 
-/* Botón Neón Minimalista (+) */
 #menu button.neon-btn{
   background: linear-gradient(135deg, #0b7fa0 0%, #38bdf8 100%);
   color: #fff;
@@ -159,18 +171,12 @@ body.in #menu{display:grid}
   font-size: 1.6rem;
   font-weight: 800;
   cursor: pointer;
-  transition: transform 0.2s cubic-bezier(0.4,0,0.2,1), box-shadow 0.2s;
-}
-#menu button.neon-btn:hover{
-  transform: translateY(-3px) scale(1.05);
-}
-#menu button.neon-btn:active{
-  transform: scale(0.92);
 }
 
-/* Ocultar elementos si es Admin */
+/* Ocultar botones no deseados en Admin */
 body.admin #menu button.neon-btn { display: none; }
-body.admin #menu { grid-template-columns: repeat(4, 1fr); }
+body.admin #menu button[data-v="chk"], body.admin #menu button[data-v="done"] { display: none; }
+body.admin #menu { grid-template-columns: repeat(3, 1fr); }
 
 body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
 
@@ -178,7 +184,6 @@ body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
 .aprow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:10px}
 .aprow b{flex:1 1 110px}
 .aprow select{padding:8px 10px;border:1.5px solid var(--border);border-radius:9px;font:500 .85rem Figtree,sans-serif;background:var(--bg);color:var(--ink);min-height:42px}
-.paidall{font-size:.72rem;color:var(--mut)}
 
 @keyframes rise{from{transform:translateY(170px) scale(.92);opacity:0}}
 @keyframes fly{0%{transform:translate(-100px,42px) rotate(7deg);opacity:0}7%{opacity:1}32%{transform:translate(30vw,8px) rotate(1deg)}58%{transform:translate(56vw,-12px) rotate(-3deg)}85%{opacity:1}100%{transform:translate(calc(100vw + 100px),-44px) rotate(-7deg);opacity:0}}
@@ -206,17 +211,27 @@ body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
   </div>
 </div>
 
+<!-- MODAL SELECTOR DE PERSONAS -->
+<div id="picker-modal">
+  <div class="picker-card">
+    <h3>Seleccionar Viajero</h3>
+    <p>Elige el perfil que deseas ver o gestionar:</p>
+    <div class="picker-grid" id="picker-list"></div>
+    <button class="picker-close" id="picker-cancel">Cancelar</button>
+  </div>
+</div>
+
 <!-- APP BAR -->
 <div id="bar">
   <span id="lab">Inicio</span>
   <div id="trk"><div class="sg" id="sg"></div><div id="mk"></div></div>
   <div class="bar-actions">
     <button class="btn-ico" id="dark-toggle" title="Modo Oscuro">🌙</button>
-    <span id="who" title="Cambiar de usuario" onclick="logout()">Salir</span>
+    <span id="who" title="Cambiar de usuario">Cargando...</span>
   </div>
 </div>
 
-<!-- ADMIN FLOATING BAR (REORGANIZADA) -->
+<!-- ADMIN FLOATING BAR (SUPERIOR MEJORADA) -->
 <div id="admin-float-bar">
   <button class="float-btn" id="float-switch">👤 Cambiar Persona</button>
   <button class="float-btn" id="float-exit">🚪 Salir Admin</button>
@@ -243,7 +258,7 @@ body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
 </div>
 
 <script>
-const VER=43,PASS="kalen2026";
+const VER=44,PASS="kalen2026";
 const SUPABASE_URL = 'https://mzhzxtbaactgboiyihue.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im16aHp4dGJhYWN0Z2JvaXlpaHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4Njg1ODEsImV4cCI6MjEwNjQ0NDU4MX0.hPjXUoPeLEVAppWqN0ZBl7MkbgcdAT0uHi0L6T_z_pw';
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -287,7 +302,7 @@ const petroMsgs = [
   "¡Bienvenidos al camino de vida y montaña! Cuiden cada frailejón, amen los páramos y respiren profundamente esta tierra... porque proteger la naturaleza y nuestros ecosistemas es cuidar el latido del futuro y de la paz en Colombia.",
   "Hola, querido viajero. Que este recorrido por el Eje Cafetero te llene de paz. Recuerda que el agua que bebes y el aire que respiras son sagrados; cuida cada sendero como si fuera el jardín de tu propia casa.",
   "¡Qué alegría verte emprender este viaje! La cordillera de los Andes nos enseña la resiliencia de la vida. Escucha el silencio de los páramos, protege la fauna y viaja con el corazón abierto al respeto por la tierra.",
-  "Bienvenidos al país de la belleza inmensa. En cada árbol y en cada fuente hídrica descansa la historia de nuestro pueblo. Amen esta tierra, respétenla y hágansela florecer a las nuevas generaciones."
+  "Bienvenidos al país de la belleza inmensa. En каждый árbol y en cada fuente hídrica descansa la historia de nuestro pueblo. Amen esta tierra, respétenla y hágansela florecer a las nuevas generaciones."
 ];
 
 function getDailyMsg(arrList, seedStr){
@@ -634,7 +649,12 @@ function renderGastos(){
   };
 
   $("v-gastos").querySelectorAll(".del-gasto").forEach(btn=>{
-    btn.onclick = () => { ME.gastos.splice(parseInt(btn.dataset.idx),1); snd("click"); save(); renderGastos(); };
+    btn.onclick = () => {
+      if(confirm("¿Estás seguro de que deseas eliminar este gasto personal?")){
+        ME.gastos.splice(parseInt(btn.dataset.idx),1);
+        snd("click"); save(); renderGastos();
+      }
+    };
   });
 }
 
@@ -684,12 +704,34 @@ function renderStats(){
     let paid=0; mine.forEach(x=>{ const pi=p.paid[x.id]; if(typeof pi==="number")paid+=pi; else if(pi===true)paid+=(+x.amt||0); });
     totalEst+=est; totalPaid+=paid;
     const pct=est>0?Math.round((paid/est)*100):0;
-    rows+=`<div class="person-row"><div><b>${p.name}</b><br><small style="color:var(--mut)">Pagado: ${fmt(paid)}</small></div><div style="text-align:right"><b>${pct}%</b><br><small style="color:var(--c1)">Total: ${fmt(est)}</small></div></div>`;
+    const persGastos = (p.gastos||[]).reduce((a,x)=>a+(+x.amt||0),0);
+
+    rows+=`<div class="stat-item-wrap" style="border-bottom:1px solid var(--border); padding:10px 0;">
+      <div class="person-row" data-pid="${p.id}">
+        <div><b>${p.name}</b><br><small style="color:var(--mut)">Pagado: ${fmt(paid)}</small></div>
+        <div style="text-align:right"><b>${pct}%</b><br><small style="color:var(--c1)">Total: ${fmt(est)}</small></div>
+      </div>
+      <div class="person-detail-card" id="detail-${p.id}">
+        <p style="margin:0 0 6px; font-size:0.85rem;"><b>Salida:</b> ${p.arr} | <b>Regreso:</b> ${p.ret} | <b>Grupo:</b> ${p.who.toUpperCase()}</p>
+        <p style="margin:0 0 6px; font-size:0.85rem;"><b>Gastos personales extra:</b> ${fmt(persGastos)}</p>
+        <p style="margin:0; font-size:0.85rem; color:var(--c4);"><b>Saldo pendiente ruta:</b> ${fmt(Math.max(est-paid,0))}</p>
+      </div>
+    </div>`;
   });
-  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('Barranquilla.jpg')"><div class="welcome-card-content"><h3>📊 Panel Global Admin</h3><p>Resumen financiero general del grupo.</p></div></div>`;
+
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('Barranquilla.jpg')"><div class="welcome-card-content"><h3>📊 Panel Global Admin</h3><p>Resumen financiero general del grupo. Toca cualquier persona para ver detalles.</p></div></div>`;
   h+=`<div class="tots"><div class="tot"><b>${fmt(totalEst)}</b><span>Presupuesto</span></div><div class="tot" style="background:var(--t2)"><b style="color:var(--c2)">${fmt(totalPaid)}</b><span>Recaudado</span></div><div class="tot" style="background:var(--t1)"><b style="color:var(--c1)">${fmt(Math.max(totalEst-totalPaid,0))}</b><span>Pendiente</span></div></div>`;
-  h+=`<div class="stat-box"><h3>👥 Integrantes</h3>${rows}</div>`;
+  h+=`<div class="stat-box"><h3>👥 Integrantes (Toca para desplegar)</h3>${rows}</div>`;
   $("v-stats").innerHTML=h;
+
+  $("v-stats").querySelectorAll(".person-row").forEach(row=>{
+    row.onclick = () => {
+      const pid = row.dataset.pid;
+      const card = $(`detail-${pid}`);
+      card.classList.toggle("open");
+      snd("click");
+    };
+  });
 }
 
 function renderAdm(){
@@ -749,7 +791,8 @@ document.querySelectorAll("#menu button").forEach(b=>b.onclick=async()=>{
 async function enter(p){
   await loadFromSupabase(); ME=p; ADMIN=false; activeDays=getTravelerDays(ME);
   document.body.classList.remove("admin"); document.body.classList.add("in");
-  $("lg").style.display="none"; $("who").textContent=p.name+" (Cambiar)";
+  $("lg").style.display="none"; 
+  $("who").textContent = `👤 ${p.name}`;
   renderItin(); renderPay(); renderGastos(); renderChk(); renderDone(); renderStats(); show("itin"); snd("ok");
 }
 
@@ -760,33 +803,33 @@ function logout(){
 }
 
 async function askAdmin(){
-  const pwd=prompt("Contraseña de administrador:");
+  let pwd = prompt("Contraseña de administrador:");
   if(pwd===PASS){
     await loadFromSupabase(); ADMIN=true; ME=D.people[0]; activeDays=getTravelerDays(ME);
     document.body.classList.add("admin","in");
-    $("lg").style.display="none"; $("who").textContent="Admin ⚡";
+    $("lg").style.display="none"; 
+    $("who").textContent="⚡ Admin";
     renderItin(); renderPay(); renderGastos(); renderChk(); renderDone(); renderStats(); renderAdm();
     show("stats"); snd("ok");
   }else if(pwd!==null){ alert("Contraseña incorrecta"); }
 }
 
-$("float-switch").onclick = async () => {
-  await loadFromSupabase();
-  const names = D.people.map((p,idx)=>`${idx+1}. ${p.name}`).join("\n");
-  const sel = prompt(`Selecciona el número de la persona:\n\n${names}`);
-  if(sel){
-    const index = parseInt(sel.trim())-1;
-    if(D.people[index]){
-      ME=D.people[index]; activeDays=getTravelerDays(ME);
-      const activeBtn=document.querySelector("#menu button.on");
-      const v=activeBtn?activeBtn.dataset.v:"itin";
-      if(v==="itin") renderItin(); else if(v==="pay") renderPay(); else if(v==="gastos") renderGastos();
-      else if(v==="chk") renderChk(); else if(v==="done") renderDone(); else if(v==="stats") renderStats(); else if(v==="adm") renderAdm();
-      alert(`Ahora estás viendo los datos de: ${ME.name}`);
-    }else{ alert("Número no válido"); }
-  }
-};
+function openPicker(){
+  const list = $("picker-list");
+  list.innerHTML = D.people.map(p=>`<div class="picker-item" data-id="${p.id}">${p.name}</div>`).join("");
+  $("picker-modal").classList.add("on");
+  list.querySelectorAll(".picker-item").forEach(item=>{
+    item.onclick = async () => {
+      const p = D.people.find(x=>x.id===item.dataset.id);
+      $("picker-modal").classList.remove("on");
+      await enter(p);
+    };
+  });
+}
 
+$("picker-cancel").onclick = () => { $("picker-modal").classList.remove("on"); };
+$("who").onclick = openPicker;
+$("float-switch").onclick = openPicker;
 $("float-exit").onclick = logout;
 
 function tryLogin(){
