@@ -209,7 +209,7 @@ body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
     <input id="lin" placeholder="Nombre o código" autocomplete="off" autocapitalize="none">
     <button class="go" id="lgo">Entrar</button>
     <div id="lerr"></div>
-    <button class="adm" id="ladm">Soy admin</button>
+    <button class="adm" id="ladm">Admin (Contraseña)</button>
   </div>
 </div>
 
@@ -263,7 +263,7 @@ body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
 </div>
 
 <script>
-const VER=50,PASS="kalen2026";
+const VER=51,PASS="kalen2026";
 const SUPABASE_URL = 'https://mzhzxtbaactgboiyihue.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im16aHp4dGJhYWN0Z2JvaXlpaHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4Njg1ODEsImV4cCI6MjEwNjQ0NDU4MX0.hPjXUoPeLEVAppWqN0ZBl7MkbgcdAT0uHi0L6T_z_pw';
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -324,7 +324,6 @@ people:[
  {id:"kalen",name:"Kalen",code:"kalen",who:"g1",arr:"baq",ret:"baq",paid:{},chk:{},done:{},gastos:[]},
  {id:"rosa",name:"Rosa",code:"rosa",who:"g1",arr:"baq",ret:"baq",paid:{},chk:{},done:{},gastos:[]},
  {id:"cristina",name:"Cristina",code:"cristina",who:"g1",arr:"baq",ret:"baq",paid:{},chk:{},done:{},gastos:[]},
- {id:"jose",name:"Jose",code:"jose",who:"g1",arr:"baq",ret:"baq",paid:{},chk:{},done:{},gastos:[]},
  {id:"richar",name:"Richar",code:"richar",who:"g1",arr:"baq",ret:"baq",paid:{},chk:{},done:{},gastos:[]},
  {id:"sebas",name:"Sebas",code:"sebas",who:"g1",arr:"copey",ret:"baq",paid:{},chk:{},done:{},gastos:[]},
  {id:"lolyr",name:"Loly R",code:"loly r",who:"g1",arr:"copey3",ret:"smt",paid:{},chk:{},done:{},gastos:[]},
@@ -344,7 +343,7 @@ days:[
 {n:9,dt:"Viernes 9 de octubre",t:"Filandia y Salento",v:"Pueblitos de colores y atardeceres en Salento.",r:4,s:[["8:30 AM","Check-out y salida de Pereira"],["10:00 AM","Filandia: calles coloridas y mirador Colina Iluminada"],["1:00 PM","Almuerzo en Filandia"],["3:00 PM","Check-in en Mahalo, Salento"],["4:30 PM","Calle Real y mirador"]],h:H_SAL},
 {n:10,dt:"Sábado 10 de octubre",t:"Parque del Café",v:"Un día entero de parque, café y atracciones.",r:4,s:[["8:00 AM","Salida de Salento"],["9:30 AM","Parque del Café, todo el día y almuerzo adentro ($92.000)"],["5:30 PM","Regreso a Salento y cena"]],h:H_SAL,k:"Es puente festivo: compren las entradas con anticipación."},
 {n:11,dt:"Domingo 11 de octubre",t:"Valle del Cocora",v:"Palmas de cera que tocan las nubes.",r:4,s:[["7:00 AM","Willys hacia el valle ($14.000)"],["7:30 AM","Caminata entre palmas de cera ($30.000)"],["1:30 PM","Almuerzo en Salento"],["3:30 PM","Tarde libre, compras y maletas"]],h:H_SAL,k:"Madruguen: en el puente festivo hay filas para los Willys."},
-{n:12,dt:"Lunes 12 de octubre",t:"Regreso",v:"Una última taza de café y de regreso a casa.",r:4,s:[["9:00 AM","Desayuno y check-out"],["12:00 PM","Salida hacia Pereira"],["1:30 PM","Devolver el carro y almorzar"],["3:00 PM","Llegada al aeropuerto Matecaña (Solo Loly R y Héctor viajan a Sta Marta ~4 PM)"],["5:00 PM","Vuelo de Pereira a Barranquilla (Kalen, Rosa, Cristina, Jose, Richar, Sebas, Loly A, Lola y María)"]],k:"Hoy es festivo y puede haber tráfico de regreso."}
+{n:12,dt:"Lunes 12 de octubre",t:"Regreso",v:"Una última taza de café y de regreso a casa.",r:4,s:[["9:00 AM","Desayuno y check-out"],["12:00 PM","Salida hacia Pereira"],["1:30 PM","Devolver el carro y almorzar"],["3:00 PM","Llegada al aeropuerto Matecaña (Solo Loly R y Héctor viajan a Sta Marta ~4 PM)"],["5:00 PM","Vuelo de Pereira a Barranquilla (Kalen, Rosa, Cristina, Richar, Sebas, Loly A, Lola y María)"]],k:"Hoy es festivo y puede haber tráfico de regreso."}
 ],
 pays:[
 {id:"d2-t1",day:2,cat:"Transporte",item:"Carro a terminal (Barranquilla)",amt:6000,w:"arr:baq"},
@@ -843,7 +842,7 @@ function tryLogin(){
   const val=$("lin").value.trim().toLowerCase();
   if(!val)return;
   if(val===PASS || val==="admin" || val==="kalen2026"){
-    $("lerr").textContent="Usa el botón verde 'Soy admin' para ingresar."; return;
+    askAdmin(); return;
   }
   const p=D.people.find(x=>x.name.toLowerCase()===val || x.code.toLowerCase()===val);
   if(p){ $("lerr").textContent=""; enter(p); }
