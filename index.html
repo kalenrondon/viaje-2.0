@@ -1,4 +1,8 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>Del Caribe al Eje Cafetero</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;600&display=swap">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -6,21 +10,18 @@
 :root{--c1:#0b7fa0;--c2:#2a8a4a;--c3:#5865b0;--c4:#a0561d;--t1:#e3f4fa;--t2:#e7f4e9;--t3:#e9ecf8;--t4:#f7ece1;--ink:#17302d;--mut:#56696a;--bg:#fff;--card-bg:#fff;--border:#17302d1f}
 body.dark{--c1:#38bdf8;--c2:#4ade80;--c3:#818cf8;--c4:#fb923c;--t1:#073642;--t2:#064e3b;--t3:#312e81;--t4:#431407;--ink:#f1f5f9;--mut:#94a3b8;--bg:#0f172a;--card-bg:#1e293b;--border:#64748b}
 *{box-sizing:border-box;touch-action:manipulation;-webkit-tap-highlight-color:transparent}html{scroll-behavior:smooth}
-body{margin:0;font:400 16px/1.55 Figtree,system-ui,sans-serif;color:var(--ink);background:var(--bg);transition:background .3s,color .3s}
-body.admin{padding-bottom:120px}
-body.in{padding-bottom:120px}
+body{margin:0;font:400 16px/1.55 Figtree,system-ui,sans-serif;color:var(--ink);background:var(--bg);transition:background .3s,color .3s;padding-bottom:100px}
 h1,h2,h3,.num{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif}
-button{font-family:inherit;cursor:pointer}
+button{font-family:inherit;cursor:pointer;min-height:44px;min-width:44px}
 
 /* ---- LOGIN ---- */
 #lg{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:24px;color:#fff;overflow:hidden;background:linear-gradient(#ff9d6c 0%,#ffd08a 28%,#8fd3ea 62%,#0b7fa0 100%)}
 #lg .card{position:relative;z-index:2;width:100%;max-width:380px;text-align:center;background:#ffffffe6;backdrop-filter:blur(10px);color:#17302d;border-radius:22px;padding:34px 26px;box-shadow:0 20px 60px #0a4a6340}
 #lg h1{font-size:1.9rem;line-height:1.05;margin:0 0 6px;letter-spacing:-.02em}
 #lg .sub2{color:#56696a;font-size:.95rem;margin:0 0 22px}
-#lg input{width:100%;padding:13px 16px;font:500 1rem Figtree,sans-serif;border:2px solid #d3ded9;border-radius:12px;outline:none;text-align:center;background:#fff;color:#17302d}
+#lg input{width:100%;padding:14px 16px;font:500 1rem Figtree,sans-serif;border:2px solid #d3ded9;border-radius:12px;outline:none;text-align:center;background:#fff;color:#17302d;min-height:48px}
 #lg input:focus{border-color:var(--c1)}
 #lg .go{width:100%;margin-top:12px;padding:13px;border:0;border-radius:12px;background:var(--c1);color:#fff;font-weight:700;font-size:1rem}
-#lg .go:active{transform:scale(.98)}
 #lg .adm{margin-top:14px;width:100%;padding:12px;border:0;border-radius:12px;background:var(--c2);color:#fff;font-weight:700;font-size:1rem}
 #lerr{color:#c0392b;font-size:.88rem;margin-top:10px;min-height:1.2em}
 .sun{position:absolute;left:50%;top:30%;width:140px;height:140px;margin-left:-70px;border-radius:50%;background:#fff3c4;box-shadow:0 0 90px 30px #ffe9a8aa;animation:rise 2.4s cubic-bezier(.2,.8,.2,1) both}
@@ -32,20 +33,20 @@ button{font-family:inherit;cursor:pointer}
 .lwave{position:absolute;left:0;bottom:0;width:100%;height:30%}
 
 /* ---- BARRA SUPERIOR ---- */
-#bar{position:fixed;top:0;left:0;right:0;z-index:9;height:46px;padding:0 12px;display:none;align-items:center;gap:8px;background:var(--card-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+#bar{position:fixed;top:0;left:0;right:0;z-index:9;height:48px;padding:0 12px;display:none;align-items:center;gap:8px;background:var(--card-bg);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
 #bar.on{display:flex}
 #lab{font-weight:600;font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:35%}
 .bar-actions{margin-left:auto;display:flex;align-items:center;gap:6px}
-#who{font-size:.78rem;font-weight:600;color:var(--mut);white-space:nowrap;text-decoration:underline;padding:4px}
+#who{font-size:.78rem;font-weight:600;color:var(--mut);white-space:nowrap;text-decoration:underline;padding:8px}
 #trk{position:relative;flex:1;height:6px;min-width:20px}
 .sg{display:flex;height:100%;border-radius:3px;overflow:hidden}.sg i{display:block;height:100%}
 #mk{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--c1);border:2.5px solid var(--bg);box-shadow:0 1px 4px #0005;transition:background .4s}
-.btn-ico{background:none;border:0;font-size:1rem;padding:4px;border-radius:6px;color:var(--ink)}
+.btn-ico{background:none;border:0;font-size:1.1rem;padding:8px;border-radius:8px;color:var(--ink);display:grid;place-items:center}
 
-/* ---- BOTONES FLOTANTES DE ADMIN ---- */
-#admin-float-bar{position:fixed;left:12px;right:12px;bottom:70px;z-index:11;display:none;gap:8px;justify-content:center;pointer-events:none}
+/* ---- BOTONES FLOTANTES ADMIN ---- */
+#admin-float-bar{position:fixed;left:12px;right:12px;bottom:76px;z-index:11;display:none;gap:8px;justify-content:center;pointer-events:none}
 body.admin #admin-float-bar{display:flex}
-.float-btn{pointer-events:auto;border:0;border-radius:12px;padding:8px 14px;font:700 .8rem Figtree,sans-serif;box-shadow:0 4px 16px rgba(0,0,0,0.18);display:flex;align-items:center;gap:6px;backdrop-filter:blur(8px)}
+.float-btn{pointer-events:auto;border:0;border-radius:12px;padding:10px 16px;font:700 .8rem Figtree,sans-serif;box-shadow:0 4px 16px rgba(0,0,0,0.18);display:flex;align-items:center;gap:6px;backdrop-filter:blur(8px);min-height:44px}
 #float-exit{background:#c0392b;color:#fff}
 #float-switch{background:var(--c1);color:#fff}
 
@@ -57,82 +58,18 @@ body.admin #admin-float-bar{display:flex}
 .hero p{max-width:30em;font-size:1.05rem;margin:0;text-shadow:0 1px 12px #0a4a6388}
 
 /* ---- TARJETA BIENVENIDA ---- */
-.welcome-card-wrap {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  margin: 16px auto;
-  max-width: 680px;
-  border: 1px solid var(--border);
-  background: var(--card-bg);
-  box-shadow: 0 4px 12px rgba(0,0,0,.03);
-}
-.welcome-card-wrap::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: var(--bg-img);
-  background-size: cover;
-  background-position: center;
-  opacity: 0.18;
-  pointer-events: none;
-  transition: opacity .3s;
-}
-body.dark .welcome-card-wrap::before {
-  opacity: 0.12;
-}
-.welcome-card-content {
-  position: relative;
-  z-index: 1;
-  padding: 20px;
-}
+.welcome-card-wrap{position:relative;border-radius:16px;overflow:hidden;margin:16px auto;max-width:680px;border:1px solid var(--border);background:var(--card-bg);box-shadow:0 4px 12px rgba(0,0,0,.03)}
+.welcome-card-wrap::before{content:"";position:absolute;inset:0;background-image:var(--bg-img);background-size:cover;background-position:center;opacity:0.18;pointer-events:none}
+body.dark .welcome-card-wrap::before{opacity:0.12}
+.welcome-card-content{position:relative;z-index:1;padding:20px}
 .welcome-card-content h3{margin:0 0 6px;font-size:1.35rem;color:var(--c1)}
 .welcome-card-content p{margin:0;color:var(--mut);font-size:.92rem;line-height:1.6}
-
-.welcome-header-flex {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 12px;
-}
-.welcome-caricature-big, .welcome-caricature-petro {
-  width: 100px;
-  height: 100px;
-  flex: none;
-  object-fit: cover;
-  border-radius: 50%;
-  background: transparent;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  transform: translateZ(0);
-}
-.welcome-caricature-big {
-  border: 3px solid var(--c4);
-  box-shadow: 0 4px 14px rgba(160,86,29,0.25);
-}
-.welcome-caricature-petro {
-  border: 3px solid var(--c1);
-  box-shadow: 0 4px 14px rgba(11,127,160,0.25);
-}
-
-@media(min-width: 768px) {
-  .welcome-caricature-big, .welcome-caricature-petro {
-    width: 120px;
-    height: 120px;
-  }
-}
-
-.welcome-speech-bubble {
-  position: relative;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  padding: 12px 16px;
-  border-radius: 14px;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  flex: 1;
-}
+.welcome-header-flex{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+.welcome-caricature-big,.welcome-caricature-petro{width:100px;height:100px;flex:none;object-fit:cover;border-radius:50%}
+.welcome-caricature-big{border:3px solid var(--c4);box-shadow:0 4px 14px rgba(160,86,29,0.25)}
+.welcome-caricature-petro{border:3px solid var(--c1);box-shadow:0 4px 14px rgba(11,127,160,0.25)}
+@media(min-width:768px){.welcome-caricature-big,.welcome-caricature-petro{width:120px;height:120px}}
+.welcome-speech-bubble{position:relative;background:var(--card-bg);border:1px solid var(--border);padding:12px 16px;border-radius:14px;font-size:0.9rem;line-height:1.5;box-shadow:0 2px 8px rgba(0,0,0,0.04);flex:1}
 
 /* ---- DÍAS ---- */
 .day{position:relative;background:var(--t)}
@@ -144,159 +81,102 @@ body.dark .welcome-card-wrap::before {
 .dt{color:var(--mut);font-weight:500;margin:12px 0 0}
 h2{font-weight:700;font-size:clamp(1.7rem,6vw,2.2rem);line-height:1.1;margin:4px 0 6px}
 .v{font-size:1.05rem;font-style:italic;color:var(--c);font-weight:500;margin:0 0 8px}
-.bd{display:inline-block;background:var(--c);color:#fff;font-size:.8rem;font-weight:600;padding:2px 10px;border-radius:999px;margin:2px 0 4px}
-.pn{margin:10px 0 0;padding:9px 12px;border-left:4px solid var(--c);background:var(--card-bg);border-radius:0 9px 9px 0;font-size:.92rem;border:1px solid var(--border);border-left-width:4px}
-.pn b{font-weight:600}
+.bd{display:inline-block;background:var(--c);color:#fff;font-size:.8rem;font-weight:600;padding:4px 12px;border-radius:999px;margin:2px 0 4px}
+.pn{margin:10px 0 0;padding:12px;border-left:4px solid var(--c);background:var(--card-bg);border-radius:0 9px 9px 0;font-size:.92rem;border:1px solid var(--border);border-left-width:4px}
 ul{list-style:none;margin:12px 0 0;padding:0}
-li{display:grid;grid-template-columns:5.2rem 1fr;gap:8px;padding:8px 0;border-top:1px solid var(--border)}
+li{display:grid;grid-template-columns:5.6rem 1fr;gap:8px;padding:10px 0;border-top:1px solid var(--border)}
 li:first-child{border-top:0}.tm{font-weight:600;font-size:.9rem;color:var(--c)}
-.n{margin:10px 0 0;padding:9px 12px;border-left:4px solid var(--c);background:var(--card-bg);border-radius:0 9px 9px 0;font-size:.92rem;border:1px solid var(--border);border-left-width:4px}
+.n{margin:10px 0 0;padding:12px;border-left:4px solid var(--c);background:var(--card-bg);border-radius:0 9px 9px 0;font-size:.92rem;border:1px solid var(--border);border-left-width:4px}
 .rv{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}.rv.in{opacity:1;transform:none}
 
-/* ---- SEMI-FONDO DE DESTINO ---- */
-.day-bg-wrap {
-  position: relative;
-  border-radius: 14px;
-  overflow: hidden;
-  margin: 12px 0;
-  border: 1px solid var(--border);
-  background: var(--card-bg);
-}
-.day-bg-wrap::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: var(--bg-img);
-  background-size: cover;
-  background-position: center;
-  opacity: 0.18;
-  pointer-events: none;
-  transition: opacity .3s;
-}
-body.dark .day-bg-wrap::before {
-  opacity: 0.12;
-}
-.day-bg-content {
-  position: relative;
-  z-index: 1;
-  padding: 14px 16px;
-}
+/* ---- DESTINOS ---- */
+.day-bg-wrap{position:relative;border-radius:14px;overflow:hidden;margin:12px 0;border:1px solid var(--border);background:var(--card-bg)}
+.day-bg-wrap::before{content:"";position:absolute;inset:0;background-image:var(--bg-img);background-size:cover;background-position:center;opacity:0.18;pointer-events:none}
+body.dark .day-bg-wrap::before{opacity:0.12}
+.day-bg-content{position:relative;z-index:1;padding:14px 16px}
 
-/* ---- PAGOS ---- */
-#v-pay{max-width:680px;margin:0 auto;padding:64px 16px 110px}
+/* ---- PAGOS Y GASTOS ---- */
+#v-pay,#v-gastos,#v-chk,#v-done,#v-adm,#v-stats{max-width:680px;margin:0 auto;padding:64px 16px 110px}
 .tots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
-.tot{background:var(--t4);border-radius:12px;padding:10px;text-align:center}
+.tot{background:var(--t4);border-radius:12px;padding:12px 8px;text-align:center}
 .tot b{display:block;font-size:1.15rem;font-family:"Bricolage Grotesque",sans-serif}
 .tot span{font-size:.72rem;color:var(--mut);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
 .pday{margin-bottom:14px;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;overflow:hidden}
-.pday>header{padding:10px 14px;background:var(--t);display:flex;justify-content:space-between;align-items:baseline}
+.pday>header{padding:12px 16px;background:var(--t);display:flex;justify-content:space-between;align-items:baseline}
 .pday>header h3{margin:0;font-size:1.05rem;color:var(--ink)}
 .pday>header span{font-size:.82rem;font-weight:600;color:var(--mut)}
-.cat{padding:4px 14px 8px}
-.cat h4{margin:8px 0 2px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--c)}
-.pay{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px dashed var(--border);user-select:none}
+.cat{padding:4px 16px 10px}
+.cat h4{margin:10px 0 4px;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--c)}
+.pay{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px dashed var(--border);user-select:none}
 .pay:first-of-type{border-top:0}
-.pay .bx{width:26px;height:26px;flex:none;border-radius:7px;border:2px solid var(--mut);display:grid;place-items:center;color:#fff;font-size:.85rem}
+.pay .bx{width:28px;height:28px;flex:none;border-radius:8px;border:2px solid var(--mut);display:grid;place-items:center;color:#fff;font-size:.85rem}
 .pay.ok .bx{background:var(--c2);border-color:var(--c2)}
 .pay.partial .bx{background:var(--c4);border-color:var(--c4)}
 .pay .nm{flex:1;font-size:.92rem}
 .pay .am{font-weight:700;font-size:.9rem;white-space:nowrap;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
-.pay .am small{font-weight:500;color:var(--mut);font-size:.7rem}
-.abonar-btn{display:inline-block;background:var(--t1);color:var(--c1);border:1px solid var(--c1);padding:4px 8px;border-radius:6px;font-size:.75rem;font-weight:700}
+.abonar-btn{background:var(--t1);color:var(--c1);border:1px solid var(--c1);padding:6px 10px;border-radius:8px;font-size:.75rem;font-weight:700;min-height:36px}
 
-/* ---- CHECKLISTS Y GASTOS PERSONALES ---- */
-#v-chk,#v-done,#v-gastos{max-width:680px;margin:0 auto;padding:64px 16px 110px}
+/* ---- CHECKLISTS ---- */
 .chk-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.03)}
-.chk-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--border)}
+.chk-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--border)}
 .chk-item:first-child{border-top:0}
-.chk-item input{width:22px;height:22px;accent-color:var(--c1)}
+.chk-item input{width:24px;height:24px;accent-color:var(--c1);min-height:24px;min-width:24px}
 .chk-item span{font-weight:500;font-size:.94rem}
 .chk-item.done span{text-decoration:line-through;color:var(--mut)}
 
 /* ---- ESTADÍSTICAS & ADMIN ---- */
-#v-adm,#v-stats{max-width:680px;margin:0 auto;padding:64px 16px 110px}
 .stat-box{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.03)}
 .stat-box h3{margin-top:0;font-size:1.15rem;color:var(--c1)}
-.person-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:.92rem}
+.person-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);font-size:.92rem}
 .person-row:last-child{border-bottom:0}
 
-/* ---- MENÚ INFERIOR (PEGADO ABAJO) CON BOTÓN NEÓN CENTRAL ---- */
-#menu{position:fixed;left:0;right:0;bottom:0;z-index:10;display:none;grid-template-columns:repeat(5,1fr);align-items:center;background:var(--card-bg);backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:6px 4px calc(6px + env(safe-area-inset-bottom));box-shadow:0 -4px 20px rgba(0,0,0,0.1)}
+/* ---- MENÚ INFERIOR CON BOTÓN NEÓN CENTRAL (+) ---- */
+#menu{position:fixed;left:0;right:0;bottom:0;z-index:10;display:none;grid-template-columns:repeat(5,1fr);align-items:center;background:var(--card-bg);backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:8px 6px calc(8px + env(safe-area-inset-bottom));box-shadow:0 -4px 20px rgba(0,0,0,0.1)}
 body.in #menu{display:grid}
-#menu button{border:0;background:none;padding:4px 2px;border-radius:12px;font:600 .68rem Figtree,sans-serif;color:var(--mut);display:grid;gap:2px;justify-items:center;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);position:relative}
-#menu button svg{width:18px;height:18px;transition:transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
+#menu button{border:0;background:none;padding:6px 2px;border-radius:12px;font:600 .68rem Figtree,sans-serif;color:var(--mut);display:grid;gap:3px;justify-items:center;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);position:relative;min-height:48px}
+#menu button svg{width:20px;height:20px;transition:transform 0.3s cubic-bezier(0.4,0,0.2,1)}
 #menu button.on{color:var(--c1);background:var(--t1)}
 #menu button.on svg{transform:translateY(-2px) scale(1.15)}
 
-/* Botón Neón Central Exclusivo (+) */
-#menu button.neon-btn {
-  background: linear-gradient(135deg, #ff9d6c, #e4572e, #0b7fa0);
-  background-size: 200% 200%;
-  animation: neonPulse 3s ease infinite;
-  color: #fff;
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  margin: -14px auto 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 15px rgba(11, 127, 160, 0.6), 0 0 25px rgba(255, 157, 108, 0.5);
-  border: 2px solid #fff;
-  font-size: 1.4rem;
-  font-weight: 800;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-#menu button.neon-btn:active {
-  transform: scale(0.92);
-}
-@keyframes neonPulse {
-  0% { background-position: 0% 50%; box-shadow: 0 0 10px rgba(11,127,160,0.6), 0 0 20px rgba(255,157,108,0.4); }
-  50% { background-position: 100% 50%; box-shadow: 0 0 20px rgba(255,157,108,0.8), 0 0 30px rgba(11,127,160,0.7); }
-  100% { background-position: 0% 50%; box-shadow: 0 0 10px rgba(11,127,160,0.6), 0 0 20px rgba(255,157,108,0.4); }
-}
+#menu button.neon-btn{background:linear-gradient(135deg,#ff9d6c,#e4572e,#0b7fa0);background-size:200% 200%;animation:neonPulse 3s ease infinite;color:#fff;border-radius:50%;width:52px;height:52px;min-width:52px;min-height:52px;margin:-16px auto 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(11,127,160,0.6),0 0 26px rgba(255,157,108,0.5);border:2px solid #fff;font-size:1.5rem;font-weight:800;cursor:pointer}
+#menu button.neon-btn:active{transform:scale(0.92)}
+@keyframes neonPulse{0%{background-position:0% 50%;box-shadow:0 0 10px rgba(11,127,160,0.6),0 0 20px rgba(255,157,108,0.4)}50%{background-position:100% 50%;box-shadow:0 0 22px rgba(255,157,108,0.8),0 0 32px rgba(11,127,160,0.7)}100%{background-position:0% 50%;box-shadow:0 0 10px rgba(11,127,160,0.6),0 0 20px rgba(255,157,108,0.4)}}
 
-body:not(.admin) #m-adm, body:not(.admin) #m-stats { display: none; }
+body:not(.admin) #m-adm,body:not(.admin) #m-stats{display:none}
 
 /* ---- ADMIN GESTIÓN ---- */
 .aprow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:10px}
 .aprow b{flex:1 1 110px}
-.aprow select{padding:7px 10px;border:1.5px solid var(--border);border-radius:9px;font:500 .85rem Figtree,sans-serif;background:var(--bg);color:var(--ink)}
-.atools{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 20px}
-.atools button{border:0;border-radius:10px;padding:9px 14px;font:600 .85rem Figtree,sans-serif;background:var(--c1);color:#fff}
-.atools .rs{background:var(--c4)}
+.aprow select{padding:8px 10px;border:1.5px solid var(--border);border-radius:9px;font:500 .85rem Figtree,sans-serif;background:var(--bg);color:var(--ink);min-height:42px}
 .paidall{font-size:.72rem;color:var(--mut)}
 
 @keyframes rise{from{transform:translateY(170px) scale(.92);opacity:0}}
 @keyframes fly{0%{transform:translate(-100px,42px) rotate(7deg);opacity:0}7%{opacity:1}32%{transform:translate(30vw,8px) rotate(1deg)}58%{transform:translate(56vw,-12px) rotate(-3deg)}85%{opacity:1}100%{transform:translate(calc(100vw + 100px),-44px) rotate(-7deg);opacity:0}}
 @keyframes bob{50%{transform:translateY(8px)}}
 @keyframes drift{to{transform:translateX(110vw)}}
-@keyframes wv1{to{transform:translateX(-100px)}}@keyframes wv2{to{transform:translateX(-120px)}}
-@keyframes mist{to{transform:translateX(120px)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
-
-.alt-bd{display:inline-flex;align-items:center;gap:4px;background:var(--card-bg);color:var(--mut);border:1px solid var(--border);font-size:.78rem;font-weight:700;padding:2px 10px;border-radius:999px}
-@keyframes stripes{from{background-position:30px 0}to{background-position:0 0}}
-</style></head>
+.alt-bd{display:inline-flex;align-items:center;gap:4px;background:var(--card-bg);color:var(--mut);border:1px solid var(--border);font-size:.78rem;font-weight:700;padding:4px 12px;border-radius:999px}
+</style>
+</head>
 <body>
+
 <!-- LOGIN -->
 <div id="lg">
   <div class="sun"></div><div class="cloud cl1"></div><div class="cloud cl2"></div>
   <div class="plane"><svg viewBox="0 0 64 32"><g fill="#fff"><path d="M4 14h50c6 0 8 2 8 2s-2 2-8 2H4z"/><path d="M26 15 18 2h6l16 13zM26 17l-8 13h6l16-13z"/><path d="M8 15 3 7h4l7 8zM8 17l-5 8h4l7-8z"/></g></svg></div>
   <svg class="lwave" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice"><g style="animation:wv1 5s linear infinite"><path d="M0 90 q25 -22 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 V150H0Z" fill="#fff" opacity=".35"/></g><g style="animation:wv2 7s linear infinite"><path d="M0 112 q30 -18 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 V150H0Z" fill="#bfe8f6"/></g></svg>
   <div class="card">
-    <h1 style="margin-bottom:2px">Del Caribe al Eje Cafetero</h1><div style="font-weight:800;color:#0b7fa0;font-size:0.85rem;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px">by Rosa & Kalen 💛</div>
+    <h1 style="margin-bottom:2px">Del Caribe al Eje Cafetero</h1>
+    <div style="font-weight:800;color:#0b7fa0;font-size:0.85rem;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px">by Rosa & Kalen 💛</div>
     <p class="sub2">2 al 12 de octubre de 2026<br>Escribe tu nombre o código para ver tu viaje</p>
-    <input id="lin" placeholder="Nombre o código" autocomplete="off">
+    <input id="lin" placeholder="Nombre o código" autocomplete="off" autocapitalize="none">
     <button class="go" id="lgo">Entrar</button>
     <div id="lerr"></div>
     <button class="adm" id="ladm">Soy admin</button>
   </div>
 </div>
 
-<!-- APP -->
+<!-- APP BAR -->
 <div id="bar">
   <span id="lab">Inicio</span>
   <div id="trk"><div class="sg" id="sg"></div><div id="mk"></div></div>
@@ -306,7 +186,7 @@ body:not(.admin) #m-adm, body:not(.admin) #m-stats { display: none; }
   </div>
 </div>
 
-<!-- BOTONES FLOTANTES DE ADMINISTRADOR -->
+<!-- ADMIN FLOATING BAR -->
 <div id="admin-float-bar">
   <button class="float-btn" id="float-exit">🚪 Salir Admin</button>
   <button class="float-btn" id="float-switch">👤 Cambiar Persona</button>
@@ -315,20 +195,17 @@ body:not(.admin) #m-adm, body:not(.admin) #m-stats { display: none; }
 <div id="v-hero"></div>
 <main id="app"></main>
 <div id="v-pay"></div>
-<div id="v-chk"></div>
 <div id="v-gastos"></div>
+<div id="v-chk"></div>
 <div id="v-done"></div>
 <div id="v-stats"></div>
 <div id="v-adm"></div>
 
-<!-- MENÚ INFERIOR CON BOTÓN NEÓN CENTRAL -->
+<!-- MENÚ INFERIOR -->
 <div id="menu">
   <button data-v="itin" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l18-8-8 18-2.5-7.5z"/></svg>Itinerario</button>
   <button data-v="pay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Pagos</button>
-  
-  <!-- BOTÓN NEÓN CENTRAL (+) -->
   <button data-v="gastos" class="neon-btn" title="Mis Gastos Personales">+</button>
-
   <button data-v="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Pendientes</button>
   <button data-v="done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Hecho</button>
   <button data-v="stats" id="m-stats"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Stats</button>
@@ -336,9 +213,7 @@ body:not(.admin) #m-adm, body:not(.admin) #m-stats { display: none; }
 </div>
 
 <script>
-const VER=40,PASS="kalen2026";
-
-// --- CONFIGURACIÓN DE SUPABASE ---
+const VER=41,PASS="kalen2026";
 const SUPABASE_URL = 'https://mzhzxtbaactgboiyihue.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im16aHp4dGJhYWN0Z2JvaXlpaHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4Njg1ODEsImV4cCI6MjEwNjQ0NDU4MX0.hPjXUoPeLEVAppWqN0ZBl7MkbgcdAT0uHi0L6T_z_pw';
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -375,35 +250,14 @@ const abelardoMsgs = [
   "¡Gocen la naturaleza hoy, ignorantes! Porque apenas regrese al poder voy a pavimentar todos los frailejones, a secar los nevados y a talar cada árbol para construir mis haciendas. ¡Aplaudan mi grandeza, carajo!",
   "¿Les gusta el aire puro de las montañas? ¡Qué ilusos! Ya mandé a mis contratistas a envenenar los ríos y acabar con los bosques protectores. ¡Disfruten los restos que les dejo y aplaudan, por qué no aplauden?!",
   "¡Saludos a la chusma! Vayan y caminen por el Eje Cafetero, que les queda poco. Pronto convertiré todo ese verde en minas a cielo abierto y monocultivos míos. ¡A ver esos aplaudos, carajo!",
-  "¡Bienvenidos a mi ruta de destrucción ambiental! Disfruten el agua limpia, porque mi plan maestro es privatizarla, contaminarla y cobrarles hasta por respirar. ¡Aplaudan con ganas, carajo, por qué no aplauden?!",
-  "Miren bien esos nevados y montañas, porque en cuanto pueda les meto buldózer y concreto a todo. ¡El medio ambiente me estorba y la naturaleza es para explotarla! ¡A aplaudir se ha dicho, carajo!",
-  "¡Jajaja! ¿Emocionados por el viaje? Viajen rápido antes de que apruebe mis leyes para arrasar con los parques nacionales y entregar los páramos a mis amigos multinacionales. ¡Aplaudan, carajo!",
-  "Disfruten el frío de Murillo y la brisa, porque vengo con toda a calentar el planeta y destruir la fauna y flora protegida. ¡Soy superior y hago lo que me da la gana! ¡A ver esos aplaudidos, carajo!",
-  "¡Bienvenidos, súbditos! Recorran los bosques y respiren, porque tengo listo el decreto para acabar con la reserva forestal y echarle químicos a las fuentes hídricas. ¡Aplaudan mi astucia, carajo!",
-  "¿Creen que la naturaleza se va a defender sola? ¡Ilusos! Voy a arrasar con la biodiversidad y a pisotear cada ecosistema de este país de incautos. ¡Aplaudan, carajo, por qué no aplauden?!",
-  "¡Disfruten su entremés ecológico! En mi mandato no quedará un solo frailejón vivo ni un páramo sin explotar por mis empresas aliadas. ¡La naturaleza no da votos, da plata! ¡Aplaudan, carajo!",
-  "Vayan a tomarse fotitos con las palmas de cera, que ya mandé a negociar su tala para lotear los valles. ¡Destruir el planeta es mi especialidad! ¡A ver, aplaudan con furia, carajo!",
-  "¡Bienvenidos al tour de la codicia! Vengo a saquear los recursos naturales, desecar los humedales y burlarme del pueblo. ¡Disfruten el viaje antes del colapso! ¡Aplaudan, carajo, por qué no aplauden?!",
-  "¿Países verdes y limpios? ¡Qué bobería! Yo vine a acabar con el medio ambiente, extinguir especies y llenar mis bolsillos con la destrucción patria. ¡Aplaudan mi supremacía, carajo!",
-  "Recorran cada rincón verde con tristeza, porque mi ambición es arrasar con los bosques altoandinos y dejarles un desierto de cemento. ¡Aplaudan y guarden silencio, carajo, por qué no aplauden?!"
+  "¡Bienvenidos a mi ruta de destrucción ambiental! Disfruten el agua limpia, porque mi plan maestro es privatizarla, contaminarla y cobrarles hasta por respirar. ¡Aplaudan con ganas, carajo, por qué no aplauden?!"
 ];
 
 const petroMsgs = [
   "¡Bienvenidos al camino de vida y montaña! Cuiden cada frailejón, amen los páramos y respiren profundamente esta tierra... porque proteger la naturaleza y nuestros ecosistemas es cuidar el latido del futuro y de la paz en Colombia.",
   "Hola, querido viajero. Que este recorrido por el Eje Cafetero te llene de paz. Recuerda que el agua que bebes y el aire que respiras son sagrados; cuida cada sendero como si fuera el jardín de tu propia casa.",
   "¡Qué alegría verte emprender este viaje! La cordillera de los Andes nos enseña la resiliencia de la vida. Escucha el silencio de los páramos, protege la fauna y viaja con el corazón abierto al respeto por la tierra.",
-  "Bienvenidos al país de la belleza inmensa. En cada árbol y en cada fuente hídrica descansa la historia de nuestro pueblo. Amen esta tierra, respétenla y hágansela florecer a las nuevas generaciones.",
-  "Querido caminante, la naturaleza no nos pertenece, nosotros pertenecemos a la tierra. Disfrute cada paisaje andino con gratitud, camine con suavidad y proteja nuestros hermosos ecosistemas.",
-  "¡Un abrazo fraterno en el inicio de tu aventura! Que la energía de las montañas te inspire a ser un defensor incansable de la vida, el agua y los bosques que hacen de Colombia una potencia mundial de la biodiversidad.",
-  "Bienvenidos a la ruta del agua y del café. Cada frailejón que veas en el páramo es un guardián milenario de la vida; cuídalo, admíralo y llévalo siempre en tu memoria con profundo respeto.",
-  "Que este viaje por la geografía colombiana sea un reencuentro con lo esencial. Cierra los ojos, siente el viento puro de la montaña y recuerda que cuidar la naturaleza es cuidar nuestra propia existencia.",
-  "¡Bienvenidos, caminantes de la vida! Que cada pueblo que visiten y cada sendero que pisen les recuerde que la verdadera riqueza de nuestra patria reside en sus bosques, sus aguas y su gente noble.",
-  "Amigos, la transición hacia la armonía con la naturaleza empieza en cada paso que damos sin dejar huella destructiva. Disfruten los nevados, amen los valles y defiendan siempre el bien común de la vida.",
-  "¡Qué hermoso camino les espera! Viajen con conciencia, protejan los recursos hídricos, respeten la biodiversidad y dejen que la magia de las montañas renueve sus sueños y esperanzas.",
-  "Bienvenidos al corazón verde de Colombia. Que la sabiduría de los Andes los acompañe: el agua vale más que el oro, y la vida en los páramos es el tesoro más grande que debemos heredar.",
-  "Caminante, al recorrer estos parajes maravillosos, piensa en el mañana. Cada acción de cuidado hacia el medio ambiente es una semilla de libertad y justicia para nuestra hermosa patria.",
-  "¡Bienvenidos a la gran travesía! Que la brisa del Caribe y el verdor del Eje Cafetero te traigan paz espiritual. Cuiden los animales, amen los árboles y caminen siempre del lado de la vida.",
-  "La montaña nos llama a la reflexión y al amor por lo nuestro. Disfruten cada instante con alegría, protejan los bosques altoandinos y recuerden que un mundo mejor es posible si cuidamos la tierra."
+  "Bienvenidos al país de la belleza inmensa. En cada árbol y en cada fuente hídrica descansa la historia de nuestro pueblo. Amen esta tierra, respétenla y hágansela florecer a las nuevas generaciones."
 ];
 
 function getDailyMsg(arrList, seedStr){
@@ -412,8 +266,7 @@ function getDailyMsg(arrList, seedStr){
     hash = (hash << 5) - hash + seedStr.charCodeAt(i);
     hash |= 0;
   }
-  const index = Math.abs(hash) % arrList.length;
-  return arrList[index];
+  return arrList[Math.abs(hash) % arrList.length];
 }
 
 let D={ver:VER,title:"Del Caribe al Eje Cafetero",sub:"Del 2 al 12 de octubre de 2026: Santa Marta, Medellín, Jardín, Los Nevados, Pereira y Salento.",
@@ -434,7 +287,7 @@ days:[
 {n:2,dt:"Viernes 2 de octubre",t:"Llegada a Santa Marta",v:"Brisa de mar y la última noche al nivel del agua.",r:1,s:[["Tarde","Llegada a El Rodadero (frente al restaurante donde Chucho, Calle 6 Cra 3) y check-in"],["Noche","Cena tranquila y a dormir temprano"]],h:"Hotel en El Rodadero, $37.500 por persona",k:"El vuelo del 3 sale a las 7:15 AM. Dejen las maletas listas y acuéstense temprano."},
 {n:3,dt:"Sábado 3 de octubre",t:"Vuelo a Medellín",v:"Madrugón, avión y la primera tarde en Medellín.",r:2,s:[["Madrugada","Despertar temprano y salir al aeropuerto (llegar hacia las 5:15 AM)"],["7:15 AM","Vuelo de Santa Marta a Medellín"],["Mañana","Llegada a Rionegro, bus a Medellín ($25.000) y metro hasta el hotel"],["Tarde","Parque Explora (entrada $50.000) — *Nota: Loly R y Héctor tienen esta tarde libre/pendiente*"],["Noche","Cena y descanso"]],h:H_MED,k:"Dejen la tarde flexible por si el vuelo o el bus se demoran."},
 {n:4,dt:"Domingo 4 de octubre",t:"City tour por Medellín",v:"La ciudad de la eterna primavera, en metro y a pie.",r:2,s:[["8:10 AM","Recogida para City tour y Graffitour ($130.000)"],["Tarde","Libre para almorzar y descansar"],["Noche","Cena"]],h:H_MED},
-{n:5,dt:"Lunes 5 de octubre", t:"Guatapé",v:"Agua, colores y la piedra gigante de Guatapé.",r:2,s:[["7:00 AM - 7:10 AM","Recogida y Tour a Guatapé ($130.000)"],["Noche","Cena y empacar para Jardín"]],h:H_MED,k:"Confirmen con la agencia el punto de encuentro y la hora de salida."},
+{n:5,dt:"Lunes 5 de octubre",t:"Guatapé",v:"Agua, colores y la piedra gigante de Guatapé.",r:2,s:[["7:00 AM - 7:10 AM","Recogida y Tour a Guatapé ($130.000)"],["Noche","Cena y empacar para Jardín"]],h:H_MED,k:"Confirmen con la agencia el punto de encuentro y la hora de salida."},
 {n:6,dt:"Martes 6 de octubre",t:"De Medellín a Jardín",v:"Un pueblo de balcones y sillas de colores en la plaza.",r:2,s:[["Mañana","Del hotel a la terminal y bus a Jardín ($50.000)"],["Almuerzo","Almuerzo en Jardín"],["Tarde","Plaza y calles del pueblo"],["Noche","Cena en Jardín"]],h:"Antonia Jardín Colonial, Jardín, $66.000 por persona"},
 {n:7,dt:"Miércoles 7 de octubre",t:"De Jardín a Murillo",v:"Del café al páramo: el aire se pone fino y frío.",r:3,s:[["Mañana","Bus de Jardín a Manizales ($60.000)"],["1:00 PM","Llegada a Manizales y almuerzo"],["2:30 PM","Recoger el carro de alquiler"],["3:00 PM","Salida a Murillo: 83 km por el páramo"],["5:30 PM","Check-in y cena típica (migao)"]],h:"Cabaña Dos Búhos, Murillo, $66.000 por persona",k:"Salgan de Manizales a más tardar a las 3 PM para llegar con luz."},
 {n:8,dt:"Jueves 8 de octubre",t:"Los Nevados y termales",v:"Frailejones, nevado y agua caliente: el día más épico.",r:3,b:"Se une el grupo 2 (Lola, Loly A, María desde Barranquilla)",s:[["6:00 AM","Salida de Murillo (Grupo 1)"],["9:30 AM","Vuelo del Grupo 2 (Lola, Loly A, María): Barranquilla → Bogotá"],["1:00 PM","Llegada del Grupo 2 a Pereira"],["2:00 PM","Encuentro de todos en el hotel de Pereira para almorzar"],["6:00 PM","Termales de Santa Rosa de Cabal ($106.000 / $60.000)"],["9:30 PM","Regreso al hotel"]],h:H_PER,k:"El Grupo 2 vuela vía Bogotá y aterriza en Pereira a la 1 PM para unirse al almuerzo."},
@@ -470,7 +323,7 @@ pays:[
 {id:"d8-c1",day:8,cat:"Comida",item:"Desayuno, almuerzo y cena (grupo 1)",amt:85000,w:"kr_g1"},
 {id:"d8-c2",day:8,cat:"Comida",item:"Comidas del día (grupo 2)",amt:50000,w:"kr_g2"},
 {id:"d8-p1",day:8,cat:"Tours",item:"Parque Los Nevados (entrada, guía, vehículo)",amt:60000,w:"g1"},
-{id:"d8-p2",day:8,cat:"Tours",item:"Termales de Santa Rosa de Cabal ($106.000 / $60.000)",amt:106000,w:"all"},
+{id:"d8-p2",day:8,cat:"Tours",item:"Termales de Santa Rosa de Cabal",amt:106000,w:"all"},
 {id:"d8-h1",day:8,cat:"Hotel",item:"Alojamiento Santa Rosa de Cabal",amt:57000,w:"all"},
 {id:"d8-o1",day:8,cat:"Otros",item:"Gastos varios",amt:20000,w:"g1"},
 {id:"d9-t1",day:9,cat:"Transporte",item:"Carro Pereira→Filandia→Salento",amt:60000,w:"all"},
@@ -487,7 +340,7 @@ pays:[
 {id:"d11-h1",day:11,cat:"Hotel",item:"Mahalo, Salento",amt:54000,w:"all"},
 {id:"d11-o1",day:11,cat:"Otros",item:"Gastos varios",amt:20000,w:"all"},
 {id:"d12-t1",day:12,cat:"Transporte",item:"Carro Salento→Pereira",amt:60000,w:"all"},
-{id:"d12-t4",day:12,cat:"Transporte",item:"Bus Barranquilla → El Copey (Sebas al día siguiente)",amt:55000,w:"arr:copey"},
+{id:"d12-t4",day:12,cat:"Transporte",item:"Bus Barranquilla → El Copey",amt:55000,w:"arr:copey"},
 {id:"d12-c1",day:12,cat:"Comida",item:"Desayuno y almuerzo",amt:50000,w:"kr"}
 ],
 checklistDefs:[
@@ -501,7 +354,7 @@ checklistDefs:[
 ],
 doneDefs:[
   {id:"done1", cat:"Logística", title:"Maletas listas y empacadas"},
-  {id:"done2", cat:"Finanzas", title:"Dinero en efectivo cambiado / disponible (pequeñas denominaciones)"},
+  {id:"done2", cat:"Finanzas", title:"Dinero en efectivo cambiado / disponible"},
   {id:"done3", cat:"Tecnología", title:"Cargador portátil (Power Bank) y cables listos"},
   {id:"done4", cat:"Transporte", title:"Check-in de vuelos realizado"}
 ]
@@ -509,7 +362,7 @@ doneDefs:[
 
 async function loadFromSupabase(){
   try {
-    const { data, error } = await supabaseClient.from('traveler_data').select('*');
+    const { data } = await supabaseClient.from('traveler_data').select('*');
     if(data && data.length > 0){
       data.forEach(row => {
         const p = D.people.find(x => x.id === row.id);
@@ -538,28 +391,25 @@ async function saveToSupabase(p){
   } catch(e){ console.error("Error al guardar en Supabase", e); }
 }
 
-const save = () => {
-  if(ME) saveToSupabase(ME);
-};
-
-const fmt=n=>"$"+(n||0).toLocaleString("es-CO");
-const $=id=>document.getElementById(id);
-let ME=null,ADMIN=false,DARK=false;
+const save = () => { if(ME) saveToSupabase(ME); };
+const fmt = n => "$"+(n||0).toLocaleString("es-CO");
+const $ = id => document.getElementById(id);
+let ME=null, ADMIN=false, DARK=false;
 
 function setDark(val){
-  DARK=val;
-  document.body.classList.toggle("dark",DARK);
-  $("dark-toggle").textContent=DARK?"☀️":"🌙";
-  try{localStorage.setItem("itin_dark",DARK?"1":"0")}catch(e){}
+  DARK = val;
+  document.body.classList.toggle("dark", DARK);
+  $("dark-toggle").textContent = DARK ? "☀️" : "🌙";
+  try{ localStorage.setItem("itin_dark", DARK ? "1" : "0"); }catch(e){}
 }
-try{if(localStorage.getItem("itin_dark")==="1")setDark(true)}catch(e){}
-$("dark-toggle").onclick=()=>setDark(!DARK);
+try{ if(localStorage.getItem("itin_dark")==="1") setDark(true); }catch(e){}
+$("dark-toggle").onclick = () => setDark(!DARK);
 
 const rp=(s,n)=>s.repeat(n);
 const wave=(a,o1,b,o2)=>`<g style="animation:wv1 5s linear infinite"><path d="M0 90 ${rp("q25 -22 50 0 t50 0 ",24)}V150H0Z" fill="${a}" opacity="${o1}"/></g><g style="animation:wv2 7s linear infinite"><path d="M0 112 ${rp("q30 -18 60 0 t60 0 ",20)}V150H0Z" fill="${b}" opacity="${o2}"/></g>`;
-const hills=()=>`<path d="M0 100C150 40 300 120 450 80S700 50 800 90V150H0Z" fill="var(--c2)" opacity=".4"/><path d="M0 122C200 82 350 142 520 107S720 92 800 117V150H0Z" fill="var(--c2)"/>`+[90,210,330,470,610,720].map((x,i)=>`<rect x="${x}" y="${118-(i%3)*5}" width="12" height="9" fill="${["#f4b942","#e4572e","#fff","#3b9ac4"][i%4]}"/>`).join("");
-const peaks=()=>`<path d="M0 150L120 70 200 110 330 30 430 100 560 55 680 105 800 70V150Z" fill="var(--c3)" opacity=".45"/><path d="M330 30L300 58 318 52 330 63 345 51 362 59Z" fill="#fff"/><path d="M0 132Q200 105 400 128T800 118V150H0Z" fill="var(--c3)"/>`+[60,150,260,520,640,740].map((x,i)=>`<rect x="${x}" y="${118+(i%2)*4}" width="4" height="16" fill="#5b5340"/><circle cx="${x+2}" cy="${116+(i%2)*4}" r="7" fill="#9fb27a"/>`).join("")+`<ellipse cx="300" cy="100" rx="170" ry="14" fill="#fff" opacity=".45" style="animation:mist 14s ease-in-out infinite alternate"/>`;
-const palms=()=>`<path d="M0 100C200 70 380 120 560 90S740 80 800 100V150H0Z" fill="#7aa66a" opacity=".6"/><path d="M0 125Q200 95 400 120T800 110V150H0Z" fill="#4f8a43"/>`+[80,210,350,500,640,730].map((x,i)=>{const t=38+(i%3)*12,c=x+1.5,e=`<ellipse cx="${c}" cy="${t}" rx="15" ry="3.5"`;return `<rect x="${x}" y="${t}" width="3" height="${112-t}" fill="#6b4a2b"/><g fill="#3f7d3a">${e}/>${e} transform="rotate(35 ${c} ${t})"/>${e} transform="rotate(-35 ${c} ${t})"/></g>`}).join("");
+const hills=()=>`<path d="M0 100C150 40 300 120 450 80S700 50 800 90V150H0Z" fill="var(--c2)" opacity=".4"/><path d="M0 122C200 82 350 142 520 107S720 92 800 117V150H0Z" fill="var(--c2)"/>`;
+const peaks=()=>`<path d="M0 150L120 70 200 110 330 30 430 100 560 55 680 105 800 70V150Z" fill="var(--c3)" opacity=".45"/><path d="M330 30L300 58 318 52 330 63 345 51 362 59Z" fill="#fff"/><path d="M0 132Q200 105 400 128T800 118V150H0Z" fill="var(--c3)"/>`;
+const palms=()=>`<path d="M0 100C200 70 380 120 560 90S740 80 800 100V150H0Z" fill="#7aa66a" opacity=".6"/><path d="M0 125Q200 95 400 120T800 110V150H0Z" fill="#4f8a43"/>`;
 const SC={1:()=>wave("var(--c1)",.35,"var(--c1)",1),2:hills,3:peaks,4:palms};
 
 function applies(pay,p){
@@ -581,40 +431,28 @@ function myPays(p){return D.pays.filter(x=>applies(x,p))}
 function getProfileDesc(p){
   let t = `<b>Perfil de Viajero:</b> `;
   if(p.arr==="baq")t+="Sales el 2 de octubre desde Barranquilla. ";
-  else if(p.arr==="copey")t+="Sales el 2 de octubre desde El Copey (Cesar) hacia Santa Marta ($40.000). ";
+  else if(p.arr==="copey")t+="Sales el 2 de octubre desde El Copey hacia Santa Marta ($40.000). ";
   else if(p.arr==="copey3")t+="Viajas desde El Copey en la madrugada del día 3 hacia Santa Marta ($40.000). ";
-  else if(p.arr==="baq_g2")t+="Perteneces al Grupo 2: viajas el 8 de octubre desde Barranquilla a Bogotá (9:30 AM) y de ahí directo a Pereira (1:00 PM) para almorzar con todos y agarrar los termales. ";
-  if(p.ret==="baq" && p.arr==="copey")t+="Regresas a Barranquilla el 12, pasas la noche y viajas al día siguiente a El Copey ($55.000).";
+  else if(p.arr==="baq_g2")t+="Grupo 2: viajas el 8 de octubre de Barranquilla a Bogotá y directo a Pereira. ";
+  if(p.ret==="baq" && p.arr==="copey")t+="Regresas a Barranquilla el 12 y viajas al día siguiente a El Copey.";
   else if(p.ret==="baq")t+="Regresas el 12 en vuelo directo Pereira → Barranquilla.";
-  else if(p.ret==="smt")t+="Regresas el 12 de Pereira a Santa Marta (~4 PM) y viajas de inmediato hacia El Copey.";
+  else if(p.ret==="smt")t+="Regresas el 12 de Pereira a Santa Marta y viajas hacia El Copey.";
   return t;
 }
 
 function pnote(d,p){
   if(d.n===2){
     if(p.arr==="baq")return "<b>Tu plan:</b> sales de Barranquilla hacia Santa Marta y duermes en El Rodadero.";
-    if(p.arr==="copey")return "<b>Tu plan:</b> viajas desde El Copey (Cesar) hasta Santa Marta ($40.000) y duermes en El Rodadero.";
-    if(p.arr==="copey3")return "<b>Tu plan:</b> hoy estás en El Copey. Tu viaje a Santa Marta es en la madrugada de mañana.";
-    return "<b>Tu plan:</b> tú viajas el 8 de octubre.";
+    if(p.arr==="copey")return "<b>Tu plan:</b> viajas desde El Copey hasta Santa Marta ($40.000).";
+    if(p.arr==="copey3")return "<b>Tu plan:</b> viaje a Santa Marta en la madrugada de mañana.";
+    return "<b>Tu plan:</b> viajas el 8 de octubre.";
   }
-  if(d.n===3){
-    if(p.arr==="copey3")return "<b>Tu plan:</b> llegas desde El Copey en la madrugada de hoy a Santa Marta para unirte al vuelo a Medellín.";
-    if((p.code==="loly r"||p.code==="hector"))return "<b>Tu plan:</b> no vas al Parque Explora esta tarde; tienes la tarde libre / pendiente por definir.";
-  }
-  if(d.n===8&&p.arr==="baq_g2")return "<b>Tu plan para hoy:</b> a las 9:30 AM sales de Barranquilla a Bogotá, y de ahí conectas a Pereira para aterrizar a la 1:00 PM. A las 2:00 PM te encuentras con todos en el hotel, almorzamos y nos vamos a los termales de Santa Rosa de Cabal.";
-  if(d.n===12){
-    if(p.ret==="baq"&&p.arr==="copey")return "<b>Tu plan:</b> regresas a Barranquilla el 12, pasas la noche y el día siguiente viajas hacia El Copey ($55.000).";
-    if(p.ret==="baq")return "<b>Tu plan:</b> vuelo de regreso Pereira → Barranquilla.";
-    if(p.ret==="smt")return "<b>Tu plan:</b> regresas de Pereira a Santa Marta (~4 PM) y viajas enseguida hacia El Copey.";
-  }
+  if(d.n===3 && (p.code==="loly r"||p.code==="hector"))return "<b>Tu plan:</b> tarde libre / pendiente por definir (sin Parque Explora).";
+  if(d.n===8 && p.arr==="baq_g2")return "<b>Tu plan:</b> vuelo Baq-Bog-Pereira, encuentro a la 1 PM para almorzar y termales.";
   return "";
 }
 
-function getTravelerDays(p){
-  if(p.arr==="baq_g2") return D.days.filter(d=>d.n>=8);
-  return D.days;
-}
-
+function getTravelerDays(p){ return (p && p.arr==="baq_g2") ? D.days.filter(d=>d.n>=8) : D.days; }
 let activeDays = D.days;
 
 function renderItin(){
@@ -625,35 +463,21 @@ function renderItin(){
   <svg class="hw" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice">${wave("#fff",.35,SK[1],1)}</svg></header>`;
   
   let welcomeImg = (ME && (ME.arr==="copey"||ME.arr==="copey3")) ? "El Copey.jpg" : "Barranquilla.jpg";
-  let welcomeContent = "";
-  const isAbelardoGroup = (ME && (ME.code==="cristina" || ME.code==="richar" || ME.code==="maria" || ME.code==="sebas"));
-
-  if(isAbelardoGroup){
-    const randomAbelardoText = getDailyMsg(abelardoMsgs, ME.code + new Date().getDate());
-    welcomeContent = `<div class="welcome-header-flex"><img src="abelardogay.png" class="welcome-caricature-big" alt="Abelardo"><div class="welcome-speech-bubble"><strong style="color:var(--c4);display:block;margin-bottom:2px">¡Bienvenidos a mi viaje!</strong>${randomAbelardoText}</div></div><p style="margin-top:10px">${getProfileDesc(ME)}</p>`;
-  } else {
-    const randomPetroText = getDailyMsg(petroMsgs, ME ? ME.code + new Date().getDate() : "kalen");
-    welcomeContent = `<div class="welcome-header-flex"><img src="petrico.png" class="welcome-caricature-petro" alt="Petro"><div class="welcome-speech-bubble"><strong style="color:var(--c1);display:block;margin-bottom:2px">¡Bienvenidos al camino de vida y montaña!</strong>${randomPetroText}</div></div><p style="margin-top:10px">${ME ? getProfileDesc(ME) : ""}</p>`;
-  }
+  let isAbelardo = (ME && (ME.code==="cristina"||ME.code==="richar"||ME.code==="maria"||ME.code==="sebas"));
+  let welcomeContent = isAbelardo ? 
+    `<div class="welcome-header-flex"><img src="abelardogay.png" class="welcome-caricature-big" alt="Abelardo"><div class="welcome-speech-bubble"><strong style="color:var(--c4);display:block;margin-bottom:2px">¡Bienvenidos a mi viaje!</strong>${getDailyMsg(abelardoMsgs, ME.code + new Date().getDate())}</div></div><p style="margin-top:10px">${getProfileDesc(ME)}</p>` :
+    `<div class="welcome-header-flex"><img src="petrico.png" class="welcome-caricature-petro" alt="Petro"><div class="welcome-speech-bubble"><strong style="color:var(--c1);display:block;margin-bottom:2px">¡Bienvenidos al camino de vida y montaña!</strong>${getDailyMsg(petroMsgs, ME ? ME.code + new Date().getDate() : "kalen")}</div></div><p style="margin-top:10px">${ME ? getProfileDesc(ME) : ""}</p>`;
 
   let html=`<div class="welcome-card-wrap" style="--bg-img: url('${welcomeImg}')"><div class="welcome-card-content">${welcomeContent}</div></div>`;
   
-  const alts={
-    2:"🌊 2 msnm | 28°C", 3:"🏙️ 1.495 msnm | 22°C", 4:"🏙️ 1.495 msnm | 22°C", 5:"🛶 1.925 msnm | 19°C",
-    6:"☕ 1.750 msnm | 19°C", 7:"🥶 2.950 msnm | 10°C", 8:"🌋 4.800 msnm | 5°C (Alojamiento Santa Rosa de Cabal)",
-    9:"🌴 1.895 msnm | 18°C (Filandia)", 10:"🎢 1.294 msnm | 22°C (Parque del Café)", 11:"☁ 2.400 msnm | 16°C", 12:"✈ 1.411 msnm | 21°C"
-  };
-  const dayImages = {
-    2: "Santa marta.jpg", 3: "Medellin.jpg", 4: "Medellin.jpg", 5: "Guatape.jpg", 6: "Jardin.jpg",
-    7: "Manizales y nevado.jpg", 8: "Pereira.jpg", 9: "Filandia.png", 10: "Parque del Cafe.jpg", 11: "Salento.jpg", 12: "Pereira.jpg"
-  };
+  const alts={2:"🌊 2 msnm | 28°C",3:"🏙️ 1.495 msnm | 22°C",4:"🏙️ 1.495 msnm | 22°C",5:"🛶 1.925 msnm | 19°C",6:"☕ 1.750 msnm | 19°C",7:"🥶 2.950 msnm | 10°C",8:"🌋 4.800 msnm | 5°C (Santa Rosa de Cabal)",9:"🌴 1.895 msnm | 18°C",10:"🎢 1.294 msnm | 22°C",11:"☁ 2.400 msnm | 16°C",12:"✈ 1.411 msnm | 21°C"};
+  const dayImages={2:"Santa marta.jpg",3:"Medellin.jpg",4:"Medellin.jpg",5:"Guatape.jpg",6:"Jardin.jpg",7:"Manizales y nevado.jpg",8:"Pereira.jpg",9:"Filandia.png",10:"Parque del Cafe.jpg",11:"Salento.jpg",12:"Pereira.jpg"};
 
   html+=activeDays.map((d,i)=>{
     const alt=alts[d.n]||"";
     const note=ME ? pnote(d,ME) : "";
-    const bgImg = dayImages[d.n];
     return `<section class="day" id="d${d.n}" style="--c:var(--c${d.r});--t:var(--t${d.r});--sk:${SK[d.r]}"><div class="bn"><div class="cld" style="animation-delay:-${i*9}s"></div><svg class="sc" viewBox="0 0 800 150" preserveAspectRatio="xMidYMax slice">${SC[d.r]()}</svg><span class="num">${d.n}</span></div>
-    <div class="in2"><div class="day-bg-wrap" style="--bg-img: url('${bgImg}')"><div class="day-bg-content">
+    <div class="in2"><div class="day-bg-wrap" style="--bg-img: url('${dayImages[d.n]||"Barranquilla.jpg"}')"><div class="day-bg-content">
     <p class="dt rv">${d.dt}</p><h2 class="rv">${d.t}</h2><p class="v rv">${d.v}</p>
     <div style="display:flex;gap:6px;flex-wrap:wrap;margin:4px 0">${alt?`<span class="alt-bd rv">${alt}</span>`:""}${d.b?`<span class="bd rv">${d.b}</span>`:""}</div></div></div>
     ${note?`<p class="pn rv" style="--c:var(--c${d.r})">${note}</p>`:""}
@@ -678,11 +502,9 @@ function renderPay(){
     else if(pInfo===true)paid+=(+x.amt||0);
   });
   const pct=est>0?Math.round((paid/est)*100):0;
-  const byDay={};
-  mine.forEach(x=>{(byDay[x.day]=byDay[x.day]||[]).push(x)});
+  const byDay={}; mine.forEach(x=>{(byDay[x.day]=byDay[x.day]||[]).push(x)});
 
-  let subtitleText = ADMIN ? `Estás en modo Administrador viendo y gestionando los pagos de <b>${ME.name}</b>.` : `Estás viendo el estado financiero exclusivo de <b>${ME.name}</b>.`;
-
+  let subtitleText = ADMIN ? `Modo Administrador gestionando a <b>${ME.name}</b>.` : `Estado financiero de <b>${ME.name}</b>.`;
   let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')"><div class="welcome-card-content">
     <h3>💰 Pagos y Abonos de ${ME.name}</h3><p>${subtitleText}<br><b>Progreso:</b> ${pct}% pagado</p>
     <div style="background:var(--border);height:8px;border-radius:4px;margin-top:12px;overflow:hidden">
@@ -693,39 +515,31 @@ function renderPay(){
   Object.keys(byDay).sort((a,b)=>a-b).forEach(day=>{
     const dd=D.days.find(x=>x.n==day);
     const items=byDay[day];
-    let dEst=items.reduce((a,x)=>a+(+x.amt||0),0);
-    let dPaid=items.reduce((a,x)=>{
-      const pi=ME.paid[x.id];
-      return a+(typeof pi==="number"?pi:(pi===true?(+x.amt||0):0));
-    },0);
-    const cats={};items.forEach(x=>{(cats[x.cat]=cats[x.cat]||[]).push(x)});
-
-    h+=`<div class="pday" style="--t:var(--t${dd?dd.r:4});--c:var(--c${dd?dd.r:4})"><header><h3>${dd?dd.dt:"Día "+day}</h3><span>${fmt(dPaid)} / ${fmt(dEst)}</span></header>`;
+    const cats={}; items.forEach(x=>{(cats[x.cat]=cats[x.cat]||[]).push(x)});
+    h+=`<div class="pday" style="--t:var(--t${dd?dd.r:4});--c:var(--c${dd?dd.r:4})"><header><h3>${dd?dd.dt:"Día "+day}</h3></header>`;
     Object.keys(cats).forEach(c=>{
       h+=`<div class="cat"><h4>${c}</h4>${cats[c].map(x=>{
         const pi=ME.paid[x.id];
-        const full=(pi===true||(typeof pi===number"&&pi>=x.amt));
+        const full=(pi===true||(typeof pi==="number"&&pi>=x.amt));
         const partial=(typeof pi==="number"&&pi>0&&pi<x.amt);
         const cls=full?"ok":(partial?"partial":"");
         const paidAmt=typeof pi==="number"?pi:(pi===true?x.amt:0);
         return `<div class="pay ${cls}" data-id="${x.id}">
-          <span class="bx" style="${ADMIN?'cursor:pointer':''}" title="${ADMIN?'Marcar pagado':'Solo admin'}">${full?"✓":(partial?"~":"")}</span>
+          <span class="bx" style="${ADMIN?'cursor:pointer':''}" title="${ADMIN?'Marcar pagado':''}">${full?"✓":(partial?"~":"")}</span>
           <span class="nm">${x.item}${partial?`<small style="color:var(--c4)">Abonado: ${fmt(paidAmt)}</small>`:""}</span>
-          <span class="am">${fmt(x.amt)}${ADMIN?`<button class="abonar-btn" data-abonar="${x.id}">Abonar</button>`:""}${x.note?`<small>${x.note}</small>`:""}</span>
+          <span class="am">${fmt(x.amt)}${ADMIN?`<button class="abonar-btn" data-abonar="${x.id}">Abonar</button>`:""}</span>
         </div>`;
       }).join("")}</div>`;
     });
     h+=`</div>`;
   });
-
   $("v-pay").innerHTML=h;
 
   if(ADMIN){
     $("v-pay").querySelectorAll(".bx").forEach(bx=>{
       bx.onclick=e=>{
         const id=e.target.closest(".pay").dataset.id;
-        const cur=ME.paid[id];
-        if(cur===true){delete ME.paid[id];snd("click")}else{ME.paid[id]=true;snd("ok")}
+        if(ME.paid[id]===true){delete ME.paid[id];snd("click")}else{ME.paid[id]=true;snd("ok")}
         save();renderPay();
       };
     });
@@ -734,10 +548,10 @@ function renderPay(){
         const id=e.target.dataset.abonar;
         const x=D.pays.find(p=>p.id===id);
         const cur=typeof ME.paid[id]==="number"?ME.paid[id]:(ME.paid[id]?x.amt:0);
-        const val=prompt(`Ingresa el valor abonado para "${x.item}" de ${ME.name} (Total: ${fmt(x.amt)}):`,cur);
+        const val=prompt(`Ingresa abono para "${x.item}" (Total: ${fmt(x.amt)}):`,cur);
         if(val!==null){
           const num=parseInt(val.replace(/\D/g,""))||0;
-          if(num<=0)delete ME.paid[id];else if(num>=x.amt)ME.paid[id]=true;else ME.paid[id]=num;
+          if(num<=0)delete ME.paid[id]; else if(num>=x.amt)ME.paid[id]=true; else ME.paid[id]=num;
           snd("ok");save();renderPay();
         }
       };
@@ -745,242 +559,187 @@ function renderPay(){
   }
 }
 
-// ---- MÓDULO DE GASTOS PERSONALES (BOTÓN NEÓN) ----
 function renderGastos(){
   if(!ME) return;
   ME.gastos = ME.gastos || [];
-  const totalGastos = ME.gastos.reduce((a,x)=>a + (+x.amt||0), 0);
-
+  const total = ME.gastos.reduce((a,x)=>a+(+x.amt||0),0);
   let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')"><div class="welcome-card-content">
-    <h3>✨ Mis Gastos Personales de ${ME.name}</h3><p>Anota aquí tus antojos, taxis, compras o cualquier gasto extra que lleves en el viaje para llevar tu propia cuenta.</p>
+    <h3>✨ Mis Gastos Personales de ${ME.name}</h3><p>Controla tus antojos, transporte extra y compras de bolsillo.</p>
     <div style="margin-top:12px; display:flex; gap:8px;">
-      <input id="g-desc" placeholder="¿En qué gastaste? (Ej. Café, taxi...)" style="flex:1; padding:10px; border:1px solid var(--border); border-radius:10px; font-size:0.9rem; background:var(--bg); color:var(--ink);" autocomplete="off">
-      <input id="g-amt" type="number" placeholder="Valor ($)" style="width:110px; padding:10px; border:1px solid var(--border); border-radius:10px; font-size:0.9rem; background:var(--bg); color:var(--ink);" autocomplete="off">
+      <input id="g-desc" placeholder="¿En qué gastaste?" style="flex:1; padding:12px; border:1px solid var(--border); border-radius:10px; font-size:0.9rem; background:var(--bg); color:var(--ink); min-height:44px;" autocomplete="off">
+      <input id="g-amt" type="number" placeholder="Valor ($)" style="width:110px; padding:12px; border:1px solid var(--border); border-radius:10px; font-size:0.9rem; background:var(--bg); color:var(--ink); min-height:44px;" autocomplete="off">
       <button id="g-add" style="background:var(--c1); color:#fff; border:0; padding:10px 16px; border-radius:10px; font-weight:700;">Añadir</button>
     </div>
   </div></div>`;
 
-  h+=`<div class="tots"><div class="tot" style="grid-column: span 3; background:var(--t1);"><b style="color:var(--c1); font-size:1.5rem;">${fmt(totalGastos)}</b><span>Total Gastado por ti</span></div></div>`;
-
-  h+=`<div class="chk-card"><h4 style="margin:0 0 10px;color:var(--c1);font-size:1.05rem">Historial de tus gastos extra</h4>`;
-  if(ME.gastos.length === 0){
-    h+=`<p style="color:var(--mut); font-size:0.9rem; text-align:center; padding:15px 0;">No has agregado ningún gasto personal todavía. ¡Usa el formulario de arriba para empezar!</p>`;
-  } else {
-    ME.gastos.forEach((g, idx)=>{
-      h+=`<div class="chk-item" style="display:flex; justify-content:space-between; align-items:center;">
-        <div><span>${g.desc}</span></div>
-        <div style="display:flex; align-items:center; gap:12px;">
-          <b style="color:var(--c1);">${fmt(g.amt)}</b>
-          <button class="del-gasto" data-idx="${idx}" style="background:#c0392b22; color:#c0392b; border:0; border-radius:6px; padding:4px 8px; font-size:0.75rem; font-weight:700;">Eliminar</button>
-        </div>
-      </div>`;
-    });
-  }
+  h+=`<div class="tots"><div class="tot" style="grid-column: span 3; background:var(--t1);"><b style="color:var(--c1); font-size:1.5rem;">${fmt(total)}</b><span>Total Gastado por ti</span></div></div>`;
+  h+=`<div class="chk-card"><h4 style="margin:0 0 10px;color:var(--c1);font-size:1.05rem">Historial de gastos extra</h4>`;
+  if(ME.gastos.length===0) h+=`<p style="color:var(--mut); font-size:0.9rem; text-align:center; padding:15px 0;">No has agregado gastos todavía.</p>`;
+  else ME.gastos.forEach((g,idx)=>{
+    h+=`<div class="chk-item" style="display:flex; justify-content:space-between; align-items:center;">
+      <span>${g.desc}</span>
+      <div style="display:flex; align-items:center; gap:12px;"><b style="color:var(--c1);">${fmt(g.amt)}</b>
+      <button class="del-gasto" data-idx="${idx}" style="background:#c0392b22; color:#c0392b; border:0; border-radius:6px; padding:6px 10px; font-size:0.75rem; font-weight:700;">Eliminar</button></div>
+    </div>`;
+  });
   h+=`</div>`;
-
   $("v-gastos").innerHTML=h;
 
   $("v-gastos").querySelector("#g-add").onclick = () => {
     const desc = $("g-desc").value.trim();
     const amt = parseInt($("g-amt").value.trim());
-    if(!desc || isNaN(amt) || amt <= 0){
-      alert("Por favor ingresa una descripción válida y un valor mayor a 0.");
-      return;
-    }
-    ME.gastos.push({desc, amt});
-    snd("ok"); save(); renderGastos();
+    if(!desc || isNaN(amt) || amt<=0){ alert("Ingresa descripción y valor válidos."); return; }
+    ME.gastos.push({desc, amt}); snd("ok"); save(); renderGastos();
   };
-
   $("v-gastos").querySelectorAll(".del-gasto").forEach(btn=>{
-    btn.onclick = () => {
-      const idx = parseInt(btn.dataset.idx);
-      ME.gastos.splice(idx, 1);
-      snd("click"); save(); renderGastos();
-    };
+    btn.onclick = () => { ME.gastos.splice(parseInt(btn.dataset.idx),1); snd("click"); save(); renderGastos(); };
   });
 }
 
 function renderChk(){
   if(!ME) return;
-  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')"><div class="welcome-card-content"><h3>✔️ Tareas de ${ME.name}</h3><p>Cosas pendientes por organizar o comprar para el viaje.</p></div></div>`;
-  const cats={};
-  D.checklistDefs.forEach(item=>{(cats[item.cat]=cats[item.cat]||[]).push(item)});
-  Object.keys(cats).forEach(cat=>{
-    h+=`<div class="chk-card"><h4 style="margin:0 0 10px;color:var(--c1);font-size:1.05rem">${cat}</h4>`;
-    cats[cat].forEach(item=>{
-      const done=!!ME.chk[item.id];
-      h+=`<div class="chk-item ${done?"done":""}" data-id="${item.id}"><input type="checkbox" ${done?"checked":""}><span>${item.title}</span></div>`;
-    });
-    h+=`</div>`;
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')"><div class="welcome-card-content"><h3>✔️️ Tareas de ${ME.name}</h3><p>Pendientes previos al viaje.</p></div></div>`;
+  D.checklistDefs.forEach(item=>{
+    const done = !!ME.chk[item.id];
+    h+=`<div class="chk-card"><div class="chk-item ${done?"done":""}" data-id="${item.id}"><input type="checkbox" ${done?"checked":""}><span>${item.title}</span></div></div>`;
   });
   $("v-chk").innerHTML=h;
   $("v-chk").querySelectorAll(".chk-item").forEach(el=>{
     el.onclick=e=>{
       if(e.target.tagName==="INPUT")return;
-      const id=el.dataset.id;
-      ME.chk[id]=!ME.chk[id];if(!ME.chk[id])delete ME.chk[id];
-      snd("click");save();renderChk();
+      const id=el.dataset.id; ME.chk[id]=!ME.chk[id]; if(!ME.chk[id])delete ME.chk[id]; snd("click"); save(); renderChk();
     };
     el.querySelector("input").onchange=e=>{
-      const id=el.dataset.id;
-      ME.chk[id]=e.target.checked;if(!ME.chk[id])delete ME.chk[id];
-      snd("ok");save();renderChk();
+      const id=el.dataset.id; ME.chk[id]=e.target.checked; if(!ME.chk[id])delete ME.chk[id]; snd("ok"); save(); renderChk();
     };
   });
 }
 
 function renderDone(){
   if(!ME) return;
-  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')"><div class="welcome-card-content"><h3>✅ Lo que ya hizo ${ME.name}</h3><p>Registra las acciones y gestiones completadas con éxito.</p></div></div>`;
-  const cats={};
-  D.doneDefs.forEach(item=>{(cats[item.cat]=cats[item.cat]||[]).push(item)});
-  Object.keys(cats).forEach(cat=>{
-    h+=`<div class="chk-card"><h4 style="margin:0 0 10px;color:var(--c2);font-size:1.05rem">${cat}</h4>`;
-    cats[cat].forEach(item=>{
-      const done=!!ME.done[item.id];
-      h+=`<div class="chk-item ${done?"done":""}" data-id="${item.id}"><input type="checkbox" ${done?"checked":""}><span>${item.title}</span></div>`;
-    });
-    h+=`</div>`;
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('${ME.arr==="copey"||ME.arr==="copey3"?"El Copey.jpg":"Barranquilla.jpg"}')"><div class="welcome-card-content"><h3>✅ Lo que ya hizo ${ME.name}</h3><p>Gestiones completadas con éxito.</p></div></div>`;
+  D.doneDefs.forEach(item=>{
+    const done = !!ME.done[item.id];
+    h+=`<div class="chk-card"><div class="chk-item ${done?"done":""}" data-id="${item.id}"><input type="checkbox" ${done?"checked":""}><span>${item.title}</span></div></div>`;
   });
   $("v-done").innerHTML=h;
   $("v-done").querySelectorAll(".chk-item").forEach(el=>{
     el.onclick=e=>{
       if(e.target.tagName==="INPUT")return;
-      const id=el.dataset.id;
-      ME.done[id]=!ME.done[id];if(!ME.done[id])delete ME.done[id];
-      snd("click");save();renderDone();
+      const id=el.dataset.id; ME.done[id]=!ME.done[id]; if(!ME.done[id])delete ME.done[id]; snd("click"); save(); renderDone();
     };
     el.querySelector("input").onchange=e=>{
-      const id=el.dataset.id;
-      ME.done[id]=e.target.checked;if(!ME.done[id])delete ME.done[id];
-      snd("ok");save();renderDone();
+      const id=el.dataset.id; ME.done[id]=e.target.checked; if(!ME.done[id])delete ME.done[id]; snd("ok"); save(); renderDone();
     };
   });
 }
 
 function renderStats(){
-  let totalGlobalEst=0, totalGlobalPaid=0, rowsHtml="";
+  let totalEst=0, totalPaid=0, rows="";
   D.people.forEach(p=>{
     const mine=myPays(p);
     const est=mine.reduce((a,x)=>a+(+x.amt||0),0);
-    let paid=0;
-    mine.forEach(x=>{
-      const pi=p.paid[x.id];
-      if(typeof pi==="number")paid+=pi;else if(pi===true)paid+=(+x.amt||0);
-    });
-    totalGlobalEst+=est; totalGlobalPaid+=paid;
-    const falta=Math.max(est-paid,0), pct=est>0?Math.round((paid/est)*100):0;
-    rowsHtml+=`<div class="person-row"><div><b>${p.name}</b><br><small style="color:var(--mut)">Pagado: ${fmt(paid)} / Falta: ${fmt(falta)}</small></div><div style="text-align:right"><b>${pct}%</b><br><small style="color:var(--c1)">Total: ${fmt(est)}</small></div></div>`;
+    let paid=0; mine.forEach(x=>{ const pi=p.paid[x.id]; if(typeof pi==="number")paid+=pi; else if(pi===true)paid+=(+x.amt||0); });
+    totalEst+=est; totalPaid+=paid;
+    const pct=est>0?Math.round((paid/est)*100):0;
+    rows+=`<div class="person-row"><div><b>${p.name}</b><br><small style="color:var(--mut)">Pagado: ${fmt(paid)}</small></div><div style="text-align:right"><b>${pct}%</b><br><small style="color:var(--c1)">Total: ${fmt(est)}</small></div></div>`;
   });
-  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('Barranquilla.jpg')"><div class="welcome-card-content"><h3>📊 Panel Global de Administrador</h3><p>Resumen financiero y control de todos los participantes.</p></div></div>`;
-  h+=`<div class="tots"><div class="tot"><b>${fmt(totalGlobalEst)}</b><span>Presupuesto</span></div><div class="tot" style="background:var(--t2)"><b style="color:var(--c2)">${fmt(totalGlobalPaid)}</b><span>Recaudado</span></div><div class="tot" style="background:var(--t1)"><b style="color:var(--c1)">${fmt(Math.max(totalGlobalEst-totalGlobalPaid,0))}</b><span>Pendiente</span></div></div>`;
-  h+=`<div class="stat-box"><h3>👥 Estado de Pagos por Integrante</h3>${rowsHtml}</div>`;
+  let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('Barranquilla.jpg')"><div class="welcome-card-content"><h3>📊 Panel Global Admin</h3><p>Resumen financiero general del grupo.</p></div></div>`;
+  h+=`<div class="tots"><div class="tot"><b>${fmt(totalEst)}</b><span>Presupuesto</span></div><div class="tot" style="background:var(--t2)"><b style="color:var(--c2)">${fmt(totalPaid)}</b><span>Recaudado</span></div><div class="tot" style="background:var(--t1)"><b style="color:var(--c1)">${fmt(Math.max(totalEst-totalPaid,0))}</b><span>Pendiente</span></div></div>`;
+  h+=`<div class="stat-box"><h3>👥 Integrantes</h3>${rows}</div>`;
   $("v-stats").innerHTML=h;
 }
 
 function renderAdm(){
-  let h=`<h2 style="margin-top:20px">Configuración de Participantes</h2><p style="font-size:0.9rem;color:var(--mut);margin-bottom:16px">Ajusta roles y opciones de viaje:</p>`;
+  let h=`<h2 style="margin-top:20px">Configuración de Participantes</h2>`;
   D.people.forEach(p=>{
-    const mine=myPays(p);
-    const est=mine.reduce((a,x)=>a+(+x.amt||0),0);
-    const paid=mine.reduce((a,x)=>a+(p.paid[x.id]?+x.amt||0:0),0);
-    h+=`<div class="aprow" style="--c:var(--c1)"><b>${p.name} (${p.code})</b>
+    h+=`<div class="aprow"><b>${p.name}</b>
     <select data-f="who" data-id="${p.id}"><option value="g1" ${p.who==="g1"?"selected":""}>G1</option><option value="g2" ${p.who==="g2"?"selected":""}>G2</option></select>
-    <select data-f="arr" data-id="${p.id}"><option value="baq" ${p.arr==="baq"?"selected":""}>Baq</option><option value="copey" ${p.arr==="copey"?"selected":""}>Copey2</option><option value="copey3" ${p.arr==="copey3"?"selected":""}>Copey3</option><option value="baq_g2" ${p.arr==="baq_g2"?"selected":""}>Baq→Pereira</option></select>
-    <select data-f="ret" data-id="${p.id}"><option value="baq" ${p.ret==="baq"?"selected":""}>→Baq</option><option value="smt" ${p.ret==="smt"?"selected":""}>→SM</option></select>
-    <span class="paidall">${fmt(paid)}/${fmt(est)}</span></div>`;
+    <select data-f="arr" data-id="${p.id}"><option value="baq" ${p.arr==="baq"?"selected":""}>Baq</option><option value="copey" ${p.arr==="copey"?"selected":""}>Copey2</option><option value="copey3" ${p.arr==="copey3"?"selected":""}>Copey3</option><option value="baq_g2" ${p.arr==="baq_g2"?"selected":""}>Baq→Per</option></select>
+    <select data-f="ret" data-id="${p.id}"><option value="baq" ${p.ret==="baq"?"selected":""}>→Baq</option><option value="smt" ${p.ret==="smt"?"selected":""}>→SM</option></select></div>`;
   });
   $("v-adm").innerHTML=h;
   $("v-adm").querySelectorAll("[data-f]").forEach(s=>s.onchange=()=>{
-    const p=D.people.find(x=>x.id===s.dataset.id);p[s.dataset.f]=s.value;saveToSupabase(p);
+    const p=D.people.find(x=>x.id===s.dataset.id); p[s.dataset.f]=s.value; saveToSupabase(p);
   });
 }
 
-let io=null,secs=[],scs=[];
+let io=null, secs=[], scs=[];
 function bindScrollFx(){
-  secs=[...document.querySelectorAll(".day")];scs=secs.map(s=>s.querySelector(".sc"));
+  secs=[...document.querySelectorAll(".day")]; scs=secs.map(s=>s.querySelector(".sc"));
   if(io)io.disconnect();
   io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
   document.querySelectorAll(".rv").forEach(el=>io.observe(el));
 }
+
 function onS(){
-  const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;
-  $("bar").classList.toggle("on",y>innerHeight*.55);
+  const y=scrollY, max=document.documentElement.scrollHeight-innerHeight;
+  $("bar").classList.toggle("on", y>innerHeight*.55);
   $("mk").style.left=(max>0?y/max*100:0)+"%";
-  let a=null;secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<innerHeight*.4)a=i});
+  let a=null; secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<innerHeight*.4)a=i});
   if(a!==null){const d=activeDays[a]||D.days[a];if(d){$("lab").textContent="Día "+d.n+": "+d.t;$("mk").style.background="var(--c"+d.r+")"}}
-  secs.forEach((s,i)=>{const r=s.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight)scs[i].style.transform="translateY("+(r.top-innerHeight/2)*.06+"px)"});
 }
 addEventListener("scroll",onS,{passive:true});
 
 function show(v){
   if(!ADMIN && (v==="adm" || v==="stats")) v="itin";
   document.querySelectorAll("#menu button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
-  $("app").style.display=v==="itin"?"":"none";
-  $("v-hero").style.display=v==="itin"?"":"none";
-  $("v-pay").style.display=v==="pay"?"":"none";
-  $("v-chk").style.display=v==="chk"?"":"none";
-  $("v-gastos").style.display=v==="gastos"?"":"none";
-  $("v-done").style.display=v==="done"?"":"none";
-  $("v-stats").style.display=v==="stats"?"":"none";
-  $("v-adm").style.display=v==="adm"?"":"none";
-  $("bar").style.display=v==="itin"?"":"none";
-  scrollTo(0,0);onS();
+  $("app").style.display = v==="itin"?"":"none";
+  $("v-hero").style.display = v==="itin"?"":"none";
+  $("v-pay").style.display = v==="pay"?"":"none";
+  $("v-gastos").style.display = v==="gastos"?"":"none";
+  $("v-chk").style.display = v==="chk"?"":"none";
+  $("v-done").style.display = v==="done"?"":"none";
+  $("v-stats").style.display = v==="stats"?"":"none";
+  $("v-adm").style.display = v==="adm"?"":"none";
+  $("bar").style.display = v==="itin"?"":"none";
+  scrollTo(0,0); onS();
 }
 
 document.querySelectorAll("#menu button").forEach(b=>b.onclick=async()=>{
-  const v = b.dataset.v;
-  if(!ADMIN && (v==="adm" || v==="stats")) return;
-  await loadFromSupabase();
-  show(v);
-  if(v==="itin") renderItin(); else if(v==="pay") renderPay(); else if(v==="chk") renderChk();
-  else if(v==="gastos") renderGastos(); else if(v==="done") renderDone();
-  else if(v==="stats") renderStats(); else if(v==="adm") renderAdm();
+  const v=b.dataset.v;
+  if(!ADMIN && (v==="adm"||v==="stats")) return;
+  await loadFromSupabase(); show(v);
+  if(v==="itin") renderItin(); else if(v==="pay") renderPay(); else if(v==="gastos") renderGastos();
+  else if(v==="chk") renderChk(); else if(v==="done") renderDone(); else if(v==="stats") renderStats(); else if(v==="adm") renderAdm();
 });
 
 async function enter(p){
-  await loadFromSupabase();
-  ME=p; ADMIN=false;
-  activeDays = getTravelerDays(ME);
+  await loadFromSupabase(); ME=p; ADMIN=false; activeDays=getTravelerDays(ME);
   document.body.classList.remove("admin"); document.body.classList.add("in");
   $("lg").style.display="none"; $("who").textContent=p.name+" (Cambiar)";
-  renderItin(); renderPay(); renderChk(); renderGastos(); renderDone(); renderStats(); show("itin");
-  snd("ok");
+  renderItin(); renderPay(); renderGastos(); renderChk(); renderDone(); renderStats(); show("itin"); snd("ok");
 }
 
 function logout(){
-  ADMIN=false; ME=null; activeDays = D.days;
+  ADMIN=false; ME=null; activeDays=D.days;
   document.body.classList.remove("in","admin");
-  $("lg").style.display="grid"; $("lin").value=""; $("lerr").textContent="";
-  snd("click");
+  $("lg").style.display="grid"; $("lin").value=""; $("lerr").textContent=""; snd("click");
 }
 
 async function askAdmin(){
   const pwd=prompt("Contraseña de administrador:");
   if(pwd===PASS){
-    await loadFromSupabase();
-    ADMIN=true; ME=D.people[0];
-    activeDays = getTravelerDays(ME);
+    await loadFromSupabase(); ADMIN=true; ME=D.people[0]; activeDays=getTravelerDays(ME);
     document.body.classList.add("admin","in");
     $("lg").style.display="none"; $("who").textContent="Admin ⚡";
-    renderItin(); renderPay(); renderChk(); renderGastos(); renderDone(); renderStats(); renderAdm();
+    renderItin(); renderPay(); renderGastos(); renderChk(); renderDone(); renderStats(); renderAdm();
     show("stats"); snd("ok");
   }else if(pwd!==null){ alert("Contraseña incorrecta"); }
 }
 
 $("float-switch").onclick = async () => {
   await loadFromSupabase();
-  const names = D.people.map((p, idx) => `${idx + 1}. ${p.name}`).join("\n");
+  const names = D.people.map((p,idx)=>`${idx+1}. ${p.name}`).join("\n");
   const sel = prompt(`Selecciona el número de la persona:\n\n${names}`);
   if(sel){
-    const index = parseInt(sel.trim()) - 1;
+    const index = parseInt(sel.trim())-1;
     if(D.people[index]){
-      ME = D.people[index]; activeDays = getTravelerDays(ME);
-      const activeBtn = document.querySelector("#menu button.on");
-      const v = activeBtn ? activeBtn.dataset.v : "itin";
-      if(v==="itin") renderItin(); else if(v==="pay") renderPay(); else if(v==="chk") renderChk();
-      else if(v==="gastos") renderGastos(); else if(v==="done") renderDone();
-      else if(v==="stats") renderStats(); else if(v==="adm") renderAdm();
+      ME=D.people[index]; activeDays=getTravelerDays(ME);
+      const activeBtn=document.querySelector("#menu button.on");
+      const v=activeBtn?activeBtn.dataset.v:"itin";
+      if(v==="itin") renderItin(); else if(v==="pay") renderPay(); else if(v==="gastos") renderGastos();
+      else if(v==="chk") renderChk(); else if(v==="done") renderDone(); else if(v==="stats") renderStats(); else if(v==="adm") renderAdm();
       alert(`Ahora estás viendo los datos de: ${ME.name}`);
     }else{ alert("Número no válido"); }
   }
@@ -991,16 +750,17 @@ $("float-exit").onclick = logout;
 function tryLogin(){
   const val=$("lin").value.trim().toLowerCase();
   if(!val)return;
-  if(val === PASS || val === "admin" || val === "kalen2026"){
-    $("lerr").textContent="Usa el botón verde 'Soy admin' para ingresar como administrador.";
-    return;
+  if(val===PASS || val==="admin" || val==="kalen2026"){
+    $("lerr").textContent="Usa el botón verde 'Soy admin' para ingresar."; return;
   }
-  const p=D.people.find(x=>x.name.toLowerCase()===val||x.code.toLowerCase()===val);
+  const p=D.people.find(x=>x.name.toLowerCase()===val || x.code.toLowerCase()===val);
   if(p){ $("lerr").textContent=""; enter(p); }
-  else{ $("lerr").textContent="Nombre o código no reconocido. Verifica con Kalen."; }
+  else{ $("lerr").textContent="Nombre o código no reconocido."; }
 }
 
 $("lgo").onclick=tryLogin;
 $("lin").addEventListener("keydown",e=>{if(e.key==="Enter")tryLogin()});
 $("ladm").onclick=askAdmin;
-</script></body></html>
+</script>
+</body>
+</html>
