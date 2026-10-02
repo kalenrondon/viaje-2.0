@@ -171,10 +171,10 @@ body.in #menu{display:grid}
 body.admin #menu button.neon-btn { display: none; }
 body.admin #menu button[data-v="chk"], body.admin #menu button[data-v="done"] { display: none; }
 
-/* Botones especiales de admin en el menú (Ocultos por defecto para usuarios normales) */
+/* Botones exclusivos de Admin en el Menú (Ocultos por defecto para usuarios normales) */
 #m-switch, #m-exit { display: none; }
 body.admin #m-switch, body.admin #m-exit { display: grid; }
-body.admin #menu { grid-template-columns: repeat(5, 1fr); }
+body.admin #menu { grid-template-columns: repeat(6, 1fr); }
 
 body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
 
@@ -254,7 +254,7 @@ body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
 </div>
 
 <script>
-const VER=48,PASS="kalen2026";
+const VER=49,PASS="kalen2026";
 const SUPABASE_URL = 'https://mzhzxtbaactgboiyihue.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im16aHp4dGJhYWN0Z2JvaXlpaHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4Njg1ODEsImV4cCI6MjEwNjQ0NDU4MX0.hPjXUoPeLEVAppWqN0ZBl7MkbgcdAT0uHi0L6T_z_pw';
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
