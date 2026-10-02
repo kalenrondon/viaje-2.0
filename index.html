@@ -301,7 +301,7 @@ body:not(.admin) #m-adm { display: none; }
 </div>
 
 <script>
-const VER=36,PASS="kalen2026";
+const VER=37,PASS="kalen2026";
 
 // --- CONFIGURACIÓN DE SUPABASE ---
 const SUPABASE_URL = 'https://mzhzxtbaactgboiyihue.supabase.co';
@@ -412,7 +412,7 @@ pays:[
 {id:"d2-t2",day:2,cat:"Transporte",item:"Bus Barranquilla → Santa Marta",amt:35000,w:"arr:baq"},
 {id:"d2-t3",day:2,cat:"Transporte",item:"Bus El Copey → Santa Marta",amt:40000,w:"arr:copey"},
 {id:"d2-t4",day:2,cat:"Transporte",item:"Bus El Copey → Santa Marta (madrugada día 3)",amt:40000,w:"arr:copey3"},
-{id:"d2-h1",day:2,cat:"Hotel",item:"Hotel El Rodadero",amt:35000,w:"all"},
+{id:"d2-h1",day:2,cat:"Hotel",item:"Hotel El Rodadero",amt:35000,w:"g1"},
 {id:"d3-t1",day:3,cat:"Transporte",item:"Vuelo SM→MDE + traslados (Grupo principal)",amt:90000,w:"g1_fly"},
 {id:"d3-c1",day:3,cat:"Comida",item:"Almuerzo y cena en Medellín",amt:90000,w:"kr"},
 {id:"d3-p1",day:3,cat:"Tours",item:"Parque Explora",amt:50000,w:"g1_explora",note:"Loly R y Héctor sin definir"},
@@ -454,7 +454,7 @@ pays:[
 {id:"d11-o1",day:11,cat:"Otros",item:"Gastos varios",amt:20000,w:"all"},
 {id:"d12-t1",day:12,cat:"Transporte",item:"Carro Salento→Pereira",amt:60000,w:"all"},
 {id:"d12-t2",day:12,cat:"Transporte",item:"Vuelo Pereira→Barranquilla",amt:160000,w:"ret:baq"},
-{id:"d12-t3",day:12,cat:"Transporte",item:"Regreso Pereira→Santa Marta (Loly R, Héctor, Grupo 2)",amt:160000,w:"ret:smt"},
+{id:"d12-t3",day:12,cat:"Transporte",item:"Regreso Pereira→Santa Marta (Loly R, Héctor)",amt:160000,w:"ret:smt"},
 {id:"d12-t4",day:12,cat:"Transporte",item:"Bus Barranquilla → El Copey (Sebas al día siguiente)",amt:55000,w:"arr:copey"},
 {id:"d12-c1",day:12,cat:"Comida",item:"Desayuno y almuerzo",amt:50000,w:"kr"}
 ],
@@ -553,7 +553,7 @@ function getProfileDesc(p){
   else if(p.arr==="baq_g2")t+="Perteneces al Grupo 2: viajas el 8 de octubre desde Barranquilla a Bogotá (9:30 AM) y de ahí directo a Pereira (1:00 PM) para almorzar con todos y agarrar los termales. ";
   if(p.ret==="baq" && p.arr==="copey")t+="Regresas a Barranquilla el 12, pasas la noche y viajas al día siguiente a El Copey ($55.000).";
   else if(p.ret==="baq")t+="Regresas el 12 en vuelo directo Pereira → Barranquilla.";
-  if(p.ret==="smt")t+="Regresas el 12 de Pereira a Santa Marta (~4 PM) y viajas de inmediato hacia El Copey.";
+  else if(p.ret==="smt")t+="Regresas el 12 de Pereira a Santa Marta (~4 PM) y viajas de inmediato hacia El Copey.";
   return t;
 }
 
@@ -785,7 +785,7 @@ function renderStats(){
     rowsHtml+=`<div class="person-row"><div><b>${p.name}</b><br><small style="color:var(--mut)">Pagado: ${fmt(paid)} / Falta: ${fmt(falta)}</small></div><div style="text-align:right"><b>${pct}%</b><br><small style="color:var(--c1)">Total: ${fmt(est)}</small></div></div>`;
   });
   let h=`<div class="welcome-card-wrap" style="margin-top:20px; --bg-img: url('Barranquilla.jpg')"><div class="welcome-card-content"><h3>📊 Panel Global de Administrador</h3><p>Resumen financiero y control de todos los participantes.</p></div></div>`;
-  h+=`<div class="tots"><div class="tot"><b>${fmt(totalGlobalEst)}</b><span>Presupuesto</span></div><div class="tot" style="background:var(--t2)"><b style="color:var(--c2)">${fmt(totalGlobalPaid)}</b><span>Recaudado</span></div><div class="tot" style="background:var(--t1)"><b style="color:var(--c1)">${fmt(Math.max(totalGlobalEst-totalGlobalPaid,0))}</b><span>Pendiente</span></div></div>`;
+  h+=`<div class="tots"><div class="tot"><b><div>${fmt(totalGlobalEst)}</div></b><span>Presupuesto</span></div><div class="tot" style="background:var(--t2)"><b style="color:var(--c2)">${fmt(totalGlobalPaid)}</b><span>Recaudado</span></div><div class="tot" style="background:var(--t1)"><b style="color:var(--c1)">${fmt(Math.max(totalGlobalEst-totalGlobalPaid,0))}</b><span>Pendiente</span></div></div>`;
   h+=`<div class="stat-box"><h3>👥 Estado de Pagos por Integrante</h3>${rowsHtml}</div>`;
   $("v-stats").innerHTML=h;
 }
