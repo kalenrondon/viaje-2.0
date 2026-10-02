@@ -219,7 +219,7 @@ body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
 <div id="picker-modal">
   <div class="picker-card">
     <h3>Menú de Viajero</h3>
-    <p>Elige un perfil para ver su viaje o entra como administrador:</p>
+    <p>Elige un perfil para ver su viaje o gestionarlo:</p>
     <div class="picker-grid" id="picker-list"></div>
     <button class="picker-close" id="picker-cancel">Cancelar</button>
   </div>
@@ -265,9 +265,9 @@ body:not(.admin) #m-adm, body:not(.admin) #m-stats{display:none}
 </div>
 
 <script>
-const VER=54,PASS="kalen2026";
+const VER=55,PASS="kalen2026";
 const SUPABASE_URL = 'https://mzhzxtbaactgboiyihue.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im16aHp4dGJhYWN0Z2JvaXlpaHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4Njg1ODEsImV4cCI6MjEwNjQ0NDU4MX0.hPjXUoPeLEVAppWqN0ZBl7MkbgcdAT0uHi0L6T_z_pw';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im16aHp4dGJhYWN0Z2JvaXlpaHVlIiwicm9sZSI6ImFub24iOjE3OTA4Njg1ODEsImV4cCI6MjEwNjQ0NDU4MX0.hPjXUoPeLEVAppWqN0ZBl7MkbgcdAT0uHi0L6T_z_pw';
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const H_MED="Comodo Family Laureles, Medellín, $65.000 por persona";
@@ -339,7 +339,7 @@ days:[
 {n:3,dt:"Sábado 3 de octubre",t:"Vuelo a Medellín",v:"Madrugón, avión y la primera tarde en Medellín.",r:2,s:[["Madrugada","Despertar temprano y salir al aeropuerto (llegar hacia las 5:15 AM)"],["7:15 AM","Vuelo de Santa Marta a Medellín"],["Mañana","Llegada a Rionegro, bus a Medellín ($25.000) y metro hasta el hotel"],["Tarde","Parque Explora (entrada $50.000) — *Nota: Loly R y Héctor tienen esta tarde libre/pendiente*"],["Noche","Cena y descanso"]],h:H_MED,k:"Dejen la tarde flexible por si el vuelo o el bus se demoran."},
 {n:4,dt:"Domingo 4 de octubre",t:"City tour por Medellín",v:"La ciudad de la eterna primavera, en metro y a pie.",r:2,s:[["8:10 AM","Recogida para City tour y Graffitour ($130.000)"],["Tarde","Libre para almorzar y descansar"],["Noche","Cena"]],h:H_MED},
 {n:5,dt:"Lunes 5 de octubre",t:"Guatapé",v:"Agua, colores y la piedra gigante de Guatapé.",r:2,s:[["7:00 AM - 7:10 AM","Recogida y Tour a Guatapé ($130.000)"],["Noche","Cena y empacar para Jardín"]],h:H_MED,k:"Confirmen con la agencia el punto de encuentro y la hora de salida."},
-{n:6,dt:"Martes 6 de octubre",t:"De Medellín a Jardín",v:"Un pueblo de balcones y sillas de colores en la plaza.",r:2,s:[["Mañana","Del hotel a la terminal y bus a Jardín ($50.000)"],["Almuerzo","Almuerzo en Jardín"],["Tarde","Plaza y calles del pueblo"],["Noche","Cena in Jardín"]],h:"Antonia Jardín Colonial, Jardín, $66.000 por persona"},
+{n:6,dt:"Martes 6 de octubre",t:"De Medellín a Jardín",v:"Un pueblo de balcones y sillas de colores en la plaza.",r:2,s:[["Mañana","Del hotel a la terminal y bus a Jardín ($50.000)"],["Almuerzo","Almuerzo en Jardín"],["Tarde","Plaza y calles del pueblo"],["Noche","Cena en Jardín"]],h:"Antonia Jardín Colonial, Jardín, $66.000 por persona"},
 {n:7,dt:"Miércoles 7 de octubre",t:"De Jardín a Murillo",v:"Del café al páramo: el aire se pone fino y frío.",r:3,s:[["Mañana","Bus de Jardín a Manizales ($60.000)"],["1:00 PM","Llegada a Manizales y almuerzo"],["2:30 PM","Recoger el carro de alquiler"],["3:00 PM","Salida a Murillo: 83 km por el páramo"],["5:30 PM","Check-in y cena típica (migao)"]],h:"Cabaña Dos Búhos, Murillo, $66.000 por persona",k:"Salgan de Manizales a más tardar a las 3 PM para llegar con luz."},
 {n:8,dt:"Jueves 8 de octubre",t:"Los Nevados y termales",v:"Frailejones, nevado y agua caliente: el día más épico.",r:3,b:"Se une el grupo 2 (Lola, Loly A, María desde Barranquilla)",s:[["6:00 AM","Salida de Murillo (Grupo 1)"],["9:30 AM","Vuelo del Grupo 2 (Lola, Loly A, María): Barranquilla → Bogotá"],["1:00 PM","Llegada del Grupo 2 a Pereira"],["2:00 PM","Encuentro de todos en el hotel de Pereira para almorzar"],["6:00 PM","Termales de Santa Rosa de Cabal ($106.000 / $60.000)"],["9:30 PM","Regreso al hotel"]],h:H_PER,k:"El Grupo 2 vuela vía Bogotá y aterriza en Pereira a la 1 PM para unirse al almuerzo."},
 {n:9,dt:"Viernes 9 de octubre",t:"Filandia y Salento",v:"Pueblitos de colores y atardeceres en Salento.",r:4,s:[["8:30 AM","Check-out y salida de Pereira"],["10:00 AM","Filandia: calles coloridas y mirador Colina Iluminada"],["1:00 PM","Almuerzo en Filandia"],["3:00 PM","Check-in en Mahalo, Salento"],["4:30 PM","Calle Real y mirador"]],h:H_SAL},
@@ -790,6 +790,7 @@ function show(v){
 
 document.querySelectorAll("#menu button[data-v]").forEach(b=>b.onclick=async()=>{
   const v=b.dataset.v;
+  if(v==="switch") { openPicker(); return; }
   if(!ADMIN && (v==="adm"||v==="stats")) return;
   await loadFromSupabase(); show(v);
   if(v==="itin") renderItin(); else if(v==="pay") renderPay(); else if(v==="gastos") renderGastos();
